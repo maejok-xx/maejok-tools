@@ -9,6 +9,5 @@
 // @icon         https://www.google.com/s2/favicons?domain=fishtank.live
 // @updateURL    https://github.com/maejok-xx/maejok-tools/raw/master/dist/maejok-tools.user.js
 // @match        *://*.fishtank.live/*
-// @match        *://localhost/*
 // @run-at       document-idle
 // ==/UserScript==
