@@ -3,6 +3,7 @@
   "author": "maejok",
   "version": "2.7.0",
   "description": "Add-on Tools for Fishtank.live Season 2",
+  "s2ts": 1701849439,
   "main": "main.js",
   "scripts": {
     "dev": "webpack --watch --progress --mode development",
