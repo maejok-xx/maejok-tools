@@ -1,4 +1,4 @@
-import { ONE_MINUTE, REMOTE_DATA_URL, VERSION } from "./constants";
+import { ONE_MINUTE, PACKAGE_URL, VERSION } from "./constants";
 import {
   playSound,
   scrollToBottom,
@@ -49,26 +49,26 @@ export const stop = () => {
 
 export const checkForUpdate = async () => {
   const now = new Date().getTime();
-  const cachedRemoteData = state.get("remoteData");
+  const cachedPackageJSON = state.get("packageJson");
   const updateCheckFrequency = config.get("updateCheckFrequency");
 
   const remoteDataExpired =
-    !cachedRemoteData?.lastCheckedAt ||
-    cachedRemoteData?.lastCheckedAt + updateCheckFrequency <= now;
+    !cachedPackageJSON?.lastCheckedAt ||
+    cachedPackageJSON?.lastCheckedAt + updateCheckFrequency <= now;
 
-  const remoteData = !remoteDataExpired
-    ? cachedRemoteData
-    : await getRemoteData();
+  const packageJSON = !remoteDataExpired
+    ? cachedPackageJSON
+    : await getRemotePackageJSON();
 
-  state.set("remoteData", { lastCheckedAt: now, ...remoteData });
+  state.set("packageJson", { lastCheckedAt: now, ...packageJSON });
 
-  if (!remoteData) {
+  if (!packageJSON) {
     return;
   }
 
   const updateData = {
     currentVersion: VERSION,
-    newVersion: remoteData.version,
+    newVersion: packageJSON.version,
   };
 
   const udpateAvailable = isRemoteVersionNewer(
@@ -84,7 +84,31 @@ export const checkForUpdate = async () => {
   }
 };
 
+export const getRemotePackageJSON = async () => {
+  const cacheBuster = new Date().getTime();
+  const url = `${PACKAGE_URL}?cb=${cacheBuster}`;
+
+  return fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          `HTTP error fetching remote package data! Status: ${response.status}`
+        );
+      }
+      return response.json();
+    })
+    .then((data) => {
+      state.set("remoteData", data);
+      return data;
+    })
+    .catch((error) => {
+      console.error(`Get remote package fetch error:`, error);
+      return false;
+    });
+};
+
 function insertChatMessage(updateData) {
+  const pluginName = state.get("packageJson")?.name || config.plugin("name");
   const chat = document.querySelector(ELEMENTS.chat.list.selector);
 
   const wrapper = document.createElement("div");
@@ -95,7 +119,7 @@ function insertChatMessage(updateData) {
 
   const title = document.createElement("div");
   title.className = "maejok-update-title";
-  title.innerHTML = `${config.plugin("name")} v${updateData.currentVersion}`;
+  title.innerHTML = `${pluginName.toUpperCase()} v${updateData.currentVersion}`;
 
   const clickHere = document.createElement("div");
   clickHere.className = "maejok-update-click_here";
@@ -158,28 +182,4 @@ function isRemoteVersionNewer(localVersion, remoteVersion) {
   }
 
   return false;
-}
-
-async function getRemoteData() {
-  const cacheBuster = new Date().getTime();
-
-  const url = `${REMOTE_DATA_URL}?cb=${cacheBuster}`;
-
-  return fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(
-          `HTTP error fetching Remote Configuration data! Status: ${response.status}`
-        );
-      }
-      return response.json();
-    })
-    .then((data) => {
-      state.set("remoteData", data);
-      return data;
-    })
-    .catch((error) => {
-      console.error("Get remote config fetch error:", error);
-      return false;
-    });
 }

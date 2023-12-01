@@ -152,7 +152,11 @@ export const createSettingsButton = () => {
 };
 
 export const createConfigurationInputModal = (option, parentModal) => {
-  const modal = new Modal(`${config.plugin("name")} - ${option.config.title}`);
+  const pluginName = state.get("packageJson")?.name || config.plugin("name");
+
+  const modal = new Modal(
+    `${pluginName.toUpperCase()} - ${option.config.title}`
+  );
 
   const wrapper = document.createElement("div");
   wrapper.classList.add(ELEMENTS.settings.config.wrapper.class);
@@ -199,11 +203,12 @@ export const createConfigurationInputModal = (option, parentModal) => {
 };
 
 export const createSettingsModal = () => {
+  const pluginName = state.get("packageJson")?.name || config.plugin("name");
   const props = ELEMENTS.settings;
 
   const settingsConfig = config.settingsOptions();
 
-  const modal = new Modal(`${config.plugin("name")} - Settings`);
+  const modal = new Modal(`${pluginName.toUpperCase()} - Settings`);
 
   const wrapper = document.createElement("div");
 

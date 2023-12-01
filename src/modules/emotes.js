@@ -6,9 +6,11 @@ import ELEMENTS from "../data/elements";
 import { Emotes, Demotes } from "../data/emotes";
 
 export const createEmotesList = () => {
-  const eventListeners = [];
+  const pluginName = state.get("packageJson")?.name || config.plugin("name");
   const displayName = state.get("user").displayName;
-  const modal = new Modal(`${config.plugin("name")} - Emotes List`);
+  const eventListeners = [];
+
+  const modal = new Modal(`${pluginName.toUpperCase()} - Emotes List`);
 
   let emotes = Object.keys(Emotes)
     .sort()

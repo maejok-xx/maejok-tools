@@ -18,7 +18,7 @@ const State = () => {
     updateCheckInterval: null,
     daysLeftInterval: null,
     running: false,
-    remoteData: {},
+    packageJson: {},
     updateShown: false,
   };
 

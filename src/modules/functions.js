@@ -577,16 +577,16 @@ export const muteUser = async (user) => {
   }, 10);
 };
 
-export const updateDaysUntilSeasonTwo = () => {
-  const remoteData = state.get("remoteData");
+export const updateDaysUntilSeasonTwo = async () => {
+  const packageJson = state.get("packageJson");
 
-  if (!remoteData?.s2ts) {
+  if (!packageJson?.s2ts) {
     clearInterval("daysLeftInterval");
     state.set("daysLeftInterval", null);
     return;
   }
 
-  const targetDate = new Date(remoteData.s2ts * 1000);
+  const targetDate = new Date(packageJson.s2ts * 1000);
   const targetDateNY = targetDate.toLocaleString("en-US", {
     timeZone: "America/New_York",
   });
