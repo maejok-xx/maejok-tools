@@ -2,5 +2,5 @@
   "version": "2.5.0",
   "s2ts": false,
   "changelogUrl": "https://github.com/maejok-xx/maejok-tools/blob/master/changelog.md",
-  "updateUrl": "https://github.com/maejok-xx/maejok-tools/raw/main/maejok-tools.user.js"
+  "updateUrl": "https://github.com/maejok-xx/maejok-tools/raw/master/dist/maejok-tools.user.js"
 }
