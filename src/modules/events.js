@@ -317,39 +317,28 @@ export const clickRemoveUserFromList = (list, user, elementToRemove) => {
 };
 
 export const clickUpdate = () => {
-  const remoteData = state.get("remoteData");
+  const packageJSON = state.get("packageJson");
 
-  if (!remoteData?.updateUrl) {
+  if (!packageJSON?.update.url) {
     return;
   }
 
-  const updateWindow = window.open(remoteData.updateUrl, "maejok_update");
+  const updateWindow = window.open(packageJSON.update.url, "maejok_update");
 
   setTimeout(() => {
     updateWindow.close();
-    postUpdateAlert();
+    afterUpdateAlert();
   }, 1000);
 };
 
-function postUpdateAlert() {
-  const showAlert = () => {
-    alert(
-      "After updating MAEJOK-TOOLS, refresh this window to start using the new version"
-    );
-    document.removeEventListener("visibilitychange", showAlert);
-  };
-
-  document.addEventListener("visibilitychange", showAlert);
-}
-
 export const clickUpdateChangelog = () => {
-  const remoteData = state.get("remoteData");
+  const packageJSON = state.get("packageJson");
 
-  if (!remoteData?.changelogUrl) {
+  if (!packageJSON?.changelog.url) {
     return;
   }
 
-  window.open(remoteData.changelogUrl, "maejok_update_changelog");
+  window.open(packageJSON.changelog.url, "maejok_update_changelog");
 };
 
 export const clickUpdateDismiss = () => {
@@ -367,3 +356,14 @@ export const clickUpdateDismiss = () => {
   dismiss.removeEventListener("click", clickUpdateDismiss);
   updateMessage.remove();
 };
+
+function afterUpdateAlert() {
+  const showAlert = () => {
+    alert(
+      "After updating MAEJOK-TOOLS, refresh this window to start using the new version"
+    );
+    document.removeEventListener("visibilitychange", showAlert);
+  };
+
+  document.addEventListener("visibilitychange", showAlert);
+}
