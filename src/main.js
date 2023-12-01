@@ -1,4 +1,3 @@
-// import "./websocket";
 import config from "./modules/config";
 import state from "./modules/state";
 import { createSettingsButton } from "./modules/settings";

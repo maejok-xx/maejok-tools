@@ -1,4 +1,4 @@
-import { ONE_MINUTE, REMOTE_DATA_URL } from "./constants";
+import { ONE_MINUTE, REMOTE_DATA_URL, VERSION } from "./constants";
 import {
   playSound,
   scrollToBottom,
@@ -67,7 +67,7 @@ export const checkForUpdate = async () => {
   }
 
   const updateData = {
-    currentVersion: GM_info.script.version,
+    currentVersion: VERSION,
     newVersion: remoteData.version,
   };
 
@@ -139,28 +139,24 @@ function isRemoteVersionNewer(localVersion, remoteVersion) {
   const [major1, minor1, patch1] = parseVersion(remoteVersion);
   const [major2, minor2, patch2] = parseVersion(localVersion);
 
-  // Compare major versions
   if (major1 > major2) {
     return true;
   } else if (major1 < major2) {
     return false;
   }
 
-  // Major versions are equal, compare minor versions
   if (minor1 > minor2) {
     return true;
   } else if (minor1 < minor2) {
     return false;
   }
 
-  // Minor versions are equal, compare patch versions
   if (patch1 > patch2) {
     return true;
   } else if (patch1 < patch2) {
     return false;
   }
 
-  // Versions are equal
   return false;
 }
 

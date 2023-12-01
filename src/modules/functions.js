@@ -1,6 +1,6 @@
 import config from "./config";
 import state from "./state";
-import { ONE_MINUTE } from "./constants";
+import { VERSION, ONE_MINUTE } from "./constants";
 import Message from "../classes/Message";
 import ELEMENTS from "../data/elements";
 import { rightClick, leftClick, dblClick, keyPress } from "./events";
@@ -625,9 +625,7 @@ export const updateDaysUntilSeasonTwo = () => {
 };
 
 export const runUserAgreement = () => {
-  const VERSION = GM_info.script.version;
-  const needsToAgree =
-    config.get("agreementVersion") !== GM_info.script.version;
+  const needsToAgree = config.get("agreementVersion") !== VERSION;
 
   if (!needsToAgree) {
     return true;

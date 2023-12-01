@@ -1,3 +1,5 @@
+export const VERSION = process.env.VERSION;
+
 export const REPO_ROOT = "https://github.com/maejok-xx/maejok-tools/master";
 export const RAW_REPO_ROOT =
   "https://raw.githubusercontent.com/maejok-xx/maejok-tools/master";
