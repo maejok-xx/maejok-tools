@@ -29,7 +29,7 @@ import "./styles/styles.scss";
   let chat = false;
   let countDownTimer = false;
 
-  const loadingInterval = setInterval(() => {
+  const loadingInterval = setInterval(async () => {
     if (address.includes("/chat")) {
       chat = document.querySelector(ELEMENTS.chat.list.selector);
       isLoaded = chat !== null;
@@ -49,7 +49,7 @@ import "./styles/styles.scss";
 
       state.set("loaded", true);
 
-      const user = getUserFromLocalStorage();
+      const user = await getUserFromLocalStorage();
       state.set("user", user);
 
       createSettingsButton();
