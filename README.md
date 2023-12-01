@@ -102,7 +102,7 @@ Create a new Userscript using your browser extension of choice (eg: Tampermonkey
 // ==/UserScript==
 ```
 
-**Be sure to replace `PATH_TO_PROJECT_DIR` with the path to your project directory and save the new userscript.**
+**Be sure to replace `PATH_TO_PROJECT_DIR` with the path to your actual project directory and save the new userscript.**
 
 Then navigate to your project root
 
