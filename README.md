@@ -63,29 +63,32 @@ Features:
 
 ---
 
-### To build from source:
+### HOW TO: Build from source
 
 1. Start by cloning the repository into your project directory
 
-   `git clone https://github.com/maejok-xx/maejok-tools.git .`
+   ```bash
+   git clone https://github.com/maejok-xx/maejok-tools.git .
+   ```
 
 2. install the dev dependencies (listed at the bottom of this readme)
 
-   `npm i`
+   ```bash
+   npm i
+   ```
 
 3. Build:
-
-   `npm run build`
+   ```bash
+   npm run build
+   ```
 
 **Note**: _Build output will be located at `./dist/maejok-tools.user.js`_
 
 ---
 
-### To run in development mode
+### HOW TO: Start in Dev Mode
 
-1. Create a new Userscript in your extension of choice (eg: tampermonkey)
-
-2. Add this
+Create a new Userscript using your browser extension of choice (eg: Tampermonkey) and add the following...
 
 ```js
 // ==UserScript==
@@ -99,17 +102,27 @@ Features:
 // ==/UserScript==
 ```
 
-3. Be sure to replace `PATH_TO_PROJECT_DIR` with the path to your project directory and save the new userscript.
+**Be sure to replace `PATH_TO_PROJECT_DIR` with the path to your project directory and save the new userscript.**
 
-4. Run:
+Then navigate to your project root
 
-   `npm run build`
+eg:
 
-Now any time you make changes and save a file, Webpack will rebuild the plugin in development mode. All that's left is for you to refresh Fishtank.live to see your changes.
+```bash
+cd C:\Users\BigHeadedLoser\Desktop\maejok-tools
+```
+
+And Run
+
+```bash
+npm run dev
+```
+
+Now any time you update and save a `.scss` or `.js` file, Webpack will automatically rebuild the plugin. You must refresh Fishtank.live to see your changes.
 
 **Note**: _Build output will be located at `./dist/maejok-tools.user.js`_
 
-When you're all done, be sure to create a pull request with your updates/additions! 😊
+When you're all done, be sure to [create a pull request](https://github.com/maejok-xx/maejok-tools/pulls) with your updates! 😊
 
 ---
 
