@@ -191,6 +191,12 @@ export const getMessageType = (element) => {
         closestWithClass(element, classes.emote),
     ],
     [
+      "roll",
+      element.textContent.includes("rolls a 20-sided dice") &&
+        (hasClass(element, classes.emote) ||
+          closestWithClass(element, classes.emote)),
+    ],
+    [
       "clan",
       hasClass(element, classes.clan) ||
         closestWithClass(element, classes.clan),
@@ -220,8 +226,12 @@ export const getMessageType = (element) => {
 
 export const getUserFromChat = (element) => {
   const messageType = getMessageType(element);
+  if (!element) {
+    return;
+  }
 
-  if ((messageType !== "message" && messageType !== "emote") || !element) {
+  const validMessageTypes = ["message", "emote", "roll"];
+  if (!validMessageTypes.includes(messageType)) {
     return;
   }
 
@@ -567,6 +577,53 @@ export const muteUser = async (user) => {
   }, 10);
 };
 
+export const updateDaysUntilSeasonTwo = () => {
+  const remoteData = state.get("remoteData");
+
+  if (!remoteData?.s2ts) {
+    clearInterval("daysLeftInterval");
+    state.set("daysLeftInterval", null);
+    return;
+  }
+
+  const targetDate = new Date(remoteData.s2ts * 1000);
+  const targetDateNY = targetDate.toLocaleString("en-US", {
+    timeZone: "America/New_York",
+  });
+
+  const currentDate = new Date();
+  const currentDateNY = currentDate.toLocaleString("en-US", {
+    timeZone: "America/New_York",
+  });
+
+  if (currentDate >= targetDate) {
+    clearInterval(state.get("daysLeftInterval"));
+    return;
+  }
+
+  const differenceMs = new Date(targetDateNY) - new Date(currentDateNY);
+  const daysRemaining = Math.ceil(differenceMs / (1000 * 60 * 60 * 24));
+
+  const setDaysRemaining = (selector, daysRemaining) => {
+    const dayElement = document.querySelector(selector);
+    if (dayElement) {
+      dayElement.textContent = `-${daysRemaining}`;
+    }
+  };
+  const setDaysRemainingLabel = (selector) => {
+    const labelElement = document.querySelector(selector);
+    if (labelElement) {
+      labelElement.textContent = `Days Left`;
+    }
+  };
+  const day = ELEMENTS.stats.day;
+
+  setDaysRemaining(day.selector1, daysRemaining);
+  setDaysRemaining(day.selector2, daysRemaining);
+  setDaysRemainingLabel(day.label.selector1);
+  setDaysRemainingLabel(day.label.selector2);
+};
+
 export const runUserAgreement = () => {
   const VERSION = GM_info.script.version;
   const needsToAgree =
@@ -623,7 +680,6 @@ export const startMaejokTools = async () => {
 
   if (!isPopoutChat) {
     startUpdater();
-    updateDaysUntilSeasonTwo();
 
     const daysLeftInterval = setInterval(() => {
       updateDaysUntilSeasonTwo();
@@ -722,53 +778,6 @@ function toast(message = "default message", type = "info", duration = 5000) {
     }),
   });
   document.dispatchEvent(toast);
-}
-
-function updateDaysUntilSeasonTwo() {
-  const remoteData = state.get("remoteData");
-
-  if (!remoteData?.s2ts) {
-    clearInterval("daysLeftInterval");
-    state.set("daysLeftInterval", null);
-    return;
-  }
-
-  const targetDate = new Date(remoteData.s2ts * 1000);
-  const targetDateNY = targetDate.toLocaleString("en-US", {
-    timeZone: "America/New_York",
-  });
-
-  const currentDate = new Date();
-  const currentDateNY = currentDate.toLocaleString("en-US", {
-    timeZone: "America/New_York",
-  });
-
-  if (currentDate >= targetDate) {
-    clearInterval(state.get("daysLeftInterval"));
-    return;
-  }
-
-  const differenceMs = new Date(targetDateNY) - new Date(currentDateNY);
-  const daysRemaining = Math.ceil(differenceMs / (1000 * 60 * 60 * 24));
-
-  const setDaysRemaining = (selector, daysRemaining) => {
-    const dayElement = document.querySelector(selector);
-    if (dayElement) {
-      dayElement.textContent = `-${daysRemaining}`;
-    }
-  };
-  const setDaysRemainingLabel = (selector) => {
-    const labelElement = document.querySelector(selector);
-    if (labelElement) {
-      labelElement.textContent = `Days Left`;
-    }
-  };
-  const day = ELEMENTS.stats.day;
-
-  setDaysRemaining(day.selector1, daysRemaining);
-  setDaysRemaining(day.selector2, daysRemaining);
-  setDaysRemainingLabel(day.label.selector1);
-  setDaysRemainingLabel(day.label.selector2);
 }
 
 function closestWithClass(element, classNames) {

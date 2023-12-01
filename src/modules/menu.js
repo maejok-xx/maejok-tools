@@ -92,6 +92,7 @@ export const open = (type, position, options) => {
 
     chatHide: (type) => {
       const configKeyMap = {
+        roll: "hideDiceRolling",
         emote: "hideEmotes",
         system: "hideSystem",
         consumable: "hideConsumables",
