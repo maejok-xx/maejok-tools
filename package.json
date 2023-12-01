@@ -1,6 +1,7 @@
 {
   "name": "maejok-tools",
-  "version": "2.5.0",
+  "author": "maejok",
+  "version": "2.7.0",
   "description": "Add-on Tools for Fishtank.live Season 2",
   "main": "main.js",
   "scripts": {
@@ -17,12 +18,17 @@
     "Tampermonkey",
     "Userscript"
   ],
-  "author": "MAEJOK",
   "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/maejok-xx/maejok-tools/issues"
   },
   "homepage": "https://github.com/maejok-xx/maejok-tools#readme",
+  "change": {
+    "log": "https://github.com/maejok-xx/maejok-tools/blob/master/changelog.md"
+  },
+  "update": {
+    "url": "https://github.com/maejok-xx/maejok-tools/raw/master/dist/maejok-tools.user.js"
+  },
   "devDependencies": {
     "css-loader": "^6.8.1",
     "file-loader": "^6.2.0",
