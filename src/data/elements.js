@@ -1,4 +1,4 @@
-import { RAW_REPO_ROOT } from "../modules/constants";
+import { REPO_RAW_ROOT } from "../modules/constants";
 
 const Elements = {
   login: {
@@ -366,7 +366,7 @@ const Elements = {
         image: {
           attr: [
             `src`,
-            `${RAW_REPO_ROOT}/public/images/console-button-square-purple.png`,
+            `${REPO_RAW_ROOT}/public/images/console-button-square-purple.png`,
           ],
         },
       },

@@ -23,6 +23,8 @@ module.exports = {
   plugins: [
     new DefinePlugin({
       "process.env.VERSION": JSON.stringify(packageJson.version),
+      "process.env.REPO": JSON.stringify(packageJson.repo),
+      "process.env.UPDATEURL": JSON.stringify(packageJson.update),
     }),
     new BannerPlugin({
       banner: () => {
@@ -30,7 +32,16 @@ module.exports = {
           "./userscript.config.js",
           "utf8"
         );
-        return userscriptConfig.replace("__VERSION__", packageJson.version);
+        const updatedUserscriptConfig = userscriptConfig
+          .replace("__DESCRIPTION__", packageJson.description)
+          .replace("__VERSION__", packageJson.version)
+          .replace("__REPO__", packageJson.repo.url)
+          .replace("__ICON__", packageJson.icon)
+          .replace("__UPDATEURL__", packageJson.update.url)
+          .replace("__GREASYFORKURL__", packageJson.greasyfork)
+          .replace("__SUPPORTURL__", packageJson.bugs.url);
+
+        return updatedUserscriptConfig;
       },
     }),
   ],

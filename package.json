@@ -20,6 +20,10 @@
     "Userscript"
   ],
   "license": "GPL-3.0-or-later",
+  "repo": {
+    "url": "https://github.com/maejok-xx/maejok-tools",
+    "raw": "https://raw.githubusercontent.com/maejok-xx/maejok-tools/master"
+  },
   "changelog": {
     "url": "https://github.com/maejok-xx/maejok-tools/blob/master/changelog.md"
   },
@@ -30,6 +34,8 @@
     "url": "https://github.com/maejok-xx/maejok-tools/issues"
   },
   "homepage": "https://github.com/maejok-xx/maejok-tools#readme",
+  "greasyfork": "https://greasyfork.org/en/scripts/465416-maejok-tools-for-fishtank-live",
+  "icon": "https://raw.githubusercontent.com/maejok-xx/maejok-tools/master/public/images/icon.png",
   "devDependencies": {
     "css-loader": "^6.8.1",
     "file-loader": "^6.2.0",
