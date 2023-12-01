@@ -324,18 +324,23 @@ export const clickUpdate = () => {
   }
 
   const updateWindow = window.open(remoteData.updateUrl, "maejok_update");
-  setTimeout(() => updateWindow.close(), 1000);
 
-  const updateMessage = document.getElementById("maejok-update-message");
-  const title = updateMessage.querySelector(".maejok-update-title");
-  const clickHere = updateMessage.querySelector(".maejok-update-click_here");
-
-  title.textContent = "After Updating...";
-  clickHere.textContent = "Refresh to start using the new version!";
-
-  clickHere.removeEventListener("click", clickUpdate);
-  clickHere.addEventListener("click", () => location.reload());
+  setTimeout(() => {
+    updateWindow.close();
+    postUpdateAlert();
+  }, 1000);
 };
+
+function postUpdateAlert() {
+  const showAlert = () => {
+    alert(
+      "After updating MAEJOK-TOOLS, refresh this window to start using the new version"
+    );
+    document.removeEventListener("visibilitychange", showAlert);
+  };
+
+  document.addEventListener("visibilitychange", showAlert);
+}
 
 export const clickUpdateChangelog = () => {
   const remoteData = state.get("remoteData");
