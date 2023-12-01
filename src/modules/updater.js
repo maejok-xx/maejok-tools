@@ -1,5 +1,9 @@
-import { ONE_MINUTE } from "./constants";
-import { playSound, scrollToBottom } from "./functions";
+import { ONE_MINUTE, REMOTE_DATA_URL } from "./constants";
+import {
+  playSound,
+  scrollToBottom,
+  updateDaysUntilSeasonTwo,
+} from "./functions";
 import {
   clickUpdate,
   clickUpdateDismiss,
@@ -24,7 +28,7 @@ export const start = () => {
     stop();
   }
 
-  checkForUpdate();
+  checkForUpdate().then(() => updateDaysUntilSeasonTwo());
 
   const timeBetweenChecks = config.get("updateCheckFrequency") * ONE_MINUTE;
   const updateCheckInterval = setInterval(checkForUpdate, timeBetweenChecks);
@@ -56,7 +60,12 @@ export const checkForUpdate = async () => {
   const remoteData = !remoteDataExpired
     ? cachedRemoteData
     : await getRemoteData();
+
   state.set("remoteData", { lastCheckedAt: now, ...remoteData });
+
+  if (!remoteData) {
+    return;
+  }
 
   const updateData = {
     currentVersion: GM_info.script.version,
@@ -157,10 +166,9 @@ function isRemoteVersionNewer(localVersion, remoteVersion) {
 }
 
 async function getRemoteData() {
-  const repoRoot = config.plugin("repoRoot");
   const cacheBuster = new Date().getTime();
 
-  const url = `${repoRoot}/test1.json?cb=${cacheBuster}`;
+  const url = `${REMOTE_DATA_URL}?cb=${cacheBuster}`;
 
   return fetch(url)
     .then((response) => {
