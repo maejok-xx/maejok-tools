@@ -1,0 +1,231 @@
+.maejok-input-group {
+  display: flex;
+  margin-bottom: 12px;
+
+  .maejok-input-help-label {
+    display: flex;
+    align-self: center;
+    margin-left: $space-sm;
+    font-weight: 800;
+    cursor: pointer;
+    color: $color-darkyellow;
+    text-shadow: 0 0 $space-xxs $color-black;
+  }
+
+  .maejok-input-label {
+    cursor: pointer;
+    color: #50985d;
+    text-shadow: 0 0 $space-xxs #000000;
+    font-family: Alarm Clock, monospace;
+  }
+
+  .maejok-input-toggle {
+    display: none;
+  }
+
+  .maejok-input-toggle:checked + .maejok-input-toggle-label {
+    background-color: rgba($color-yellow, 0.5);
+  }
+
+  .maejok-input-toggle:checked + .maejok-input-toggle-label::before {
+    background-color: rgba($color-darkyellow, 0.75);
+    border: 0.5px solid $color-gray;
+    box-shadow: 0px 0px $space-xxs 0 rgba($color-black, 0.25);
+    transform: translateX(20px);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .maejok-input-toggle-label {
+    margin-top: (-$space-xxs);
+    margin-right: $space-sm;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    border-radius: $space-md;
+    position: relative;
+    cursor: pointer;
+    background-color: $color-slategray;
+    border: 1px solid $color-slategray;
+    box-shadow: 0px 0 $space-xs 0 rgba($color-black, 0.5);
+    transition: background-color 1s ease;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 14px;
+      height: 14px;
+      margin-top: 1px;
+      margin-left: 1px;
+      background-color: $color-gray;
+      border-radius: 50%;
+      border: 1px solid rgba($color-black, 0.1);
+      box-shadow: 0px 0px 1px 0 rgba($color-black, 0.5);
+      transition: transform 0.3s ease-in-out, background-color 1s ease-in-out;
+    }
+  }
+}
+
+.maejok-input-invalid {
+  box-shadow: inset 0px -66px 0px 0 $color-darkred !important;
+}
+
+.maejok-input-button-wrapper {
+  width: 50%;
+  margin: $space-lg auto 0;
+}
+
+.maejok-input-label-checked {
+  color: #00ff04 !important;
+  text-shadow: 0 0 2px $color-darkgreen !important;
+  transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+}
+
+.maejok-input-button {
+  background-size: 100% 100%;
+  margin-top: $space-sm;
+  bottom: 0;
+  height: 36px;
+}
+
+.maejok-input-button-save {
+  background-image: url("https://cdn.fishtank.live/images/slices/console-button-long-green.png");
+}
+
+.maejok-settings-config-wrapper {
+  max-width: 330px;
+  margin: $space-lg auto $space-lg;
+
+  .maejok-settings-config-input-group {
+    display: flex;
+    margin-bottom: $space-md;
+
+    .maejok-input-label-textbox {
+      display: flex;
+      align-self: center;
+      font-size: large;
+      color: $color-dark;
+      font-family: Highway Gothic, sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-shadow: 0 0 $space-xxs rgba(225, 239, 252, 0.75);
+    }
+
+    .maejok-input-textbox {
+      margin-left: $space-lg;
+      color: #fff;
+      padding: $space-sm;
+      border-radius: $space-xs;
+      border: $space-xxs inset hsla(300, 5%, 79%, 0.5);
+      background-color: #2b2d2e;
+      background-image: linear-gradient(180deg, #1f2021, #121314, #000);
+      box-shadow: inset 0 $space-xxs $space-sm 0 #000;
+      width: 100%;
+    }
+
+    .maejok-input-help-label {
+      display: flex;
+      align-self: center;
+      margin-left: $space-sm;
+      font-weight: 800;
+      cursor: pointer;
+      color: $color-darkyellow;
+      text-shadow: 0 0 $space-xxs $color-black;
+    }
+  }
+}
+
+.maejok-settings-config-help {
+  min-width: 400px;
+  max-width: 800px;
+  font-size: larger;
+  font-weight: 800;
+  font-family: monospace;
+  color: $color-darkgray;
+  line-height: $space-lg;
+  margin: $space-md $space-xl $space-lg;
+  text-align: center;
+
+  strong {
+    color: $color-black;
+  }
+}
+
+.maejok-color-picker-wrapper {
+  // display: flex;
+  // justify-content: space-between;
+
+  .maejok-color-picker-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+
+    .maejok-color-picker-label {
+      margin-top: 2px;
+      width: 115px;
+      color: #00ff04 !important;
+      text-shadow: 0 0 2px #008800 !important;
+    }
+  }
+}
+
+.maejok-accordion-highlights {
+  // display: flex;
+  // gap: 115px;
+  margin-bottom: 20px;
+
+  .maejok-list-wrapper {
+    // flex: 2;
+    max-height: 500px;
+    overflow-y: auto;
+    width: 300px;
+    margin: auto;
+
+    .maejok-list-empty {
+      display: block;
+      text-align: center;
+      color: #00bf03;
+      text-shadow: 0 1px 2px #000000;
+      margin: 20px auto 15px;
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .maejok-list-item-wrapper {
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 4px;
+      text-transform: none;
+      color: #00bf03;
+      text-shadow: 0 1px 2px #000000;
+      transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+
+      &:hover {
+        background-color: rgba($color-black, 0.25);
+        transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+
+        .maejok-list-item {
+          color: #00ff04;
+          text-shadow: 0 1px 2px #006012;
+          transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+        }
+        .maejok-list-item-remove {
+          visibility: visible;
+
+          &:hover {
+            transform: scale(1);
+          }
+        }
+      }
+
+      .maejok-list-item-remove {
+        color: red;
+        cursor: pointer;
+        visibility: hidden;
+        transform: scale(0.8);
+      }
+    }
+  }
+}

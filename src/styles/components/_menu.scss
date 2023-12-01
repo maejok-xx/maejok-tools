@@ -1,0 +1,59 @@
+.maejok-menu-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  transition: height 0.3s ease-in-out;
+  text-shadow: 2px 2px 3px $color-black;
+  @include dark-box;
+
+  .maejok-menu-menu_item,
+  .maejok-menu-menu_no-items {
+    all: unset;
+    cursor: pointer;
+    padding: $space-sm;
+    min-width: 200px;
+    text-shadow: 1px 1px 2px $color-black;
+
+    &:hover {
+      color: $color-green;
+      background-color: rgba($color-white, 0.1);
+    }
+  }
+
+  .maejok-menu-menu_title {
+    all: unset;
+    padding: $space-sm;
+    min-width: 200px;
+    text-align: center;
+    background-color: rgba($color-white, 0.05);
+    border-bottom: 2px inset rgba($color-gray, 0.5);
+  }
+}
+
+.maejok-chatters-menu {
+  max-height: 300px;
+  overflow-y: auto;
+
+  .maejok-chatters-menu_item {
+    .chat-message-default_user__uVNvH {
+      display: flex;
+      flex-direction: row-reverse;
+      font-weight: 600;
+    }
+    .chat-message-default_clan__t_Ggo {
+      margin-left: auto;
+    }
+  }
+
+  .maejok-chatters-menu_item:not(:has(.maejok-menu-menu_no-items)) {
+    min-width: 250px;
+  }
+
+  .chat-message-default_user__uVNvH:not(
+      :has(.chat-message-default_clan__t_Ggo)
+    ) {
+    display: unset;
+    flex-direction: unset;
+  }
+}

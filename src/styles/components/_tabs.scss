@@ -1,0 +1,27 @@
+.maejok-settings_tab-panel {
+  min-width: 490px;
+  max-height: 100vh;
+  margin-bottom: $space-md;
+}
+
+.maejok-settings_tab-bar {
+  display: flex;
+  gap: $space-xxs;
+  margin-top: $space-sm;
+
+  .maejok-settings_tab {
+    .maejok-tab-button {
+      flex: 1;
+      border: none;
+      cursor: pointer;
+      width: 100px;
+      text-transform: uppercase;
+
+      img {
+        width: 373px !important;
+        height: 75px !important;
+        color: transparent !important;
+      }
+    }
+  }
+}

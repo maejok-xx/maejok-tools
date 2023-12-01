@@ -1,0 +1,52 @@
+#maejok-update-message {
+  background-color: rgba($color-black, 0.75);
+  outline: 1px solid rgba($color-white, 0.6);
+  border-radius: $space-xs;
+  user-select: none;
+  animation: glisten 3s linear infinite;
+  margin: 5px 0;
+
+  .maejok-update-body {
+    background-blend-mode: lighten;
+    padding: $space-md;
+    text-align: center;
+    color: rgba($color-white, 0.9);
+    animation: bounce 0.3s 5;
+
+    .maejok-update-title {
+      font-weight: 600;
+      padding: $space-xs;
+      color: $color-purple;
+      text-shadow: 0px 0px 2px $color-red;
+    }
+
+    .maejok-update-click_here {
+      padding: $space-sm;
+      color: $color-blue;
+      font-weight: 800;
+      width: fit-content;
+      margin: auto;
+      cursor: pointer;
+
+      &:hover {
+        text-shadow: 0px 0px 1px $color-teal;
+      }
+    }
+
+    .maejok-update-links {
+      margin-top: 5px;
+      font-size: 0.8em;
+      color: rgba($color-white, 0.55);
+
+      .maejok-update-changelog,
+      .maejok-update-dismiss {
+        display: inline-block;
+        cursor: pointer;
+
+        &:hover {
+          color: $color-white;
+        }
+      }
+    }
+  }
+}

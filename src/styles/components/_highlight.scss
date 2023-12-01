@@ -1,0 +1,23 @@
+.maejok-friend-message {
+  background-color: rgba($color-blue, 0.1);
+  &:hover {
+    background-color: rgba($color-blue, 0.1);
+    outline: 1px solid rgba($color-blue, 0.25);
+  }
+}
+
+.maejok-watched-message {
+  background-color: rgba($color-green, 0.1);
+  &:hover {
+    background-color: rgba($color-green, 0.1);
+    outline: 1px solid rgba($color-green, 0.25);
+  }
+}
+
+.maejok-context-message {
+  background-color: rgba($color-red, 0.1);
+  &:hover {
+    background-color: rgba($color-red, 0.1);
+    outline: 1px solid rgba($color-red, 0.25);
+  }
+}

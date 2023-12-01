@@ -1,0 +1,82 @@
+.maejok-accordion-header {
+  @include dark-box;
+  border: 1px inset rgba($color-gray, 0.5);
+  border-radius: 2;
+  color: $color-darkgreen;
+  text-shadow: 0 0 4px darken($color-darkgreen, 5%);
+  font-family: Alarm Clock, monospace;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: $space-sm;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+
+  &:hover {
+    background-color: $color-dark;
+  }
+
+  &:after {
+    content: "\002B";
+    color: #008702;
+    font-weight: 600;
+    text-shadow: 0 0 $space-xs #00ff046b;
+    float: right;
+    margin-left: $space-xs;
+  }
+}
+
+.maejok-accordion-active {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.maejok-accordion-active,
+.accordion:hover {
+  color: $color-green;
+  text-shadow: 0 0 $space-xs $color-green;
+  font-family: Alarm Clock, monospace;
+  font-weight: 600;
+}
+
+.maejok-accordion-active + .maejok-accordion-content {
+  padding: 20px 18px 10px;
+}
+
+.maejok-accordion-active:after {
+  content: "\2212";
+  color: $color-green;
+  font-weight: 600;
+  text-shadow: 0 0 $space-xs $color-green;
+}
+
+.maejok-accordion-content {
+  @include slategray-box;
+  border-radius: 2;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border: 1px inset rgba($color-gray, 0.5);
+  border-top: 0;
+  border-bottom: 0;
+  position: relative;
+  max-height: 0;
+  padding: 0 $space-md;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+
+  // .maejok-accordion-highlights-message_example {
+  //   margin: auto;
+  //   width: 495px;
+  //   margin-bottom: 20px;
+  //   padding: 33px;
+  //   font-family: Work Sans, sans-serif;
+  //   text-transform: none;
+  //   background-color: #1c1e1f;
+  // }
+
+  // .maejok-accordion-highlights {
+  //   min-height: 330px;
+  // }
+}

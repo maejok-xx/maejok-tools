@@ -1,0 +1,26 @@
+@mixin dark-box {
+  border-radius: 4px;
+  border: 2px inset rgba($color-gray, 0.5);
+  background-color: $color-darkgray;
+  background-image: linear-gradient(
+    180deg,
+    darken($color-darkgray, 5%),
+    darken($color-darkgray, 10%),
+    darken($color-darkgray, 90%)
+  );
+
+  box-shadow: inset 0px 2px 8px 0px darken($color-dark, 15%);
+}
+@mixin slategray-box {
+  border-radius: 4px;
+  border: 2px inset rgba($color-gray, 0.5);
+  background-color: $color-slategray;
+  background-image: linear-gradient(
+    180deg,
+    darken($color-slategray, 5%),
+    darken($color-slategray, 10%),
+    darken($color-slategray, 90%)
+  );
+
+  box-shadow: inset 0px 2px 8px 0px darken($color-dark, 15%);
+}

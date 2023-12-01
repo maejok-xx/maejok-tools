@@ -1,0 +1,10 @@
+.maejok-modal-body {
+  margin-top: $space-xs;
+  padding: $space-md $space-xs 0;
+  border-top: $space-xxs solid rgba($color-gray, 0.5);
+  user-select: none;
+  font-family: Highway Gothic, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: $color-dark;
+}
