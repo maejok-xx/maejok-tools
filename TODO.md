@@ -2,9 +2,8 @@ TODO
 
 # NEXT
 
-- test updater
+- settings info tab
 - clean up event listers
-- import/export settings (maybe)
 
 # NEEDED FOR RELEASE
 
@@ -16,6 +15,6 @@ TODO
 
 # MAYBES:
 
+- import/export settings
 - Mod Tools - Filter Bypass Alert
-- Self-highlighter
 - Username change log
