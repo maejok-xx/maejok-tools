@@ -20,16 +20,16 @@
     "Userscript"
   ],
   "license": "GPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/maejok-xx/maejok-tools/issues"
-  },
-  "homepage": "https://github.com/maejok-xx/maejok-tools#readme",
-  "change": {
-    "log": "https://github.com/maejok-xx/maejok-tools/blob/master/changelog.md"
+  "changelog": {
+    "url": "https://github.com/maejok-xx/maejok-tools/blob/master/changelog.md"
   },
   "update": {
     "url": "https://github.com/maejok-xx/maejok-tools/raw/master/dist/maejok-tools.user.js"
   },
+  "bugs": {
+    "url": "https://github.com/maejok-xx/maejok-tools/issues"
+  },
+  "homepage": "https://github.com/maejok-xx/maejok-tools#readme",
   "devDependencies": {
     "css-loader": "^6.8.1",
     "file-loader": "^6.2.0",
