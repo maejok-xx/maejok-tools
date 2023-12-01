@@ -59,7 +59,6 @@ const Config = () => {
   const pluginObj = {
     name: "MAEJOK-TOOLS-RENEWED",
     storageKey: "maejok-tools-v2r",
-    repoRoot: "https://raw.githubusercontent.com/maejok-xx/test/main",
   };
 
   const settingsOptions = () => {

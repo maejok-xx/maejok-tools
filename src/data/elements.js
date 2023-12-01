@@ -1,5 +1,4 @@
-import config from "../modules/config";
-const repoRoot = config.plugin("repoRoot");
+import { REPO_ROOT } from "../modules/constants";
 
 const Elements = {
   login: {
@@ -367,7 +366,7 @@ const Elements = {
         image: {
           attr: [
             `src`,
-            `${repoRoot}/public/images/console-button-square-purple.png`,
+            `${REPO_ROOT}/public/images/console-button-square-purple.png`,
           ],
         },
       },
