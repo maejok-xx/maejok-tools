@@ -45,7 +45,6 @@ export const stop = () => {
 
   clearInterval(existingInterval);
   state.set("updateCheckInterval", null);
-  state.set("remoteData", null);
 };
 
 export const checkForUpdate = async () => {
