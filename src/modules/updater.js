@@ -49,16 +49,8 @@ export const stop = () => {
 
 export const checkForUpdate = async () => {
   const now = new Date().getTime();
-  const cachedPackageJSON = state.get("packageJson");
-  const updateCheckFrequency = config.get("updateCheckFrequency");
 
-  const remoteDataExpired =
-    !cachedPackageJSON?.lastCheckedAt ||
-    cachedPackageJSON?.lastCheckedAt + updateCheckFrequency <= now;
-
-  const packageJSON = !remoteDataExpired
-    ? cachedPackageJSON
-    : await getRemotePackageJSON();
+  const packageJSON = await getRemotePackageJSON();
 
   state.set("packageJson", { lastCheckedAt: now, ...packageJSON });
 
@@ -98,7 +90,6 @@ export const getRemotePackageJSON = async () => {
       return response.json();
     })
     .then((data) => {
-      state.set("remoteData", data);
       return data;
     })
     .catch((error) => {
