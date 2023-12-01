@@ -728,6 +728,8 @@ function updateDaysUntilSeasonTwo() {
   const remoteData = state.get("remoteData");
 
   if (!remoteData?.s2ts) {
+    clearInterval("daysLeftInterval");
+    state.set("daysLeftInterval", null);
     return;
   }
 
