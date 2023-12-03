@@ -1,14 +1,13 @@
 import state from "./state";
 import { pluginName } from "./functions";
 
-// CONFIGURATION
 const Config = () => {
   const configObj = {
     enablePlugin: true,
     enableDimMode: false,
 
     enableUpdateChecks: true,
-    updateCheckFrequency: 1,
+    updateCheckFrequency: 10,
 
     hideTimestamps: true,
     hideAvatars: false,
@@ -93,7 +92,7 @@ const Config = () => {
             // enableUpdateChecks & updateCheckFrequency
             {
               name: "enableUpdateChecks",
-              label: "Automatically Check For Plugin Updates",
+              label: "Get Notified About Plugin Updates",
               type: "toggle",
               value: cfg.enableUpdateChecks,
               group: "plugin",
@@ -136,7 +135,7 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option reduces the brightness of the site little</p>
-                <p><i>Note: upon first enabling this option, the site will look twice as dark until the settings panel is closed.</i></p>`,
+                <p><i>Note: this setting will cause the site to appear twice as dark while the settings panel is open.</i></p>`,
               },
             },
             // enableEmotesMenu
