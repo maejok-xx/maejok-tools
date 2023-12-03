@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         MAEJOK-TOOLS DEV
+// @name         __PLUGINNAME__
 // @description  __DESCRIPTION__
 // @author       maejok-xx
 // @version      __VERSION__
