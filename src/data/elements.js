@@ -473,7 +473,10 @@ const Elements = {
       },
     },
     help: {
-      label: { class: [`maejok-input-help-label`] },
+      label: {
+        help: { class: [`maejok-input-help-label`] },
+        config: { class: [`maejok-input-help-config-label`] },
+      },
       text: { class: [`maejok-input-help-text`] },
     },
     buttons: {

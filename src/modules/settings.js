@@ -524,7 +524,7 @@ function createToggle(option, panel, modal) {
 
   if (option.config) {
     const config = document.createElement("b");
-    config.classList.add(...props.help.label.class);
+    config.classList.add(...props.help.label.config.class);
     config.innerHTML = "⚙";
     config.addEventListener("click", () => clickSettingsConfig(option, modal));
     wrapper.appendChild(config);
@@ -532,7 +532,7 @@ function createToggle(option, panel, modal) {
 
   if (option.help) {
     const help = document.createElement("b");
-    help.classList.add(...props.help.label.class);
+    help.classList.add(...props.help.label.help.class);
     help.innerHTML = `${option.help.label}`;
     help.addEventListener("click", () => clickSettingsHelp(option));
     wrapper.appendChild(help);

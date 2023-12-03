@@ -2,7 +2,8 @@
   display: flex;
   margin-bottom: 12px;
 
-  .maejok-input-help-label {
+  .maejok-input-help-label,
+  .maejok-input-help-config-label {
     display: flex;
     align-self: center;
     margin-left: $space-sm;
@@ -10,6 +11,11 @@
     cursor: pointer;
     color: $color-darkyellow;
     text-shadow: 0 0 $space-xxs $color-black;
+    margin-top: -3px;
+  }
+
+  .maejok-input-help-config-label {
+    margin-top: -1px;
   }
 
   .maejok-input-label {
