@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         __PLUGINNAME__
+// @name         __PLUGINNAME__ for Fishtank.live
 // @description  __DESCRIPTION__
 // @author       maejok-xx
 // @version      __VERSION__

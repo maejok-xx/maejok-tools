@@ -1,6 +1,6 @@
 /*!
  * // ==UserScript==
- * // @name         MAEJOK-TOOLS
+ * // @name         MAEJOK-TOOLS for Fishtank.live
  * // @description  Add-on Tools for Fishtank.live Season 2
  * // @author       maejok-xx
  * // @version      2.7.0
