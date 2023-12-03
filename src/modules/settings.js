@@ -265,8 +265,6 @@ export function validateInput(accept, value) {
 function createAboutPanel(panel) {
   const packageJson = state.get("packageJson");
 
-  console.log(packageJson);
-
   const accordion = panel.querySelector(`[data-group-content="about"]`);
   const wrapper = document.createElement("div");
   wrapper.className = "maejok-settings-about";
