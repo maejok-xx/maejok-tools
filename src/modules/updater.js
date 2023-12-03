@@ -68,7 +68,7 @@ export const checkForUpdate = async () => {
   if (udpateAvailable) {
     stop();
     playSound("mention");
-    insertChatMessage(updateData);
+    insertChatUpdateMessage(updateData);
     state.set("updateShown", true);
   }
 };
@@ -97,7 +97,67 @@ export const getRemotePackageJSON = async () => {
     });
 };
 
-function insertChatMessage(updateData) {
+export const insertChatUpdatedMessage = () => {
+  const showUpdateNotice = config.get("showUpdateNotice");
+
+  if (!showUpdateNotice) {
+    console.log("no show");
+    return;
+  }
+  console.log("show");
+
+  config.set("showUpdateNotice", false);
+  config.save();
+
+  const chat = document.querySelector(ELEMENTS.chat.list.selector);
+
+  const wrapper = document.createElement("div");
+  wrapper.id = "maejok-update-message";
+
+  const body = document.createElement("div");
+  body.className = "maejok-update-body";
+
+  const title = document.createElement("div");
+  title.className = "maejok-update-title";
+  title.innerHTML = `${pluginName().toUpperCase()}`;
+
+  const clickHere = document.createElement("div");
+  clickHere.className = "maejok-update-click_here";
+  clickHere.innerHTML = ` v${VERSION} successfully installed!`;
+
+  const links = document.createElement("div");
+  links.className = "maejok-update-links";
+
+  const changeLog = document.createElement("a");
+  changeLog.className = "maejok-update-changelog";
+  changeLog.textContent = "changelog";
+
+  const dismiss = document.createElement("a");
+  dismiss.className = "maejok-update-dismiss";
+  dismiss.textContent = "dismiss";
+
+  links.appendChild(document.createTextNode("[  "));
+  links.appendChild(changeLog);
+  links.appendChild(document.createTextNode("  |  "));
+  links.appendChild(dismiss);
+  links.appendChild(document.createTextNode("  ]"));
+
+  body.appendChild(title);
+  body.appendChild(clickHere);
+  body.appendChild(links);
+
+  wrapper.appendChild(body);
+
+  chat.appendChild(wrapper);
+
+  clickHere.addEventListener("click", clickUpdate);
+  changeLog.addEventListener("click", clickUpdateChangelog);
+  dismiss.addEventListener("click", clickUpdateDismiss);
+
+  scrollToBottom();
+};
+
+function insertChatUpdateMessage(updateData) {
   const chat = document.querySelector(ELEMENTS.chat.list.selector);
 
   const wrapper = document.createElement("div");

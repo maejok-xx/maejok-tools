@@ -9,6 +9,7 @@ import {
   getUserFromLocalStorage,
   runUserAgreement,
 } from "./modules/functions";
+import { insertChatUpdatedMessage as showUpdateNotice } from "./modules/updater";
 import "./styles/styles.scss";
 
 (function () {
@@ -58,6 +59,7 @@ import "./styles/styles.scss";
         return;
       }
 
+      showUpdateNotice();
       startMaejokTools();
     }
   }, 250);

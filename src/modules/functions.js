@@ -645,6 +645,7 @@ export const runUserAgreement = () => {
   const agreement = prompt(message);
 
   if (agreement.toLowerCase() === "i agree") {
+    config.set("showUpdateNotice", true);
     config.set("agreementVersion", VERSION);
     config.save();
 

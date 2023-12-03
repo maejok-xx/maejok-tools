@@ -8,6 +8,7 @@ const Config = () => {
 
     enableUpdateChecks: true,
     updateCheckFrequency: 10,
+    showUpdateNotice: false,
 
     hideTimestamps: true,
     hideAvatars: false,
