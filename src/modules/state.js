@@ -5,6 +5,7 @@ const State = () => {
     isPopoutChat: false,
     modals: [],
     user: null,
+    bigChatState: false,
     mentions: [],
     recentChatters: [],
     observers: {

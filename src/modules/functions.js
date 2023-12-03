@@ -108,13 +108,17 @@ export const toggleBigChat = (mode = null, muted = false) => {
       playSound("shutter");
     }
 
-    mode = mode === null ? !config.get("bigChatState") : mode;
+    mode = mode === null ? !state.get("bigChatState") : mode;
   } else {
     mode = false;
   }
 
-  config.set("bigChatState", mode);
-  config.save();
+  if (config.get("persistBigChat")) {
+    config.set("bigChatState", mode);
+    config.save();
+  }
+
+  state.set("bigChatState", mode);
 
   const getElement = (elm) => document.querySelector(elm.selector);
   const elements = {
@@ -134,6 +138,10 @@ export const toggleBigChat = (mode = null, muted = false) => {
 
   const prefix = "maejok-chat_mode-";
   Object.keys(elements).forEach((className) => {
+    if (className === "countdown") {
+      return;
+    }
+
     const element = elements[className];
     if (element) {
       element.classList.toggle(prefix + className, mode);

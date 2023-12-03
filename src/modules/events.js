@@ -200,7 +200,7 @@ export const dblClick = (event) => {
 };
 
 export const keyPress = (event) => {
-  if (!state.get("loaded") || !state.get("isPopoutChat")) {
+  if (!state.get("loaded") || state.get("isPopoutChat")) {
     return;
   }
 
