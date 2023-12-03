@@ -1,10 +1,6 @@
 # TODO
 
-- clean up event listers
-
+- clean up event listeners
 - offsite chat logger/exporter
-
-# MAYBES:
-
 - import/export settings
-- Username change logger
+- Username change log
