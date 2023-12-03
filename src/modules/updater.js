@@ -123,7 +123,7 @@ export const insertChatUpdatedMessage = () => {
 
   const clickHere = document.createElement("div");
   clickHere.className = "maejok-updated-notice";
-  clickHere.innerHTML = ` v${VERSION} successfully installed!`;
+  clickHere.innerHTML = ` v${VERSION} Successfully Installed!`;
 
   const links = document.createElement("div");
   links.className = "maejok-update-links";
