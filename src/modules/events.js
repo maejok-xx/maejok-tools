@@ -350,7 +350,7 @@ export const clickUpdateDismiss = () => {
     return;
   }
 
-  clickHere.removeEventListener("click", clickUpdate);
+  clickHere?.removeEventListener("click", clickUpdate);
   changeLog.removeEventListener("click", clickUpdateChangelog);
   dismiss.removeEventListener("click", clickUpdateDismiss);
   updateMessage.remove();

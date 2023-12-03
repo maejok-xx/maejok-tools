@@ -122,7 +122,7 @@ export const insertChatUpdatedMessage = () => {
   title.innerHTML = `${pluginName().toUpperCase()}`;
 
   const clickHere = document.createElement("div");
-  clickHere.className = "maejok-update-click_here";
+  clickHere.className = "maejok-updated-notice";
   clickHere.innerHTML = ` v${VERSION} successfully installed!`;
 
   const links = document.createElement("div");
@@ -150,7 +150,6 @@ export const insertChatUpdatedMessage = () => {
 
   chat.appendChild(wrapper);
 
-  clickHere.addEventListener("click", clickUpdate);
   changeLog.addEventListener("click", clickUpdateChangelog);
   dismiss.addEventListener("click", clickUpdateDismiss);
 
