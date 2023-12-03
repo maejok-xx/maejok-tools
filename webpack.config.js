@@ -8,11 +8,14 @@ module.exports = (env, argv) => {
   const pluginName = isDev
     ? `${packageJson.name} [DEV MODE]`
     : packageJson.name;
+  const fileName = isDev
+    ? `${packageJson.name}.dev.user.js`
+    : `${packageJson.name}.user.js`;
 
   return {
     entry: "./src/main.js",
     output: {
-      filename: `${packageJson.name}.user.js`,
+      filename: fileName,
       path: path.resolve(__dirname, "dist"),
     },
     resolve: {
