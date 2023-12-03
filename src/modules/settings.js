@@ -36,6 +36,7 @@ export const saveSettings = () => {
   );
 
   const prevUpdateCheckFrequency = config.get("updateCheckFrequency");
+  const prevChattersEnabled = config.get("enableRecentChatters");
 
   inputs.forEach((input) => {
     const key = input.id.replace("-hidden", "");
@@ -82,9 +83,15 @@ export const saveSettings = () => {
     return;
   }
 
-  if (config.get("enableRecentChatters")) {
+  const recentChattersJustEnabled =
+    config.get("enableRecentChatters") &&
+    prevChattersEnabled !== config.get("enableRecentChatters");
+
+  if (recentChattersJustEnabled) {
     startRecentChatters();
-  } else {
+  }
+
+  if (!config.get("enableRecentChatters")) {
     stopRecentChatters();
   }
 
