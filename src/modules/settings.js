@@ -320,7 +320,7 @@ function createAboutPanel(panel) {
 
   const message = document.createElement("div");
   message.classList.add("maejok-settings-about-message");
-  message.innerHTML = `<p>This plugin is not created, promoted, nor endorsed by the creators of Fishtank Live.</p><p>If you have issues while using the plugin, disable it FULLY from your Userscript Extension (Tampermonkey, GreaseMonkey, etc) and try again before making any bug reports.  If you find that the issue goes away when the plugin is disabled, please make a bug report using <a href="https://github.com/maejok-xx/maejok-tools/issues" target="_blank">GitHub Issues</a> and I'll work on getting it fixed as soon as possible!</p><p>You can show your appreciation by tipping me tokens or by <a href="https://ko-fi.com/maejok">donating on Ko-fi</a>!</p><p><strong>I LOVE YOU!</strong><br/>-maejok</p>`;
+  message.innerHTML = `<p>This plugin is not created, promoted, nor endorsed by the creators of Fishtank Live.</p><p>If you have issues while using the plugin, disable it FULLY from your Userscript Extension (Tampermonkey, GreaseMonkey, etc) and try again before making any bug reports.  If you find that the issue goes away when the plugin is disabled, please make a bug report using <a href="https://github.com/maejok-xx/maejok-tools/issues" target="_blank">GitHub Issues</a> and I'll work on getting it fixed as soon as possible!</p><p>You can show your appreciation by tipping me tokens or by <a href="https://ko-fi.com/maejok" target="_blank">donating on Ko-fi</a>!</p><p><strong>I LOVE YOU!</strong><br/>-maejok</p>`;
   wrapper.appendChild(message);
 
   accordion.appendChild(wrapper);
