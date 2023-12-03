@@ -1,6 +1,7 @@
 import config from "./modules/config";
 import state from "./modules/state";
 import { createSettingsButton } from "./modules/settings";
+import { getRemotePackageJSON } from "./modules/updater";
 import ELEMENTS from "./data/elements";
 import {
   startMaejokTools,
@@ -18,6 +19,8 @@ import "./styles/styles.scss";
   if (!userAgreementAccepted) {
     return;
   }
+
+  getRemotePackageJSON();
 
   const enableDimMode =
     config.get("enableDimMode") && config.get("enablePlugin");
