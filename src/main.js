@@ -37,12 +37,8 @@ import "./styles/styles.scss";
     } else {
       chat = document.querySelector(ELEMENTS.chat.list.selector);
       countDownTimer = document.querySelector(ELEMENTS.countdown.selector);
-      isLoaded =
-        chat !== null &&
-        (countDownTimer !== null || address === "http://localhost:3000/");
+      isLoaded = chat !== null && countDownTimer !== null;
     }
-
-    console.log(address); // REMOVE BEFORE RELEASE
 
     if (isLoaded) {
       clearInterval(loadingInterval);

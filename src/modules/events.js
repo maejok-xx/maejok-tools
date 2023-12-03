@@ -309,7 +309,6 @@ export const clickSettingsConfig = (option, modal) => {
 };
 
 export const clickRemoveUserFromList = (list, user, elementToRemove) => {
-  console.log(list, user);
   const removed = modifyUserList(list, user, false);
   if (removed) {
     elementToRemove.remove();

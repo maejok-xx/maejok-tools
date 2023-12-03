@@ -162,7 +162,6 @@ export default class Message {
       return false;
     }
     this.fish = this.sender.displayName.includes("🐟");
-    // console.log(this.sender.displayName, this.fish);
     return this.fish;
   }
 
