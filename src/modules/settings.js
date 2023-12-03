@@ -17,6 +17,7 @@ import {
   startMaejokTools,
   stopMaejokTools,
   processChatMessage,
+  toggleBigChat,
   toggleDenseChat,
   scrollToBottom,
   mentionUser,
