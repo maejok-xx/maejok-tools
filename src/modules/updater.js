@@ -3,6 +3,7 @@ import {
   playSound,
   scrollToBottom,
   updateDaysUntilSeasonTwo,
+  pluginName,
 } from "./functions";
 import {
   clickUpdate,
@@ -99,7 +100,6 @@ export const getRemotePackageJSON = async () => {
 };
 
 function insertChatMessage(updateData) {
-  const pluginName = state.get("packageJson")?.name || config.plugin("name");
   const chat = document.querySelector(ELEMENTS.chat.list.selector);
 
   const wrapper = document.createElement("div");
@@ -110,7 +110,9 @@ function insertChatMessage(updateData) {
 
   const title = document.createElement("div");
   title.className = "maejok-update-title";
-  title.innerHTML = `${pluginName.toUpperCase()} v${updateData.currentVersion}`;
+  title.innerHTML = `${pluginName().toUpperCase()} v${
+    updateData.currentVersion
+  }`;
 
   const clickHere = document.createElement("div");
   clickHere.className = "maejok-update-click_here";

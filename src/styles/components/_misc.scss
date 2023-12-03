@@ -37,3 +37,21 @@
 .maejok-chatters_count {
   cursor: pointer;
 }
+
+.button-link {
+  background: none;
+  border: none;
+  color: #11f8ff;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 0;
+  font: inherit;
+}
+
+.button-link:focus,
+.button-link:hover,
+.button-link:active {
+  outline: none;
+  background: none;
+  border: none;
+}

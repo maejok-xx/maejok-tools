@@ -1,5 +1,6 @@
 import config from "./config";
 import state from "./state";
+import { VERSION } from "./constants";
 import {
   clickOpenSettingsModal,
   clickSettingsHelp,
@@ -11,13 +12,17 @@ import {
   clickTabButton,
 } from "./events";
 import { start as startUpdater, stop as stopUpdater } from "./updater";
-import { toggleDimMode, startMaejokTools, stopMaejokTools } from "./functions";
-import observers from "./observers";
 import {
+  toggleDimMode,
+  startMaejokTools,
+  stopMaejokTools,
   processChatMessage,
   toggleDenseChat,
   scrollToBottom,
+  mentionUser,
+  pluginName,
 } from "./functions";
+import observers from "./observers";
 import {
   start as startRecentChatters,
   stop as stopRecentChatters,
@@ -152,10 +157,8 @@ export const createSettingsButton = () => {
 };
 
 export const createConfigurationInputModal = (option, parentModal) => {
-  const pluginName = state.get("packageJson")?.name || config.plugin("name");
-
   const modal = new Modal(
-    `${pluginName.toUpperCase()} - ${option.config.title}`
+    `${pluginName().toUpperCase()} - ${option.config.title}`
   );
 
   const wrapper = document.createElement("div");
@@ -203,12 +206,11 @@ export const createConfigurationInputModal = (option, parentModal) => {
 };
 
 export const createSettingsModal = () => {
-  const pluginName = state.get("packageJson")?.name || config.plugin("name");
   const props = ELEMENTS.settings;
 
   const settingsConfig = config.settingsOptions();
 
-  const modal = new Modal(`${pluginName.toUpperCase()} - Settings`);
+  const modal = new Modal(`${pluginName().toUpperCase()} - Settings`);
 
   const wrapper = document.createElement("div");
 
@@ -235,6 +237,10 @@ export const createSettingsModal = () => {
         createHighlightsPanel(cfg, panel);
     });
 
+    if (config.name === "about") {
+      createAboutPanel(panel);
+    }
+
     body.appendChild(panel);
   });
 
@@ -254,6 +260,59 @@ export function validateInput(accept, value) {
     default:
       break;
   }
+}
+
+function createAboutPanel(panel) {
+  const links = {
+    Fishtank: "@maejok",
+    Twitter: "https://twitter.com/maejok",
+  };
+
+  const accordion = panel.querySelector(`[data-group-content="about"]`);
+  const wrapper = document.createElement("div");
+  wrapper.className = "maejok-settings-about";
+
+  const title = document.createElement("div");
+  title.classList.add("maejok-settings-about-title");
+  title.textContent = `${pluginName().toUpperCase()} v${VERSION}`;
+  wrapper.appendChild(title);
+
+  const author = document.createElement("div");
+  author.classList.add("maejok-settings-about-author");
+  wrapper.appendChild(author);
+
+  const authorLabel = document.createElement("span");
+  authorLabel.classList.add("maejok-settings-about-author_label");
+  authorLabel.innerHTML = `<strong>Author</strong>: `;
+  author.appendChild(authorLabel);
+
+  const authorMention = document.createElement("button");
+  authorMention.classList.add(
+    "maejok-settings-about-author_mention",
+    "button-link"
+  );
+  authorMention.textContent = `@maejok`;
+  authorMention.onclick = () => mentionUser("maejok");
+  author.appendChild(authorMention);
+
+  author.appendChild(document.createTextNode(" / "));
+
+  const twitterLink = document.createElement("button");
+  twitterLink.classList.add(
+    "maejok-settings-about-contact_link",
+    "button-link"
+  );
+  twitterLink.textContent = `x.com/maejok`;
+  twitterLink.onclick = () =>
+    window.open("https://twitter.com/maejok", "_blank");
+  author.appendChild(twitterLink);
+
+  const message = document.createElement("div");
+  message.classList.add("maejok-settings-about-message");
+  message.innerHTML = `<p>This plugin is not created, promoted, nor endorsed by the creators of Fishtank Live.</p><p>If you have issues while using the plugin, disable it FULLY from your Userscript Extension (Tampermonkey, GreaseMonkey, etc) and try again before making any bug reports.  If you find that the issue goes away when the plugin is disabled, please make a bug report using <a href="https://github.com/maejok-xx/maejok-tools/issues" target="_blank">GitHub Issues</a> and I'll work on getting it fixed as soon as possible!</p><p>You can show your appreciation by tipping me tokens or by <a href="https://ko-fi.com/maejok">donating on Ko-fi</a>!</p><p><strong>I LOVE YOU!</strong><br/>-maejok</p>`;
+  wrapper.appendChild(message);
+
+  accordion.appendChild(wrapper);
 }
 
 function createHighlightsPanel(list, panel) {

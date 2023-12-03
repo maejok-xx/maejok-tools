@@ -655,6 +655,11 @@ export const runUserAgreement = () => {
   }
 };
 
+export const pluginName = () => {
+  const pluginName = state.get("packageJson")?.name || config.plugin("name");
+  return pluginName;
+};
+
 export const startMaejokTools = async () => {
   config.load();
   const cfg = config.get();

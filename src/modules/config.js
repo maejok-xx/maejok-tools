@@ -1,4 +1,5 @@
 import state from "./state";
+import { pluginName } from "./functions";
 
 // CONFIGURATION
 const Config = () => {
@@ -79,7 +80,7 @@ const Config = () => {
             // enablePlugin
             {
               name: "enablePlugin",
-              label: "Enable MAEJOK-TOOLS",
+              label: `Enable ${pluginName().toUpperCase()}`,
               type: "toggle",
               value: cfg.enablePlugin,
               group: "plugin",
@@ -488,7 +489,9 @@ const Config = () => {
       {
         name: "about",
         label: "About",
-        content: {},
+        content: {
+          groups: [{ name: "about", label: "About This Plugin" }],
+        },
       },
     ];
 

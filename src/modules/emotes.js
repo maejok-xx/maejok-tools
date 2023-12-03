@@ -1,16 +1,14 @@
-import config from "./config";
 import state from "./state";
-import { setChatInputValue, playSound } from "./functions";
+import { setChatInputValue, playSound, pluginName } from "./functions";
 import Modal from "../classes/Modal";
 import ELEMENTS from "../data/elements";
 import { Emotes, Demotes } from "../data/emotes";
 
 export const createEmotesList = () => {
-  const pluginName = state.get("packageJson")?.name || config.plugin("name");
   const displayName = state.get("user").displayName;
   const eventListeners = [];
 
-  const modal = new Modal(`${pluginName.toUpperCase()} - Emotes List`);
+  const modal = new Modal(`${pluginName().toUpperCase()} - Emotes List`);
 
   let emotes = Object.keys(Emotes)
     .sort()

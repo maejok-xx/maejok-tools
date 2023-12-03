@@ -1,0 +1,38 @@
+.maejok-settings-about {
+  font-size: large;
+  text-transform: none;
+  color: $color-white;
+  padding-bottom: 10px;
+  font-family: Work Sans, sans-serif;
+  text-align: center;
+  overflow-y: auto;
+
+  .maejok-settings-about-title {
+    color: $color-pink;
+    text-shadow: 0px 0px 2px $color-black;
+    font-weight: 600;
+    font-size: x-large;
+    margin-bottom: 20px;
+  }
+
+  .maejok-settings-about-author,
+  .maejok-settings-about-contact {
+    margin: 5px;
+  }
+
+  .maejok-settings-about-message {
+    max-width: 500px;
+    font-weight: 400;
+    margin: 20px 5px;
+    line-height: normal;
+
+    a {
+      color: #11f8ff;
+      font-weight: 700;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+  }
+}
