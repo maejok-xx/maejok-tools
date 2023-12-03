@@ -49,11 +49,7 @@ export const stop = () => {
 };
 
 export const checkForUpdate = async () => {
-  const now = new Date().getTime();
-
   const packageJSON = await getRemotePackageJSON();
-
-  state.set("packageJson", { lastCheckedAt: now, ...packageJSON });
 
   if (!packageJSON) {
     return;
@@ -80,6 +76,7 @@ export const checkForUpdate = async () => {
 export const getRemotePackageJSON = async () => {
   const cacheBuster = new Date().getTime();
   const url = `${PACKAGE_URL}?cb=${cacheBuster}`;
+  const now = new Date().getTime();
 
   return fetch(url)
     .then((response) => {
@@ -91,6 +88,7 @@ export const getRemotePackageJSON = async () => {
       return response.json();
     })
     .then((data) => {
+      state.set("packageJson", { lastCheckedAt: now, ...data });
       return data;
     })
     .catch((error) => {
