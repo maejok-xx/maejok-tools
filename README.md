@@ -1,4 +1,8 @@
-### Be sure to watch Season 1 and get ready for Season 2 at https://www.fishtank.live/
+## MAEJOK-TOOLS for Fishtank.live
+
+## Version 2.7.0 has been COMPLETELY rewritten from scratch with tons of improvements and new features added!
+
+### Be sure to watch Fishtank Season One and get ready for Season Two, starting December 18th at https://www.fishtank.live/
 
 ---
 
