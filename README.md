@@ -1,44 +1,24 @@
-# THIS IS NOT READY FOR RELEASE
-
-# THINGS WILL NOT WORK PROPERLY
-
-# THIS IS NOT READY FOR RELEASE
-
-# THINGS WILL NOT WORK PROPERLY
-
-# THIS IS NOT READY FOR RELEASE
-
-# THINGS WILL NOT WORK PROPERLY
-
-# THIS IS NOT READY FOR RELEASE
-
-# THINGS WILL NOT WORK PROPERLY
-
-# THIS IS NOT READY FOR RELEASE
-
-# THINGS WILL NOT WORK PROPERLY
-
-# THIS IS NOT READY FOR RELEASE
-
-# THINGS WILL NOT WORK PROPERLY
-
-# THIS IS NOT READY FOR RELEASE
-
-# THINGS WILL NOT WORK PROPERLY
-
-# THIS IS NOT READY FOR RELEASE
-
-# THINGS WILL NOT WORK PROPERLY
-
-# MAEJOK-TOOLS for Fishtank Live
-
 ### Be sure to watch Season 1 and get ready for Season 2 at https://www.fishtank.live/
 
 ---
 
 Features:
 
-- LIST FEATURES
+- Mentions log
+- Emotes Menu (right click chat input)
+- Chat Message Menus (right click messages)
+- Mention Menu (right click a mention)
+- BigChat mode (Use CTRL+` or CTRL+SHIFT+SPACE to toggle)
+- "Friending" and "Watching" users
+- Double-Click Messages in chat to toggle "Watching" of all messages from that user (persists between visits)
+- Enter Clan Chat Automatically
+- Active Chatters Count/List (click count to see list)
+- Dense Chat mode
+- Improved tagging
+- Toggle in Chat: Timestamps/Avatars/Clans/XP/Roll/Emotes/Consumables/System Messages
+- and a bunch of other stuff
+- And it's all controllable via Integrated Settings Panel
+- Plus more to come!
 
 ---
 
