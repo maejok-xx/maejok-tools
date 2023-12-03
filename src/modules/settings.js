@@ -263,10 +263,9 @@ export function validateInput(accept, value) {
 }
 
 function createAboutPanel(panel) {
-  const links = {
-    Fishtank: "@maejok",
-    Twitter: "https://twitter.com/maejok",
-  };
+  const packageJson = state.get("packageJson");
+
+  console.log(packageJson);
 
   const accordion = panel.querySelector(`[data-group-content="about"]`);
   const wrapper = document.createElement("div");
@@ -276,6 +275,12 @@ function createAboutPanel(panel) {
   title.classList.add("maejok-settings-about-title");
   title.textContent = `${pluginName().toUpperCase()} v${VERSION}`;
   wrapper.appendChild(title);
+
+  const changelog = document.createElement("button");
+  changelog.classList.add("maejok-settings-about-changelog", "button-link");
+  changelog.textContent = `Changelog`;
+  changelog.onclick = () => window.open(packageJson.changelog.url, "_blank");
+  wrapper.appendChild(changelog);
 
   const author = document.createElement("div");
   author.classList.add("maejok-settings-about-author");
