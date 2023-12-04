@@ -65,12 +65,6 @@ export const saveSettings = () => {
     toggleBigChat(false);
   }
 
-  if (!config.get("enablePlugin")) {
-    observers.chat.stop();
-  } else {
-    observers.chat.start();
-  }
-
   const startPlugin = !state.get("running") && config.get("enablePlugin");
 
   if (startPlugin) {
@@ -118,7 +112,7 @@ export const saveSettings = () => {
 export const applySettingsToChat = () => {
   const messages = document.querySelector(ELEMENTS.chat.list.selector).children;
   const nodes = Array.from(messages);
-  nodes.forEach((node) => processChatMessage(node));
+  nodes.forEach((node) => processChatMessage(node, false));
 
   state.set("contextUser", null);
 
