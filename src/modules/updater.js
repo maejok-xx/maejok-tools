@@ -101,10 +101,8 @@ export const insertChatUpdatedMessage = () => {
   const showUpdateNotice = config.get("showUpdateNotice");
 
   if (!showUpdateNotice) {
-    console.log("no show");
     return;
   }
-  console.log("show");
 
   config.set("showUpdateNotice", false);
   config.save();
