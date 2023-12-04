@@ -13,6 +13,12 @@ const Elements = {
     selector: `[class^="home_home"]`,
     class: "home_home__pUFCA",
   },
+  secondaryPanel: {
+    tab: {
+      class: "secondary-panel_tab__PxWtZ",
+      selector: `[class*="secondary-panel_tab__"]`,
+    },
+  },
   header: {
     selector: `[class*="top-bar_top-bar__"]`,
     class: "top-bar_top-bar___Z0QX",

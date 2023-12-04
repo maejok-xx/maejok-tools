@@ -687,7 +687,7 @@ export const startMaejokTools = async () => {
   }
 
   if (cfg.persistBigChat && !isPopoutChat) {
-    toggleBigChat(cfg.bigChatState, cfg.bigChatState);
+    toggleBigChat(cfg.bigChatState, true);
   }
 
   if (!isPopoutChat) {

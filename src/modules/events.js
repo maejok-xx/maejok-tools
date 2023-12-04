@@ -132,6 +132,22 @@ export const leftClick = (event) => {
       break;
   }
 
+  function checkSecondaryPanelTabClicked() {
+    const clicked = hasClass(
+      event.target.parentElement?.parentElement,
+      ELEMENTS.secondaryPanel.tab.class
+    );
+
+    if (clicked) {
+      const returnToBigChat =
+        config.get("enableBigChat") && config.get("bigChatState");
+
+      setTimeout(() => toggleBigChat(returnToBigChat, true), 0);
+      return true;
+    }
+    return false;
+  }
+
   function checkAvatarClicked() {
     const clicked = hasClass(
       event.target.parentElement,
@@ -161,6 +177,7 @@ export const leftClick = (event) => {
   function checkForTarget() {
     if (checkChattersClicked()) return;
     if (checkAvatarClicked()) return;
+    if (checkSecondaryPanelTabClicked()) return;
   }
 
   function isMenuItem() {
