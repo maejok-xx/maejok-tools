@@ -82,7 +82,7 @@ Create a new Userscript using your browser extension of choice (eg: Tampermonkey
 // @icon         https://raw.githubusercontent.com/maejok-xx/maejok-tools/master/public/images/icon.png
 // @match        *://*.fishtank.live/*
 // @run-at       document-idle
-// @require      file:\\\PATH_TO_PROJECT_DIR\dist\maejok-tools.user.js
+// @require      file:\\\PATH_TO_PROJECT_DIR\dist\maejok-tools.dev.user.js
 // ==/UserScript==
 ```
 
