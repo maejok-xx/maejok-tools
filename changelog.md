@@ -1,5 +1,26 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.7.1_**
+
+### Notes
+
+- N/A
+
+### Bug Fixes
+
+- [Big Chat Bug](https://github.com/maejok-xx/maejok-tools/issues/2)
+- [Mentions log duplicates itself by toggling options](https://github.com/maejok-xx/maejok-tools/issues/5)
+
+### Features Added
+
+- N/A
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.7.0_**
 
 ### Notes
