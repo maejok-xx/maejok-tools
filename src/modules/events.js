@@ -140,7 +140,9 @@ export const leftClick = (event) => {
 
     if (clicked) {
       const returnToBigChat =
-        config.get("enableBigChat") && config.get("bigChatState");
+        config.get("enableBigChat") &&
+        config.get("bigChatState") &&
+        state.get("bigChatState");
 
       setTimeout(() => toggleBigChat(returnToBigChat, true), 0);
       return true;
