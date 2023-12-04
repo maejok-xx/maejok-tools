@@ -24,6 +24,9 @@ const State = () => {
   };
 
   const get = (key) => {
+    if (!key) {
+      return defaults;
+    }
     return defaults[key];
   };
 
