@@ -357,11 +357,14 @@ export const scrollToBottom = () => {
   chat.scrollTop = chat.scrollHeight;
 };
 
-export const processChatMessage = (node) => {
+export const processChatMessage = (node, logMentions = true) => {
   const cfg = config.get();
   const message = new Message(node);
 
-  processMentions(message);
+  if (logMentions) {
+    processMentions(message);
+  }
+
   checkRoomChange(node);
 
   const msgHideTypes = {
