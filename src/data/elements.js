@@ -391,15 +391,15 @@ const Elements = {
         selector: `[class^="maejok-settings_body"]`,
         classes: [
           `maejok-tab-button`,
-          `console-button-long_console-button-long__G6irT`,
-          `console-button-long_md__y_aAD`,
+          `color-button_color-button__cW61T`,
+          `color-button_md__GaczN`,
         ],
         image: {
           attr: [`loading`, `lazy`, `decoding`, `async`, `data-nimg`, `1`],
           src: `https://cdn.fishtank.live/images/slices/console-button-long-orange.png`,
         },
         text: {
-          class: ["console-button-long_text__ajAjy"],
+          class: ["color-button_text__3OQAq"],
         },
       },
     },
