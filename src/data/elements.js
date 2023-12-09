@@ -363,11 +363,8 @@ const Elements = {
       selector: `[class^="maejok-settings-opener"]`,
       class: [`maejok-settings-opener`],
       button: {
-        classes: [
-          `console-button-square_console-button-square__GpSZQ`,
-          `console-button-square_md__OiTX7`,
-        ],
-        square: { class: [`console-button-square_text__IfVyC`] },
+        classes: [`icon-button_icon-button___ltd_`, `icon-button_md__NKfSk`],
+        square: { class: [`icon-button_text___4FTZ`] },
         icon: { class: [`icon_icon__bDzMA`] },
         image: {
           attr: [
