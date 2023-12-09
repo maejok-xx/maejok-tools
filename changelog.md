@@ -1,5 +1,27 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.7.2_**
+
+### Notes
+
+- Some updates to fishtank's stylesheet were made which broke some of the plugin layout stuff. This update just fixes those things.
+
+### Bug Fixes
+
+- [Enormous settings button](https://github.com/maejok-xx/maejok-tools/issues/9)
+- [Enormous settings tabs](https://github.com/maejok-xx/maejok-tools/issues/11)
+- [Mentions scrollbar doesn't always show](https://github.com/maejok-xx/maejok-tools/issues/10)
+
+### Features Added
+
+- N/A
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.7.1_**
 
 ### Notes
