@@ -363,11 +363,8 @@ const Elements = {
       selector: `[class^="maejok-settings-opener"]`,
       class: [`maejok-settings-opener`],
       button: {
-        classes: [
-          `console-button-square_console-button-square__GpSZQ`,
-          `console-button-square_md__OiTX7`,
-        ],
-        square: { class: [`console-button-square_text__IfVyC`] },
+        classes: [`icon-button_icon-button___ltd_`, `icon-button_md__NKfSk`],
+        square: { class: [`icon-button_text___4FTZ`] },
         icon: { class: [`icon_icon__bDzMA`] },
         image: {
           attr: [
@@ -394,15 +391,15 @@ const Elements = {
         selector: `[class^="maejok-settings_body"]`,
         classes: [
           `maejok-tab-button`,
-          `console-button-long_console-button-long__G6irT`,
-          `console-button-long_md__y_aAD`,
+          `color-button_color-button__cW61T`,
+          `color-button_md__GaczN`,
         ],
         image: {
           attr: [`loading`, `lazy`, `decoding`, `async`, `data-nimg`, `1`],
           src: `https://cdn.fishtank.live/images/slices/console-button-long-orange.png`,
         },
         text: {
-          class: ["console-button-long_text__ajAjy"],
+          class: ["color-button_text__3OQAq"],
         },
       },
     },
