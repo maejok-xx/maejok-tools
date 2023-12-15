@@ -7,6 +7,7 @@ const Config = () => {
     enableDimMode: false,
 
     disableSoundEffects: false,
+    hideGlobalMissions: false,
 
     enableUpdateChecks: true,
     updateCheckFrequency: 10,
@@ -177,7 +178,19 @@ const Config = () => {
               group: "site-options",
               help: {
                 label: "?",
-                text: `<p>Enabling this option will disable sound effects, but will not video/stream audio.  This includes mentions, global missions, episode hover static, etc.</p>`,
+                text: `<p>Enabling this option will disable sound effects.  This includes mentions, global missions, episode hover static, etc.</p>`,
+              },
+            },
+            // hideGlobalMissions
+            {
+              name: "hideGlobalMissions",
+              label: "Hide Global Mission Popups",
+              type: "toggle",
+              value: cfg.hideGlobalMissions,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will prevent the <strong>Global Missions</strong> pop up from showing, however, you will still hear the sound effect.</p>`,
               },
             },
           ],

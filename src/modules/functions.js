@@ -667,6 +667,11 @@ export const startMaejokTools = async () => {
   applySettingsToChat();
   observers.chat.start();
 
+  if (config.get("hideGlobalMissions")) {
+    observers.body.start();
+    observers.modal.start();
+  }
+
   const clanTag = state.get("user").clan;
   if (cfg.autoClanChat && clanTag !== null && !isPopoutChat) {
     enterChat("autoClanChat");
@@ -701,6 +706,8 @@ export const stopMaejokTools = () => {
 
   observers.chat.stop();
   observers.user.stop();
+  observers.body.stop();
+  observers.modal.stop();
 
   disableSoundEffects(false);
   stopRecentChatters();

@@ -30,6 +30,7 @@ import {
 } from "./recent-chatters";
 import Modal from "../classes/Modal";
 import ELEMENTS from "../data/elements";
+import observers from "./observers";
 
 export const saveSettings = async () => {
   const inputs = document.querySelectorAll(
@@ -38,6 +39,7 @@ export const saveSettings = async () => {
 
   const prevUpdateCheckFrequency = config.get("updateCheckFrequency");
   const prevChattersEnabled = config.get("enableRecentChatters");
+  const prevHideGlobalMissions = config.get("hideGlobalMissions");
 
   inputs.forEach((input) => {
     const key = input.id.replace("-hidden", "");
@@ -105,6 +107,15 @@ export const saveSettings = async () => {
 
   if (stopUpdateChecker) {
     stopUpdater();
+  }
+
+  const hideGlobalMissionsJustEnabled =
+    config.get("hideGlobalMissions") &&
+    prevHideGlobalMissions !== config.get("hideGlobalMissions");
+
+  if (hideGlobalMissionsJustEnabled) {
+    observers.body.start();
+    observers.modal.start();
   }
 
   scrollToBottom();

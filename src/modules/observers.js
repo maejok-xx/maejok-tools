@@ -1,5 +1,5 @@
 import state from "./state";
-import { processChatMessage } from "./functions";
+import { processChatMessage, getElementText } from "./functions";
 import ELEMENTS from "../data/elements";
 
 const observers = {
@@ -44,9 +44,9 @@ const observers = {
       const userObserver = new MutationObserver(async (mutations) => {
         const userData = state.get("user");
         const clanTag =
-          functions.getElementText(ELEMENTS.header.user.clan.selector) || null;
+          getElementText(ELEMENTS.header.user.clan.selector) || null;
         const displayName =
-          functions.getElementText(ELEMENTS.header.user.name.selector) || null;
+          getElementText(ELEMENTS.header.user.name.selector) || null;
 
         const newUserData = {
           clan: clanTag ? { tag: clanTag } : null,
@@ -71,6 +71,87 @@ const observers = {
     stop: () => {
       const observers = state.get("observers");
       observers.user?.disconnect();
+    },
+  },
+
+  modal: {
+    start: () => {
+      state.get("observers").modal?.disconnect();
+
+      const nextElement = document.getElementById("__next");
+
+      const bodyObserver = new MutationObserver(async (mutations) => {
+        mutations.forEach((mutation) => {
+          if (
+            mutation.type !== "childList" ||
+            mutation.addedNodes.length === 0
+          ) {
+            return;
+          }
+
+          mutation.addedNodes.forEach((addedNode) => {
+            if (addedNode.id === "modal") {
+              const title = getElementText(ELEMENTS.modal.title.text.selector);
+              if (!title || title.toLowerCase() !== "global mission") {
+                return;
+              }
+              addedNode.setAttribute("style", "display: none !important");
+            }
+          });
+        });
+      });
+
+      bodyObserver.observe(nextElement, { childList: true });
+
+      state.set("observers", {
+        ...state.get("observers"),
+        body: bodyObserver,
+      });
+    },
+
+    stop: () => {
+      const observers = state.get("observers");
+      observers.modal?.disconnect();
+    },
+  },
+
+  body: {
+    start: () => {
+      state.get("observers").body?.disconnect();
+
+      const body = document.querySelector("body");
+
+      const bodyObserver = new MutationObserver(async (mutations) => {
+        mutations.forEach((mutation) => {
+          if (
+            mutation.type !== "childList" ||
+            mutation.addedNodes.length === 0 ||
+            !mutation.addedNodes[0].className ||
+            !mutation.addedNodes[0].className.includes(
+              "global-mission-modal_backdrop__oVezg"
+            )
+          ) {
+            return;
+          }
+
+          mutation.addedNodes[0].setAttribute(
+            "style",
+            "display: none !important"
+          );
+        });
+      });
+
+      bodyObserver.observe(body, { childList: true });
+
+      state.set("observers", {
+        ...state.get("observers"),
+        body: bodyObserver,
+      });
+    },
+
+    stop: () => {
+      const observers = state.get("observers");
+      observers.body?.disconnect();
     },
   },
 };
