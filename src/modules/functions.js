@@ -1,6 +1,6 @@
 import config from "./config";
 import state from "./state";
-import { VERSION, ONE_MINUTE } from "./constants";
+import { VERSION, ONE_MINUTE, SOUNDS } from "./constants";
 import Message from "../classes/Message";
 import ELEMENTS from "../data/elements";
 import { rightClick, leftClick, dblClick, keyPress } from "./events";
@@ -463,41 +463,8 @@ export const getHighestZIndex = () => {
 export const playSound = (sound) => {
   const audio = document.createElement("audio");
   audio.style.display = "none";
-  const sounds = new Map([
-    //long
-    ["doom", "mp3"],
-    ["vomit", "mp3"],
-    ["romantic", "mp3"],
-    ["massacre", "mp3"],
-    ["breakup", "mp3"],
-    ["fart", "mp3"],
-    ["raid", "mp3"],
-    //short
-    ["equip", "mp3"],
-    ["denied", "mp3"],
-    ["chunk-short", "mp3"],
-    ["blip", "mp3"],
-    ["book", "mp3"],
-    ["click-high-short", "mp3"],
-    ["click-low-short", "mp3"],
-    ["xp", "mp3"],
-    ["level", "mp3"],
-    ["mention", "mp3"],
-    ["click-harsh-short", "wav"],
-    ["swap-short", "wav"],
-    ["shutter", "wav"],
-    ["complete", "wav"],
-    ["xp-down", "wav"],
-    ["power", "wav"],
-    ["daily", "wav"],
-    ["item-found", "wav"],
-    ["item-consumed", "wav"],
-    ["panic", "wav"],
-    ["poll", "wav"],
-    ["tick-short", "wav"],
-    ["granted", "mp3"],
-  ]);
-  const ext = sounds.get(sound);
+
+  const ext = SOUNDS.get(sound);
   if (ext) {
     audio.volume = 0.5;
     audio.src = `https://www.fishtank.live/sounds/${sound}.${ext}`;
@@ -551,6 +518,21 @@ export const areObjectsEqual = (obj1, obj2) => {
   }
 
   return true;
+};
+
+export const disableSoundEffects = (disable) => {
+  const audioElement = state.get("audioElement");
+
+  if (audioElement === false) {
+    state.set("audioElement", HTMLAudioElement.prototype.play);
+    disableSoundEffects(!!disable);
+    return;
+  }
+
+  HTMLAudioElement.prototype.play = function () {
+    this.muted = !!disable;
+    return audioElement.apply(this, arguments);
+  };
 };
 
 export const openProfile = async (userId) => {
@@ -681,8 +663,14 @@ export const startMaejokTools = async () => {
     startRecentChatters();
   }
 
+  disableSoundEffects(config.get("disableSoundEffects"));
   applySettingsToChat();
   observers.chat.start();
+
+  if (config.get("hideGlobalMissions")) {
+    observers.body.start();
+    observers.modal.start();
+  }
 
   const clanTag = state.get("user").clan;
   if (cfg.autoClanChat && clanTag !== null && !isPopoutChat) {
@@ -718,7 +706,10 @@ export const stopMaejokTools = () => {
 
   observers.chat.stop();
   observers.user.stop();
+  observers.body.stop();
+  observers.modal.stop();
 
+  disableSoundEffects(false);
   stopRecentChatters();
   stopUpdater();
 

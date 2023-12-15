@@ -3,6 +3,7 @@ import state from "./modules/state";
 import { createSettingsButton } from "./modules/settings";
 import { getRemotePackageJSON } from "./modules/updater";
 import ELEMENTS from "./data/elements";
+import observers from "./modules/observers";
 import {
   startMaejokTools,
   toggleDimMode,
@@ -32,6 +33,11 @@ import "./styles/styles.scss";
   let isLoaded = false;
   let chat = false;
   let countDownTimer = false;
+
+  if (config.get("hideGlobalMissions")) {
+    observers.body.start();
+    observers.modal.start();
+  }
 
   const loadingInterval = setInterval(async () => {
     if (address.includes("/chat")) {

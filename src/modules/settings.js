@@ -22,22 +22,24 @@ import {
   scrollToBottom,
   mentionUser,
   pluginName,
+  disableSoundEffects,
 } from "./functions";
-import observers from "./observers";
 import {
   start as startRecentChatters,
   stop as stopRecentChatters,
 } from "./recent-chatters";
 import Modal from "../classes/Modal";
 import ELEMENTS from "../data/elements";
+import observers from "./observers";
 
-export const saveSettings = () => {
+export const saveSettings = async () => {
   const inputs = document.querySelectorAll(
     `${ELEMENTS.settings.body.selector} input`
   );
 
   const prevUpdateCheckFrequency = config.get("updateCheckFrequency");
   const prevChattersEnabled = config.get("enableRecentChatters");
+  const prevHideGlobalMissions = config.get("hideGlobalMissions");
 
   inputs.forEach((input) => {
     const key = input.id.replace("-hidden", "");
@@ -52,12 +54,13 @@ export const saveSettings = () => {
     }
   });
 
-  config.save();
+  await config.save();
 
   if (!config.get("enableMentionLog")) {
     state.set("mentions", []);
   }
 
+  disableSoundEffects(config.get("disableSoundEffects"));
   applySettingsToChat();
   toggleDimMode(config.get("enableDimMode"));
 
@@ -104,6 +107,15 @@ export const saveSettings = () => {
 
   if (stopUpdateChecker) {
     stopUpdater();
+  }
+
+  const hideGlobalMissionsJustEnabled =
+    config.get("hideGlobalMissions") &&
+    prevHideGlobalMissions !== config.get("hideGlobalMissions");
+
+  if (hideGlobalMissionsJustEnabled) {
+    observers.body.start();
+    observers.modal.start();
   }
 
   scrollToBottom();
