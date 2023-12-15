@@ -435,6 +435,7 @@ const Elements = {
       group: { class: "maejok-settings-config-input-group" },
       help: {
         class: "maejok-settings-config-help",
+        label: { class: "maejok-input-help-label" },
       },
     },
   },
@@ -485,11 +486,11 @@ const Elements = {
     buttons: {
       classes: [
         `maejok-input-button`,
-        `console-button-long_console-button-long__G6irT`,
-        `console-button-long_lg__hdQwz`,
+        `color-button_color-button__cW61T`,
+        `color-button_md__GaczN`,
       ],
       wrapper: { class: [`maejok-input-button-wrapper`] },
-      label: { class: [`console-button-long_text__ajAjy`] },
+      label: { class: [`color-button_text__3OQAq`] },
       save: { class: [`maejok-input-button-save`] },
     },
     textbox: {
