@@ -22,8 +22,8 @@ import {
   scrollToBottom,
   mentionUser,
   pluginName,
+  disableSoundEffects,
 } from "./functions";
-import observers from "./observers";
 import {
   start as startRecentChatters,
   stop as stopRecentChatters,
@@ -31,7 +31,7 @@ import {
 import Modal from "../classes/Modal";
 import ELEMENTS from "../data/elements";
 
-export const saveSettings = () => {
+export const saveSettings = async () => {
   const inputs = document.querySelectorAll(
     `${ELEMENTS.settings.body.selector} input`
   );
@@ -52,12 +52,13 @@ export const saveSettings = () => {
     }
   });
 
-  config.save();
+  await config.save();
 
   if (!config.get("enableMentionLog")) {
     state.set("mentions", []);
   }
 
+  disableSoundEffects(config.get("disableSoundEffects"));
   applySettingsToChat();
   toggleDimMode(config.get("enableDimMode"));
 

@@ -6,6 +6,8 @@ const Config = () => {
     enablePlugin: true,
     enableDimMode: false,
 
+    disableSoundEffects: false,
+
     enableUpdateChecks: true,
     updateCheckFrequency: 10,
     showUpdateNotice: false,
@@ -164,6 +166,18 @@ const Config = () => {
                 text: `<p>Enabling this option creates a menu option quickly access user actions by right-clicking a user in chat.</p>
                 <p>Right-clicking a mention will give options related to the mentioned user.</p>
                 <p><i>Note: Right-clicking again without moving the mouse will give you access to your browser's regular context menu.</i></p>`,
+              },
+            },
+            // disableSoundEffects
+            {
+              name: "disableSoundEffects",
+              label: "Disable Sound Effects",
+              type: "toggle",
+              value: cfg.disableSoundEffects,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will disable sound effects, but will not video/stream audio.  This includes mentions, global missions, episode hover static, etc.</p>`,
               },
             },
           ],
@@ -538,14 +552,23 @@ const Config = () => {
     return configObj;
   };
 
-  const save = () => {
+  const save = async () => {
     const storedSettings = {};
     for (const key in configObj) {
       if (configObj.hasOwnProperty(key)) {
         storedSettings[key] = configObj[key];
       }
     }
-    localStorage.setItem(pluginObj.storageKey, JSON.stringify(storedSettings));
+    try {
+      localStorage.setItem(
+        pluginObj.storageKey,
+        JSON.stringify(storedSettings)
+      );
+    } catch {
+      console.error("Error while saving localstorage");
+    } finally {
+      return storedSettings;
+    }
   };
 
   return { plugin, get, set, load, save, settingsOptions };

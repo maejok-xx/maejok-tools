@@ -21,6 +21,7 @@ const State = () => {
     running: false,
     packageJson: {},
     updateShown: false,
+    audioElement: false,
   };
 
   const get = (key) => {
