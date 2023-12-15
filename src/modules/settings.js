@@ -187,7 +187,7 @@ export const createConfigurationInputModal = (option, parentModal) => {
 
     if (optionConfig.help) {
       const help = document.createElement("b");
-      help.classList.add(ELEMENTS.inputs.help.label.class);
+      help.classList.add(ELEMENTS.settings.config.help.label.class);
       help.innerHTML = "?";
       help.addEventListener("click", () => clickSettingsHelp(optionConfig));
       inputGroup.appendChild(help);
