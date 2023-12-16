@@ -212,6 +212,28 @@ export default class Message {
     messageText.classList.toggle(normalize.class, shouldNormalize);
   }
 
+  fixDarkDisplayName() {
+    const validTypes = ["message", "emote"];
+    if (!validTypes.includes(this.type) || !config.get("fixDarkDisplayNames")) {
+      return false;
+    }
+
+    const senderSelector = ELEMENTS.chat[this.type].sender.selector;
+    const nameElement = this.node.querySelector(senderSelector);
+    const nameColor = nameElement?.style.color;
+
+    if (!nameColor) {
+      return;
+    }
+
+    const isTooDark = functions.isColorTooDark(nameColor);
+
+    if (isTooDark) {
+      const newColor = functions.increaseColorBrightness(nameColor);
+      nameElement.setAttribute("style", `color: ${newColor}`);
+    }
+  }
+
   hideElements(elements, hide) {
     if (this.type !== "message") {
       return;

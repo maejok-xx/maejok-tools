@@ -411,6 +411,8 @@ export const processChatMessage = (node, logMentions = true) => {
     message.normalizeEpic();
     message.normalizeGrand();
 
+    message.fixDarkDisplayName();
+
     message.hideElements(hideTypes.element, hideTypes.hide);
 
     message.highlightMessage();
@@ -533,6 +535,33 @@ export const disableSoundEffects = (disable) => {
     this.muted = !!disable;
     return audioElement.apply(this, arguments);
   };
+};
+
+export const isColorTooDark = (color, threshold = 40) => {
+  const { r, g, b } = colorToRGB(color);
+
+  const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+
+  const isTooDark = luminance < threshold;
+
+  return isTooDark;
+};
+
+export const increaseColorBrightness = (color) => {
+  const { r, g, b } = colorToRGB(color);
+
+  const applyLowerBounds = (val) => Math.max(8, val);
+
+  const adjustedR = applyLowerBounds(r);
+  const adjustedG = applyLowerBounds(g);
+  const adjustedB = applyLowerBounds(b);
+
+  const newR = Math.min(255, Math.round(adjustedR * 15));
+  const newG = Math.min(255, Math.round(adjustedG * 15));
+  const newB = Math.min(255, Math.round(adjustedB * 15));
+
+  const newColor = `rgb(${newR}, ${newG}, ${newB})`;
+  return newColor;
 };
 
 export const openProfile = async (userId) => {
@@ -772,6 +801,27 @@ async function fetchFromFishtank(method, endpoint) {
     console.error("Error fetching data:", error);
     throw error;
   }
+}
+
+function colorToRGB(color) {
+  let r, g, b;
+
+  if (color.includes("rgb")) {
+    const rgb = color.replace(/[^\d,]/g, "").split(",");
+    r = parseInt(rgb[0], 10);
+    g = parseInt(rgb[1], 10);
+    b = parseInt(rgb[2], 10);
+  } else if (color.includes("#")) {
+    const hex = hexColor.replace(/^#/, "");
+    const bigint = parseInt(hex, 16);
+    r = (bigint >> 16) & 255;
+    g = (bigint >> 8) & 255;
+    b = bigint & 255;
+  } else {
+    return false;
+  }
+
+  return { r, g, b };
 }
 
 function toast(message = "default message", type = "info", duration = 5000) {
