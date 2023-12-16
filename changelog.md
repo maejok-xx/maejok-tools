@@ -1,5 +1,29 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.8.0_**
+
+### Notes
+
+- This update is to help prevent inturruptions, primarily for the sake of clippers/streamers.
+- It's unknown how the "disable sound effects" option will affect livestream audio once cams are enabled, but it shouldn't be an issue. If it is, I'll try to get an update out quickly.
+- Enabling "Toggle Global Mission pop-ups" may reduce performance as it has to watch the entire page body for mutations to hide the goldstriker background image.
+
+### Bug Fixes
+
+- [Option config button and help icon styles](https://github.com/maejok-xx/maejok-tools/issues/18)
+- [New TTS/SFX buttons meefed up XP bar in Bigchat mode](https://github.com/maejok-xx/maejok-tools/issues/19)
+
+### Features Added
+
+- [Toogle Sound Effect](https://github.com/maejok-xx/maejok-tools/pull/23)
+- [Toogle Global Mission pop-ups](https://github.com/maejok-xx/maejok-tools/pull/23)
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.7.2_**
 
 ### Notes

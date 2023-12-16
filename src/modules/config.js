@@ -41,6 +41,7 @@ const Config = () => {
     autoClanChat: false,
     enableEmotesMenu: true,
     enableChatMenu: true,
+    fixDarkDisplayNames: false,
 
     enableMentionLog: true,
 
@@ -443,6 +444,18 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option makes <strong>Red "Grand" Messages</strong> look like all the other messages in chat.<p>`,
+              },
+            },
+            // fixDarkDisplayNames
+            {
+              name: "fixDarkDisplayNames",
+              label: "Fix Dark Display Names",
+              type: "toggle",
+              value: cfg.fixDarkDisplayNames,
+              group: "chat-misc",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option makes Dark Display Names a little brighter and easier to read.<p>`,
               },
             },
           ],
