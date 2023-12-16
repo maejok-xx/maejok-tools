@@ -92,10 +92,9 @@ const observers = {
           mutation.addedNodes.forEach((addedNode) => {
             if (addedNode.id === "modal") {
               const title = getElementText(ELEMENTS.modal.title.text.selector);
-              if (!title || title.toLowerCase() !== "global mission") {
-                return;
+              if (title && title.includes("Global Mission")) {
+                addedNode.setAttribute("style", "display: none !important");
               }
-              addedNode.setAttribute("style", "display: none !important");
             }
           });
         });
