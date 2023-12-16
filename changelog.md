@@ -17,6 +17,7 @@
 
 - [Toogle Sound Effect](https://github.com/maejok-xx/maejok-tools/pull/23)
 - [Toogle Global Mission pop-ups](https://github.com/maejok-xx/maejok-tools/pull/23)
+- ["fix" dark display names](https://github.com/maejok-xx/maejok-tools/issues/24)
 
 ### Removed
 
