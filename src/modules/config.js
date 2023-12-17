@@ -45,6 +45,7 @@ const Config = () => {
     fixDarkDisplayNames: false,
 
     enableMentionLog: true,
+    reverseMentionLog: false,
 
     agreementVersion: null,
 
@@ -503,6 +504,7 @@ const Config = () => {
           groups: [{ name: "mentions", label: "Mentions Log" }],
           inputs: [
             // mentions
+            // enableMentionLog
             {
               name: "enableMentionLog",
               label: "Enable Mention Logging",
@@ -515,6 +517,19 @@ const Config = () => {
                 <p>This log WILL clear every time you refresh or close the page.</p>`,
               },
             },
+            // reverseMentionLog
+            {
+              name: "reverseMentionLog",
+              label: "Show Newest First",
+              type: "toggle",
+              value: cfg.reverseMentionLog,
+              group: "mentions",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option set the mentions log to list in order of newest to oldest.</p><p>After toggling this option, you must close and reopen the settings window to see the changes.</p>`,
+              },
+            },
+            // mentionsLog
             {
               name: "mentionsLog",
               label: "Mentions Log",
