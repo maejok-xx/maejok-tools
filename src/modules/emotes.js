@@ -34,7 +34,6 @@ export const createEmotesList = () => {
 
       if (multiEmote) {
         emotes[command] = emotes[command][0];
-        console.log(emotes[command]);
       }
 
       const emote = emotes[command].replace(
