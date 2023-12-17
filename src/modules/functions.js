@@ -66,6 +66,23 @@ export const modifyUserList = (list, user, toggle) => {
   return true;
 };
 
+export const toggleItemInList = (list, item) => {
+  const items = config.get(list);
+  const itemExists = items.includes(item);
+
+  if (itemExists) {
+    const index = items.indexOf(item);
+    items.splice(index, 1);
+  } else {
+    items.push(item);
+  }
+
+  config.set(list, items);
+  config.save();
+
+  return itemExists ? false : true;
+};
+
 export const capitalize = (str) => {
   return str.replace(/^\w/, (c) => c.toUpperCase());
 };

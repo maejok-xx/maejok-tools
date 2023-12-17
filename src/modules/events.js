@@ -14,6 +14,8 @@ import {
   modifyUserList,
   toggleBigChat,
   playSound,
+  setChatInputValue,
+  toggleItemInList,
 } from "./functions";
 import * as settings from "./settings";
 import * as menu from "./menu";
@@ -373,6 +375,25 @@ export const clickUpdateDismiss = () => {
   changeLog.removeEventListener("click", clickUpdateChangelog);
   dismiss.removeEventListener("click", clickUpdateDismiss);
   updateMessage.remove();
+};
+
+export const handleUseEmote = (event, modal, eventListeners) => {
+  playSound("shutter");
+  const command = event.currentTarget.getAttribute("data-emote-command");
+  setChatInputValue(`/${command}&nbsp;`);
+  modal.destroy();
+  eventListeners.forEach(({ element, event, listener }) => {
+    element.removeEventListener(event, listener);
+  });
+};
+
+export const handlePinEmote = (event) => {
+  playSound("shutter");
+  const command = event.currentTarget.getAttribute("data-emote-command");
+
+  const added = toggleItemInList("pinnedEmotes", command);
+
+  event.currentTarget.textContent = added ? "Unpin" : "Pin";
 };
 
 function afterUpdateAlert() {

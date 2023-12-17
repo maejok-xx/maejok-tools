@@ -40,6 +40,7 @@ const Config = () => {
 
     autoClanChat: false,
     enableEmotesMenu: true,
+    pinnedEmotes: [],
     enableChatMenu: true,
     fixDarkDisplayNames: false,
 
