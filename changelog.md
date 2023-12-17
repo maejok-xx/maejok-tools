@@ -1,5 +1,27 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.9.0_**
+
+### Notes
+
+- This update is fixes two small bugs and adds two small features.
+
+### Bug Fixes
+
+- [Clan Invite button size & position](https://github.com/maejok-xx/maejok-tools/issues/27)
+- [Highlight message context not working properly](https://github.com/maejok-xx/maejok-tools/issues/28)
+
+### Features Added
+
+- [Emote Pinning](https://github.com/maejok-xx/maejok-tools/issues/1) _suggested by: you1307_
+- [Mention Log Reverse Sort Order Option](https://github.com/maejok-xx/maejok-tools/pull/23) _suggested by: you1307_
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.8.0_**
 
 ### Notes
