@@ -1,79 +1,106 @@
 .maejok-modal-emotes {
   padding: $space-sm;
-  width: 600px;
+  width: 650px;
   height: 600px;
   margin: $space-sm 0 $space-md 0;
   overflow-y: auto;
-}
 
-.maejok-emotes-list {
-  display: flex;
-  gap: $space-xs;
-  flex-direction: column;
-  padding-right: $space-xs;
-}
+  .maejok-emotes-list-note {
+    text-align: center;
+    font-style: italic;
+    color: $color-black;
+    margin-bottom: $space-md;
+    font-weight: 600;
+  }
 
-.maejok-emotes-list_item {
-  display: flex;
-  padding: $space-sm;
-  border-radius: $space-xs;
-  justify-content: space-around;
-  border: $space-xxs solid transparent;
+  .maejok-emotes-list {
+    display: flex;
+    gap: $space-xs;
+    flex-direction: column;
+    padding-right: $space-xs;
 
-  &:hover {
-    background-color: rgba($color-black, 0.15);
-    border: $space-xxs solid rgba($color-white, 0.25);
+    .maejok-emotes-list-label {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: $color-black;
+      margin-top: $space-md;
+    }
 
-    .maejok-emotes-list_item_use {
-      visibility: visible;
+    hr {
+      margin: $space-md 0;
+      border: none;
+      border-top: $space-xxs solid rgba($color-black, 0.5);
+    }
+
+    .maejok-emotes-list_item {
+      display: flex;
+      padding: $space-sm;
+      border-radius: $space-xs;
+      justify-content: space-around;
+      border: $space-xxs solid transparent;
 
       &:hover {
-        background-color: rgba($color-green, 0.6);
+        background-color: rgba($color-black, 0.15);
+        border: $space-xxs solid rgba($color-white, 0.25);
+
+        .maejok-emotes-list_item_use,
+        .maejok-emotes-list_item_pin {
+          visibility: visible;
+
+          &:hover {
+            background-color: rgba($color-green, 0.6);
+          }
+        }
       }
     }
   }
-}
 
-.maejok-emotes-list_item_command {
-  min-width: 104px;
-  align-items: center;
-  display: flex;
-  color: $color-black;
-  font-weight: 600;
-}
+  .maejok-emotes-list_item_command {
+    min-width: 104px;
+    align-items: center;
+    display: flex;
+    color: $color-black;
+    font-weight: 600;
+  }
 
-.maejok-emotes-list_item_command_demote {
-  min-width: 104px;
-  align-items: center;
-  display: flex;
-  font-weight: 600;
-  color: rgba($color-darkred, 0.7);
-}
+  .maejok-emotes-list_item_command_demote {
+    min-width: 104px;
+    align-items: center;
+    display: flex;
+    font-weight: 600;
+    color: rgba($color-darkred, 0.7);
+  }
 
-.maejok-emotes-list_item_emote {
-  flex: 1;
-  padding: $space-sm;
-  width: 325px;
-  margin: 0 $space-md;
-  border-radius: 4px;
-  text-align: center;
-  font-style: italic;
-  background-color: rgba($color-black, 0.5);
-  outline: $space-xxs solid rgba($color-black, 0.55);
-}
+  .maejok-emotes-list_item_emote {
+    flex: 1;
+    padding: $space-sm;
+    width: 325px;
+    margin: 0 $space-md;
+    border-radius: 4px;
+    text-align: center;
+    font-style: italic;
+    background-color: rgba($color-black, 0.5);
+    outline: $space-xxs solid rgba($color-black, 0.55);
+  }
 
-.maejok-emotes-list_item_use {
-  padding: $space-xxs;
-  width: 60px;
-  height: 28px;
-  border-radius: $space-xs;
-  background-color: rgba($color-graygreen, 0.9);
-  color: black;
-  font-weight: 500;
-  align-self: center;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  visibility: hidden;
+  .maejok-emotes-list_item_use,
+  .maejok-emotes-list_item_pin {
+    padding: $space-xxs;
+    width: 60px;
+    height: 28px;
+    border-radius: $space-xs;
+    color: black;
+    font-weight: 500;
+    align-self: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    visibility: hidden;
+    background-color: rgba($color-graygreen, 0.9);
+
+    &:first-of-type {
+      margin-right: 3px;
+    }
+  }
 }

@@ -133,8 +133,9 @@ export const Emotes = {
   clone: "Suddenly, there are two $displayNames.",
   breakdance: "$displayName starts spinning on their head, breakdancing.",
   jelq: "$displayName starts doing the ancient and mysterious 'jelq' technique.",
-  flipcoin: "$displayName flips a coin. It lands: heads/tails",
-  roll: "$displayName rolls a 20-sided dice. It lands: 4",
+  flipcoin: ["$displayName flips a coin. It lands: heads/tails"],
+  roll: ["$displayName rolls a 20-sided dice. It lands: 4"],
+  meef: ["$displayName meefs it! They begin to glow!"],
 };
 
 export const Demotes = [

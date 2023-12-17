@@ -442,9 +442,14 @@ const Elements = {
   emotes: {
     selector: `[class^="maejok-modal-emotes"]`,
     class: "maejok-modal-emotes",
+    note: { class: "maejok-emotes-list-note" },
     list: {
       selector: `[class^="maejok-emotes-list"]`,
       class: "maejok-emotes-list",
+      label: {
+        selector: `[class^="maejok-emotes-list-label"]`,
+        class: "maejok-emotes-list-label",
+      },
       item: {
         selector: `[class^="maejok-emotes-list_item"]`,
         class: "maejok-emotes-list_item",
@@ -462,6 +467,10 @@ const Elements = {
         use: {
           selector: `[class^="maejok-emotes-list_item_use"]`,
           class: "maejok-emotes-list_item_use",
+        },
+        pin: {
+          selector: `[class^="maejok-emotes-list_item_pin"]`,
+          class: "maejok-emotes-list_item_pin",
         },
       },
     },
