@@ -934,6 +934,9 @@ function processMentions(message) {
   }
 
   if (message.mentioned && cfg.enableMentionLog) {
-    state.set("mentions", [...state.get("mentions"), { ...message }]);
+    state.set("mentions", [
+      ...state.get("mentions"),
+      { ...message, added: Date.now() },
+    ]);
   }
 }

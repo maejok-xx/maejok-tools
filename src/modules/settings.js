@@ -430,8 +430,11 @@ function createHighlightsPanel(list, panel) {
 }
 
 function createMentionsLog(list, panel) {
+  const reverse = config.get("reverseMentionLog");
   const props = ELEMENTS.settings;
-  const log = list.value;
+  const log = reverse
+    ? list.value.sort((a, b) => b.added - a.added)
+    : list.value.sort((a, b) => a.added - b.added);
 
   const accordion = panel.querySelector(`[data-group-content="${list.group}"]`);
 
