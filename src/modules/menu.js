@@ -122,7 +122,7 @@ export const open = (type, position, options) => {
             ? () => {
                 close();
                 state.set("contextUser", user);
-                settings.applySettingsToChat();
+                applySettingsToChat();
               }
             : null,
         },
