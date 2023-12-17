@@ -4,12 +4,18 @@ const TerserPlugin = require("terser-webpack-plugin");
 const packageJson = require("./package.json");
 
 module.exports = (env, argv) => {
-  const isDev = argv.mode === "development";
+  const isDev = process.env.NODE_ENV === "development";
+  const isPreview = process.env.NODE_ENV === "preview";
+
   const pluginName = isDev
     ? `${packageJson.name} [DEV MODE]`
+    : isPreview
+    ? `${packageJson.name} [PREVIEW MODE]`
     : packageJson.name;
   const fileName = isDev
     ? `${packageJson.name}.dev.user.js`
+    : isPreview
+    ? `${packageJson.name}.preview.user.js`
     : `${packageJson.name}.user.js`;
 
   return {
