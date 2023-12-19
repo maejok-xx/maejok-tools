@@ -1,10 +1,5 @@
 import { ONE_MINUTE, PACKAGE_URL, VERSION } from "./constants";
-import {
-  playSound,
-  scrollToBottom,
-  updateDaysUntilSeasonTwo,
-  pluginName,
-} from "./functions";
+import { playSound, scrollToBottom, pluginName } from "./functions";
 import {
   clickUpdate,
   clickUpdateDismiss,
@@ -29,7 +24,7 @@ export const start = () => {
     stop();
   }
 
-  checkForUpdate().then(() => updateDaysUntilSeasonTwo());
+  checkForUpdate();
 
   const timeBetweenChecks = config.get("updateCheckFrequency") * ONE_MINUTE;
   const updateCheckInterval = setInterval(checkForUpdate, timeBetweenChecks);

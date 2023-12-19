@@ -604,53 +604,6 @@ export const muteUser = async (user) => {
   }, 10);
 };
 
-export const updateDaysUntilSeasonTwo = async () => {
-  const packageJson = state.get("packageJson");
-
-  if (!packageJson?.s2ts) {
-    clearInterval("daysLeftInterval");
-    state.set("daysLeftInterval", null);
-    return;
-  }
-
-  const targetDate = new Date(packageJson.s2ts * 1000);
-  const targetDateNY = targetDate.toLocaleString("en-US", {
-    timeZone: "America/New_York",
-  });
-
-  const currentDate = new Date();
-  const currentDateNY = currentDate.toLocaleString("en-US", {
-    timeZone: "America/New_York",
-  });
-
-  if (currentDate >= targetDate) {
-    clearInterval(state.get("daysLeftInterval"));
-    return;
-  }
-
-  const differenceMs = new Date(targetDateNY) - new Date(currentDateNY);
-  const daysRemaining = Math.ceil(differenceMs / (1000 * 60 * 60 * 24));
-
-  const setDaysRemaining = (selector, daysRemaining) => {
-    const dayElement = document.querySelector(selector);
-    if (dayElement) {
-      dayElement.textContent = `-${daysRemaining}`;
-    }
-  };
-  const setDaysRemainingLabel = (selector) => {
-    const labelElement = document.querySelector(selector);
-    if (labelElement) {
-      labelElement.textContent = `Days Left`;
-    }
-  };
-  const day = ELEMENTS.stats.day;
-
-  setDaysRemaining(day.selector1, daysRemaining);
-  setDaysRemaining(day.selector2, daysRemaining);
-  setDaysRemainingLabel(day.label.selector1);
-  setDaysRemainingLabel(day.label.selector2);
-};
-
 export const runUserAgreement = () => {
   const needsToAgree = config.get("agreementVersion") !== VERSION;
 
@@ -717,12 +670,6 @@ export const startMaejokTools = async () => {
 
   if (!isPopoutChat) {
     startUpdater();
-
-    const daysLeftInterval = setInterval(() => {
-      updateDaysUntilSeasonTwo();
-    }, ONE_MINUTE);
-
-    state.set("daysLeftInterval", daysLeftInterval);
   }
 
   const main = document.querySelector("main");
