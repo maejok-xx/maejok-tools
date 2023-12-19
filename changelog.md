@@ -1,5 +1,25 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.9.1_**
+
+### Notes
+
+- This update fixes the plugin not working with Season 2 live.
+
+### Bug Fixes
+
+- Fix not loading since S2 started
+
+### Features Added
+
+- N/A
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.9.0_**
 
 ### Notes
