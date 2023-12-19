@@ -1,5 +1,25 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.9.2_**
+
+### Notes
+
+- This update fixes the plugin again.
+
+### Bug Fixes
+
+- Fix features not working since last update and livestreams going live
+
+### Features Added
+
+- N/A
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.9.1_**
 
 ### Notes
