@@ -32,7 +32,6 @@ import "./styles/styles.scss";
 
   let isLoaded = false;
   let chat = false;
-  let countDownTimer = false;
 
   if (config.get("hideGlobalMissions")) {
     observers.body.start();
@@ -46,8 +45,7 @@ import "./styles/styles.scss";
       state.set("isPopoutChat", true);
     } else {
       chat = document.querySelector(ELEMENTS.chat.list.selector);
-      countDownTimer = document.querySelector(ELEMENTS.countdown.selector);
-      isLoaded = chat !== null && countDownTimer !== null;
+      isLoaded = chat !== null;
     }
 
     if (isLoaded) {

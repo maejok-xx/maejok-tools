@@ -150,7 +150,6 @@ export const toggleBigChat = (mode = null, muted = false) => {
     links: getElement(ELEMENTS.header.title.links),
     invite: getElement(ELEMENTS.profile.clanInvite),
     experience: getElement(ELEMENTS.experience),
-    countdown: getElement(ELEMENTS.countdown),
   };
 
   const prefix = "maejok-chat_mode-";
@@ -164,17 +163,6 @@ export const toggleBigChat = (mode = null, muted = false) => {
       element.classList.toggle(prefix + className, mode);
     }
   });
-
-  elements.countdown?.classList.remove(
-    "maejok-chat-countdown-hide",
-    "maejok-chat-countdown-show"
-  );
-  elements.countdown?.classList.toggle(
-    config.get("hideCountdown")
-      ? "maejok-chat-countdown-hide"
-      : "maejok-chat-countdown-show",
-    mode
-  );
 };
 
 export const toggleDimMode = (enable) => {

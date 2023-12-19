@@ -33,8 +33,6 @@ const Config = () => {
     enableRecentChatters: true,
     recentChattersThreshold: 10,
 
-    hideCountdown: false,
-
     normalizeEpicText: false,
     normalizeGrandText: false,
 
@@ -307,19 +305,6 @@ const Config = () => {
                 label: "?",
                 text: `<p>Enabling this option hides <strong>System Messages</strong>.</p>
                 <p>These are the green messages.  eg: "Joined Global".</p>`,
-              },
-            },
-            // hideCountdown
-            {
-              name: "hideCountdown",
-              label: "Hide Countdown in Big Chat Mode",
-              type: "toggle",
-              value: cfg.hideCountdown,
-              group: "hiders",
-              help: {
-                label: "?",
-                text: `<p>Enabling this option will hide the countdown while in Big Chat Mode.</p>
-                <p>Disabling this option will force the countdown to the top while in Big Chat Mode<p>`,
               },
             },
 
