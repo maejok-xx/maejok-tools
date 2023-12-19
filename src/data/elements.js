@@ -13,6 +13,14 @@ const Elements = {
     selector: `[class^="home_home"]`,
     class: "home_home__pUFCA",
   },
+  livestreams: {
+    selector: `[class*="live-streams_live-streams__"]`,
+    class: "live-streams_live-streams__BYV96",
+    grid: {
+      selector: `[class*="live-streams_live-streams-grid__"]`,
+      class: "live-streams_live-streams-grid__Tp4ah",
+    },
+  },
   secondaryPanel: {
     tab: {
       class: "secondary-panel_tab__PxWtZ",

@@ -8,6 +8,7 @@ import {
   startMaejokTools,
   toggleDimMode,
   getUserFromLocalStorage,
+  getClanFromLocalStorage,
   runUserAgreement,
 } from "./modules/functions";
 import { insertChatUpdatedMessage as showUpdateNotice } from "./modules/updater";
@@ -32,6 +33,7 @@ import "./styles/styles.scss";
 
   let isLoaded = false;
   let chat = false;
+  let livestreams = false;
 
   if (config.get("hideGlobalMissions")) {
     observers.body.start();
@@ -45,7 +47,8 @@ import "./styles/styles.scss";
       state.set("isPopoutChat", true);
     } else {
       chat = document.querySelector(ELEMENTS.chat.list.selector);
-      isLoaded = chat !== null;
+      livestreams = document.querySelector(ELEMENTS.livestreams.selector);
+      isLoaded = chat !== null && livestreams !== null;
     }
 
     if (isLoaded) {
@@ -54,7 +57,9 @@ import "./styles/styles.scss";
       state.set("loaded", true);
 
       const user = await getUserFromLocalStorage();
+      const clan = await getClanFromLocalStorage();
       state.set("user", user);
+      state.set("clan", clan);
 
       createSettingsButton();
 
