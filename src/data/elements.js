@@ -252,6 +252,14 @@ const Elements = {
         class: `chat-message-system_chat-message-system__qZ_cD`,
       },
     },
+    tts: {
+      selector: `[class^="chat-message-tts_chat-message-tts__"]`,
+      class: "chat-message-tts_chat-message-tts__2Jlxi",
+    },
+    sfx: {
+      selector: `[class^="chat-message-sfx_chat-message-sfx__"]`,
+      class: "chat-message-sfx_chat-message-sfx__OGv6q",
+    },
     scroll: {
       selector: `[class^="chat_scroll"]`,
       class: `chat_scroll__6Tqdf`,

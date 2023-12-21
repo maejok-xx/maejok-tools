@@ -74,7 +74,9 @@ export const rightClick = (event) => {
     }
 
     if (
-      ["roll", "emote", "system", "consumable", "clan"].includes(messageType)
+      ["roll", "emote", "system", "consumable", "clan", "tts", "sfx"].includes(
+        messageType
+      )
     ) {
       event.preventDefault();
       menu.open("chatHide", adjustedPosition, messageType);
