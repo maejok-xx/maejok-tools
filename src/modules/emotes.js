@@ -7,7 +7,7 @@ import ELEMENTS from "../data/elements";
 import { Emotes, Demotes } from "../data/emotes";
 
 export const createEmotesList = () => {
-  const displayName = state.get("user").displayName;
+  const displayName = state.get("user")?.displayName;
   const pinnedEmotes = config.get("pinnedEmotes");
   const eventListeners = [];
 
