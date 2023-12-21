@@ -8,7 +8,7 @@
 // @namespace    __GREASYFORKURL__
 // @icon         __ICON__
 // @updateURL    __UPDATEURL__
-// @supportURL    __SUPPORTURL__
+// @supportURL   __SUPPORTURL__
 // @match        https://www.fishtank.live/
 // @run-at       document-idle
 // ==/UserScript==
