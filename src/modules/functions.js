@@ -689,8 +689,7 @@ export const startMaejokTools = async () => {
     observers.modal.start();
   }
 
-  console.log(state.get("clan"));
-  const clanTag = state.get("clan").tag;
+  const clanTag = state.get("clan")?.tag;
   if (cfg.autoClanChat && clanTag !== null && !isPopoutChat) {
     enterChat("autoClanChat");
   }
