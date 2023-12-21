@@ -97,11 +97,16 @@ export const open = (type, position, options) => {
         system: "hideSystem",
         consumable: "hideConsumables",
         clan: "hideClanMessages",
+        tts: "hideTTSMessages",
+        sfx: "hideSFXMessages",
       };
+
+      const typeName =
+        (type === "tts" && "TTS") || (type === "sfx" && "SFX") || undefined;
 
       const items = [
         {
-          label: `Hide ${capitalize(type)} Messages`,
+          label: `Hide ${typeName ? typeName : capitalize(type)} Messages`,
           action: () => {
             config.set(configKeyMap[type], true);
             applySettingsAndClose();

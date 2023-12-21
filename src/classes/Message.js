@@ -27,6 +27,8 @@ export default class Message {
       [ELEMENTS.chat.message.class]: "message",
       [ELEMENTS.chat.consumable.class]: "consumable",
       [ELEMENTS.chat.clan.class]: "clan",
+      [ELEMENTS.chat.tts.class]: "tts",
+      [ELEMENTS.chat.sfx.class]: "sfx",
     };
 
     const classNames = this.node.className.split(" ");

@@ -23,6 +23,8 @@ const Config = () => {
     hideEmotes: false,
     hideDiceRolling: false,
     hideClanMessages: false,
+    hideTTSMessages: false,
+    hideSFXMessages: false,
     hideSystem: false,
 
     enableImprovedTagging: true,
@@ -306,6 +308,30 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option hides <strong>Clan Messages</strong> created by a clan being created or clan alliances being proposed/formed, etc.</p>`,
+              },
+            },
+            // hideTTSMessages
+            {
+              name: "hideTTSMessages",
+              label: "Hide TTS Messages",
+              type: "toggle",
+              value: cfg.hideTTSMessages,
+              group: "hiders",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option hides <strong>TTS Messages</strong> from chat.</p>`,
+              },
+            },
+            // hideSFXMessages
+            {
+              name: "hideSFXMessages",
+              label: "Hide SFX Messages",
+              type: "toggle",
+              value: cfg.hideSFXMessages,
+              group: "hiders",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option hides <strong>SFX Messages</strong> from chat.</p>`,
               },
             },
             // hideSystem

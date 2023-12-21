@@ -199,6 +199,8 @@ export const getMessageType = (element) => {
     clan: ELEMENTS.chat.clan.class,
     system: ELEMENTS.chat.system.class,
     consumable: ELEMENTS.chat.consumable.class,
+    tts: ELEMENTS.chat.tts.class,
+    sfx: ELEMENTS.chat.sfx.class,
   };
 
   const conditions = new Map([
@@ -232,6 +234,10 @@ export const getMessageType = (element) => {
       "consumable",
       hasClass(element, classes.consumable) ||
         closestWithClass(element, classes.consumable),
+    ],
+    [
+      "tts",
+      hasClass(element, classes.tts) || closestWithClass(element, classes.tts),
     ],
   ]);
 
@@ -387,6 +393,8 @@ export const processChatMessage = (node, logMentions = true) => {
     clan: "hideClanMessages",
     consumable: "hideConsumables",
     roll: "hideDiceRolling",
+    tts: "hideTTSMessages",
+    sfx: "hideSFXMessages",
   };
 
   if (cfg[msgHideTypes[message.type]] && cfg.enablePlugin) {
