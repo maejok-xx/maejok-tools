@@ -19,6 +19,7 @@ const Config = () => {
     hideAvatars: false,
     hideClans: false,
     hideLevels: false,
+    hideEndorsements: false,
     hideConsumables: false,
     hideEmotes: false,
     hideDiceRolling: false,
@@ -259,6 +260,15 @@ const Config = () => {
               label: "Hide Levels",
               type: "toggle",
               value: cfg.hideLevels,
+              group: "hiders",
+              // help: { label: "?", text: `` },
+            },
+            // hideEndorsements
+            {
+              name: "hideEndorsements",
+              label: "Hide Endorsements",
+              type: "toggle",
+              value: cfg.hideEndorsements,
               group: "hiders",
               // help: { label: "?", text: `` },
             },

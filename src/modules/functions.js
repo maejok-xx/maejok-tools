@@ -418,6 +418,10 @@ export const processChatMessage = (node, logMentions = true) => {
         element: "level",
         hide: cfg.enablePlugin ? cfg.hideLevels : false,
       },
+      hideEndorsements: {
+        element: "endorsement",
+        hide: cfg.enablePlugin ? cfg.hideEndorsements : false,
+      },
     };
 
     const hideTypes = Object.entries(messageHideMap).reduce(
