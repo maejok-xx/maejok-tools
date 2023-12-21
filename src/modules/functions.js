@@ -521,7 +521,7 @@ export const getUserFromLocalStorage = () => {
 export const getClanFromLocalStorage = () => {
   const keys = Object.keys(localStorage);
   for (const key of keys) {
-    if (key.includes("my-clan")) {
+    if (key.includes("user-clan")) {
       return JSON.parse(localStorage.getItem(key)).value;
     }
   }
@@ -677,6 +677,7 @@ export const startMaejokTools = async () => {
     observers.modal.start();
   }
 
+  console.log(state.get("clan"));
   const clanTag = state.get("clan").tag;
   if (cfg.autoClanChat && clanTag !== null && !isPopoutChat) {
     enterChat("autoClanChat");
