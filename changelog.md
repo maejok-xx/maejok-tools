@@ -1,5 +1,29 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.10.0_**
+
+### Notes
+
+- I was unable to test the SFX hider option since they haven't been enabled, but it should work... time will tell
+
+### Bug Fixes
+
+- Fix errors being caused by message user data not being defined on some messages
+- Fix issue with grabbing clan data
+- Only load plugin on main site
+
+### Features Added
+
+- [Toggle Scan Lines Effect](https://github.com/maejok-xx/maejok-tools/issues/33) _suggested by: Tickle_
+- [Toggle TTS/SFX Messages](https://github.com/maejok-xx/maejok-tools/pull/34)
+- [Toggle Endorsements in chat](https://github.com/maejok-xx/maejok-tools/pull/35)
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.9.2_**
 
 ### Notes
