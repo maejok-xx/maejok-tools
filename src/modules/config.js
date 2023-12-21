@@ -13,6 +13,8 @@ const Config = () => {
     updateCheckFrequency: 10,
     showUpdateNotice: false,
 
+    hideScanLines: false,
+
     hideTimestamps: true,
     hideAvatars: false,
     hideClans: false,
@@ -192,6 +194,18 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option will prevent the <strong>Global Missions</strong> pop up from showing, however, you will still hear the sound effect.</p>`,
+              },
+            },
+            // hideScanLines
+            {
+              name: "hideScanLines",
+              label: "Hide Scan Lines Effect",
+              type: "toggle",
+              value: cfg.hideScanLines,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option hide the <strong>Scan Line Effect</strong> seen across the site.</p>`,
               },
             },
           ],

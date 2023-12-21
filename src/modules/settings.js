@@ -23,6 +23,7 @@ import {
   mentionUser,
   pluginName,
   disableSoundEffects,
+  toggleScanLines,
 } from "./functions";
 import {
   start as startRecentChatters,
@@ -62,6 +63,7 @@ export const saveSettings = async () => {
 
   disableSoundEffects(config.get("disableSoundEffects"));
   applySettingsToChat();
+  toggleScanLines();
   toggleDimMode(config.get("enableDimMode"));
 
   if (!config.get("enableBigChat")) {

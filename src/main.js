@@ -10,6 +10,7 @@ import {
   getUserFromLocalStorage,
   getClanFromLocalStorage,
   runUserAgreement,
+  toggleScanLines,
 } from "./modules/functions";
 import { insertChatUpdatedMessage as showUpdateNotice } from "./modules/updater";
 import "./styles/styles.scss";
@@ -28,6 +29,8 @@ import "./styles/styles.scss";
   const enableDimMode =
     config.get("enableDimMode") && config.get("enablePlugin");
   toggleDimMode(enableDimMode);
+
+  toggleScanLines(config.get("hideScanLines") && config.get("enablePlugin"));
 
   const address = window.location.href;
 

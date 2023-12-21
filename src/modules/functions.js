@@ -119,6 +119,15 @@ export const toggleDenseChat = () => {
   );
 };
 
+export const toggleScanLines = (toggle) => {
+  const body = document.querySelector("body");
+
+  toggle = toggle === undefined ? config.get("hideScanLines") : toggle;
+
+  console.log(toggle);
+  body.classList.toggle("maejok-hide-scan_lines", toggle);
+};
+
 export const toggleBigChat = (mode = null, muted = false) => {
   if (config.get("enableBigChat")) {
     if (!muted) {
@@ -661,6 +670,7 @@ export const startMaejokTools = async () => {
 
   disableSoundEffects(config.get("disableSoundEffects"));
   applySettingsToChat();
+  toggleScanLines();
   observers.chat.start();
 
   if (config.get("hideGlobalMissions")) {
@@ -702,6 +712,7 @@ export const stopMaejokTools = () => {
   disableSoundEffects(false);
   stopRecentChatters();
   stopUpdater();
+  toggleScanLines(false);
 
   clearInterval(state.get("updateCheckInterval"));
   clearInterval(state.get("daysLeftInterval"));
