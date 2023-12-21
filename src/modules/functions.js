@@ -124,7 +124,6 @@ export const toggleScanLines = (toggle) => {
 
   toggle = toggle === undefined ? config.get("hideScanLines") : toggle;
 
-  console.log(toggle);
   body.classList.toggle("maejok-hide-scan_lines", toggle);
 };
 
