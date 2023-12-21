@@ -9,6 +9,6 @@
 // @icon         __ICON__
 // @updateURL    __UPDATEURL__
 // @supportURL    __SUPPORTURL__
-// @match        *://*.fishtank.live/*
+// @match        https://www.fishtank.live/
 // @run-at       document-idle
 // ==/UserScript==
