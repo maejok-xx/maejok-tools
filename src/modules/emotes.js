@@ -65,11 +65,11 @@ export const createEmotesList = () => {
       itemPin.textContent = isPinned ? "Unpin" : "Pin";
       listItem.appendChild(itemPin);
 
-      const itemUse = document.createElement("button");
-      itemUse.classList.add(ELEMENTS.emotes.list.item.use.class);
-      itemUse.setAttribute("data-emote-command", command);
-      itemUse.textContent = "Use";
-      listItem.appendChild(itemUse);
+      // const itemUse = document.createElement("button");
+      // itemUse.classList.add(ELEMENTS.emotes.list.item.use.class);
+      // itemUse.setAttribute("data-emote-command", command);
+      // itemUse.textContent = "Use";
+      // listItem.appendChild(itemUse);
 
       itemPin.addEventListener("click", handlePinEmote);
       eventListeners.push({
@@ -78,14 +78,14 @@ export const createEmotesList = () => {
         listener: handlePinEmote,
       });
 
-      itemUse.addEventListener("click", (event) =>
-        handleUseEmote(event, modal, eventListeners)
-      );
-      eventListeners.push({
-        element: itemUse,
-        event: "click",
-        listener: (event) => handleUseEmote(event, modal, eventListeners),
-      });
+      // itemUse.addEventListener("click", (event) =>
+      //   handleUseEmote(event, modal, eventListeners)
+      // );
+      // eventListeners.push({
+      //   element: itemUse,
+      //   event: "click",
+      //   listener: (event) => handleUseEmote(event, modal, eventListeners),
+      // });
 
       list.appendChild(listItem);
     });
