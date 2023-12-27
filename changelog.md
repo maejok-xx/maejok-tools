@@ -1,5 +1,25 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.10.1_**
+
+### Notes
+
+- The new chat input on fishtank broke some things in the plugin. This update just stops the crashes and updates some element class names.
+
+### Bug Fixes
+
+- [Site crash/chat input #36](https://github.com/maejok-xx/maejok-tools/issues/36)
+
+### Features Added
+
+- N/A
+
+### Removed
+
+- "Use" emote button removed. You'll just have to type the emote yourself for now.
+
+---
+
 # **_v2.10.0_**
 
 ### Notes

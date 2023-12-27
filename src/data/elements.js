@@ -270,15 +270,19 @@ const Elements = {
     },
     input: {
       selector: `[id="chat-input"]`,
-      class: `chat-input_input__ozkas`,
+      class: `chat-input_input__jljCU`,
       id: `chat-input`,
       form: {
         selector: `[class^="chat-input_chat-input__"]`,
-        class: "chat-input_chat-input__OmyQV",
+        class: "chat-input_chat-input__GAgOF",
+      },
+      wrapper: {
+        selector: `[class^="chat-input_input-wrapper__"]`,
+        class: "chat-input_input-wrapper__rjiu1",
       },
       placeholder: {
         selector: `[class^="chat-input_placeholder"]`,
-        class: `chat-input_placeholder__LVY_6 `,
+        class: `chat-input_placeholder__8Brjt `,
       },
       actions: {
         selector: `[class^="chat-input_actions"]`,
@@ -287,6 +291,9 @@ const Elements = {
           selector: `[class^="medal-selector_medal-selector__"]`,
           class: "medal-selector_medal-selector___1oot",
         },
+      },
+      rich: {
+        mention: "chat-input-mention_chat-input-mention__pDrCH",
       },
     },
   },
@@ -544,6 +551,12 @@ const Elements = {
       empty: {
         class: "maejok-list-empty",
       },
+    },
+  },
+  takeover: {
+    happening: {
+      selector: `[class^="happening_happening__"]`,
+      class: "happening_happening__Ca2E7",
     },
   },
 };
