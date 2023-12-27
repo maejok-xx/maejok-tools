@@ -186,15 +186,18 @@ export const toggleDimMode = (enable) => {
 };
 
 export const mentionUser = (displayName) => {
+  const input = document.querySelector(ELEMENTS.chat.input.selector);
   if (typeof displayName === "object") displayName = displayName.displayName;
 
   const mention = new CustomEvent("insertmention", {
-    detail: displayName,
+    detail: `${displayName}`,
   });
 
   playSound("click-high-short");
 
   document.dispatchEvent(mention);
+
+  input && setCursorPosition(input);
 };
 
 export const getMessageType = (element) => {
@@ -880,12 +883,12 @@ function getUserInfo(property) {
 }
 
 function setCursorPosition(target) {
-  let range = document.createRange();
+  const range = document.createRange();
+  const sel = window.getSelection();
   range.selectNodeContents(target);
   range.collapse(false);
-  let selection = window.getSelection();
-  selection.removeAllRanges();
-  selection.addRange(range);
+  sel.removeAllRanges();
+  sel.addRange(range);
   target.focus();
 }
 
