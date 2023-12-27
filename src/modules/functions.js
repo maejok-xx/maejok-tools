@@ -187,8 +187,14 @@ export const toggleDimMode = (enable) => {
 
 export const mentionUser = (displayName) => {
   if (typeof displayName === "object") displayName = displayName.displayName;
-  setChatInputValue(`@${displayName}`, false);
+
+  const mention = new CustomEvent("insertmention", {
+    detail: displayName,
+  });
+
   playSound("click-high-short");
+
+  document.dispatchEvent(mention);
 };
 
 export const getMessageType = (element) => {
