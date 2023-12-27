@@ -380,6 +380,8 @@ export const clickUpdateDismiss = () => {
 };
 
 export const handleUseEmote = (event, modal, eventListeners) => {
+  return;
+
   playSound("shutter");
   const command = event.currentTarget.getAttribute("data-emote-command");
   setChatInputValue(`/${command}&nbsp;`);
