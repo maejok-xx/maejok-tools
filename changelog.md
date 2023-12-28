@@ -1,5 +1,25 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.10.2_**
+
+### Notes
+
+- Just adds a notice on client crashes to report bugs to the proper people.
+
+### Bug Fixes
+
+- N/A
+
+### Features Added
+
+- Client crash notice
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.10.1_**
 
 ### Notes

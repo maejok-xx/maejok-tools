@@ -90,6 +90,12 @@ const observers = {
           }
 
           mutation.addedNodes.forEach((addedNode) => {
+            if (addedNode.innerHTML.includes("Application error:")) {
+              addedNode.innerHTML =
+                addedNode.innerHTML +
+                `<div style="background-color: rgba(0,0,0,0.5); padding: 10px; width: 775px; line-height: 1em; color: red; font-weight: 900; font-size: 2em; text-shadow: 0 0 3px maroon">MAEJOK-TOOLS NOTICE</div><div style="background-color: rgba(0,0,0,0.5); width: 775px; color: #ff7b7b; font-weight: 900; padding: 10px; text-shadow: 0 0 6px black">Something happened and the site crashed...<br/><br/>Please, for the love of everything holy, DISABLE MAEJOK-TOOLS AND CONFIRM THE PLUGIN IS NOT THE CAUSE OF THE ERROR *BEFORE* MAKING ANY BUG REPORTS<br/><br/>If the error no longer exists after disabling the plugin, <a href="https://github.com/maejok-xx/maejok-tools/issues" target="_blank" style="color: #4747ff;">report the bug on GitHub</a> Or by  <a href="https://twitter.com/maejok" target="_blank" style="color: #4747ff;">contacting @maejok</a><br/><br/>However, if, AND ONLY IF, the error persists after fully disabling MAEJOK-TOOLS from within your UserScript extension, you may report the bug on <a href="https://discord.gg/fishtankislive" target="_blank" style="color: #4747ff;">Fishcord</a><br/><br/>DO NOT <u><b>UNDER ANY CIRCUMSTANCE</u></b> CONTACT WES, JET, FISHTANK STAFF OR ANYONE ELSE ABOUT A BUGS CAUSED BY MAEJOK-TOOLS!</div>`;
+            }
+
             if (addedNode.id === "modal") {
               const title = getElementText(ELEMENTS.modal.title.text.selector);
               if (title && title.includes("Global Mission")) {
