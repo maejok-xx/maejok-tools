@@ -1,5 +1,26 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.10.3_**
+
+### Notes
+
+- Updates to the way user data is cached brok Mention Logger.. this update fixes it.
+- Improved Dim Mode for better camera/episode clarity and a generally darker experience.
+
+### Bug Fixes
+
+- [Mention Logger not working](https://github.com/maejok-xx/maejok-tools/issues/38)
+
+### Features Added / Improved
+
+- [Improved Dim Mode](https://github.com/maejok-xx/maejok-tools/commit/0d064e240fca2366e7bc10aa2482030602a27982)
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.10.2_**
 
 ### Notes
