@@ -8,7 +8,6 @@ import {
   startMaejokTools,
   toggleDimMode,
   getUserFromLocalStorage,
-  getClanFromLocalStorage,
   runUserAgreement,
   toggleScanLines,
 } from "./modules/functions";
@@ -57,12 +56,10 @@ import "./styles/styles.scss";
     if (isLoaded) {
       clearInterval(loadingInterval);
 
-      state.set("loaded", true);
-
       const user = await getUserFromLocalStorage();
-      const clan = await getClanFromLocalStorage();
       state.set("user", user);
-      state.set("clan", clan);
+
+      state.set("loaded", true);
 
       createSettingsButton();
 

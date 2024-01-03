@@ -154,7 +154,13 @@ export default class Message {
       return;
     }
 
-    const isMentioned = this.mentions.includes(state.get("user")?.displayName);
+    const user = state.get("user");
+
+    if (!user) {
+      return false;
+    }
+
+    const isMentioned = this.mentions.includes(user.displayName);
 
     return isMentioned;
   }

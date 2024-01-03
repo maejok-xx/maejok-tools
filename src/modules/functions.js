@@ -533,16 +533,7 @@ export const hasClass = (element, className) => {
 export const getUserFromLocalStorage = () => {
   const keys = Object.keys(localStorage);
   for (const key of keys) {
-    if (key.includes("cached-profile")) {
-      return JSON.parse(localStorage.getItem(key)).value;
-    }
-  }
-};
-
-export const getClanFromLocalStorage = () => {
-  const keys = Object.keys(localStorage);
-  for (const key of keys) {
-    if (key.includes("user-clan")) {
+    if (key.includes("profile")) {
       return JSON.parse(localStorage.getItem(key)).value;
     }
   }
@@ -698,9 +689,10 @@ export const startMaejokTools = async () => {
     observers.modal.start();
   }
 
-  const clanTag = state.get("clan")?.tag;
-  if (cfg.autoClanChat && clanTag !== null && !isPopoutChat) {
-    enterChat("autoClanChat");
+  const user = state.get("user");
+
+  if (cfg.autoClanChat && user.clan !== null && !isPopoutChat) {
+    enterChat(user.clan.tag);
   }
 
   if (cfg.persistBigChat && !isPopoutChat) {
