@@ -52,3 +52,87 @@ export const SOUNDS = new Map([
   ["poll", "wav"],
   ["tick-short", "wav"],
 ]);
+
+export const DARK_MODE_STYLES = `
+.background_background__fNMDL {
+  background: #1c1c1c;
+  background-image: none;
+}
+
+.live-stream_live-stream__uVezO,
+.live-stream-fullscreen_left__idsvZ,
+.live-stream-fullscreen_right___UCNg,
+.episode-fullscreen_left__bNbXb,
+.episode-fullscreen_right__HuAn9,
+.top-bar_top-bar___Z0QX,
+.stats_stats__SIg_t,
+.tts-history_tts-history__8_9eB,
+.secondary-panel_secondary-panel__vUc65,
+.experience-bar_experience-bar__nVDge,
+.announcement_announcement__Sow3P,
+.chat-input_actions__QqSJK,
+.chat_header__8kNPS,
+.loader_loader__iek2w,
+.clans_clans__v2iO2,
+.episodes_episodes__o7PWv,
+.leader-board_leader-board__7KyzK,
+.episode-fullscreen_bonus__scypw,
+.clan-info_clan-info___2J6Z,
+#contestants {
+  filter: brightness(0.5) !important;
+}
+
+.episode_episode__oA49f {
+  filter: brightness(0.7);
+}
+
+.live-stream_popular__hfeZD {
+  filter: drop-shadow(0 0 8px rgba(255,29,0,.75)) brightness(0.8) !important;
+}
+
+.modal_backdrop__94Bu6 {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.modal_modal-container__iQODa .modal_modal__MS70U:before {
+  filter: brightness(0.25);
+}
+
+#live-stream-player, #episode-player {
+  border: none;
+  box-shadow: none;
+  outline-color: rgb(129 129 129);
+}
+
+#live-stream-player:after, #episode-player:after {
+  filter: brightness(0.7);
+}
+
+#live-stream-player:before, #episode-player:before {
+  filter: brightness(0.5);
+}
+
+.chat_chat__2rdNg {
+  filter: brightness(0.9);
+  border: none;
+  box-shadow: none;
+  outline-color: rgb(129 129 129) !important;
+}
+
+.chat_chat__2rdNg .chat_messages__2IBEJ:before {
+  opacity: 0 ;
+}
+
+.chat_chat__2rdNg:after,
+.chat_chat__2rdNg:before {
+  filter: brightness(0.5);
+}
+
+#live-stream-fullscreen {
+  filter: brightness(0.25);
+}
+
+.live-stream-controls_live-stream-controls__hI4aT {
+  filter: brightness(0.75);
+}
+`;
