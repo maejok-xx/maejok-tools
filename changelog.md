@@ -13,7 +13,7 @@
 
 ### Features Added / Improved
 
-- [Improved Dim Mode](https://github.com/maejok-xx/maejok-tools/commit/0d064e240fca2366e7bc10aa2482030602a27982)
+- [Improved Dim Mode](https://github.com/maejok-xx/maejok-tools/commit/84bab2f23213b23f07f2c066e7fe1e82bbc18929)
 
 ### Removed
 
