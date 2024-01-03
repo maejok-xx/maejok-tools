@@ -1,4 +1,6 @@
 node_modules
+pnpm-lock.yaml
+
 maejok-tools.code-workspace
 dist/maejok-tools.dev.user.js
 dist/maejok-tools.preview.user.js
