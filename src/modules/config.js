@@ -144,8 +144,7 @@ const Config = () => {
               group: "site-options",
               help: {
                 label: "?",
-                text: `<p>Enabling this option reduces the brightness of the site little</p>
-                <p><i>Note: this setting will cause the site to appear twice as dark while the settings panel is open.</i></p>`,
+                text: `<p>Enabling this option reduces the brightness of the site</p>`,
               },
             },
             // enableEmotesMenu
