@@ -136,3 +136,10 @@ export const DARK_MODE_STYLES = `
   filter: brightness(0.75);
 }
 `;
+
+export const SCREEN_TAKEOVERS_STYLES = `
+.happening_happening__Ca2E7,
+.happening_backdrop__JCihz {
+  display: none !important;
+}
+`;

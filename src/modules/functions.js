@@ -1,6 +1,11 @@
 import config from "./config";
 import state from "./state";
-import { VERSION, SOUNDS, DARK_MODE_STYLES } from "./constants";
+import {
+  VERSION,
+  SOUNDS,
+  DARK_MODE_STYLES,
+  SCREEN_TAKEOVERS_STYLES,
+} from "./constants";
 import Message from "../classes/Message";
 import ELEMENTS from "../data/elements";
 import { rightClick, leftClick, dblClick, keyPress } from "./events";
@@ -180,8 +185,20 @@ export const toggleDimMode = (toggle) => {
     style.setAttribute("id", "maejok-darkmode");
     document.head.appendChild(style);
   } else {
-    const darkmode = document.getElementById("maejok-darkmode");
-    darkmode?.remove();
+    const styles = document.getElementById("maejok-darkmode");
+    styles?.remove();
+  }
+};
+
+export const toggleScreenTakeovers = (toggle) => {
+  if (toggle) {
+    const style = document.createElement("style");
+    style.textContent = SCREEN_TAKEOVERS_STYLES;
+    style.setAttribute("id", "maejok-hidescreentakeovers");
+    document.head.appendChild(style);
+  } else {
+    const styles = document.getElementById("maejok-hidescreentakeovers");
+    styles?.remove();
   }
 };
 
@@ -682,6 +699,7 @@ export const startMaejokTools = async () => {
   disableSoundEffects(config.get("disableSoundEffects"));
   applySettingsToChat();
   toggleScanLines();
+  toggleScreenTakeovers(config.get("hideScreenTakeovers"));
   observers.chat.start();
 
   if (config.get("hideGlobalMissions")) {
