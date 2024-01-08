@@ -31,7 +31,7 @@ const Config = () => {
 
     enableImprovedTagging: true,
 
-    enableDenseChat: true,
+    enableDenseChat: false,
     enableBigChat: true,
     persistBigChat: false,
     bigChatState: false,
