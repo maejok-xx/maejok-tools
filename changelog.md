@@ -1,5 +1,25 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.12.0_**
+
+### Notes
+
+- Since there's a pop-out chat option now, I decided to switch Big Chat mode to Big Screen. This is intended for clippers to get a larger screen capture area while still being able to utilize stream navigation and auto-mode.
+
+### Bug Fixes
+
+- N/A
+
+### Features Added / Changed
+
+- [BigChat Becomes BigScreen](https://github.com/maejok-xx/maejok-tools/pull/43)
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.11.0_**
 
 ### Notes
