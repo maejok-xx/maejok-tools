@@ -5,6 +5,7 @@ import {
   SOUNDS,
   DARK_MODE_STYLES,
   SCREEN_TAKEOVERS_STYLES,
+  BIG_SCREEN_STYLES,
 } from "./constants";
 import Message from "../classes/Message";
 import ELEMENTS from "../data/elements";
@@ -132,50 +133,33 @@ export const toggleScanLines = (toggle) => {
   body.classList.toggle("maejok-hide-scan_lines", toggle);
 };
 
-export const toggleBigChat = (mode = null, muted = false) => {
-  if (config.get("enableBigChat")) {
+export const toggleBigScreen = (mode = null, muted = false) => {
+  if (config.get("enableBigScreen")) {
     if (!muted) {
       playSound("shutter");
     }
 
-    mode = mode === null ? !state.get("bigChatState") : mode;
+    mode = mode === null ? !state.get("bigScreenState") : mode;
   } else {
     mode = false;
   }
 
-  if (config.get("persistBigChat")) {
-    config.set("bigChatState", mode);
+  if (config.get("persistBigScreen")) {
+    config.set("bigScreenState", mode);
     config.save();
   }
 
-  state.set("bigChatState", mode);
+  state.set("bigScreenState", mode);
 
-  const getElement = (elm) => document.querySelector(elm.selector);
-  const elements = {
-    chat: getElement(ELEMENTS.chat.main),
-    presence: getElement(ELEMENTS.chat.header.presence),
-    chat_count: getElement(ELEMENTS.chat.header.recent),
-    room_select: getElement(ELEMENTS.chat.room),
-    header: getElement(ELEMENTS.header),
-    user: getElement(ELEMENTS.header.user),
-    admin: getElement(ELEMENTS.header.title.admin),
-    logo: getElement(ELEMENTS.header.title.logo),
-    links: getElement(ELEMENTS.header.title.links),
-    invite: getElement(ELEMENTS.profile.clanInvite),
-    experience: getElement(ELEMENTS.experience),
-  };
-
-  const prefix = "maejok-chat_mode-";
-  Object.keys(elements).forEach((className) => {
-    if (className === "countdown") {
-      return;
-    }
-
-    const element = elements[className];
-    if (element) {
-      element.classList.toggle(prefix + className, mode);
-    }
-  });
+  if (mode) {
+    const style = document.createElement("style");
+    style.textContent = BIG_SCREEN_STYLES;
+    style.setAttribute("id", "maejok-bigscreen");
+    document.head.appendChild(style);
+  } else {
+    const styles = document.getElementById("maejok-bigscreen");
+    styles?.remove();
+  }
 };
 
 export const toggleDimMode = (toggle) => {
@@ -713,8 +697,8 @@ export const startMaejokTools = async () => {
     enterChat(user.clan.tag);
   }
 
-  if (cfg.persistBigChat && !isPopoutChat) {
-    toggleBigChat(cfg.bigChatState, true);
+  if (cfg.persistBigScreen && !isPopoutChat) {
+    toggleBigScreen(cfg.bigScreenState, true);
   }
 
   if (!isPopoutChat) {
@@ -732,7 +716,7 @@ export const startMaejokTools = async () => {
 };
 
 export const stopMaejokTools = () => {
-  toggleBigChat(false);
+  toggleBigScreen(false);
 
   observers.chat.stop();
   observers.user.stop();

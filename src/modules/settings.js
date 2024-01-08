@@ -17,7 +17,7 @@ import {
   startMaejokTools,
   stopMaejokTools,
   processChatMessage,
-  toggleBigChat,
+  toggleBigScreen,
   toggleDenseChat,
   scrollToBottom,
   mentionUser,
@@ -68,8 +68,8 @@ export const saveSettings = async () => {
   toggleDimMode(config.get("enableDimMode"));
   toggleScreenTakeovers(config.get("hideScreenTakeovers"));
 
-  if (!config.get("enableBigChat")) {
-    toggleBigChat(false);
+  if (!config.get("enableBigScreen")) {
+    toggleBigScreen(false);
   }
 
   const startPlugin = !state.get("running") && config.get("enablePlugin");

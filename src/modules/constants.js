@@ -143,3 +143,64 @@ export const SCREEN_TAKEOVERS_STYLES = `
   display: none !important;
 }
 `;
+
+export const BIG_SCREEN_STYLES = `
+.home_home__pUFCA {
+  grid-template-columns: 0px auto 0px 375px;
+  grid-template-rows: 75px auto 1fr 0px auto;
+  padding: 0px;
+  grid-gap: 0px;
+  gap: 0px;
+}
+
+#main-panel {
+  margin-right: 3px;
+  grid-row: 1/4;
+}
+
+.live-streams_live-streams__BYV96 {
+  padding: 0 10px;
+}
+
+.stats_stats__SIg_t {
+  margin-bottom: 10px;
+}
+
+.top-bar_top-bar___Z0QX,
+.secondary-panel_secondary-panel__vUc65,
+.experience-bar_experience-bar__nVDge,
+.announcement_announcement__Sow3P,
+.tts-history_tts-history__8_9eB  {
+  display: none;
+}
+
+.live-stream-fullscreen_live-stream-fullscreen__zpNvE {
+  .live-stream-fullscreen_left__idsvZ,
+  .live-stream-fullscreen_right___UCNg {
+    flex: 2% 1;
+
+    img {
+      display: none;
+    }
+  }
+}
+
+#live-stream-player > div.live-stream-fullscreen_close__JY_lb > button {
+  all: unset;
+  cursor: pointer;
+  text-shadow: 0px 0px 4px #000;
+
+  &:hover {
+    transform: scale(1.15);
+  }
+
+  &::before {
+    unset: all;
+    content: "❌";
+  }
+  
+  img {
+    display: none;
+  }
+}
+`;

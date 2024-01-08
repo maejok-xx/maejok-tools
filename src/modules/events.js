@@ -12,7 +12,7 @@ import {
   mentionUser,
   existsInUserList,
   modifyUserList,
-  toggleBigChat,
+  toggleBigScreen,
   playSound,
   setChatInputValue,
   toggleItemInList,
@@ -143,12 +143,12 @@ export const leftClick = (event) => {
     );
 
     if (clicked) {
-      const returnToBigChat =
-        config.get("enableBigChat") &&
-        config.get("bigChatState") &&
-        state.get("bigChatState");
+      const returnToBigScreen =
+        config.get("enableBigScreen") &&
+        config.get("bigScreenState") &&
+        state.get("bigScreenState");
 
-      setTimeout(() => toggleBigChat(returnToBigChat, true), 0);
+      setTimeout(() => toggleBigScreen(returnToBigScreen, true), 0);
       return true;
     }
     return false;
@@ -237,11 +237,11 @@ export const keyPress = (event) => {
     (event.ctrlKey && event.keyCode === keys.backtick) ||
     (event.ctrlKey && event.shiftKey && event.keyCode === keys.space)
   ) {
-    toggleBigChat();
+    toggleBigScreen();
     return;
   }
-  if (config.get("bigChatState") && event.keyCode === keys.escape) {
-    toggleBigChat(false);
+  if (config.get("bigScreenState") && event.keyCode === keys.escape) {
+    toggleBigScreen(false);
     return;
   }
 };
