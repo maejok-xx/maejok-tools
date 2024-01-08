@@ -6,6 +6,9 @@ const Config = () => {
     enablePlugin: true,
     enableDimMode: false,
 
+    enableBigScreen: true,
+    persistBigScreen: false,
+    bigScreenState: false,
     disableSoundEffects: false,
     hideGlobalMissions: false,
     hideScreenTakeovers: false,
@@ -32,9 +35,6 @@ const Config = () => {
     enableImprovedTagging: true,
 
     enableDenseChat: false,
-    enableBigChat: true,
-    persistBigChat: false,
-    bigChatState: false,
 
     enableRecentChatters: true,
     recentChattersThreshold: 10,
@@ -136,6 +136,32 @@ const Config = () => {
               group: "plugin",
             },
             // site-options
+            // enableBigScreen
+            {
+              name: "enableBigScreen",
+              label: "Enable Big Screen Mode",
+              type: "toggle",
+              value: cfg.enableBigScreen,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option creates a keyboard shortcut to toggle <strong>Big Screen Mode</strong> which makes the videos take priority in the layout.</p>
+                <p>Keyboard Shortcut: <strong>CTRL+\`</strong> (tilda, above TAB key)</p>
+                <p>or using <strong>CTRL+SHIFT+SPACE BAR</strong>.</p>`,
+              },
+            },
+            // persistBigScreen
+            {
+              name: "persistBigScreen",
+              label: "Persist Big Screen",
+              type: "toggle",
+              value: cfg.persistBigScreen,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will restore the last <strong>Big Screen Mode</strong> state upon refreshing the site.</p>`,
+              },
+            },
             // enableDimMode
             {
               name: "enableDimMode",
@@ -382,32 +408,6 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option makes the gap between chat messages smaller.</p>`,
-              },
-            },
-            // enableBigChat
-            {
-              name: "enableBigChat",
-              label: "Enable Big Chat",
-              type: "toggle",
-              value: cfg.enableBigChat,
-              group: "chat-misc",
-              help: {
-                label: "?",
-                text: `<p>Enabling this option creates a keyboard shortcut to toggle <strong>Big Chat Mode</strong>.</p>
-                <p>Keyboard Shortcut: <strong>CTRL+\`</strong> (tilda, above TAB key)</p>
-                <p>or using <strong>CTRL+SHIFT+SPACE BAR</strong>.</p>`,
-              },
-            },
-            // persistBigChat
-            {
-              name: "persistBigChat",
-              label: "Persist Big Chat",
-              type: "toggle",
-              value: cfg.persistBigChat,
-              group: "chat-misc",
-              help: {
-                label: "?",
-                text: `<p>Enabling this option will restore <strong>Big Chat Mode</strong> if it was open when you left the site.</p>`,
               },
             },
             // enableRecentChatters / Chatter Threshold
