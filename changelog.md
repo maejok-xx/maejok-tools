@@ -1,5 +1,25 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.11.0_**
+
+### Notes
+
+- This addition is difficult to test on the production site due to how infrequent takeovers happen, but it works on the dev server, so it should be okay. If it doesn't work, I'll get a fix out asap.
+
+### Bug Fixes
+
+- N/A
+
+### Features Added
+
+- [Hide Screen Takeovers](https://github.com/maejok-xx/maejok-tools/commit/035036a34a06723859895dd49724ee46cdcfbb54)
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.10.3_**
 
 ### Notes
