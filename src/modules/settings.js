@@ -24,6 +24,7 @@ import {
   pluginName,
   disableSoundEffects,
   toggleScanLines,
+  toggleScreenTakeovers,
 } from "./functions";
 import {
   start as startRecentChatters,
@@ -65,6 +66,7 @@ export const saveSettings = async () => {
   applySettingsToChat();
   toggleScanLines();
   toggleDimMode(config.get("enableDimMode"));
+  toggleScreenTakeovers(config.get("hideScreenTakeovers"));
 
   if (!config.get("enableBigChat")) {
     toggleBigChat(false);

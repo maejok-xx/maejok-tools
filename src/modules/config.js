@@ -8,6 +8,7 @@ const Config = () => {
 
     disableSoundEffects: false,
     hideGlobalMissions: false,
+    hideScreenTakeovers: false,
 
     enableUpdateChecks: true,
     updateCheckFrequency: 10,
@@ -196,6 +197,18 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option will prevent the <strong>Global Missions</strong> pop up from showing, however, you will still hear the sound effect.</p>`,
+              },
+            },
+            // hideScreenTakeovers
+            {
+              name: "hideScreenTakeovers",
+              label: "Hide Screen Takeovers",
+              type: "toggle",
+              value: cfg.hideScreenTakeovers,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will prevent the <strong>Screen Takeovers</strong> (Cigarette Deliveries, Loot Crates, etc.) from showing, however, you will still hear the sound effect.</p>`,
               },
             },
             // hideScanLines
