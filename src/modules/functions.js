@@ -27,7 +27,7 @@ export const getReactProps = (element) => {
 }
 
 export const inputIsFocused = () => {
-  return document.activeElement.className.includes("input") || document.activeElement.role == "input" || document.activeElement.tagName == "input";
+  return document.activeElement.className.toLowerCase().includes("input") || document.activeElement.role?.toLowerCase() == "input" || document.activeElement.tagName.toLowerCase() == "input";
 }
 
 export const existsInUserList = (list, userId) => {
