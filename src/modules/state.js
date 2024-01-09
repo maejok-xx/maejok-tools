@@ -22,6 +22,7 @@ const State = () => {
     packageJson: {},
     updateShown: false,
     audioElement: false,
+    pendingKeybind: null
   };
 
   const get = (key) => {

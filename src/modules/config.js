@@ -1,5 +1,6 @@
 import state from "./state";
 import { pluginName } from "./functions";
+import { clickResetKeybindButton } from "./events";
 
 const Config = () => {
   const configObj = {
@@ -52,6 +53,26 @@ const Config = () => {
     reverseMentionLog: false,
 
     agreementVersion: null,
+    
+    bindsEnable: false,
+    bindsForceCtrl: false,
+    bindsRooms: {
+      "living-room":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyQ"},
+      "lounge":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyW"},
+      "bar":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyE"},
+      "kitchen":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyR"},
+      "dog-house":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyT"},
+      "hallway-downstairs":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyY"},
+      "hallway-upstairs":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit5"},
+      "bedroom-1":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit1"},
+      "bedroom-2":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit2"},
+      "bedroom-3":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit3"},
+      "the-bunk":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit4"},
+      "attic":{ctrlKey: false, altKey: false, shiftKey: false, code: "F1"},
+      "upstairs-bathroom":{ctrlKey: false, altKey: false, shiftKey: false, code: "F2"},
+      "downstairs-bathroom":{ctrlKey: false, altKey: false, shiftKey: false, code: "F3"},
+      "master-bathroom":{ctrlKey: false, altKey: false, shiftKey: false, code: "F4"}
+    },
 
     friends: [],
     watching: [],
@@ -584,6 +605,178 @@ const Config = () => {
               value: state.get("mentions"),
               group: "mentions",
             },
+          ],
+        },
+      },
+      
+      // --- KEYBINDS
+      {
+        name: "keyBinds",
+        label: "KEYBINDS",
+        content: {
+          groups: [
+            { name: "bindoptions", label: "Bind Options" },
+            { name: "roombinds", label: "Room Binds" }
+          ],
+          inputs: [
+            // roombinds
+            // bindsEnable
+            {
+              name: "bindsEnable",
+              label: "Enable Key Binds",
+              type: "toggle",
+              value: cfg.bindsEnable,
+              group: "bindoptions",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will allow binds to be used.</p>`,
+              },
+            },
+            // bindsForceCtrl
+            {
+              name: "bindsForceCtrl",
+              label: "Force Ctrl Requirement",
+              type: "toggle",
+              value: cfg.bindsForceCtrl,
+              group: "bindoptions",
+              help: {
+                label: "?",
+                text: `<p>If enabled, all keybinds will require the CTRL key to be held.</p>`,
+              },
+            },
+            // bindsReset
+            {
+              name: "bindsReset",
+              label: "Restore Default Binds",
+              type: "button",
+              group: "bindoptions",
+              onclick: clickResetKeybindButton,
+              color: "red",
+              help: {
+                label: "?",
+                text: `<p>Resets all keybinds to their default values.</p>`,
+              },
+            },
+            // switchBedroom1
+            {
+              name: "switchBedroom1",
+              label: "Bedroom 1",
+              type: "keybind",
+              value: "bedroom-1",
+              group: "roombinds"
+            },
+            // switchBedroom2
+            {
+              name: "switchBedroom2",
+              label: "Bedroom 2",
+              type: "keybind",
+              value: "bedroom-2",
+              group: "roombinds"
+            },
+            // switchBedroom3
+            {
+              name: "switchBedroom3",
+              label: "Bedroom 3",
+              type: "keybind",
+              value: "bedroom-3",
+              group: "roombinds"
+            },
+            // switchBunk
+            {
+              name: "switchBunk",
+              label: "The Bunk",
+              type: "keybind",
+              value: "the-bunk",
+              group: "roombinds"
+            },
+            // switchHallwayUpstairs
+            {
+              name: "switchHallwayUpstairs",
+              label: "Hallway - Upstairs",
+              type: "keybind",
+              value: "hallway-upstairs",
+              group: "roombinds"
+            },
+            // switchHallwayDownstairs
+            {
+              name: "switchHallwayDownstairs",
+              label: "Hallway - Downstairs",
+              type: "keybind",
+              value: "hallway-downstairs",
+              group: "roombinds"
+            },
+            // switchLivingRoom
+            {
+              name: "switchLivingRoom",
+              label: "Living Room",
+              type: "keybind",
+              value: "living-room",
+              group: "roombinds"
+            },
+            // switchLounge
+            {
+              name: "switchLounge",
+              label: "Lounge",
+              type: "keybind",
+              value: "lounge",
+              group: "roombinds"
+            },
+            // switchBar
+            {
+              name: "switchBar",
+              label: "Bar",
+              type: "keybind",
+              value: "bar",
+              group: "roombinds"
+            },
+            // switchKitchen
+            {
+              name: "switchKitchen",
+              label: "Kitchen",
+              type: "keybind",
+              value: "kitchen",
+              group: "roombinds"
+            },
+            // switchDogHouse
+            {
+              name: "switchDogHouse",
+              label: "Dog House",
+              type: "keybind",
+              value: "dog-house",
+              group: "roombinds"
+            },
+            // switchAttic
+            {
+              name: "switchAttic",
+              label: "Attic",
+              type: "keybind",
+              value: "attic",
+              group: "roombinds"
+            },
+            // switchBathroomUpstairs
+            {
+              name: "switchBathroomUpstairs",
+              label: "Bathroom - Upstairs",
+              type: "keybind",
+              value: "upstairs-bathroom",
+              group: "roombinds"
+            },
+            // switchBathroomDownstairs
+            {
+              name: "switchBathroomDownstairs",
+              label: "Bathroom - Downstairs",
+              type: "keybind",
+              value: "downstairs-bathroom",
+              group: "roombinds"
+            },
+            // switchBathroomMaster
+            {
+              name: "switchBathroomMaster",
+              label: "Bathroom - Master",
+              type: "keybind",
+              value: "master-bathroom",
+              group: "roombinds"
+            }
           ],
         },
       },

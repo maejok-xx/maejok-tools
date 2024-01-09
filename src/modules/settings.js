@@ -10,6 +10,7 @@ import {
   clickSettingsToggle,
   clickSettingsConfig,
   clickTabButton,
+  clickKeybindButton
 } from "./events";
 import { start as startUpdater, stop as stopUpdater } from "./updater";
 import {
@@ -25,6 +26,7 @@ import {
   disableSoundEffects,
   toggleScanLines,
   toggleScreenTakeovers,
+  keyEventToString
 } from "./functions";
 import {
   start as startRecentChatters,
@@ -248,6 +250,8 @@ export const createSettingsModal = () => {
     config.content.inputs?.forEach((cfg) => {
       if (cfg.disabled) return;
       else if (["toggle"].includes(cfg.type)) createToggle(cfg, panel, modal);
+      else if (["button"].includes(cfg.type)) createButtonInput(cfg, panel, modal);
+      else if (["keybind"].includes(cfg.type)) createKeybindInput(cfg, panel, modal);
       else if (["hidden"].includes(cfg.type)) createHiddenInput(cfg, panel);
       else if (["mentions-log"].includes(cfg.type))
         createMentionsLog(cfg, panel);
@@ -552,6 +556,77 @@ function createToggle(option, panel, modal) {
   }
 }
 
+function createKeybindInput(option, panel, modal) {
+  const binds = config.get("bindsRooms");
+  const props = ELEMENTS.inputs;
+
+  const accordion = panel.querySelector(
+    `[data-group-content="${option.group}"]`
+  );
+  const wrapper = document.createElement("div");
+  wrapper.classList.add(...props.group.class);
+  accordion ? accordion.appendChild(wrapper) : panel.appendChild(wrapper);
+  
+  const button = createColorButton(option, "green", keyEventToString(binds[option.value]), function() {
+    
+    clickKeybindButton(this, option.label, option.value);
+    
+  });
+
+  const label = document.createElement("label");
+  label.classList.add(...props.label.class);
+  label.setAttribute("for", option.name);
+  label.textContent = option.label;
+  wrapper.appendChild(label);
+  wrapper.appendChild(button);
+
+  if (option.config) {
+    const config = document.createElement("b");
+    config.classList.add(...props.help.label.config.class);
+    config.innerHTML = "⚙";
+    config.addEventListener("click", () => clickSettingsConfig(option, modal));
+    wrapper.appendChild(config);
+  }
+
+  if (option.help) {
+    const help = document.createElement("b");
+    help.classList.add(...props.help.label.help.class);
+    help.innerHTML = `${option.help.label}`;
+    help.addEventListener("click", () => clickSettingsHelp(option));
+    wrapper.appendChild(help);
+  }
+}
+
+function createButtonInput(option, panel, modal) {
+  const props = ELEMENTS.inputs;
+
+  const accordion = panel.querySelector(
+    `[data-group-content="${option.group}"]`
+  );
+  const wrapper = document.createElement("div");
+  wrapper.classList.add(...props.group.class);
+  accordion ? accordion.appendChild(wrapper) : panel.appendChild(wrapper);
+  
+  const button = createColorButton(option, option.color, option.label, option.onclick);
+  wrapper.appendChild(button);
+
+  if (option.config) {
+    const config = document.createElement("b");
+    config.classList.add(...props.help.label.config.class);
+    config.innerHTML = "⚙";
+    config.addEventListener("click", () => clickSettingsConfig(option, modal));
+    wrapper.appendChild(config);
+  }
+
+  if (option.help) {
+    const help = document.createElement("b");
+    help.classList.add(...props.help.label.help.class);
+    help.innerHTML = `${option.help.label}`;
+    help.addEventListener("click", () => clickSettingsHelp(option));
+    wrapper.appendChild(help);
+  }
+}
+
 function createHiddenInput(option, panel) {
   const input = document.createElement("input");
   input.type = "hidden";
@@ -580,6 +655,39 @@ function createButton(type, action) {
   wrapper.appendChild(button);
 
   return wrapper;
+}
+
+export const createColorButton = function(option, color, label, action) {
+  const props = ELEMENTS.inputs;
+  const tab_props = ELEMENTS.settings.tabs;
+  
+  const button = document.createElement("button");
+  button.classList.add(...props.buttons.classes);
+  
+  if (option && option.type == "keybind") {
+    button.classList.add(...props.buttons.bind_classes);
+  }
+
+  const image = document.createElement("img");
+  image.setAttribute(...tab_props.button.image.attr);
+  image.src = props.buttons.img_colors[color] || props.buttons.img_colors["orange"];
+  image.alt = "";
+
+  button.appendChild(image);
+
+  const text = document.createElement("div");
+  text.classList.add(...tab_props.button.text.class);
+  text.textContent = label;
+
+  button.appendChild(text);
+
+  text.addEventListener("click", function() {
+    if (typeof action === "function") {
+      action.call(this);
+    }
+  });
+
+  return button;
 }
 
 function createTabBar(props) {

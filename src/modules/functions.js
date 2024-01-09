@@ -19,6 +19,17 @@ import {
 } from "./recent-chatters";
 import observers from "./observers";
 
+export const getReactProps = (element) => {
+  if (!element) return null;
+  return element[Object.getOwnPropertyNames(element).filter((prop)=>{
+    return prop.startsWith("__reactProps")
+  })];
+}
+
+export const inputIsFocused = () => {
+  return document.activeElement.className.includes("input") || document.activeElement.role == "input" || document.activeElement.tagName == "input";
+}
+
 export const existsInUserList = (list, userId) => {
   const users = config.get(list);
   if (!users.length) return false;
@@ -713,6 +724,33 @@ export const startMaejokTools = async () => {
   document.addEventListener("keydown", keyPress);
 
   state.set("running", true);
+};
+
+export const keyEventToString = (event) => {
+  return (event.ctrlKey && !~event.code.indexOf("Control") ? "Ctrl + " : "") +
+    (event.altKey && !~event.code.indexOf("Alt") ? "Alt + " : "") +
+    (event.shiftKey && !~event.code.indexOf("Shift") ? "Shift + " : "") +
+    event.code.replace(/^Digit(\d)$/, "NumRow $1").replace(/^Key([A-Z])$/, "$1");
+};
+
+export const resetBindDefaults = () => {
+  config.set("bindsRooms", {
+      "living-room":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyQ"},
+      "lounge":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyW"},
+      "bar":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyE"},
+      "kitchen":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyR"},
+      "dog-house":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyT"},
+      "hallway-downstairs":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyY"},
+      "hallway-upstairs":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit5"},
+      "bedroom-1":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit1"},
+      "bedroom-2":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit2"},
+      "bedroom-3":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit3"},
+      "the-bunk":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit4"},
+      "attic":{ctrlKey: false, altKey: false, shiftKey: false, code: "F1"},
+      "upstairs-bathroom":{ctrlKey: false, altKey: false, shiftKey: false, code: "F2"},
+      "downstairs-bathroom":{ctrlKey: false, altKey: false, shiftKey: false, code: "F3"},
+      "master-bathroom":{ctrlKey: false, altKey: false, shiftKey: false, code: "F4"}
+  });
 };
 
 export const stopMaejokTools = () => {
