@@ -2,6 +2,7 @@ import config from "./config";
 import state from "./state";
 import Modal from "../classes/Modal";
 import ELEMENTS from "../data/elements";
+import { ROOMS } from "./constants";
 import {
   areObjectsEqual,
   getMessageType,
@@ -16,6 +17,9 @@ import {
   playSound,
   setChatInputValue,
   toggleItemInList,
+  inputIsFocused,
+  keyEventToString,
+  resetBindDefaults
 } from "./functions";
 import * as settings from "./settings";
 import * as menu from "./menu";
@@ -244,6 +248,57 @@ export const keyPress = (event) => {
     toggleBigScreen(false);
     return;
   }
+  
+  const keycombo = {
+      ctrlKey: event.ctrlKey,
+      altKey: event.altKey,
+      shiftKey: event.shiftKey,
+      code: event.code
+  }
+  
+  let keyPrompt = document.querySelector(ELEMENTS.modal.prompt.selector);
+  
+  if (keyPrompt) {
+    if (event.code == "Escape") return;
+    
+    keyPrompt.querySelector(ELEMENTS.modal.prompt.keyname.selector).textContent = keyEventToString(keycombo);
+    keyPrompt.querySelector(".error").style.display = 'none';
+    
+    let roomcfg = config.get("bindsRooms");
+    for (let i in roomcfg) {
+      if (areObjectsEqual(roomcfg[i], keycombo)) {
+        keyPrompt.querySelector(".error").style.display = 'block';
+        break;
+      }
+    }
+    
+    state.set("pendingKeybind", keycombo);
+    //playSound("tick-short");
+    
+    event.stopPropagation();
+    event.preventDefault();
+    return;
+    
+  } else {
+    
+    if (config.get("bindsEnable") && !inputIsFocused()) {
+      let forceCtrl = config.get("bindsForceCtrl");
+      if (!keycombo.ctrlKey && forceCtrl) return;
+      let roomBindMap = config.get("bindsRooms");
+      for (let i in ROOMS) {
+        let j = roomBindMap[ROOMS[i].id];
+        
+        if (keycombo.code == j.code && (keycombo.ctrlKey == j.ctrlKey || (keycombo.ctrlKey && forceCtrl && !j.ctrlKey)) && keycombo.altKey == j.altKey && keycombo.shiftKey == j.shiftKey && typeof ROOMS[i].switchTo === "function") {
+          ROOMS[i].switchTo();
+          event.stopPropagation();
+          event.preventDefault();
+          return;
+        }
+      }
+    }
+    
+  }
+  
 };
 
 export const clickCloseModal = (modal) => {
@@ -399,6 +454,55 @@ export const handlePinEmote = (event) => {
 
   event.currentTarget.textContent = added ? "Unpin" : "Pin";
 };
+
+export const clickKeybindButton = (button, label, key) => {
+  playSound("shutter");
+  state.set("pendingKeybind", null);
+  
+  if (document.querySelector(ELEMENTS.modal.prompt.class)) return;
+  
+  let prompt = new Modal("Rebind Key");
+  let bodyhtml = `Input a key combo to set a new keybind for:<br />${label}<br /><br />`;
+  
+  const keyname = document.createElement("div");
+  keyname.classList.add(ELEMENTS.modal.prompt.keyname.class);
+  keyname.textContent = "(none)";
+  
+  const errorText = document.createElement("div");
+  errorText.classList.add("error");
+  errorText.textContent = "This key combo is already in use!";
+  errorText.style.display = 'none';
+  
+  const confirmBtn = settings.createColorButton(null, "blue", "Confirm", function() {
+    playSound("shutter");
+    let bind = state.get("pendingKeybind");
+    if (bind) {
+      let val = {};
+      val[key] = bind;
+      config.set("bindsRooms", val);
+      settings.saveSettings();
+      button.textContent = keyEventToString(bind);
+    }
+    state.set("pendingKeybind", null);
+    prompt.destroy();
+  });
+  
+  const body = document.createElement("div");
+  body.classList.add(ELEMENTS.settings.config.help.class);
+  body.innerHTML = bodyhtml;
+  body.append(keyname);
+  body.append(errorText);
+  body.append(confirmBtn);
+  prompt.setBody(body);
+  
+  prompt.getElement().classList.add(ELEMENTS.modal.prompt.class);
+};
+
+export const clickResetKeybindButton = () => {
+  playSound("shutter");
+  resetBindDefaults();
+  settings.saveSettings();
+}
 
 function afterUpdateAlert() {
   const showAlert = () => {

@@ -23,6 +23,7 @@
     color: #50985d;
     text-shadow: 0 0 $space-xxs #000000;
     font-family: Alarm Clock, monospace;
+    align-self: center;
   }
 
   .maejok-input-toggle {
@@ -95,6 +96,12 @@
   height: 36px;
 }
 
+.maejok-input-button-bind {
+  margin-left: auto;
+  flex-basis: fit-content;
+  min-width: 200px;
+}
+
 .maejok-input-button-save {
   background-image: url("https://cdn.fishtank.live/images/slices/console-button-long-green.png");
 }
@@ -155,6 +162,10 @@
 
   strong {
     color: $color-black;
+  }
+  
+  .error {
+    color: $color-darkred;
   }
 }
 
