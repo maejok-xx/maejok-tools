@@ -572,6 +572,7 @@ function createKeybindInput(option, panel, modal) {
     clickKeybindButton(this, option.label, option.value);
     
   });
+  button.setAttribute("data-room", option.value);
 
   const label = document.createElement("label");
   label.classList.add(...props.label.class);
@@ -665,7 +666,7 @@ export const createColorButton = function(option, color, label, action) {
   button.classList.add(...props.buttons.classes);
   
   if (option && option.type == "keybind") {
-    button.classList.add(...props.buttons.bind_classes);
+    button.classList.add(props.buttons.bind.class);
   }
 
   const image = document.createElement("img");
@@ -685,6 +686,8 @@ export const createColorButton = function(option, color, label, action) {
     if (typeof action === "function") {
       action.call(this);
     }
+    this.blur();
+    button.blur();
   });
 
   return button;
@@ -726,4 +729,14 @@ function createTabPanel(tab, props) {
   panel.dataset.tab = tab.name;
 
   return panel;
+}
+
+export const updateBindButtons = () => {
+  const buttons = document.querySelectorAll(ELEMENTS.inputs.buttons.bind.selector);
+  const binds = config.get("bindsRooms");
+  for (var button of buttons) {
+    if (button.dataset.room) {
+      button.querySelector(ELEMENTS.inputs.buttons.label.selector).textContent = keyEventToString(binds[button.dataset.room])
+    }
+  }
 }

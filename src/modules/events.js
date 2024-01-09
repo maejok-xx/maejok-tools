@@ -462,7 +462,11 @@ export const clickKeybindButton = (button, label, key) => {
   if (document.querySelector(ELEMENTS.modal.prompt.class)) return;
   
   let prompt = new Modal("Rebind Key");
-  let bodyhtml = `Input a key combo to set a new keybind for:<br />${label}<br /><br />`;
+  let bodyhtml = `Input a key or key combo to set a new keybind for:<br />`;
+  
+  const roomname = document.createElement("div");
+  roomname.classList.add(ELEMENTS.modal.prompt.roomname.class);
+  roomname.textContent = label;
   
   const keyname = document.createElement("div");
   keyname.classList.add(ELEMENTS.modal.prompt.keyname.class);
@@ -470,7 +474,7 @@ export const clickKeybindButton = (button, label, key) => {
   
   const errorText = document.createElement("div");
   errorText.classList.add("error");
-  errorText.textContent = "This key combo is already in use!";
+  errorText.textContent = "Conflicts with an existing keybind!";
   errorText.style.display = 'none';
   
   const confirmBtn = settings.createColorButton(null, "blue", "Confirm", function() {
@@ -490,6 +494,8 @@ export const clickKeybindButton = (button, label, key) => {
   const body = document.createElement("div");
   body.classList.add(ELEMENTS.settings.config.help.class);
   body.innerHTML = bodyhtml;
+  body.append(roomname);
+  body.append(document.createElement("br"));
   body.append(keyname);
   body.append(errorText);
   body.append(confirmBtn);
@@ -502,6 +508,7 @@ export const clickResetKeybindButton = () => {
   playSound("shutter");
   resetBindDefaults();
   settings.saveSettings();
+  settings.updateBindButtons();
 }
 
 function afterUpdateAlert() {

@@ -384,6 +384,10 @@ const Elements = {
       keyname: {
         selector: `[class="maejok-modal_keyprompt_name"]`,
         class: "maejok-modal_keyprompt_name"
+      },
+      roomname: {
+        selector: `[class="maejok-modal_roomname"]`,
+        class: "maejok-modal_roomname"
       }
     }
   },
@@ -533,9 +537,10 @@ const Elements = {
         `color-button_color-button__cW61T`,
         `color-button_md__GaczN`,
       ],
-      bind_classes: [
-        `maejok-input-button-bind`
-      ],
+      bind: {
+        class: "maejok-input-button-bind",
+        selector: `[class*="maejok-input-button-bind"]`
+      },
       img_colors: {
         "orange": "https://cdn.fishtank.live/images/slices/console-button-long-orange.png",
         "green": "https://cdn.fishtank.live/images/slices/console-button-long-green.png",
@@ -543,7 +548,10 @@ const Elements = {
         "blue": "https://cdn.fishtank.live/images/slices/console-button-long-blue.png"
       },
       wrapper: { class: [`maejok-input-button-wrapper`] },
-      label: { class: [`color-button_text__3OQAq`] },
+      label: {
+        class: [`color-button_text__3OQAq`],
+        selector: `[class*="color-button_text__3OQAq"]`
+      },
       save: { class: [`maejok-input-button-save`] },
     },
     textbox: {

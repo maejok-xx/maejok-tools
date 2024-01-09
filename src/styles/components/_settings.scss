@@ -74,6 +74,12 @@
   }
 }
 
+.maejok-modal_keyprompt_name {
+  background-color: rgba($color-black,.65);
+  border-radius: $space-md;
+  color: $color-white;
+}
+
 .maejok-input-invalid {
   box-shadow: inset 0px -66px 0px 0 $color-darkred !important;
 }
@@ -163,9 +169,18 @@
   strong {
     color: $color-black;
   }
+
+  .maejok-modal_roomname, .error {
+    text-shadow: 0 0 $space-xs $color-black;
+  }
+  
+  
+  .maejok-modal_roomname {
+    color: $color-lightteal;
+  }
   
   .error {
-    color: $color-darkred;
+    color: $color-lightred;
   }
 }
 
