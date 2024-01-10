@@ -403,8 +403,6 @@ function createAboutPanel(panel) {
   contributorsLabel.innerHTML = `<strong>Contributors</strong>: `;
   contributors.appendChild(contributorsLabel);
 
-  console.log(packageJson);
-
   packageJson.contributors.forEach((contributor, index) => {
     const contributorLink = document.createElement("button");
     contributorLink.classList.add(
