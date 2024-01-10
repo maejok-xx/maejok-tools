@@ -56,128 +56,7 @@ const Config = () => {
 
     bindsEnable: false,
     bindsForceCtrl: false,
-    binds: {
-      "toggle-auto": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "Backquote",
-      },
-      "toggle-hq": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "KeyH",
-      },
-      "enter-native-fs": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "KeyF",
-      },
-      "close-stream": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: true,
-        code: "Space",
-      },
-      "close-stream": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: true,
-        code: "Space",
-      },
-      "living-room": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "KeyQ",
-      },
-      lounge: {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "KeyW",
-      },
-      bar: {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "KeyE",
-      },
-      kitchen: {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "KeyR",
-      },
-      "dog-house": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "KeyT",
-      },
-      "hallway-downstairs": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "KeyY",
-      },
-      "hallway-upstairs": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "Digit5",
-      },
-      "bedroom-1": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "Digit1",
-      },
-      "bedroom-2": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "Digit2",
-      },
-      "bedroom-3": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "Digit3",
-      },
-      "the-bunk": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "Digit4",
-      },
-      attic: {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "F1",
-      },
-      "upstairs-bathroom": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "F2",
-      },
-      "downstairs-bathroom": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "F3",
-      },
-      "master-bathroom": {
-        ctrlKey: false,
-        altKey: false,
-        shiftKey: false,
-        code: "F4",
-      },
-    },
+    binds: {},
 
     friends: [],
     watching: [],
@@ -958,7 +837,7 @@ const Config = () => {
 
   const load = () => {
     const storedSettings = JSON.parse(
-      localStorage.getItem(pluginObj.storageKey),
+      localStorage.getItem(pluginObj.storageKey)
     );
     if (!storedSettings) {
       save();
@@ -982,7 +861,7 @@ const Config = () => {
     try {
       localStorage.setItem(
         pluginObj.storageKey,
-        JSON.stringify(storedSettings),
+        JSON.stringify(storedSettings)
       );
     } catch {
       console.error("Error while saving localstorage");

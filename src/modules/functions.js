@@ -6,6 +6,7 @@ import {
   DARK_MODE_STYLES,
   SCREEN_TAKEOVERS_STYLES,
   BIG_SCREEN_STYLES,
+  DEFAULT_KEYBINDS,
 } from "./constants";
 import Message from "../classes/Message";
 import ELEMENTS from "../data/elements";
@@ -138,7 +139,7 @@ export const toggleDenseChat = () => {
 
   chatInner.classList.toggle(
     "maejok-dense-chat",
-    config.get("enableDenseChat"),
+    config.get("enableDenseChat")
   );
 };
 
@@ -457,7 +458,7 @@ export const processChatMessage = (node, logMentions = true) => {
         acc.hide.push(data.hide);
         return acc;
       },
-      { element: [], hide: [] },
+      { element: [], hide: [] }
     );
 
     message.normalizeEpic();
@@ -541,7 +542,7 @@ export const playSound = (sound) => {
 export const hasClass = (element, className) => {
   if (Array.isArray(className)) {
     return className.some((classItem) =>
-      element?.classList?.contains(classItem),
+      element?.classList?.contains(classItem)
     );
   }
 
@@ -619,7 +620,7 @@ export const increaseColorBrightness = (color) => {
 export const openProfile = async (userId) => {
   const data = await fetchFromFishtank(
     "get",
-    `https://www.fishtank.live/api/user/get?uid=${userId}`,
+    `https://www.fishtank.live/api/user/get?uid=${userId}`
   );
 
   const modal = new CustomEvent("modalopen", {
@@ -636,7 +637,7 @@ export const muteUser = async (user) => {
   let i = 0;
   const muteInterval = setInterval(() => {
     const muteButton = document.querySelector(
-      ELEMENTS.profile.actions.mute.selector,
+      ELEMENTS.profile.actions.mute.selector
     );
 
     if (muteButton) {
@@ -664,6 +665,7 @@ export const runUserAgreement = () => {
   const agreement = prompt(message);
 
   if (agreement.toLowerCase() === "i agree") {
+    updateKeybindsOnDefaultsChange();
     config.set("showUpdateNotice", true);
     config.set("agreementVersion", VERSION);
     config.save();
@@ -686,6 +688,43 @@ export const runUserAgreement = () => {
 export const pluginName = () => {
   const pluginName = state.get("packageJson")?.name || config.plugin("name");
   return pluginName;
+};
+
+export const keyEventToString = (event) => {
+  let nameTable = {
+    Backquote: "`",
+  };
+
+  return (
+    (event.ctrlKey && !~event.code.indexOf("Control") ? "Ctrl + " : "") +
+    (event.altKey && !~event.code.indexOf("Alt") ? "Alt + " : "") +
+    (event.shiftKey && !~event.code.indexOf("Shift") ? "Shift + " : "") +
+    (nameTable[event.code] || event.code)
+      .replace(/^Digit(\d)$/, "NumRow $1")
+      .replace(/^Key([A-Z])$/, "$1")
+  );
+};
+
+export const updateKeybindsOnDefaultsChange = () => {
+  const binds = config.get("binds");
+
+  // check for removed keybinds
+  for (const key in binds) {
+    if (!(key in DEFAULT_KEYBINDS)) {
+      // Key is not in default anymore, remove it
+      delete binds[key];
+    }
+  }
+
+  // merge new keybinds
+  for (const key in DEFAULT_KEYBINDS) {
+    if (!(key in binds)) {
+      binds[key] = { ...DEFAULT_KEYBINDS[key], ...binds[key] };
+    }
+  }
+
+  config.set("binds", binds);
+  return binds;
 };
 
 export const startMaejokTools = async () => {
@@ -730,140 +769,6 @@ export const startMaejokTools = async () => {
   document.addEventListener("keydown", keyPress);
 
   state.set("running", true);
-};
-
-export const keyEventToString = (event) => {
-  let nameTable = {
-    Backquote: "`",
-  };
-
-  return (
-    (event.ctrlKey && !~event.code.indexOf("Control") ? "Ctrl + " : "") +
-    (event.altKey && !~event.code.indexOf("Alt") ? "Alt + " : "") +
-    (event.shiftKey && !~event.code.indexOf("Shift") ? "Shift + " : "") +
-    (nameTable[event.code] || event.code)
-      .replace(/^Digit(\d)$/, "NumRow $1")
-      .replace(/^Key([A-Z])$/, "$1")
-  );
-};
-
-export const resetBindDefaults = () => {
-  config.set("binds", {
-    "toggle-auto": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "Backquote",
-    },
-    "toggle-hq": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "KeyH",
-    },
-    "enter-native-fs": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "KeyF",
-    },
-    "close-stream": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: true,
-      code: "Space",
-    },
-    "living-room": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "KeyQ",
-    },
-    lounge: {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "KeyW",
-    },
-    bar: {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "KeyE",
-    },
-    kitchen: {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "KeyR",
-    },
-    "dog-house": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "KeyT",
-    },
-    "hallway-downstairs": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "KeyY",
-    },
-    "hallway-upstairs": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "Digit5",
-    },
-    "bedroom-1": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "Digit1",
-    },
-    "bedroom-2": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "Digit2",
-    },
-    "bedroom-3": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "Digit3",
-    },
-    "the-bunk": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "Digit4",
-    },
-    attic: {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "F1",
-    },
-    "upstairs-bathroom": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "F2",
-    },
-    "downstairs-bathroom": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "F3",
-    },
-    "master-bathroom": {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      code: "F4",
-    },
-  });
 };
 
 export const stopMaejokTools = () => {
@@ -1006,7 +911,7 @@ function enterChat(destination = "Global") {
     destination === "autoClanChat" ? getUserInfo("clan") : destination;
 
   const rooms = document.querySelectorAll(
-    `${ELEMENTS.chat.room.options.selector} button span`,
+    `${ELEMENTS.chat.room.options.selector} button span`
   );
 
   rooms.forEach((room) => {
@@ -1016,7 +921,7 @@ function enterChat(destination = "Global") {
 
 function getUserInfo(property) {
   const element = document.querySelector(
-    ELEMENTS.header.user[property].selector,
+    ELEMENTS.header.user[property].selector
   );
   const value = element.innerText;
 

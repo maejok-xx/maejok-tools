@@ -38,7 +38,7 @@ import observers from "./observers";
 
 export const saveSettings = async () => {
   const inputs = document.querySelectorAll(
-    `${ELEMENTS.settings.body.selector} input`,
+    `${ELEMENTS.settings.body.selector} input`
   );
 
   const prevUpdateCheckFrequency = config.get("updateCheckFrequency");
@@ -139,7 +139,7 @@ export const applySettingsToChat = () => {
 
 export const openTab = (tab) => {
   const panels = document.querySelectorAll(
-    ELEMENTS.settings.tabs.panel.selector,
+    ELEMENTS.settings.tabs.panel.selector
   );
   for (const panel of panels) {
     panel.style.display = "none";
@@ -150,7 +150,7 @@ export const openTab = (tab) => {
 
 export const createSettingsButton = () => {
   const inputActions = document.querySelector(
-    ELEMENTS.chat.input.actions.selector,
+    ELEMENTS.chat.input.actions.selector
   );
   const props = ELEMENTS.settings;
 
@@ -178,7 +178,7 @@ export const createSettingsButton = () => {
 
 export const createConfigurationInputModal = (option, parentModal) => {
   const modal = new Modal(
-    `${pluginName().toUpperCase()} - ${option.config.title}`,
+    `${pluginName().toUpperCase()} - ${option.config.title}`
   );
 
   const wrapper = document.createElement("div");
@@ -286,6 +286,57 @@ export function validateInput(accept, value) {
   }
 }
 
+export const createColorButton = function (option, color, label, action) {
+  const props = ELEMENTS.inputs;
+  const tab_props = ELEMENTS.settings.tabs;
+
+  const button = document.createElement("button");
+  button.classList.add(...props.buttons.classes);
+
+  if (option && option.type == "keybind") {
+    button.classList.add(props.buttons.bind.class);
+  }
+
+  const image = document.createElement("img");
+  image.setAttribute(...tab_props.button.image.attr);
+  image.src =
+    props.buttons.img_colors[color] || props.buttons.img_colors["orange"];
+  image.alt = "";
+
+  button.appendChild(image);
+
+  const text = document.createElement("div");
+  text.classList.add(...tab_props.button.text.class);
+  text.textContent = label;
+
+  button.appendChild(text);
+
+  text.addEventListener("click", function () {
+    if (typeof action === "function") {
+      action.call(this);
+    }
+    this.blur();
+    button.blur();
+  });
+
+  return button;
+};
+
+export const updateBindButtons = () => {
+  const buttons = document.querySelectorAll(
+    ELEMENTS.inputs.buttons.bind.selector
+  );
+
+  const binds = config.get("binds");
+
+  for (var button of buttons) {
+    if (button.dataset.bindid) {
+      button.querySelector(ELEMENTS.inputs.buttons.label.selector).textContent =
+        keyEventToString(binds[button.dataset.bindid]);
+    }
+  }
+};
+
 function createAboutPanel(panel) {
   const packageJson = state.get("packageJson");
 
@@ -316,7 +367,7 @@ function createAboutPanel(panel) {
   const authorMention = document.createElement("button");
   authorMention.classList.add(
     "maejok-settings-about-author_mention",
-    "button-link",
+    "button-link"
   );
   authorMention.textContent = `@maejok`;
   authorMention.onclick = () => mentionUser("maejok");
@@ -327,7 +378,7 @@ function createAboutPanel(panel) {
   const twitterLink = document.createElement("button");
   twitterLink.classList.add(
     "maejok-settings-about-contact_link",
-    "button-link",
+    "button-link"
   );
   twitterLink.textContent = `x.com/maejok`;
   twitterLink.onclick = () =>
@@ -504,7 +555,7 @@ function createAccordions(tab, panel) {
 
   accordions.forEach(function (accordion) {
     accordion.addEventListener("click", () =>
-      clickAccordionHeader(accordion, panel, props),
+      clickAccordionHeader(accordion, panel, props)
     );
   });
 }
@@ -513,7 +564,7 @@ function createToggle(option, panel, modal) {
   const props = ELEMENTS.inputs;
 
   const accordion = panel.querySelector(
-    `[data-group-content="${option.group}"]`,
+    `[data-group-content="${option.group}"]`
   );
   const wrapper = document.createElement("div");
   wrapper.classList.add(...props.group.class);
@@ -525,7 +576,7 @@ function createToggle(option, panel, modal) {
   checkbox.id = option.name;
   checkbox.checked = option.value;
   checkbox.addEventListener("change", () =>
-    clickSettingsToggle(checkbox, label, modal),
+    clickSettingsToggle(checkbox, label, modal)
   );
   wrapper.appendChild(checkbox);
 
@@ -563,7 +614,7 @@ function createKeybindInput(option, panel, modal) {
   const props = ELEMENTS.inputs;
 
   const accordion = panel.querySelector(
-    `[data-group-content="${option.group}"]`,
+    `[data-group-content="${option.group}"]`
   );
   const wrapper = document.createElement("div");
   wrapper.classList.add(...props.group.class);
@@ -575,7 +626,7 @@ function createKeybindInput(option, panel, modal) {
     keyEventToString(binds[option.value]),
     function () {
       clickKeybindButton(this, option.label, option.value);
-    },
+    }
   );
   button.setAttribute("data-bindid", option.value);
 
@@ -608,7 +659,7 @@ function createButtonInput(option, panel, modal) {
   const props = ELEMENTS.inputs;
 
   const accordion = panel.querySelector(
-    `[data-group-content="${option.group}"]`,
+    `[data-group-content="${option.group}"]`
   );
   const wrapper = document.createElement("div");
   wrapper.classList.add(...props.group.class);
@@ -618,7 +669,7 @@ function createButtonInput(option, panel, modal) {
     option,
     option.color,
     option.label,
-    option.onclick,
+    option.onclick
   );
   wrapper.appendChild(button);
 
@@ -669,42 +720,6 @@ function createButton(type, action) {
   return wrapper;
 }
 
-export const createColorButton = function (option, color, label, action) {
-  const props = ELEMENTS.inputs;
-  const tab_props = ELEMENTS.settings.tabs;
-
-  const button = document.createElement("button");
-  button.classList.add(...props.buttons.classes);
-
-  if (option && option.type == "keybind") {
-    button.classList.add(props.buttons.bind.class);
-  }
-
-  const image = document.createElement("img");
-  image.setAttribute(...tab_props.button.image.attr);
-  image.src =
-    props.buttons.img_colors[color] || props.buttons.img_colors["orange"];
-  image.alt = "";
-
-  button.appendChild(image);
-
-  const text = document.createElement("div");
-  text.classList.add(...tab_props.button.text.class);
-  text.textContent = label;
-
-  button.appendChild(text);
-
-  text.addEventListener("click", function () {
-    if (typeof action === "function") {
-      action.call(this);
-    }
-    this.blur();
-    button.blur();
-  });
-
-  return button;
-};
-
 function createTabBar(props) {
   const bar = document.createElement("div");
   bar.classList.add(...props.tabs.bar.class);
@@ -742,16 +757,3 @@ function createTabPanel(tab, props) {
 
   return panel;
 }
-
-export const updateBindButtons = () => {
-  const buttons = document.querySelectorAll(
-    ELEMENTS.inputs.buttons.bind.selector,
-  );
-  const binds = config.get("binds");
-  for (var button of buttons) {
-    if (button.dataset.bindid) {
-      button.querySelector(ELEMENTS.inputs.buttons.label.selector).textContent =
-        keyEventToString(binds[button.dataset.bindid]);
-    }
-  }
-};
