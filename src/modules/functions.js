@@ -266,6 +266,10 @@ export const getMessageType = (element) => {
       "tts",
       hasClass(element, classes.tts) || closestWithClass(element, classes.tts),
     ],
+    [
+      "sfx",
+      hasClass(element, classes.sfx) || closestWithClass(element, classes.sfx),
+    ],
   ]);
 
   let result = null;
