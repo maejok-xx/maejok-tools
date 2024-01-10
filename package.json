@@ -1,9 +1,8 @@
 {
   "name": "maejok-tools",
-  "author": "maejok",
-  "version": "2.12.0",
+  "author": "maejok-xx",
+  "version": "2.13.0",
   "description": "Add-on Tools for Fishtank.live Season 2",
-  "s2ts": 1702875600,
   "main": "main.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --watch --progress --mode development",
