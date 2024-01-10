@@ -2,6 +2,7 @@ import config from "./config";
 import state from "./state";
 import Modal from "../classes/Modal";
 import ELEMENTS from "../data/elements";
+import { ROOMS } from "./constants";
 import {
   areObjectsEqual,
   getMessageType,
@@ -16,6 +17,9 @@ import {
   playSound,
   setChatInputValue,
   toggleItemInList,
+  inputIsFocused,
+  keyEventToString,
+  resetBindDefaults,
 } from "./functions";
 import * as settings from "./settings";
 import * as menu from "./menu";
@@ -52,7 +56,7 @@ export const rightClick = (event) => {
     if (messageType === "message") {
       const isMention = hasClass(
         event.target,
-        ELEMENTS.chat.message.mention.class
+        ELEMENTS.chat.message.mention.class,
       );
 
       if (isMention) {
@@ -75,7 +79,7 @@ export const rightClick = (event) => {
 
     if (
       ["roll", "emote", "system", "consumable", "clan", "tts", "sfx"].includes(
-        messageType
+        messageType,
       )
     ) {
       event.preventDefault();
@@ -139,7 +143,7 @@ export const leftClick = (event) => {
   function checkSecondaryPanelTabClicked() {
     const clicked = hasClass(
       event.target.parentElement?.parentElement,
-      ELEMENTS.secondaryPanel.tab.class
+      ELEMENTS.secondaryPanel.tab.class,
     );
 
     if (clicked) {
@@ -157,7 +161,7 @@ export const leftClick = (event) => {
   function checkAvatarClicked() {
     const clicked = hasClass(
       event.target.parentElement,
-      ELEMENTS.chat.message.avatar.class
+      ELEMENTS.chat.message.avatar.class,
     );
 
     if (clicked) {
@@ -202,7 +206,7 @@ export const dblClick = (event) => {
   ];
 
   const isMessage = messageTargets.some((element) =>
-    hasClass(element, messageClasses)
+    hasClass(element, messageClasses),
   );
 
   if (isMessage) {
@@ -213,7 +217,7 @@ export const dblClick = (event) => {
     if (isFriend) {
       toast(
         `Can't add friends to Watching list! Remove ${user.displayName} from friends list first.`,
-        "error"
+        "error",
       );
       return;
     }
@@ -228,23 +232,120 @@ export const keyPress = (event) => {
   }
 
   const keys = {
-    backtick: 192,
-    space: 32,
-    escape: 27,
+    backtick: "Backquote",
+    space: "Space",
+    escape: "Escape",
   };
 
   if (
-    (event.ctrlKey && event.keyCode === keys.backtick) ||
-    (event.ctrlKey && event.shiftKey && event.keyCode === keys.space)
+    (event.ctrlKey && event.code === keys.backtick) ||
+    (event.ctrlKey && event.shiftKey && event.code === keys.space)
   ) {
     toggleBigScreen();
     return;
   }
-  if (config.get("bigScreenState") && event.keyCode === keys.escape) {
+
+  if (config.get("bigScreenState") && event.code === keys.escape) {
     toggleBigScreen(false);
     return;
   }
+
+  const keycombo = {
+    ctrlKey: event.ctrlKey,
+    altKey: event.altKey,
+    shiftKey: event.shiftKey,
+    code: event.code,
+  };
+
+  const keyPrompt = document.querySelector(ELEMENTS.modal.prompt.selector);
+
+  if (keyPrompt) {
+    keyPrompt.querySelector(
+      ELEMENTS.modal.prompt.keyname.selector,
+    ).textContent = keyEventToString(keycombo);
+    keyPrompt.querySelector(".error").style.display = "none";
+
+    const bindcfg = config.get("binds");
+    for (let i in bindcfg) {
+      if (areObjectsEqual(bindcfg[i], keycombo)) {
+        keyPrompt.querySelector(".error").style.display = "block";
+        break;
+      }
+    }
+
+    state.set("pendingKeybind", keycombo);
+    //playSound("tick-short");
+
+    event.stopPropagation();
+    event.preventDefault();
+    return;
+  } else {
+    if (config.get("bindsEnable") && !inputIsFocused()) {
+      const forceCtrl = config.get("bindsForceCtrl");
+      if (!keycombo.ctrlKey && forceCtrl) return;
+
+      const bindMap = config.get("binds");
+
+      if (compareKeybind(keycombo, bindMap["toggle-auto"])) {
+        document
+          .querySelector(
+            '.live-streams-auto-mode_live-streams-auto-mode__pE2X_ input[type="checkbox"]',
+          )
+          ?.click();
+        event.stopPropagation();
+        event.preventDefault();
+        return;
+      } else if (compareKeybind(keycombo, bindMap["close-stream"])) {
+        document
+          .querySelector(".live-stream-fullscreen_close__JY_lb > button")
+          ?.click();
+        event.stopPropagation();
+        event.preventDefault();
+        return;
+      } else if (compareKeybind(keycombo, bindMap["toggle-hq"])) {
+        document
+          .querySelector(
+            '.live-stream-controls_right__u0Dox input[type="checkbox"]',
+          )
+          ?.click();
+        event.stopPropagation();
+        event.preventDefault();
+        return;
+      } else if (compareKeybind(keycombo, bindMap["enter-native-fs"])) {
+        document
+          .querySelector("#live-stream-player video")
+          ?.requestFullscreen();
+        event.stopPropagation();
+        event.preventDefault();
+        return;
+      } else {
+        for (let i in ROOMS) {
+          let j = bindMap[ROOMS[i].id];
+
+          if (
+            compareKeybind(keycombo, j) &&
+            typeof ROOMS[i].switchTo === "function"
+          ) {
+            ROOMS[i].switchTo();
+            event.stopPropagation();
+            event.preventDefault();
+            return;
+          }
+        }
+      }
+    }
+  }
 };
+
+function compareKeybind(input, bind) {
+  return (
+    input.code == bind.code &&
+    (input.ctrlKey == bind.ctrlKey ||
+      (input.ctrlKey && config.get("bindsForceCtrl") && !bind.ctrlKey)) &&
+    input.altKey == bind.altKey &&
+    input.shiftKey == bind.shiftKey
+  );
+}
 
 export const clickCloseModal = (modal) => {
   playSound("click-high-short");
@@ -291,7 +392,7 @@ export const clickAccordionHeader = (accordion, panel, props) => {
     panel.style.maxHeight = null;
   } else {
     var allPanels = panel.parentElement.querySelectorAll(
-      props.content.selector
+      props.content.selector,
     );
 
     allPanels.forEach(function (content) {
@@ -299,7 +400,7 @@ export const clickAccordionHeader = (accordion, panel, props) => {
     });
 
     var allHeaders = panel.parentElement.querySelectorAll(
-      props.header.selector
+      props.header.selector,
     );
 
     allHeaders.forEach(function (header) {
@@ -400,10 +501,71 @@ export const handlePinEmote = (event) => {
   event.currentTarget.textContent = added ? "Unpin" : "Pin";
 };
 
+export const clickKeybindButton = (button, label, key) => {
+  playSound("shutter");
+  state.set("pendingKeybind", null);
+
+  if (document.querySelector(ELEMENTS.modal.prompt.class)) return;
+
+  let prompt = new Modal("Rebind Key");
+  let bodyhtml = `Input a key or key combo to set a new keybind for:<br />`;
+
+  const roomname = document.createElement("div");
+  roomname.classList.add(ELEMENTS.modal.prompt.roomname.class);
+  roomname.textContent = label;
+
+  const keyname = document.createElement("div");
+  keyname.classList.add(ELEMENTS.modal.prompt.keyname.class);
+  keyname.textContent = "(none)";
+
+  const errorText = document.createElement("div");
+  errorText.classList.add("error");
+  errorText.textContent = "Conflicts with an existing keybind!";
+  errorText.style.display = "none";
+
+  const confirmBtn = settings.createColorButton(
+    null,
+    "blue",
+    "Confirm",
+    function () {
+      playSound("shutter");
+      let bind = state.get("pendingKeybind");
+      if (bind) {
+        let val = {};
+        val[key] = bind;
+        config.set("binds", val);
+        settings.saveSettings();
+        button.textContent = keyEventToString(bind);
+      }
+      state.set("pendingKeybind", null);
+      prompt.destroy();
+    },
+  );
+
+  const body = document.createElement("div");
+  body.classList.add(ELEMENTS.settings.config.help.class);
+  body.innerHTML = bodyhtml;
+  body.append(roomname);
+  body.append(document.createElement("br"));
+  body.append(keyname);
+  body.append(errorText);
+  body.append(confirmBtn);
+  prompt.setBody(body);
+
+  prompt.getElement().classList.add(ELEMENTS.modal.prompt.class);
+};
+
+export const clickResetKeybindButton = () => {
+  playSound("shutter");
+  resetBindDefaults();
+  settings.saveSettings();
+  settings.updateBindButtons();
+};
+
 function afterUpdateAlert() {
   const showAlert = () => {
     alert(
-      "After updating MAEJOK-TOOLS, refresh this window to start using the new version"
+      "After updating MAEJOK-TOOLS, refresh this window to start using the new version",
     );
     document.removeEventListener("visibilitychange", showAlert);
   };

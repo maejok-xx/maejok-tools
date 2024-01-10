@@ -4,12 +4,14 @@ import { createSettingsButton } from "./modules/settings";
 import { getRemotePackageJSON } from "./modules/updater";
 import ELEMENTS from "./data/elements";
 import observers from "./modules/observers";
+import { ROOMS } from "./modules/constants";
 import {
   startMaejokTools,
   toggleDimMode,
   getUserFromLocalStorage,
   runUserAgreement,
   toggleScanLines,
+  getReactProps,
 } from "./modules/functions";
 import { insertChatUpdatedMessage as showUpdateNotice } from "./modules/updater";
 import "./styles/styles.scss";
@@ -49,12 +51,21 @@ import "./styles/styles.scss";
       state.set("isPopoutChat", true);
     } else {
       chat = document.querySelector(ELEMENTS.chat.list.selector);
-      livestreams = document.querySelector(ELEMENTS.livestreams.selector);
+      livestreams = document.querySelector(ELEMENTS.livestreams.grid.selector);
       isLoaded = chat !== null && livestreams !== null;
     }
 
     if (isLoaded) {
       clearInterval(loadingInterval);
+      state.set("loaded", true);
+
+      //weird hacky way to get the methods for changing rooms
+      //requires the user to stay on the room grid page until the plugin settings button appears
+      livestreams.querySelectorAll("button").forEach((el) => {
+        if (el.id) {
+          ROOMS[el.id].switchTo = getReactProps(el).onClick;
+        }
+      });
 
       const user = await getUserFromLocalStorage();
       state.set("user", user);
