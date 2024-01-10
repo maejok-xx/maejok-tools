@@ -340,6 +340,21 @@ export const updateBindButtons = () => {
 function createAboutPanel(panel) {
   const packageJson = state.get("packageJson");
 
+  const authorLinks = [
+    {
+      label: "@maejok",
+      onClick: () => mentionUser("maejok"),
+    },
+    {
+      label: "x.com/@maejok",
+      onClick: () => window.open("https://twitter.com/maejok", "_blank"),
+    },
+    {
+      label: "github.com/maejok-xx",
+      onClick: () => window.open("https://github.com/maejok-xx", "_blank"),
+    },
+  ];
+
   const accordion = panel.querySelector(`[data-group-content="about"]`);
   const wrapper = document.createElement("div");
   wrapper.className = "maejok-settings-about";
@@ -364,26 +379,42 @@ function createAboutPanel(panel) {
   authorLabel.innerHTML = `<strong>Author</strong>: `;
   author.appendChild(authorLabel);
 
-  const authorMention = document.createElement("button");
-  authorMention.classList.add(
-    "maejok-settings-about-author_mention",
-    "button-link"
-  );
-  authorMention.textContent = `@maejok`;
-  authorMention.onclick = () => mentionUser("maejok");
-  author.appendChild(authorMention);
+  authorLinks.forEach((link, index) => {
+    const authorLink = document.createElement("button");
+    authorLink.classList.add(
+      "maejok-settings-about-author_link",
+      "button-link"
+    );
+    authorLink.textContent = link.label;
+    authorLink.onclick = link.onClick;
+    author.appendChild(authorLink);
 
-  author.appendChild(document.createTextNode(" / "));
+    if (index !== authorLinks.length - 1) {
+      author.appendChild(document.createTextNode(" / "));
+    }
+  });
 
-  const twitterLink = document.createElement("button");
-  twitterLink.classList.add(
-    "maejok-settings-about-contact_link",
-    "button-link"
-  );
-  twitterLink.textContent = `x.com/maejok`;
-  twitterLink.onclick = () =>
-    window.open("https://twitter.com/maejok", "_blank");
-  author.appendChild(twitterLink);
+  const contributors = document.createElement("div");
+  contributors.classList.add("maejok-settings-about-contributors");
+  wrapper.appendChild(contributors);
+
+  const contributorsLabel = document.createElement("span");
+  contributorsLabel.classList.add("maejok-settings-about-author_label");
+  contributorsLabel.innerHTML = `<strong>Contributors</strong>: `;
+  contributors.appendChild(contributorsLabel);
+
+  console.log(packageJson);
+
+  packageJson.contributors.forEach((contributor, index) => {
+    const contributorLink = document.createElement("button");
+    contributorLink.classList.add(
+      "maejok-settings-about-contact_link",
+      "button-link"
+    );
+    contributorLink.textContent = contributor.name;
+    contributorLink.onclick = () => window.open(contributor.url, "_blank");
+    contributors.appendChild(contributorLink);
+  });
 
   const message = document.createElement("div");
   message.classList.add("maejok-settings-about-message");

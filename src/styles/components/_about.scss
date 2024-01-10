@@ -22,13 +22,17 @@
 
   .maejok-settings-about-author,
   .maejok-settings-about-contact {
-    margin: 5px;
+    margin: 3px auto;
+  }
+
+  .maejok-settings-about-contributors {
+    margin: 10px auto;
   }
 
   .maejok-settings-about-message {
     max-width: 500px;
     font-weight: 400;
-    margin: 20px 5px;
+    margin: 20px auto;
     line-height: normal;
 
     a {
