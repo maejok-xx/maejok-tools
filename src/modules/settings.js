@@ -10,7 +10,7 @@ import {
   clickSettingsToggle,
   clickSettingsConfig,
   clickTabButton,
-  clickKeybindButton
+  clickKeybindButton,
 } from "./events";
 import { start as startUpdater, stop as stopUpdater } from "./updater";
 import {
@@ -26,7 +26,7 @@ import {
   disableSoundEffects,
   toggleScanLines,
   toggleScreenTakeovers,
-  keyEventToString
+  keyEventToString,
 } from "./functions";
 import {
   start as startRecentChatters,
@@ -38,7 +38,7 @@ import observers from "./observers";
 
 export const saveSettings = async () => {
   const inputs = document.querySelectorAll(
-    `${ELEMENTS.settings.body.selector} input`
+    `${ELEMENTS.settings.body.selector} input`,
   );
 
   const prevUpdateCheckFrequency = config.get("updateCheckFrequency");
@@ -139,7 +139,7 @@ export const applySettingsToChat = () => {
 
 export const openTab = (tab) => {
   const panels = document.querySelectorAll(
-    ELEMENTS.settings.tabs.panel.selector
+    ELEMENTS.settings.tabs.panel.selector,
   );
   for (const panel of panels) {
     panel.style.display = "none";
@@ -150,7 +150,7 @@ export const openTab = (tab) => {
 
 export const createSettingsButton = () => {
   const inputActions = document.querySelector(
-    ELEMENTS.chat.input.actions.selector
+    ELEMENTS.chat.input.actions.selector,
   );
   const props = ELEMENTS.settings;
 
@@ -178,7 +178,7 @@ export const createSettingsButton = () => {
 
 export const createConfigurationInputModal = (option, parentModal) => {
   const modal = new Modal(
-    `${pluginName().toUpperCase()} - ${option.config.title}`
+    `${pluginName().toUpperCase()} - ${option.config.title}`,
   );
 
   const wrapper = document.createElement("div");
@@ -250,8 +250,10 @@ export const createSettingsModal = () => {
     config.content.inputs?.forEach((cfg) => {
       if (cfg.disabled) return;
       else if (["toggle"].includes(cfg.type)) createToggle(cfg, panel, modal);
-      else if (["button"].includes(cfg.type)) createButtonInput(cfg, panel, modal);
-      else if (["keybind"].includes(cfg.type)) createKeybindInput(cfg, panel, modal);
+      else if (["button"].includes(cfg.type))
+        createButtonInput(cfg, panel, modal);
+      else if (["keybind"].includes(cfg.type))
+        createKeybindInput(cfg, panel, modal);
       else if (["hidden"].includes(cfg.type)) createHiddenInput(cfg, panel);
       else if (["mentions-log"].includes(cfg.type))
         createMentionsLog(cfg, panel);
@@ -314,7 +316,7 @@ function createAboutPanel(panel) {
   const authorMention = document.createElement("button");
   authorMention.classList.add(
     "maejok-settings-about-author_mention",
-    "button-link"
+    "button-link",
   );
   authorMention.textContent = `@maejok`;
   authorMention.onclick = () => mentionUser("maejok");
@@ -325,7 +327,7 @@ function createAboutPanel(panel) {
   const twitterLink = document.createElement("button");
   twitterLink.classList.add(
     "maejok-settings-about-contact_link",
-    "button-link"
+    "button-link",
   );
   twitterLink.textContent = `x.com/maejok`;
   twitterLink.onclick = () =>
@@ -502,7 +504,7 @@ function createAccordions(tab, panel) {
 
   accordions.forEach(function (accordion) {
     accordion.addEventListener("click", () =>
-      clickAccordionHeader(accordion, panel, props)
+      clickAccordionHeader(accordion, panel, props),
     );
   });
 }
@@ -511,7 +513,7 @@ function createToggle(option, panel, modal) {
   const props = ELEMENTS.inputs;
 
   const accordion = panel.querySelector(
-    `[data-group-content="${option.group}"]`
+    `[data-group-content="${option.group}"]`,
   );
   const wrapper = document.createElement("div");
   wrapper.classList.add(...props.group.class);
@@ -523,7 +525,7 @@ function createToggle(option, panel, modal) {
   checkbox.id = option.name;
   checkbox.checked = option.value;
   checkbox.addEventListener("change", () =>
-    clickSettingsToggle(checkbox, label, modal)
+    clickSettingsToggle(checkbox, label, modal),
   );
   wrapper.appendChild(checkbox);
 
@@ -557,22 +559,25 @@ function createToggle(option, panel, modal) {
 }
 
 function createKeybindInput(option, panel, modal) {
-  const binds = config.get("bindsRooms");
+  const binds = config.get("binds");
   const props = ELEMENTS.inputs;
 
   const accordion = panel.querySelector(
-    `[data-group-content="${option.group}"]`
+    `[data-group-content="${option.group}"]`,
   );
   const wrapper = document.createElement("div");
   wrapper.classList.add(...props.group.class);
   accordion ? accordion.appendChild(wrapper) : panel.appendChild(wrapper);
-  
-  const button = createColorButton(option, "green", keyEventToString(binds[option.value]), function() {
-    
-    clickKeybindButton(this, option.label, option.value);
-    
-  });
-  button.setAttribute("data-room", option.value);
+
+  const button = createColorButton(
+    option,
+    "green",
+    keyEventToString(binds[option.value]),
+    function () {
+      clickKeybindButton(this, option.label, option.value);
+    },
+  );
+  button.setAttribute("data-bindid", option.value);
 
   const label = document.createElement("label");
   label.classList.add(...props.label.class);
@@ -602,13 +607,18 @@ function createButtonInput(option, panel, modal) {
   const props = ELEMENTS.inputs;
 
   const accordion = panel.querySelector(
-    `[data-group-content="${option.group}"]`
+    `[data-group-content="${option.group}"]`,
   );
   const wrapper = document.createElement("div");
   wrapper.classList.add(...props.group.class);
   accordion ? accordion.appendChild(wrapper) : panel.appendChild(wrapper);
-  
-  const button = createColorButton(option, option.color, option.label, option.onclick);
+
+  const button = createColorButton(
+    option,
+    option.color,
+    option.label,
+    option.onclick,
+  );
   wrapper.appendChild(button);
 
   if (option.config) {
@@ -658,20 +668,21 @@ function createButton(type, action) {
   return wrapper;
 }
 
-export const createColorButton = function(option, color, label, action) {
+export const createColorButton = function (option, color, label, action) {
   const props = ELEMENTS.inputs;
   const tab_props = ELEMENTS.settings.tabs;
-  
+
   const button = document.createElement("button");
   button.classList.add(...props.buttons.classes);
-  
+
   if (option && option.type == "keybind") {
     button.classList.add(props.buttons.bind.class);
   }
 
   const image = document.createElement("img");
   image.setAttribute(...tab_props.button.image.attr);
-  image.src = props.buttons.img_colors[color] || props.buttons.img_colors["orange"];
+  image.src =
+    props.buttons.img_colors[color] || props.buttons.img_colors["orange"];
   image.alt = "";
 
   button.appendChild(image);
@@ -682,7 +693,7 @@ export const createColorButton = function(option, color, label, action) {
 
   button.appendChild(text);
 
-  text.addEventListener("click", function() {
+  text.addEventListener("click", function () {
     if (typeof action === "function") {
       action.call(this);
     }
@@ -691,7 +702,7 @@ export const createColorButton = function(option, color, label, action) {
   });
 
   return button;
-}
+};
 
 function createTabBar(props) {
   const bar = document.createElement("div");
@@ -732,11 +743,14 @@ function createTabPanel(tab, props) {
 }
 
 export const updateBindButtons = () => {
-  const buttons = document.querySelectorAll(ELEMENTS.inputs.buttons.bind.selector);
-  const binds = config.get("bindsRooms");
+  const buttons = document.querySelectorAll(
+    ELEMENTS.inputs.buttons.bind.selector,
+  );
+  const binds = config.get("binds");
   for (var button of buttons) {
-    if (button.dataset.room) {
-      button.querySelector(ELEMENTS.inputs.buttons.label.selector).textContent = keyEventToString(binds[button.dataset.room])
+    if (button.dataset.bindid) {
+      button.querySelector(ELEMENTS.inputs.buttons.label.selector).textContent =
+        keyEventToString(binds[button.dataset.bindid]);
     }
   }
-}
+};

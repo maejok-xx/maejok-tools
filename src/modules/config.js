@@ -53,25 +53,112 @@ const Config = () => {
     reverseMentionLog: false,
 
     agreementVersion: null,
-    
+
     bindsEnable: false,
     bindsForceCtrl: false,
-    bindsRooms: {
-      "living-room":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyQ"},
-      "lounge":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyW"},
-      "bar":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyE"},
-      "kitchen":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyR"},
-      "dog-house":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyT"},
-      "hallway-downstairs":{ctrlKey: false, altKey: false, shiftKey: false, code: "KeyY"},
-      "hallway-upstairs":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit5"},
-      "bedroom-1":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit1"},
-      "bedroom-2":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit2"},
-      "bedroom-3":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit3"},
-      "the-bunk":{ctrlKey: false, altKey: false, shiftKey: false, code: "Digit4"},
-      "attic":{ctrlKey: false, altKey: false, shiftKey: false, code: "F1"},
-      "upstairs-bathroom":{ctrlKey: false, altKey: false, shiftKey: false, code: "F2"},
-      "downstairs-bathroom":{ctrlKey: false, altKey: false, shiftKey: false, code: "F3"},
-      "master-bathroom":{ctrlKey: false, altKey: false, shiftKey: false, code: "F4"}
+    binds: {
+      "toggle-auto": {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "Backquote",
+      },
+      "close-stream": {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: true,
+        code: "Space",
+      },
+      "living-room": {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "KeyQ",
+      },
+      lounge: {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "KeyW"
+      },
+      bar: {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "KeyE"
+      },
+      kitchen: {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "KeyR"
+      },
+      "dog-house": {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "KeyT",
+      },
+      "hallway-downstairs": {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "KeyY",
+      },
+      "hallway-upstairs": {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "Digit5",
+      },
+      "bedroom-1": {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "Digit1",
+      },
+      "bedroom-2": {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "Digit2",
+      },
+      "bedroom-3": {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "Digit3",
+      },
+      "the-bunk": {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "Digit4",
+      },
+      attic: {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "F1"
+      },
+      "upstairs-bathroom": {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "F2",
+      },
+      "downstairs-bathroom": {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "F3",
+      },
+      "master-bathroom": {
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        code: "F4",
+      },
     },
 
     friends: [],
@@ -608,7 +695,7 @@ const Config = () => {
           ],
         },
       },
-      
+
       // --- KEYBINDS
       {
         name: "keyBinds",
@@ -616,10 +703,10 @@ const Config = () => {
         content: {
           groups: [
             { name: "bindoptions", label: "Bind Options" },
-            { name: "roombinds", label: "Room Binds" }
+            { name: "roombinds", label: "Key Binds" },
           ],
           inputs: [
-            // roombinds
+            // bindoptions
             // bindsEnable
             {
               name: "bindsEnable",
@@ -657,13 +744,30 @@ const Config = () => {
                 text: `<p>Resets all keybinds to their default values.</p>`,
               },
             },
+            // roombinds
+            // toggleAuto
+            {
+              name: "toggleAuto",
+              label: "Toggle Auto",
+              type: "keybind",
+              value: "toggle-auto",
+              group: "roombinds",
+            },
+            // closeStream
+            {
+              name: "closeStream",
+              label: "Return to Room Grid",
+              type: "keybind",
+              value: "close-stream",
+              group: "roombinds",
+            },
             // switchBedroom1
             {
               name: "switchBedroom1",
               label: "Bedroom 1",
               type: "keybind",
               value: "bedroom-1",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchBedroom2
             {
@@ -671,7 +775,7 @@ const Config = () => {
               label: "Bedroom 2",
               type: "keybind",
               value: "bedroom-2",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchBedroom3
             {
@@ -679,7 +783,7 @@ const Config = () => {
               label: "Bedroom 3",
               type: "keybind",
               value: "bedroom-3",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchBunk
             {
@@ -687,7 +791,7 @@ const Config = () => {
               label: "The Bunk",
               type: "keybind",
               value: "the-bunk",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchHallwayUpstairs
             {
@@ -695,7 +799,7 @@ const Config = () => {
               label: "Hallway - Upstairs",
               type: "keybind",
               value: "hallway-upstairs",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchHallwayDownstairs
             {
@@ -703,7 +807,7 @@ const Config = () => {
               label: "Hallway - Downstairs",
               type: "keybind",
               value: "hallway-downstairs",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchLivingRoom
             {
@@ -711,7 +815,7 @@ const Config = () => {
               label: "Living Room",
               type: "keybind",
               value: "living-room",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchLounge
             {
@@ -719,7 +823,7 @@ const Config = () => {
               label: "Lounge",
               type: "keybind",
               value: "lounge",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchBar
             {
@@ -727,7 +831,7 @@ const Config = () => {
               label: "Bar",
               type: "keybind",
               value: "bar",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchKitchen
             {
@@ -735,7 +839,7 @@ const Config = () => {
               label: "Kitchen",
               type: "keybind",
               value: "kitchen",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchDogHouse
             {
@@ -743,7 +847,7 @@ const Config = () => {
               label: "Dog House",
               type: "keybind",
               value: "dog-house",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchAttic
             {
@@ -751,7 +855,7 @@ const Config = () => {
               label: "Attic",
               type: "keybind",
               value: "attic",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchBathroomUpstairs
             {
@@ -759,7 +863,7 @@ const Config = () => {
               label: "Bathroom - Upstairs",
               type: "keybind",
               value: "upstairs-bathroom",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchBathroomDownstairs
             {
@@ -767,7 +871,7 @@ const Config = () => {
               label: "Bathroom - Downstairs",
               type: "keybind",
               value: "downstairs-bathroom",
-              group: "roombinds"
+              group: "roombinds",
             },
             // switchBathroomMaster
             {
@@ -775,8 +879,8 @@ const Config = () => {
               label: "Bathroom - Master",
               type: "keybind",
               value: "master-bathroom",
-              group: "roombinds"
-            }
+              group: "roombinds",
+            },
           ],
         },
       },
@@ -820,7 +924,7 @@ const Config = () => {
 
   const load = () => {
     const storedSettings = JSON.parse(
-      localStorage.getItem(pluginObj.storageKey)
+      localStorage.getItem(pluginObj.storageKey),
     );
     if (!storedSettings) {
       save();
@@ -844,7 +948,7 @@ const Config = () => {
     try {
       localStorage.setItem(
         pluginObj.storageKey,
-        JSON.stringify(storedSettings)
+        JSON.stringify(storedSettings),
       );
     } catch {
       console.error("Error while saving localstorage");

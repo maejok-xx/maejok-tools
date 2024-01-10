@@ -207,78 +207,78 @@ export const BIG_SCREEN_STYLES = `
 
 export const ROOMS = {
   "living-room": {
-    "id": "living-room",
-    "name": "Living Room",
-    "switchTo": ()=>{}
+    id: "living-room",
+    name: "Living Room",
+    switchTo: () => {},
   },
-  "lounge": {
-    "id": "lounge",
-    "name": "Lounge",
-    "switchTo": ()=>{}
+  lounge: {
+    id: "lounge",
+    name: "Lounge",
+    switchTo: () => {},
   },
-  "bar": {
-    "id": "bar",
-    "name": "Bar",
-    "switchTo": ()=>{}
+  bar: {
+    id: "bar",
+    name: "Bar",
+    switchTo: () => {},
   },
-  "kitchen": {
-    "id": "kitchen",
-    "name": "Kitchen",
-    "switchTo": ()=>{}
+  kitchen: {
+    id: "kitchen",
+    name: "Kitchen",
+    switchTo: () => {},
   },
   "dog-house": {
-    "id": "dog-house",
-    "name": "Dog House",
-    "switchTo": ()=>{}
+    id: "dog-house",
+    name: "Dog House",
+    switchTo: () => {},
   },
   "hallway-downstairs": {
-    "id": "hallway-downstairs",
-    "name": "Hallway Downstairs",
-    "switchTo": ()=>{}
+    id: "hallway-downstairs",
+    name: "Hallway Downstairs",
+    switchTo: () => {},
   },
   "hallway-upstairs": {
-    "id": "hallway-upstairs",
-    "name": "Hallway Upstairs",
-    "switchTo": ()=>{}
+    id: "hallway-upstairs",
+    name: "Hallway Upstairs",
+    switchTo: () => {},
   },
   "bedroom-1": {
-    "id": "bedroom-1",
-    "name": "Bedroom 1",
-    "switchTo": ()=>{}
+    id: "bedroom-1",
+    name: "Bedroom 1",
+    switchTo: () => {},
   },
   "bedroom-2": {
-    "id": "bedroom-2",
-    "name": "Bedroom 2",
-    "switchTo": ()=>{}
+    id: "bedroom-2",
+    name: "Bedroom 2",
+    switchTo: () => {},
   },
   "the-bunk": {
-    "id": "the-bunk",
-    "name": "The Bunk",
-    "switchTo": ()=>{}
+    id: "the-bunk",
+    name: "The Bunk",
+    switchTo: () => {},
   },
   "bedroom-3": {
-    "id": "bedroom-3",
-    "name": "Bedroom 3",
-    "switchTo": ()=>{}
+    id: "bedroom-3",
+    name: "Bedroom 3",
+    switchTo: () => {},
   },
-  "attic": {
-    "id": "attic",
-    "name": "Attic",
-    "switchTo": ()=>{}
+  attic: {
+    id: "attic",
+    name: "Attic",
+    switchTo: () => {},
   },
   "upstairs-bathroom": {
-    "id": "upstairs-bathroom",
-    "name": "Upstairs Bathroom",
-    "switchTo": ()=>{}
+    id: "upstairs-bathroom",
+    name: "Upstairs Bathroom",
+    switchTo: () => {},
   },
   "downstairs-bathroom": {
-    "id": "downstairs-bathroom",
-    "name": "Downstairs Bathroom",
-    "switchTo": ()=>{}
+    id: "downstairs-bathroom",
+    name: "Downstairs Bathroom",
+    switchTo: () => {},
   },
   "master-bathroom": {
-    "id": "master-bathroom",
-    "name": "Master Bathroom",
-    "switchTo": ()=>{}
-  }
-}
+    id: "master-bathroom",
+    name: "Master Bathroom",
+    switchTo: () => {},
+  },
+};

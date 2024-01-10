@@ -11,7 +11,7 @@ import {
   getUserFromLocalStorage,
   runUserAgreement,
   toggleScanLines,
-  getReactProps
+  getReactProps,
 } from "./modules/functions";
 import { insertChatUpdatedMessage as showUpdateNotice } from "./modules/updater";
 import "./styles/styles.scss";
@@ -58,15 +58,15 @@ import "./styles/styles.scss";
     if (isLoaded) {
       clearInterval(loadingInterval);
       state.set("loaded", true);
-      
+
       //weird hacky way to get the methods for changing rooms
       //requires the user to stay on the room grid page until the plugin settings button appears
-      livestreams.querySelectorAll("button").forEach(el => {
+      livestreams.querySelectorAll("button").forEach((el) => {
         if (el.id) {
           ROOMS[el.id].switchTo = getReactProps(el).onClick;
         }
-      })
-      
+      });
+
       const user = await getUserFromLocalStorage();
       state.set("user", user);
 

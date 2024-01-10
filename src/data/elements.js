@@ -383,13 +383,13 @@ const Elements = {
       class: "maejok-modal_prompt",
       keyname: {
         selector: `[class="maejok-modal_keyprompt_name"]`,
-        class: "maejok-modal_keyprompt_name"
+        class: "maejok-modal_keyprompt_name",
       },
       roomname: {
         selector: `[class="maejok-modal_roomname"]`,
-        class: "maejok-modal_roomname"
-      }
-    }
+        class: "maejok-modal_roomname",
+      },
+    },
   },
   settings: {
     selector: `[class^="maejok-modal-modal"]`,
@@ -539,18 +539,20 @@ const Elements = {
       ],
       bind: {
         class: "maejok-input-button-bind",
-        selector: `[class*="maejok-input-button-bind"]`
+        selector: `[class*="maejok-input-button-bind"]`,
       },
       img_colors: {
-        "orange": "https://cdn.fishtank.live/images/slices/console-button-long-orange.png",
-        "green": "https://cdn.fishtank.live/images/slices/console-button-long-green.png",
-        "red": "https://cdn.fishtank.live/images/slices/console-button-long-red.png",
-        "blue": "https://cdn.fishtank.live/images/slices/console-button-long-blue.png"
+        orange:
+          "https://cdn.fishtank.live/images/slices/console-button-long-orange.png",
+        green:
+          "https://cdn.fishtank.live/images/slices/console-button-long-green.png",
+        red: "https://cdn.fishtank.live/images/slices/console-button-long-red.png",
+        blue: "https://cdn.fishtank.live/images/slices/console-button-long-blue.png",
       },
       wrapper: { class: [`maejok-input-button-wrapper`] },
       label: {
         class: [`color-button_text__3OQAq`],
-        selector: `[class*="color-button_text__3OQAq"]`
+        selector: `[class*="color-button_text__3OQAq"]`,
       },
       save: { class: [`maejok-input-button-save`] },
     },

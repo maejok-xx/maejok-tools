@@ -22,7 +22,9 @@
     cursor: pointer;
     color: #50985d;
     text-shadow: 0 0 $space-xxs #000000;
-    font-family: Alarm Clock, monospace;
+    font-family:
+      Alarm Clock,
+      monospace;
     align-self: center;
   }
 
@@ -69,13 +71,15 @@
       border-radius: 50%;
       border: 1px solid rgba($color-black, 0.1);
       box-shadow: 0px 0px 1px 0 rgba($color-black, 0.5);
-      transition: transform 0.3s ease-in-out, background-color 1s ease-in-out;
+      transition:
+        transform 0.3s ease-in-out,
+        background-color 1s ease-in-out;
     }
   }
 }
 
 .maejok-modal_keyprompt_name {
-  background-color: rgba($color-black,.65);
+  background-color: rgba($color-black, 0.65);
   border-radius: $space-md;
   color: $color-white;
 }
@@ -92,7 +96,9 @@
 .maejok-input-label-checked {
   color: #00ff04 !important;
   text-shadow: 0 0 2px $color-darkgreen !important;
-  transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+  transition:
+    color 0.3s ease-in-out,
+    text-shadow 0.3s ease-in-out;
 }
 
 .maejok-input-button {
@@ -125,7 +131,9 @@
       align-self: center;
       font-size: large;
       color: $color-dark;
-      font-family: Highway Gothic, sans-serif;
+      font-family:
+        Highway Gothic,
+        sans-serif;
       font-weight: 600;
       text-transform: uppercase;
       text-shadow: 0 0 $space-xxs rgba(225, 239, 252, 0.75);
@@ -170,15 +178,15 @@
     color: $color-black;
   }
 
-  .maejok-modal_roomname, .error {
+  .maejok-modal_roomname,
+  .error {
     text-shadow: 0 0 $space-xs $color-black;
   }
-  
-  
+
   .maejok-modal_roomname {
     color: $color-lightteal;
   }
-  
+
   .error {
     color: $color-lightred;
   }
@@ -232,16 +240,22 @@
       text-transform: none;
       color: #00bf03;
       text-shadow: 0 1px 2px #000000;
-      transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+      transition:
+        color 0.3s ease-in-out,
+        text-shadow 0.3s ease-in-out;
 
       &:hover {
         background-color: rgba($color-black, 0.25);
-        transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        transition:
+          color 0.3s ease-in-out,
+          background-color 0.3s ease-in-out;
 
         .maejok-list-item {
           color: #00ff04;
           text-shadow: 0 1px 2px #006012;
-          transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+          transition:
+            color 0.3s ease-in-out,
+            text-shadow 0.3s ease-in-out;
         }
         .maejok-list-item-remove {
           visibility: visible;
