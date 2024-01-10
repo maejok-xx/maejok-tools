@@ -10,5 +10,7 @@
 // @updateURL    __UPDATEURL__
 // @supportURL   __SUPPORTURL__
 // @match        https://www.fishtank.live/
+// @match        https://www.fishtank.live/clips
+// @match        https://www.fishtank.live/clip/*
 // @run-at       document-idle
 // ==/UserScript==
