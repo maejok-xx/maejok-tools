@@ -2,7 +2,7 @@ import config from "./config";
 import state from "./state";
 import Modal from "../classes/Modal";
 import ELEMENTS from "../data/elements";
-import { ROOMS } from "./constants";
+import { ROOMS, DEFAULT_KEYBINDS } from "./constants";
 import {
   areObjectsEqual,
   getMessageType,
@@ -19,7 +19,6 @@ import {
   toggleItemInList,
   inputIsFocused,
   keyEventToString,
-  resetBindDefaults,
 } from "./functions";
 import * as settings from "./settings";
 import * as menu from "./menu";
@@ -56,7 +55,7 @@ export const rightClick = (event) => {
     if (messageType === "message") {
       const isMention = hasClass(
         event.target,
-        ELEMENTS.chat.message.mention.class,
+        ELEMENTS.chat.message.mention.class
       );
 
       if (isMention) {
@@ -79,7 +78,7 @@ export const rightClick = (event) => {
 
     if (
       ["roll", "emote", "system", "consumable", "clan", "tts", "sfx"].includes(
-        messageType,
+        messageType
       )
     ) {
       event.preventDefault();
@@ -143,7 +142,7 @@ export const leftClick = (event) => {
   function checkSecondaryPanelTabClicked() {
     const clicked = hasClass(
       event.target.parentElement?.parentElement,
-      ELEMENTS.secondaryPanel.tab.class,
+      ELEMENTS.secondaryPanel.tab.class
     );
 
     if (clicked) {
@@ -161,7 +160,7 @@ export const leftClick = (event) => {
   function checkAvatarClicked() {
     const clicked = hasClass(
       event.target.parentElement,
-      ELEMENTS.chat.message.avatar.class,
+      ELEMENTS.chat.message.avatar.class
     );
 
     if (clicked) {
@@ -206,7 +205,7 @@ export const dblClick = (event) => {
   ];
 
   const isMessage = messageTargets.some((element) =>
-    hasClass(element, messageClasses),
+    hasClass(element, messageClasses)
   );
 
   if (isMessage) {
@@ -217,7 +216,7 @@ export const dblClick = (event) => {
     if (isFriend) {
       toast(
         `Can't add friends to Watching list! Remove ${user.displayName} from friends list first.`,
-        "error",
+        "error"
       );
       return;
     }
@@ -261,7 +260,7 @@ export const keyPress = (event) => {
 
   if (keyPrompt) {
     keyPrompt.querySelector(
-      ELEMENTS.modal.prompt.keyname.selector,
+      ELEMENTS.modal.prompt.keyname.selector
     ).textContent = keyEventToString(keycombo);
     keyPrompt.querySelector(".error").style.display = "none";
 
@@ -289,7 +288,7 @@ export const keyPress = (event) => {
       if (compareKeybind(keycombo, bindMap["toggle-auto"])) {
         document
           .querySelector(
-            '.live-streams-auto-mode_live-streams-auto-mode__pE2X_ input[type="checkbox"]',
+            '.live-streams-auto-mode_live-streams-auto-mode__pE2X_ input[type="checkbox"]'
           )
           ?.click();
         event.stopPropagation();
@@ -305,7 +304,7 @@ export const keyPress = (event) => {
       } else if (compareKeybind(keycombo, bindMap["toggle-hq"])) {
         document
           .querySelector(
-            '.live-stream-controls_right__u0Dox input[type="checkbox"]',
+            '.live-stream-controls_right__u0Dox input[type="checkbox"]'
           )
           ?.click();
         event.stopPropagation();
@@ -392,7 +391,7 @@ export const clickAccordionHeader = (accordion, panel, props) => {
     panel.style.maxHeight = null;
   } else {
     var allPanels = panel.parentElement.querySelectorAll(
-      props.content.selector,
+      props.content.selector
     );
 
     allPanels.forEach(function (content) {
@@ -400,7 +399,7 @@ export const clickAccordionHeader = (accordion, panel, props) => {
     });
 
     var allHeaders = panel.parentElement.querySelectorAll(
-      props.header.selector,
+      props.header.selector
     );
 
     allHeaders.forEach(function (header) {
@@ -539,7 +538,7 @@ export const clickKeybindButton = (button, label, key) => {
       }
       state.set("pendingKeybind", null);
       prompt.destroy();
-    },
+    }
   );
 
   const body = document.createElement("div");
@@ -557,7 +556,7 @@ export const clickKeybindButton = (button, label, key) => {
 
 export const clickResetKeybindButton = () => {
   playSound("shutter");
-  resetBindDefaults();
+  config.set("binds", DEFAULT_KEYBINDS);
   settings.saveSettings();
   settings.updateBindButtons();
 };
@@ -565,7 +564,7 @@ export const clickResetKeybindButton = () => {
 function afterUpdateAlert() {
   const showAlert = () => {
     alert(
-      "After updating MAEJOK-TOOLS, refresh this window to start using the new version",
+      "After updating MAEJOK-TOOLS, refresh this window to start using the new version"
     );
     document.removeEventListener("visibilitychange", showAlert);
   };
