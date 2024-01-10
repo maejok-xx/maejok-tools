@@ -9,6 +9,8 @@
 Features:
 
 - Mentions log
+- Customizable Keybinds (thanks to [deerfarce](https://github.com/deerfarce))
+- Ability to Hide: Chat Timestamps/Avatars/Clans/XP/Roll/Emotes/Consumables/System Messages, & Screen Takeovers
 - Emotes Menu (right click chat input)
 - Chat Message Menus (right click messages)
 - Mention Menu (right click a mention)
@@ -19,7 +21,6 @@ Features:
 - Active Chatters Count/List (click count to see list)
 - Dense Chat mode
 - Improved tagging
-- Ability to Hide: Chat Timestamps/Avatars/Clans/XP/Roll/Emotes/Consumables/System Messages, & Screen Takeovers
 - and a bunch of other stuff
 - And it's all controllable via Integrated Settings Panel
 - Plus more to come!

@@ -1,5 +1,25 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.13.0_**
+
+### Notes
+
+- Huge thanks to deerfarce for this one! This update adds Custom Keybinds for navigating streams and a couple other options.
+
+### Bug Fixes
+
+- N/A
+
+### Features Added / Changed
+
+- [Customizable Keybinds](https://github.com/maejok-xx/maejok-tools/pull/44) - _by [deerfarce](https://github./com/deerfarce)_
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.12.0_**
 
 ### Notes
