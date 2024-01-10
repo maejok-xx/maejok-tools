@@ -37,6 +37,12 @@
   "homepage": "https://github.com/maejok-xx/maejok-tools#readme",
   "greasyfork": "https://greasyfork.org/en/scripts/465416-maejok-tools-for-fishtank-live",
   "icon": "https://raw.githubusercontent.com/maejok-xx/maejok-tools/master/public/images/icon.png",
+  "contributors": [
+    {
+      "name": "deerfarce",
+      "url": "https://github.com/deerfarce"
+    }
+  ],
   "devDependencies": {
     "cross-env": "^7.0.3",
     "css-loader": "^6.8.1",
