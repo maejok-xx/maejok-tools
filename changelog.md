@@ -8,7 +8,7 @@
 
 ### Bug Fixes
 
-- N/A
+- [SFX chat menu not showing](https://github.com/maejok-xx/maejok-tools/commit/9b2109362df1af1a9fd474dc66d048acfbf186c0)
 
 ### Features Added / Changed
 
