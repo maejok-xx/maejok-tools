@@ -584,7 +584,6 @@ function createKeybindInput(option, panel, modal) {
   label.setAttribute("for", option.name);
   label.textContent = option.label;
   wrapper.appendChild(label);
-  wrapper.appendChild(button);
 
   if (option.config) {
     const config = document.createElement("b");
@@ -601,6 +600,8 @@ function createKeybindInput(option, panel, modal) {
     help.addEventListener("click", () => clickSettingsHelp(option));
     wrapper.appendChild(help);
   }
+
+  wrapper.appendChild(button);
 }
 
 function createButtonInput(option, panel, modal) {

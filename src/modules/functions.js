@@ -755,6 +755,18 @@ export const resetBindDefaults = () => {
       shiftKey: false,
       code: "Backquote",
     },
+    "toggle-hq": {
+      ctrlKey: false,
+      altKey: false,
+      shiftKey: false,
+      code: "KeyH",
+    },
+    "enter-native-fs": {
+      ctrlKey: false,
+      altKey: false,
+      shiftKey: false,
+      code: "KeyF",
+    },
     "close-stream": {
       ctrlKey: false,
       altKey: false,
@@ -771,19 +783,19 @@ export const resetBindDefaults = () => {
       ctrlKey: false,
       altKey: false,
       shiftKey: false,
-      code: "KeyW"
+      code: "KeyW",
     },
     bar: {
       ctrlKey: false,
       altKey: false,
       shiftKey: false,
-      code: "KeyE"
+      code: "KeyE",
     },
     kitchen: {
       ctrlKey: false,
       altKey: false,
       shiftKey: false,
-      code: "KeyR"
+      code: "KeyR",
     },
     "dog-house": {
       ctrlKey: false,
@@ -831,7 +843,7 @@ export const resetBindDefaults = () => {
       ctrlKey: false,
       altKey: false,
       shiftKey: false,
-      code: "F1"
+      code: "F1",
     },
     "upstairs-bathroom": {
       ctrlKey: false,

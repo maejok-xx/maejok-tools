@@ -292,11 +292,31 @@ export const keyPress = (event) => {
             '.live-streams-auto-mode_live-streams-auto-mode__pE2X_ input[type="checkbox"]',
           )
           ?.click();
+        event.stopPropagation();
+        event.preventDefault();
         return;
       } else if (compareKeybind(keycombo, bindMap["close-stream"])) {
         document
           .querySelector(".live-stream-fullscreen_close__JY_lb > button")
           ?.click();
+        event.stopPropagation();
+        event.preventDefault();
+        return;
+      } else if (compareKeybind(keycombo, bindMap["toggle-hq"])) {
+        document
+          .querySelector(
+            '.live-stream-controls_right__u0Dox input[type="checkbox"]',
+          )
+          ?.click();
+        event.stopPropagation();
+        event.preventDefault();
+        return;
+      } else if (compareKeybind(keycombo, bindMap["enter-native-fs"])) {
+        document
+          .querySelector("#live-stream-player video")
+          ?.requestFullscreen();
+        event.stopPropagation();
+        event.preventDefault();
         return;
       } else {
         for (let i in ROOMS) {
