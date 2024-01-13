@@ -62,7 +62,7 @@ import "./styles/styles.scss";
       //weird hacky way to get the methods for changing rooms
       //requires the user to stay on the room grid page until the plugin settings button appears
       livestreams.querySelectorAll("button").forEach((el) => {
-        if (el.id) {
+        if (el.id && ROOMS.hasOwnProperty(el.id)) {
           ROOMS[el.id].switchTo = getReactProps(el).onClick;
         }
       });
