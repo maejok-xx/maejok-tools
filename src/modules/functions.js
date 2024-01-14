@@ -695,6 +695,8 @@ export const pluginName = () => {
 };
 
 export const keyEventToString = (event) => {
+  if (!event) return "(none)";
+
   let nameTable = {
     Backquote: "`",
   };

@@ -337,6 +337,7 @@ export const keyPress = (event) => {
 };
 
 function compareKeybind(input, bind) {
+  if (!input || !bind) return false;
   return (
     input.code == bind.code &&
     (input.ctrlKey == bind.ctrlKey ||

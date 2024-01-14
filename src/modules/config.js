@@ -794,6 +794,14 @@ const Config = () => {
               value: "master-bathroom",
               group: "roombinds",
             },
+            // switchConfessional
+            {
+              name: "switchConfessional",
+              label: "Confessional",
+              type: "keybind",
+              value: "confessional",
+              group: "roombinds",
+            },
           ],
         },
       },

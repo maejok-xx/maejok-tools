@@ -281,6 +281,11 @@ export const ROOMS = {
     name: "Master Bathroom",
     switchTo: () => {},
   },
+  "confessional": {
+    id: "confessional",
+    name: "Confessional",
+    switchTo: () => {},
+  },
 };
 
 export const DEFAULT_KEYBINDS = {
@@ -398,4 +403,10 @@ export const DEFAULT_KEYBINDS = {
     shiftKey: false,
     code: "F4",
   },
+  "confessional": {
+    ctrlKey: false,
+    altKey: false,
+    shiftKey: false,
+    code: "F6",
+  }
 };
