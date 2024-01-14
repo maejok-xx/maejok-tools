@@ -1,5 +1,25 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.13.1_**
+
+### Notes
+
+- Fixes plugin not loading.
+
+### Bug Fixes
+
+- [Plugin not loading](https://github.com/maejok-xx/maejok-tools/pull/46)
+
+### Features Added / Changed
+
+- N/A
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.13.0_**
 
 ### Notes
