@@ -1,5 +1,25 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.13.3_**
+
+### Notes
+
+- Fixes mentions log tracking random users
+
+### Bug Fixes
+
+- [Only get user data once](https://github.com/maejok-xx/maejok-tools/commit/7abbdf4bc09d87060b05212c487414eaf3b937fd)
+
+### Features Added / Changed
+
+- N/A
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.13.2_**
 
 ### Notes
