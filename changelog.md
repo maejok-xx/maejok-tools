@@ -1,5 +1,26 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.13.2_**
+
+### Notes
+
+- Just making some improvments.
+
+### Bug Fixes
+
+- Fixed mentions log width over-expanding
+- Show Update Notice earlier in case of failure to load script
+
+### Features Added / Changed
+
+- [Improve User Data Fetching](https://github.com/maejok-xx/maejok-tools/pull/47)
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.13.1_**
 
 ### Notes
