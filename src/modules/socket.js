@@ -24,7 +24,15 @@ export const listenOnWebsocket = () => {
 
       const user = decodedMessage.data[0];
 
-      if (user?.displayName) {
+      const isUserData =
+        decodedMessage.id === 9 &&
+        user?.id !== null &&
+        user?.displayName !== null &&
+        user?.joined !== null;
+
+      const userDataSet = state.get("user") !== null;
+
+      if (isUserData && !userDataSet) {
         state.set("user", user);
       }
     }
