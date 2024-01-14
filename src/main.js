@@ -5,10 +5,10 @@ import { getRemotePackageJSON } from "./modules/updater";
 import ELEMENTS from "./data/elements";
 import observers from "./modules/observers";
 import { ROOMS } from "./modules/constants";
+import { listenOnWebsocket } from "./modules/socket";
 import {
   startMaejokTools,
   toggleDimMode,
-  getUserFromLocalStorage,
   runUserAgreement,
   toggleScanLines,
   getReactProps,
@@ -26,6 +26,8 @@ import "./styles/styles.scss";
   }
 
   getRemotePackageJSON();
+
+  listenOnWebsocket();
 
   const enableDimMode =
     config.get("enableDimMode") && config.get("enablePlugin");
@@ -67,9 +69,6 @@ import "./styles/styles.scss";
         }
       });
 
-      const user = await getUserFromLocalStorage();
-      state.set("user", user);
-
       state.set("loaded", true);
 
       createSettingsButton();
@@ -78,6 +77,8 @@ import "./styles/styles.scss";
         console.warn(`${config.plugin("name")} disabled in settings panel`);
         return;
       }
+
+      console.log(state.get("user"));
 
       showUpdateNotice();
       startMaejokTools();
