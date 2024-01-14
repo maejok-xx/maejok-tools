@@ -1,7 +1,6 @@
 import config from "./modules/config";
 import state from "./modules/state";
 import { createSettingsButton } from "./modules/settings";
-import { getRemotePackageJSON } from "./modules/updater";
 import ELEMENTS from "./data/elements";
 import observers from "./modules/observers";
 import { ROOMS } from "./modules/constants";
@@ -13,7 +12,7 @@ import {
   toggleScanLines,
   getReactProps,
 } from "./modules/functions";
-import { insertChatUpdatedMessage as showUpdateNotice } from "./modules/updater";
+import { checkForUpdate } from "./modules/updater";
 import "./styles/styles.scss";
 
 (function () {
@@ -24,8 +23,6 @@ import "./styles/styles.scss";
   if (!userAgreementAccepted) {
     return;
   }
-
-  getRemotePackageJSON();
 
   listenOnWebsocket();
 
@@ -39,6 +36,7 @@ import "./styles/styles.scss";
 
   let isLoaded = false;
   let chat = false;
+  let updateChecked = false;
   let livestreams = false;
 
   if (config.get("hideGlobalMissions")) {
@@ -57,7 +55,12 @@ import "./styles/styles.scss";
       isLoaded = chat !== null && livestreams !== null;
     }
 
-    if (isLoaded) {
+    if (chat && !updateChecked) {
+      updateChecked = true;
+      checkForUpdate();
+    }
+
+    if (chat && livestreams) {
       clearInterval(loadingInterval);
       state.set("loaded", true);
 
@@ -78,9 +81,6 @@ import "./styles/styles.scss";
         return;
       }
 
-      console.log(state.get("user"));
-
-      showUpdateNotice();
       startMaejokTools();
     }
   }, 250);
