@@ -553,15 +553,6 @@ export const hasClass = (element, className) => {
   return element?.classList?.contains(className) || false;
 };
 
-export const getUserFromLocalStorage = () => {
-  const keys = Object.keys(localStorage);
-  for (const key of keys) {
-    if (key.includes("profile")) {
-      return JSON.parse(localStorage.getItem(key)).value;
-    }
-  }
-};
-
 export const areObjectsEqual = (obj1, obj2) => {
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
