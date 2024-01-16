@@ -4,6 +4,7 @@ import { clickResetKeybindButton } from "./events";
 
 const Config = () => {
   const configObj = {
+    userData: null,
     enablePlugin: true,
     enableDimMode: false,
 
