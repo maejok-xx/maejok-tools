@@ -60,7 +60,9 @@ import "./styles/styles.scss";
       checkForUpdate();
     }
 
-    if (chat && livestreams) {
+    const userData = state.get("user");
+
+    if (chat && livestreams && userData) {
       clearInterval(loadingInterval);
       state.set("loaded", true);
 

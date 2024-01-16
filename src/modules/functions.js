@@ -724,6 +724,30 @@ export const updateKeybindsOnDefaultsChange = () => {
   return binds;
 };
 
+export const hasKeys = (obj, keyArray) => {
+  if (typeof obj !== "object" || !Array.isArray(keyArray)) {
+    return false;
+  }
+
+  return keyArray.every((key) => obj.hasOwnProperty(key));
+};
+
+export const toast = (
+  message = "default message",
+  type = "info",
+  ms = 5000
+) => {
+  const toast = new CustomEvent("toastopen", {
+    detail: JSON.stringify({
+      type, // success, error, info, warning
+      message,
+      duration: ms,
+      id: uuid(),
+    }),
+  });
+  document.dispatchEvent(toast);
+};
+
 export const startMaejokTools = async () => {
   config.load();
   const cfg = config.get();
@@ -861,18 +885,6 @@ function colorToRGB(color) {
   }
 
   return { r, g, b };
-}
-
-function toast(message = "default message", type = "info", duration = 5000) {
-  const toast = new CustomEvent("toastopen", {
-    detail: JSON.stringify({
-      type, // success, error, info, warning
-      message,
-      duration,
-      id: uuid(),
-    }),
-  });
-  document.dispatchEvent(toast);
 }
 
 function closestWithClass(element, classNames) {
