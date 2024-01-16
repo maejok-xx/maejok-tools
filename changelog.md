@@ -1,5 +1,25 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.13.4_**
+
+### Notes
+
+- User data doesn't come down the websocket every page load, which caused some issues, this fixes that by caching the user data and displaying and error if it doesn't load
+
+### Bug Fixes
+
+- [userData not loading](https://github.com/maejok-xx/maejok-tools/issues/48) fixed by [cache userData](https://github.com/maejok-xx/maejok-tools/pull/49)
+
+### Features Added / Changed
+
+- N/A
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.13.3_**
 
 ### Notes
