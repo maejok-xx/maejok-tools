@@ -66,6 +66,10 @@ const Elements = {
         class: "top-bar-links_top-bar-links__70nuu",
       },
     },
+    director: {
+      selector: `[class^="top-side_director__"]`,
+      class: "top-side_director__nAHL_",
+    },
   },
   profile: {
     selector: `[class^="profile-modal_profile-modal"]`,
