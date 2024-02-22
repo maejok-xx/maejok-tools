@@ -4,18 +4,18 @@ import { createSettingsButton } from "./modules/settings";
 import ELEMENTS from "./data/elements";
 import observers from "./modules/observers";
 import { ROOMS } from "./modules/constants";
-import { listenOnWebsocket } from "./modules/socket";
 import {
   startMaejokTools,
   toggleDimMode,
   runUserAgreement,
   toggleScanLines,
   getReactProps,
+  getUserData,
 } from "./modules/functions";
 import { checkForUpdate } from "./modules/updater";
 import "./styles/styles.scss";
 
-(function () {
+(async function () {
   config.load();
 
   const userAgreementAccepted = runUserAgreement();
@@ -23,8 +23,6 @@ import "./styles/styles.scss";
   if (!userAgreementAccepted) {
     return;
   }
-
-  listenOnWebsocket();
 
   const enableDimMode =
     config.get("enableDimMode") && config.get("enablePlugin");
@@ -35,9 +33,13 @@ import "./styles/styles.scss";
   const address = window.location.href;
 
   let isLoaded = false;
-  let chat = false;
-  let updateChecked = false;
-  let livestreams = false;
+  let chat,
+    updateChecked,
+    livestreams,
+    directorMode,
+    isShowLive = null;
+  let hasFetchedUserData = false;
+  let isPopoutChat = false;
 
   if (config.get("hideGlobalMissions")) {
     observers.body.start();
@@ -46,13 +48,21 @@ import "./styles/styles.scss";
 
   const loadingInterval = setInterval(async () => {
     if (address.includes("/chat")) {
+      const userData = config.get("userData");
+      state.set("userData", userData);
+
       chat = document.querySelector(ELEMENTS.chat.list.selector);
       isLoaded = chat !== null;
+      isPopoutChat = true;
       state.set("isPopoutChat", true);
     } else {
       chat = document.querySelector(ELEMENTS.chat.list.selector);
       livestreams = document.querySelector(ELEMENTS.livestreams.grid.selector);
-      isLoaded = chat !== null && livestreams !== null;
+      directorMode = document.querySelector(ELEMENTS.header.director.selector);
+      isLoaded =
+        (directorMode !== null && chat !== null && livestreams !== null) ||
+        (directorMode === null && chat !== null);
+      isShowLive = directorMode !== null;
     }
 
     if (chat && !updateChecked) {
@@ -60,19 +70,53 @@ import "./styles/styles.scss";
       checkForUpdate();
     }
 
-    const userData = state.get("user");
+    if (!isLoaded) {
+      return;
+    }
 
-    if (chat && livestreams && userData) {
+    const displayNameElement = document.querySelector(
+      ELEMENTS.header.user.name.selector
+    );
+
+    if (!displayNameElement && !isPopoutChat) {
+      return;
+    }
+
+    const userId = displayNameElement?.getAttribute("data-user-id") || false;
+
+    if (!userId && !isPopoutChat) {
+      return;
+    }
+
+    if (!state.get("user") && !hasFetchedUserData && !isPopoutChat) {
+      hasFetchedUserData = true;
+      let userProfile;
+      try {
+        userProfile = await getUserData(userId);
+      } catch (error) {
+        clearInterval(loadingInterval);
+        return;
+      }
+
+      const userData = userProfile?.profile || false;
+
+      if (userData) {
+        state.set("user", userData);
+        config.set("userData", userData); // Store userData as a fallback for use with popout chat
+        config.save();
+      }
+    } else {
       clearInterval(loadingInterval);
-      state.set("loaded", true);
 
       //weird hacky way to get the methods for changing rooms
       //requires the user to stay on the room grid page until the plugin settings button appears
-      livestreams.querySelectorAll("button").forEach((el) => {
-        if (el.id && ROOMS.hasOwnProperty(el.id)) {
-          ROOMS[el.id].switchTo = getReactProps(el).onClick;
-        }
-      });
+      if (livestreams) {
+        livestreams.querySelectorAll("button").forEach((el) => {
+          if (el.id && ROOMS.hasOwnProperty(el.id)) {
+            ROOMS[el.id].switchTo = getReactProps(el).onClick;
+          }
+        });
+      }
 
       state.set("loaded", true);
 
