@@ -316,6 +316,15 @@ export const getUserFromChat = (element) => {
   return user;
 };
 
+export const getUserData = async (userId) => {
+  const data = await fetchFromFishtank(
+    "get",
+    `https://www.fishtank.live/api/user/get?uid=${userId}`
+  );
+
+  return data || false;
+};
+
 export const findUserByName = (displayName) => {
   const messages = document.querySelectorAll(ELEMENTS.chat.message.selector);
   const messagesArray = Array.from(messages);
@@ -796,7 +805,6 @@ export const stopMaejokTools = () => {
   toggleBigScreen(false);
 
   observers.chat.stop();
-  observers.user.stop();
   observers.body.stop();
   observers.modal.stop();
 
