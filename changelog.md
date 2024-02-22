@@ -1,5 +1,26 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.13.5_**
+
+### Notes
+
+- This will get things working again and will probably be the last update until S3.
+
+### Bug Fixes
+
+- userData not loading again
+- [Mention log doesn't pick up name caps variations / max-height](https://github.com/maejok-xx/maejok-tools/issues/50)
+
+### Features Added / Changed
+
+- N/A
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.13.4_**
 
 ### Notes
