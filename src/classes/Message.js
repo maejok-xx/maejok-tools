@@ -160,7 +160,11 @@ export default class Message {
       return false;
     }
 
-    const isMentioned = this.mentions.includes(user.displayName);
+    const lowercaseMentions = this.mentions.map((mention) =>
+      mention.toLowerCase()
+    );
+    const lowercaseDisplayName = user.displayName.toLowerCase();
+    const isMentioned = lowercaseMentions.includes(lowercaseDisplayName);
 
     return isMentioned;
   }
