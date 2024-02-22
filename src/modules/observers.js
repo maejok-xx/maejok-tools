@@ -35,45 +35,6 @@ const observers = {
     },
   },
 
-  user: {
-    start: () => {
-      state.get("observers").user?.disconnect();
-
-      const userInfo = document.querySelector(ELEMENTS.header.user.selector);
-
-      const userObserver = new MutationObserver(async (mutations) => {
-        const userData = state.get("user");
-        const clanTag =
-          getElementText(ELEMENTS.header.user.clan.selector) || null;
-        const displayName =
-          getElementText(ELEMENTS.header.user.name.selector) || null;
-
-        const newUserData = {
-          clan: clanTag ? { tag: clanTag } : null,
-          displayName,
-        };
-        state.set("user", { ...userData, ...newUserData });
-      });
-
-      userObserver.observe(userInfo, {
-        attributes: true,
-        childList: true,
-        subtree: true,
-        characterData: true,
-      });
-
-      state.set("observers", {
-        ...state.get("observers"),
-        user: userObserver,
-      });
-    },
-
-    stop: () => {
-      const observers = state.get("observers");
-      observers.user?.disconnect();
-    },
-  },
-
   modal: {
     start: () => {
       state.get("observers").modal?.disconnect();
