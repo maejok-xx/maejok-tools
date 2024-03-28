@@ -1,5 +1,12 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.13.6_**
+
+### Notes
+
+- Fixes the script trying to run everywhere using GreaseMonkey.
+- The way webpack is packing and minifying the script adds multi-line comments to the userscript.config.js, which for some reason, GreaseMonkey doesn't like, but TamperMonkey mind. This "fix" doesn't actually address the issue with webpack since there probably won't be any more updates to this -- it just replaces the userscript banner with the proper single-line comment format, so building this yourself for GreaseMonkey will still produce the same issue, unless you remove the multi-line comments manually after building.
+
 # **_v2.13.5_**
 
 ### Notes
