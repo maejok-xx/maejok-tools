@@ -117,8 +117,13 @@ const Elements = {
       presence: {
         selector: `[class^="chat_presence__"]`,
         class: "chat_presence__90XuO",
+        online: {
+          selector: `[class*="maejok-chatters_presence-online"]`,
+          class: "maejok-chatters_presence-online",
+        },
         wrapper: {
-          class: "chat-maejok-chatters_presence-container",
+          selector: `[class*="maejok-chatters_presence-container"]`,
+          class: "maejok-chatters_presence-container",
         }
       },
       recent: {
@@ -354,8 +359,11 @@ const Elements = {
         selector: `[class^="close-button"]`,
         classes: ["close-button_close-button__BKUKA", "close-button_sm__n0dZT"],
         image: {
-          selector: `[class=^"close-button"] img`,
-          attr: ["src", "https://cdn.fishtank.live/images/slices/close.png"],
+          attr: [
+            `src`,
+            // UPDATE TO GITHUB
+            `https://cdn.fishtank.live/images/slices/close.png`,
+          ],
         },
       },
     },
@@ -392,7 +400,7 @@ const Elements = {
       selector: `[class^="maejok-settings-opener"]`,
       class: [`maejok-settings-opener`],
       button: {
-        classes: [`chat-input_action__qw4PQ`],
+        class: `chat-input_action__qw4PQ`,
         icon: { class: [`icon_icon__bDzMA`] },
       },
     },
@@ -411,7 +419,7 @@ const Elements = {
       },
       button: {
         selector: `[class^="maejok-settings_body"]`,
-        classes: [
+        class: [
           `maejok-tab-button`,
         ],
       },
