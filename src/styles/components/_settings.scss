@@ -115,7 +115,9 @@
 }
 
 .maejok-input-button-save {
-  background-image: url("https://cdn.fishtank.live/images/slices/console-button-long-green.png");
+  color: #fff;
+  border-color: #fff;
+  background-color: #2b2d2e;
 }
 
 .maejok-settings-config-wrapper {
@@ -130,12 +132,9 @@
       display: flex;
       align-self: center;
       font-size: large;
-      color: $color-dark;
-      font-family:
-        Highway Gothic,
-        sans-serif;
+      color: #f8ec94;
+      font-family: JetBrains Mono, monospace;
       font-weight: 600;
-      text-transform: uppercase;
       text-shadow: 0 0 $space-xxs rgba(225, 239, 252, 0.75);
     }
 
