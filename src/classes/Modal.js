@@ -53,14 +53,6 @@ export default class Modal {
     closeButton.classList.add(...ELEMENTS.modal.close.button.classes);
     closeButton.addEventListener("click", () => events.clickCloseModal(this));
 
-    const closeButtonIcon = document.createElement("img");
-    closeButtonIcon.setAttribute(...ELEMENTS.modal.close.button.image.attr);
-
-    const screws = document
-      .querySelector(ELEMENTS.modal.screws.selector)
-      .cloneNode(true);
-    screws.querySelector(ELEMENTS.modal.screws.top.right.selector).remove();
-
     this.body = document.createElement("div");
     this.body.classList.add(ELEMENTS.modal.body.class);
 
@@ -68,10 +60,8 @@ export default class Modal {
     titleWrapper.appendChild(this.titleElement);
     header.appendChild(close);
     close.appendChild(closeButton);
-    closeButton.appendChild(closeButtonIcon);
     this.modal.appendChild(header);
     this.modal.appendChild(this.body);
-    this.modal.appendChild(screws);
     main.parentElement.insertBefore(this.container, main.nextSibling);
     this.container.appendChild(backdrop);
     this.container.appendChild(this.modal);

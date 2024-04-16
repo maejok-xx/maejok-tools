@@ -525,7 +525,7 @@ export const clickKeybindButton = (button, label, key) => {
 
   const confirmBtn = settings.createColorButton(
     null,
-    "blue",
+    "darkGreen",
     "Confirm",
     function () {
       playSound("shutter");
