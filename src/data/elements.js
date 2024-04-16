@@ -419,7 +419,7 @@ const Elements = {
       },
       button: {
         selector: `[class^="maejok-settings_body"]`,
-        class: [
+        classes: [
           `maejok-tab-button`,
         ],
       },

@@ -30,14 +30,9 @@ export const stop = () => {
     return;
   }
 
-  const chatCount = document.querySelector(
-    ELEMENTS.chat.header.recent.selector
-  );
-
-  chatCount?.remove();
+  restore();
 
   state.set("recentChatters", []);
-
   clearInterval(existingInterval);
   state.set("recentChattersInterval", null);
 };
@@ -135,7 +130,7 @@ function create() {
   if (!config.get("enableRecentChatters")) {
     return;
   }
-  
+
   const header = document.querySelector(
     ELEMENTS.chat.header.selector
   );
@@ -153,8 +148,8 @@ function create() {
 
   const chattersOnline = document.createElement("div");
   chattersOnline.innerHTML = chatHeader.innerHTML;
-  chattersOnline.classList.add(ELEMENTS.chat.header.presence.class);
-  
+  chattersOnline.classList.add(...[ELEMENTS.chat.header.presence.class, ELEMENTS.chat.header.presence.online.class]);
+
   const chattersActive = document.createElement("div");
   chattersActive.classList.add(ELEMENTS.chat.header.recent.class);
   chattersActive.classList.add(ELEMENTS.chat.header.presence.class);
@@ -175,4 +170,25 @@ function create() {
   chatHeader.remove();
 
   update();
+}
+
+function restore() {
+  const onlineChatters = document.querySelector(
+    ELEMENTS.chat.header.presence.online.selector
+  );
+
+  const chatPresenceContainer = document.querySelector(
+    ELEMENTS.chat.header.presence.wrapper.selector
+  );
+
+  const chatHeader = document.querySelector(
+    ELEMENTS.chat.header.selector
+  );
+
+  const roomSelect = document.querySelector(
+    ELEMENTS.chat.header.roomSelect.selector
+  );
+  chatHeader.insertBefore(onlineChatters, roomSelect);
+
+  chatPresenceContainer.remove();
 }

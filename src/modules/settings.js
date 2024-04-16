@@ -159,7 +159,7 @@ export const createSettingsButton = () => {
 
   const button = document.createElement("button");
   button.type = "button";
-  button.classList.add(...props.opener.button.classes);
+  button.classList.add(props.opener.button.class);
   inputActions.insertBefore(button, inputLength);
 
   const buttonIcon = document.createElement("div");
