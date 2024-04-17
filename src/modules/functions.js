@@ -304,8 +304,7 @@ export const getUserFromChat = (element) => {
     return;
   }
 
-  const sender = getElementText(senderElement);
-  const displayName = cleanDisplayName(sender);
+  const displayName = getSender(senderElement, messageType);
   const displayNameColor = senderElement.style.color || "rgb(255, 255, 255)";
 
   const id = messageElement.hasAttribute("data-user-id")
@@ -315,6 +314,21 @@ export const getUserFromChat = (element) => {
   const user = { displayName, id, color: displayNameColor };
   return user;
 };
+
+export const getSender = function (messageElement, messageType) {
+  const sender = ELEMENTS.chat[messageType].sender;
+
+  const senderElement = messageElement.classList.contains(sender.class)
+    ? messageElement
+    : messageElement.querySelector(sender.selector);
+
+  const senderText = messageType === "message"
+    ? senderElement.lastChild.textContent
+    : getElementText(senderElement);
+
+  return senderText;
+}
+
 
 export const getUserData = async (userId) => {
   const data = await fetchFromFishtank(
@@ -394,11 +408,6 @@ export const findNearestRelative = (element, className) => {
   }
 
   return null; // No matching relative element found
-};
-
-export const cleanDisplayName = (displayName) => {
-  if (typeof displayName === "object") displayName = displayName.displayName;
-  return displayName.replace(/\[[^\]]+\]/, "").trim();
 };
 
 export const setChatInputValue = (value, replace = true) => {
