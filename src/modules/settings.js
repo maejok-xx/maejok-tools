@@ -263,6 +263,8 @@ export const createSettingsModal = () => {
     body.appendChild(panel);
   });
 
+  bar.firstChild.classList.add(props.tabs.tab.active.class)
+
   wrapper.appendChild(body);
 
   modal.setBody(wrapper);
@@ -287,19 +289,24 @@ export const createColorButton = function (option, color, label, action) {
 
   const button = document.createElement("button");
 
-  if (option && option.type == "keybind") {
-    button.classList.add(props.buttons.bind.class);
+  if (option?.type == "keybind") {
+    button.classList.add(...props.buttons.bind.class);
   }
+
+  if (option?.type == "button") {
+    button.classList.add(...props.buttons.standard.classes);
+  }
+
   button.background_color =
     props.buttons.img_colors[color] || props.buttons.img_colors["red"];
 
+  button.classList.add(...tab_props.button.classes);
   const text = document.createElement("div");
-  text.classList.add(...tab_props.button.class);
   text.textContent = label;
 
   button.appendChild(text);
 
-  text.addEventListener("click", function () {
+  button.addEventListener("click", function () {
     if (typeof action === "function") {
       action.call(this);
     }
@@ -309,6 +316,28 @@ export const createColorButton = function (option, color, label, action) {
 
   return button;
 };
+
+export const createButton = function (type, action) {
+  const props = ELEMENTS.inputs;
+
+  const wrapper = document.createElement("div");
+  wrapper.classList.add(props.buttons.wrapper.class);
+
+  const button = document.createElement("button");
+  button.classList.add(...props.buttons[type].class);
+
+  button.addEventListener("click", action);
+
+  const label = document.createElement("div");
+  label.classList.add(props.buttons.label.class);
+  label.textContent = type;
+
+  button.appendChild(label);
+
+  wrapper.appendChild(button);
+
+  return wrapper;
+}
 
 export const updateBindButtons = () => {
   const buttons = document.querySelectorAll(
@@ -639,7 +668,7 @@ function createKeybindInput(option, panel, modal) {
 
   const button = createColorButton(
     option,
-    "light-green",
+    "lightGreen",
     keyEventToString(binds[option.value]),
     function () {
       clickKeybindButton(this, option.label, option.value);
@@ -715,28 +744,6 @@ function createHiddenInput(option, panel) {
   panel.appendChild(input);
 }
 
-function createButton(type, action) {
-  const props = ELEMENTS.inputs;
-
-  const wrapper = document.createElement("div");
-  wrapper.classList.add(props.buttons.wrapper.class);
-
-  const button = document.createElement("button");
-  button.classList.add(...props.buttons[type].class);
-
-  button.addEventListener("click", action);
-
-  const label = document.createElement("div");
-  label.classList.add(props.buttons.label.class);
-  label.textContent = type;
-
-  button.appendChild(label);
-
-  wrapper.appendChild(button);
-
-  return wrapper;
-}
-
 function createTabBar(props) {
   const bar = document.createElement("div");
   bar.classList.add(...props.tabs.bar.class);
@@ -754,7 +761,7 @@ function createTabButton(tab, props) {
 
   button.appendChild(text);
 
-  text.addEventListener("click", () => clickTabButton(tab));
+  text.addEventListener("click", () => clickTabButton(tab, button));
 
   return button;
 }

@@ -597,7 +597,7 @@ const Config = () => {
       // --- KEYBINDS
       {
         name: "keyBinds",
-        label: "KEYBINDS",
+        label: "Keybinds",
         content: {
           groups: [
             { name: "bindoptions", label: "Bind Options" },

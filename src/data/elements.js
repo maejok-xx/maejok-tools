@@ -338,7 +338,7 @@ const Elements = {
     class: "modal_modal__MS70U",
     confirm: {
       selector: `[class^="confirm-modal_confirm-modal"] button:nth-child(1)`,
-      class: "confirm-modal_confirm-modal__pxBa_",
+      class: "button_button__p28wJ",
     },
     container: {
       selector: `[class^="modal_modal-container"]`,
@@ -407,11 +407,14 @@ const Elements = {
     tabs: {
       bar: {
         selector: `[class^="maejok-settings_tab-bar"]`,
-        class: [`maejok-settings_tab-bar`],
+        class: [`maejok-settings_tab-bar`, `button-group_button-group__7lSi7`],
       },
       tab: {
         selector: `[class^="maejok-tab-button"]`,
         class: [`maejok-tab-button`],
+        active: {
+          class: `button-group_selected__rLKL4`
+        }
       },
       panel: {
         selector: `[class^="maejok-settings_tab-panel"]`,
@@ -518,9 +521,10 @@ const Elements = {
         `maejok-input-button`,
         `color-button_color-button__cW61T`,
         `color-button_md__GaczN`,
+        `button_button__p28wJ`
       ],
       bind: {
-        class: "maejok-input-button-bind",
+        class: ["maejok-input-button-bind", "button_sm__O72y2", "button_button__p28wJ"],
         selector: `[class*="maejok-input-button-bind"]`,
       },
       img_colors: {
@@ -534,7 +538,10 @@ const Elements = {
         class: [`color-button_text__3OQAq`],
         selector: `[class*="color-button_text__3OQAq"]`,
       },
-      save: { class: [`maejok-input-button-save`] },
+      save: { class: [`maejok-input-button-save`, `button_button__p28wJ`] },
+      standard: { 
+        classes: ["button_sm__O72y2", "button_button__p28wJ"] 
+      }
     },
     textbox: {
       class: "maejok-input-textbox",

@@ -5,41 +5,34 @@
 }
 
 .maejok-settings_tab-bar {
-  color-scheme: dark;
-  font-family: JetBrains Mono,monospace;
-  font-size: 16px;
-  line-height: 16px;
-  color: #aaa;
-  text-shadow: 2px 2px 0 rgba(0,0,0,.75);
-  --mobile-bottom-panel-height: 0;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
   display: flex;
-  justify-content: center;
+  margin-top: $space-sm;
 
   .maejok-settings_tab {
     .maejok-tab-button {
-      box-sizing: border-box;
-      margin: 0;
-      font-family: JetBrains Mono,monospace;
-      font-size: 16px;
-      line-height: 16px;
-      all: unset;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 8px;
-      gap: 8px;
+      flex: 1;
+      border: none;
       cursor: pointer;
-      color: #fff;
-      background-color: rgba(43,45,46,.25);
-      flex-grow: 1;
-      border: 1px solid #505050;
-      border-left: 0;
-      border-radius: 0;
-      font-weight: 400;
+      width: 100px;
+      text-transform: uppercase;
+
+      button {
+        all: unset;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 8px;
+        gap: 8px;
+        cursor: pointer;
+        color: #fff;
+        background-color: rgba(43, 45, 46, .25);
+        flex-grow: 1;
+        border: 1px solid #505050;
+        border-left: 0;
+        border-radius: 0;
+        font-weight: 400;
+      }
     }
   }
 }

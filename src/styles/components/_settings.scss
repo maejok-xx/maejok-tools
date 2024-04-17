@@ -91,6 +91,7 @@
 .maejok-input-button-wrapper {
   width: 50%;
   margin: $space-lg auto 0;
+  display: grid;
 }
 
 .maejok-input-label-checked {
@@ -112,12 +113,6 @@
   margin-left: auto;
   flex-basis: fit-content;
   min-width: 200px;
-}
-
-.maejok-input-button-save {
-  color: #fff;
-  border-color: #fff;
-  background-color: #2b2d2e;
 }
 
 .maejok-settings-config-wrapper {
@@ -166,9 +161,9 @@
   min-width: 400px;
   max-width: 800px;
   font-size: larger;
-  font-weight: 800;
-  font-family: monospace;
-  color: $color-darkgray;
+  font-weight: 600;
+  font-family: JetBrains Mono;
+  color: $color-darkyellow;
   line-height: $space-lg;
   margin: $space-md $space-xl $space-lg;
   text-align: center;
