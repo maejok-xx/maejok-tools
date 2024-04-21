@@ -31,6 +31,10 @@ import "./styles/styles.scss";
   toggleScanLines(config.get("hideScanLines") && config.get("enablePlugin"));
 
   const address = window.location.href;
+  const userData = config.get("userData");
+  if (userData) {
+    state.set("user", userData);
+  }
 
   let isLoaded = false;
   let chat,
@@ -48,9 +52,6 @@ import "./styles/styles.scss";
 
   const loadingInterval = setInterval(async () => {
     if (address.includes("/chat")) {
-      const userData = config.get("userData");
-      state.set("userData", userData);
-
       chat = document.querySelector(ELEMENTS.chat.list.selector);
       isLoaded = chat !== null;
       isPopoutChat = true;
@@ -91,9 +92,11 @@ import "./styles/styles.scss";
       return;
     }
 
-    if (!state.get("user") && !hasFetchedUserData && !isPopoutChat) {
+    const userFetched = state.get("user") || hasFetchedUserData;
+    if (!userFetched && !isPopoutChat) {
       hasFetchedUserData = true;
       let userProfile;
+
       try {
         userProfile = await getUserData(userId);
       } catch (error) {
