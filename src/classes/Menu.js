@@ -7,6 +7,7 @@ export default class Menu {
     this.position = position;
     this.items = items;
     this.title = options.title;
+    this.titleColor = options.titleColor;
     this.class = options.class;
     this.id = functions.uuid();
     this.menu = null;
@@ -28,6 +29,16 @@ export default class Menu {
       const menuTitle = document.createElement("div");
       menuTitle.classList.add(ELEMENTS.menu.title.class);
       menuTitle.innerText = this.title;
+
+      if (this.titleColor) {
+        const color  = functions.isColorTooDark(this.titleColor) ?
+          functions.increaseColorBrightness(this.titleColor) :
+          this.titleColor;
+
+        menuTitle.setAttribute("style", `color: ${color}`);
+      } else {
+        menuTitle.setAttribute("style", `color: #28d97f`);
+      }
       this.menu.appendChild(menuTitle);
     }
 

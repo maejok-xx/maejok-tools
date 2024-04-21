@@ -16,8 +16,8 @@ import Menu from "../classes/Menu";
 import ELEMENTS from "../data/elements";
 
 export const open = (type, position, options) => {
-  const createMenu = (position, items, title) => {
-    const menu = new Menu(position, items.filter(Boolean), title);
+  const createMenu = (position, items, options) => {
+    const menu = new Menu(position, items.filter(Boolean), options);
     return menu;
   };
 
@@ -86,7 +86,7 @@ export const open = (type, position, options) => {
         },
       ];
 
-      const options = { title: user.displayName };
+      const options = { title: user.displayName, titleColor: user.color };
       return createMenu(position, items, options);
     },
 
