@@ -1,13 +1,14 @@
 ## MAEJOK-TOOLS for Fishtank.live
 
-### Be sure to watch Fishtank Season Two LIVE and Fishtank Season One Episodes at https://www.fishtank.live/
+### Be sure to watch Fishtank Season Two LIVE and Fishtank Season One Episodes and Season Two clips, and get ready for Season 2.5 at https://www.fishtank.live/
 
 ---
 
 Features:
 
-- Mentions log
+- Now working with Season 2.5! (thanks to [f3rked](https://github.com/f3rked))
 - Customizable Keybinds (thanks to [deerfarce](https://github.com/deerfarce))
+- Mentions log
 - Ability to Hide: Chat Timestamps/Avatars/Clans/XP/Roll/Emotes/Consumables/System Messages, & Screen Takeovers
 - Emotes Menu (right click chat input)
 - Chat Message Menus (right click messages)

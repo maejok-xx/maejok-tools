@@ -1,5 +1,28 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.14.0_**
+
+_Release: 04-21-2024_
+
+### Notes
+
+- Updated to work with the Season 2.5 site.
+- MASSIVE thank you to [f3rked](https://github.com/f3rked) for making this happen! I wasn't going to do it, so you only have him to thank!
+
+### Bug Fixes
+
+- N/A
+
+### Features Added / Changed
+
+- N/A
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.13.6_**
 
 ### Notes

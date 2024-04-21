@@ -1,8 +1,8 @@
 {
   "name": "maejok-tools",
   "author": "maejok-xx",
-  "version": "2.13.6",
-  "description": "Add-on Tools for Fishtank.live Season 2",
+  "version": "2.14.0",
+  "description": "Add-on Tools for Fishtank.live Season 2.5",
   "main": "main.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --watch --progress --mode development",
@@ -37,6 +37,10 @@
   "greasyfork": "https://greasyfork.org/en/scripts/465416-maejok-tools-for-fishtank-live",
   "icon": "https://raw.githubusercontent.com/maejok-xx/maejok-tools/master/public/images/icon.png",
   "contributors": [
+    {
+      "name": "f3rked",
+      "url": "https://github.com/f3rked"
+    },
     {
       "name": "deerfarce",
       "url": "https://github.com/deerfarce"
