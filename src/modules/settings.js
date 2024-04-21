@@ -154,7 +154,7 @@ export const createSettingsButton = () => {
   );
   const inputLength = document.querySelector(
     ELEMENTS.chat.input.actions.inputLength.selector
-  )
+  );
   const props = ELEMENTS.settings;
 
   const button = document.createElement("button");
@@ -263,7 +263,7 @@ export const createSettingsModal = () => {
     body.appendChild(panel);
   });
 
-  bar.firstChild.classList.add(props.tabs.tab.active.class)
+  bar.firstChild.classList.add(props.tabs.tab.active.class);
 
   wrapper.appendChild(body);
 
@@ -337,7 +337,7 @@ export const createButton = function (type, action) {
   wrapper.appendChild(button);
 
   return wrapper;
-}
+};
 
 export const updateBindButtons = () => {
   const buttons = document.querySelectorAll(
@@ -421,6 +421,9 @@ function createAboutPanel(panel) {
   contributors.appendChild(contributorsLabel);
 
   packageJson.contributors.forEach((contributor, index) => {
+    if (index !== 0) {
+      contributors.appendChild(document.createTextNode(" / "));
+    }
     const contributorLink = document.createElement("button");
     contributorLink.classList.add(
       "maejok-settings-about-contact_link",
