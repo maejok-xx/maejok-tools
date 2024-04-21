@@ -7,9 +7,9 @@
     display: flex;
     align-self: center;
     margin-left: $space-sm;
-    font-weight: 800;
+    font-weight: 600;
     cursor: pointer;
-    color: $color-darkyellow;
+    color: $color-graygreen;
     text-shadow: 0 0 $space-xxs $color-black;
     margin-top: -3px;
   }
@@ -91,6 +91,7 @@
 .maejok-input-button-wrapper {
   width: 50%;
   margin: $space-lg auto 0;
+  display: grid;
 }
 
 .maejok-input-label-checked {
@@ -114,10 +115,6 @@
   min-width: 200px;
 }
 
-.maejok-input-button-save {
-  background-image: url("https://cdn.fishtank.live/images/slices/console-button-long-green.png");
-}
-
 .maejok-settings-config-wrapper {
   max-width: 330px;
   margin: $space-lg auto $space-lg;
@@ -130,12 +127,9 @@
       display: flex;
       align-self: center;
       font-size: large;
-      color: $color-dark;
-      font-family:
-        Highway Gothic,
-        sans-serif;
+      color: #f8ec94;
+      font-family: JetBrains Mono, monospace;
       font-weight: 600;
-      text-transform: uppercase;
       text-shadow: 0 0 $space-xxs rgba(225, 239, 252, 0.75);
     }
 
@@ -167,9 +161,9 @@
   min-width: 400px;
   max-width: 800px;
   font-size: larger;
-  font-weight: 800;
-  font-family: monospace;
-  color: $color-darkgray;
+  font-weight: 600;
+  font-family: JetBrains Mono;
+  color: $color-darkyellow;
   line-height: $space-lg;
   margin: $space-md $space-xl $space-lg;
   text-align: center;

@@ -152,25 +152,20 @@ export const createSettingsButton = () => {
   const inputActions = document.querySelector(
     ELEMENTS.chat.input.actions.selector
   );
+  const inputLength = document.querySelector(
+    ELEMENTS.chat.input.actions.inputLength.selector
+  )
   const props = ELEMENTS.settings;
 
   const button = document.createElement("button");
   button.type = "button";
-  button.classList.add(...props.opener.button.classes);
-  inputActions.insertBefore(button, inputActions.firstChild);
-
-  const buttonImg = document.createElement("img");
-  buttonImg.setAttribute(...props.opener.button.image.attr);
-  button.appendChild(buttonImg);
-
-  const buttonSquare = document.createElement("div");
-  buttonSquare.classList.add(...props.opener.button.square.class);
-  button.appendChild(buttonSquare);
+  button.classList.add(props.opener.button.class);
+  inputActions.insertBefore(button, inputLength);
 
   const buttonIcon = document.createElement("div");
   buttonIcon.classList.add(...props.opener.button.icon.class);
   buttonIcon.innerHTML = `<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none"><path d="M2257 5065 c-568 -69 -1104 -335 -1502 -747 -183 -189 -314 -369 -429 -589 -194 -371 -286 -748 -286 -1169 0 -411 85 -770 270 -1135 129 -256 261 -437 469 -646 209 -208 390 -340 646 -469 363 -184 725 -270 1135 -270 875 0 1666 439 2144 1190 179 282 320 685 361 1036 57 491 -31 987 -255 1429 -121 240 -253 426 -445 624 -402 416 -935 679 -1513 746 -153 18 -445 18 -595 0z m623 -400 c433 -67 831 -264 1144 -565 352 -339 571 -758 641 -1225 83 -563 -60 -1130 -404 -1593 -83 -112 -311 -340 -423 -423 -520 -387 -1171 -519 -1792 -364 -583 145 -1091 545 -1370 1077 -110 210 -185 439 -223 679 -24 157 -24 461 0 618 82 527 340 984 750 1327 319 268 722 438 1147 484 117 12 403 4 530 -15z"></path><path d="M1655 3526 c-86 -27 -160 -84 -210 -160 -131 -200 -55 -466 164 -573 50 -25 67 -28 161 -28 93 0 112 3 162 27 324 151 300 618  -36 731 -59 20 -183 21 -241 3z"></path><path d="M3240 3531 c-100 -33 -199 -117 -243 -206 -98 -197 -11 -438 191 -533 50 -24 69 -27 162 -27 94 0 111 3 161 28 87 42 143 98 185 183 100 202 18 439 -185 532 -46 21 -73 27 -151 29 -52 1 -106 -1 -120 -6z"></path><path d="M1455 2220 c-54 -109 -97 -201 -95 -203 3 -3 140 -70 304 -151 165 -80 297 -148 295 -150 -2 -3 -146 -52 -319 -111 -173 -58 -316 -108 -318 -110 -7 -7 133 -417 143 -421 6 -3 250 76 544 174 l534 179 504 -249 c277 -136 507 -248 511 -248 9 0 208 398 202 403 -3 2 -138 70 -300 151 -162 81 -296 149 -298 151 -2 2 141 51 316 109 l320 107 -70 212 c-39 117 -72 214 -74 215 -1 2 -244 -77 -538 -177 l-536 -181 -507 250 c-278 138 -509 250 -512 250 -4 0 -51 -90 -106 -200z"></path></g></svg>`;
-  buttonSquare.appendChild(buttonIcon);
+  button.appendChild(buttonIcon);
 
   button.addEventListener("click", clickOpenSettingsModal);
   if (config.get("autoOpenSettings")) clickOpenSettingsModal;
@@ -268,6 +263,8 @@ export const createSettingsModal = () => {
     body.appendChild(panel);
   });
 
+  bar.firstChild.classList.add(props.tabs.tab.active.class)
+
   wrapper.appendChild(body);
 
   modal.setBody(wrapper);
@@ -291,27 +288,25 @@ export const createColorButton = function (option, color, label, action) {
   const tab_props = ELEMENTS.settings.tabs;
 
   const button = document.createElement("button");
-  button.classList.add(...props.buttons.classes);
 
-  if (option && option.type == "keybind") {
-    button.classList.add(props.buttons.bind.class);
+  if (option?.type == "keybind") {
+    button.classList.add(...props.buttons.bind.class);
   }
 
-  const image = document.createElement("img");
-  image.setAttribute(...tab_props.button.image.attr);
-  image.src =
-    props.buttons.img_colors[color] || props.buttons.img_colors["orange"];
-  image.alt = "";
+  if (option?.type == "button") {
+    button.classList.add(...props.buttons.standard.classes);
+  }
 
-  button.appendChild(image);
+  button.background_color =
+    props.buttons.img_colors[color] || props.buttons.img_colors["red"];
 
+  button.classList.add(...tab_props.button.classes);
   const text = document.createElement("div");
-  text.classList.add(...tab_props.button.text.class);
   text.textContent = label;
 
   button.appendChild(text);
 
-  text.addEventListener("click", function () {
+  button.addEventListener("click", function () {
     if (typeof action === "function") {
       action.call(this);
     }
@@ -321,6 +316,28 @@ export const createColorButton = function (option, color, label, action) {
 
   return button;
 };
+
+export const createButton = function (type, action) {
+  const props = ELEMENTS.inputs;
+
+  const wrapper = document.createElement("div");
+  wrapper.classList.add(props.buttons.wrapper.class);
+
+  const button = document.createElement("button");
+  button.classList.add(...props.buttons[type].class);
+
+  button.addEventListener("click", action);
+
+  const label = document.createElement("div");
+  label.classList.add(props.buttons.label.class);
+  label.textContent = type;
+
+  button.appendChild(label);
+
+  wrapper.appendChild(button);
+
+  return wrapper;
+}
 
 export const updateBindButtons = () => {
   const buttons = document.querySelectorAll(
@@ -651,7 +668,7 @@ function createKeybindInput(option, panel, modal) {
 
   const button = createColorButton(
     option,
-    "green",
+    "lightGreen",
     keyEventToString(binds[option.value]),
     function () {
       clickKeybindButton(this, option.label, option.value);
@@ -727,28 +744,6 @@ function createHiddenInput(option, panel) {
   panel.appendChild(input);
 }
 
-function createButton(type, action) {
-  const props = ELEMENTS.inputs;
-
-  const wrapper = document.createElement("div");
-  wrapper.classList.add(props.buttons.wrapper.class);
-
-  const button = document.createElement("button");
-  button.classList.add(...props.buttons[type].class, ...props.buttons.classes);
-
-  button.addEventListener("click", action);
-
-  const label = document.createElement("div");
-  label.classList.add(props.buttons.label.class);
-  label.textContent = type;
-
-  button.appendChild(label);
-
-  wrapper.appendChild(button);
-
-  return wrapper;
-}
-
 function createTabBar(props) {
   const bar = document.createElement("div");
   bar.classList.add(...props.tabs.bar.class);
@@ -761,20 +756,12 @@ function createTabButton(tab, props) {
   const button = document.createElement("button");
   button.classList.add(...props.tabs.button.classes);
 
-  const image = document.createElement("img");
-  image.setAttribute(...props.tabs.button.image.attr);
-  image.src = props.tabs.button.image.src;
-  image.alt = "";
-
-  button.appendChild(image);
-
   const text = document.createElement("div");
-  text.classList.add(...props.tabs.button.text.class);
   text.textContent = tab.label;
 
   button.appendChild(text);
 
-  text.addEventListener("click", () => clickTabButton(tab));
+  text.addEventListener("click", () => clickTabButton(tab, button));
 
   return button;
 }

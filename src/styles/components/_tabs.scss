@@ -6,7 +6,6 @@
 
 .maejok-settings_tab-bar {
   display: flex;
-  gap: $space-xxs;
   margin-top: $space-sm;
 
   .maejok-settings_tab {
@@ -17,10 +16,22 @@
       width: 100px;
       text-transform: uppercase;
 
-      img {
-        width: 373px !important;
-        height: 75px !important;
-        color: transparent !important;
+      button {
+        all: unset;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 8px;
+        gap: 8px;
+        cursor: pointer;
+        color: #fff;
+        background-color: rgba(43, 45, 46, .25);
+        flex-grow: 1;
+        border: 1px solid #505050;
+        border-left: 0;
+        border-radius: 0;
+        font-weight: 400;
       }
     }
   }

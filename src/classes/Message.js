@@ -81,11 +81,7 @@ export default class Message {
 
     const id = this.node.getAttribute("data-user-id") || false;
 
-    const dirtyDisplayName = functions.getElementText(
-      this.node,
-      senderSelector
-    );
-    const displayName = functions.cleanDisplayName(dirtyDisplayName);
+    const displayName = functions.getSender(this.node, this.type);
 
     const html = this.node.querySelector(senderSelector)?.outerHTML || false;
 

@@ -412,7 +412,15 @@ export const clickAccordionHeader = (accordion, panel, props) => {
   }
 };
 
-export const clickTabButton = (tab) => {
+export const clickTabButton = (tab, element) => {
+  const activeClass = ELEMENTS.settings.tabs.tab.active.class;
+  const wrapper = element.parentElement;
+  
+  for (const child of wrapper.children) {
+    child.classList.remove(activeClass)
+  }
+  element.classList.add(activeClass);
+
   playSound("click-high-short");
   settings.openTab(tab.name);
 };
@@ -523,10 +531,8 @@ export const clickKeybindButton = (button, label, key) => {
   errorText.textContent = "Conflicts with an existing keybind!";
   errorText.style.display = "none";
 
-  const confirmBtn = settings.createColorButton(
-    null,
-    "blue",
-    "Confirm",
+  const confirmBtn = settings.createButton(
+    "save",
     function () {
       playSound("shutter");
       let bind = state.get("pendingKeybind");

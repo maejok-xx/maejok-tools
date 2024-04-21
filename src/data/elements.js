@@ -32,39 +32,35 @@ const Elements = {
     class: "top-bar_top-bar___Z0QX",
     user: {
       selector: `[class^="top-bar_user"]`,
-      class: `top-bar_user__J28x0`,
+      class: `top-bar-user_top-bar-user__VUdJm`,
       name: {
-        selector: `[class^="top-bar_display-name"]`,
-        class: `top-bar_display-name__TM9I3`,
+        selector: `[class^="top-bar-user_display-name"]`,
+        class: `top-bar-user_display-name__bzlpw`,
       },
       clan: {
         selector: `[class^="top-bar_clan_"]`,
-        class: `top-bar_clan__qikGL`,
+        class: `top-bar-user_clan__M5hMP`,
       },
       level: {
         selector: `[class^="top-bar_xp"]`,
-        class: `top-bar_xp__WP8hN`,
+        class: `top-bar-user_xp___ttgt`,
       },
       tokens: {
         selector: `[class^="top-bar_tokens"]`,
-        class: `top-bar_tokens__C71wC`,
+        class: `top-bar-user_tokens__vAwEj`,
       },
     },
-    title: {
-      selector: `[class^="top-bar_title__"]`,
-      class: "top-bar_title__DJbDC",
-      admin: {
-        selector: `[class^="admin-toolbar_admin-toolbar__"]`,
-        class: "admin-toolbar_admin-toolbar__Jlc17",
-      },
-      logo: {
-        selector: `[class^="top-bar_logo__"]`,
-        class: "top-bar_logo__XL0_C",
-      },
-      links: {
-        selector: `[class^="top-bar-links_top-bar-links__70nuu"]`,
-        class: "top-bar-links_top-bar-links__70nuu",
-      },
+    admin: {
+      selector: `[class^="admin-toolbar_admin-toolbar__"]`,
+      class: "admin-toolbar_admin-toolbar__Jlc17",
+    },
+    logo: {
+      selector: `[class^="top-bar_logo__"]`,
+      class: "top-bar_logo__XL0_C",
+    },
+    links: {
+      selector: `[class^="top-bar-links"]`,
+      class: "top-bar_links__4FJwt",
     },
     director: {
       selector: `[class^="top-side_director__"]`,
@@ -110,13 +106,25 @@ const Elements = {
     header: {
       selector: `[class^="chat_header__"]`,
       class: "chat_header__8kNPS",
+      title: {
+        selector: `[class^="chat_title__"]`,
+        class: "chat_title__CrfQP",
+      },
+      roomSelect: {
+        selector: `[class^="chat-room-selector_chat-room-selector__"]`,
+        class: "chat-room-selector_chat-room-selector__PayQH",
+      },
       presence: {
         selector: `[class^="chat_presence__"]`,
         class: "chat_presence__90XuO",
-        count: {
-          selector: `[class^="chat_count__"]`,
-          class: "chat_count__D7xic",
+        online: {
+          selector: `[class*="maejok-chatters_presence-online"]`,
+          class: "maejok-chatters_presence-online",
         },
+        wrapper: {
+          selector: `[class*="maejok-chatters_presence-container"]`,
+          class: "maejok-chatters_presence-container",
+        }
       },
       recent: {
         selector: `[class*="maejok-chatters_presence"]`,
@@ -134,8 +142,8 @@ const Elements = {
       },
     },
     list: {
-      selector: `[class^="chat_inner"]`,
-      class: `chat_inner__cymIB`,
+      selector: `[class^="chat_messages__"]`,
+      class: `chat_messages__2IBEJ`,
     },
     room: {
       selector: `[class^="chat-room-selector_chat-room-selector__"]`,
@@ -290,11 +298,15 @@ const Elements = {
       },
       actions: {
         selector: `[class^="chat-input_actions"]`,
-        class: `chat-input_actions__V_ho0`,
+        class: `chat-input_actions__QqSJK`,
         medals: {
-          selector: `[class^="medal-selector_medal-selector__"]`,
-          class: "medal-selector_medal-selector___1oot",
+          selector: `[class^="medal-selector_medal-selector-wrapper"]`,
+          class: "medal-selector_medal-selector-wrapper__bR_Ts",
         },
+        inputLength: {
+          selector: `[class^="chat-input_length__"]`,
+          class: "chat-input_length__c7xG6",
+        }
       },
       rich: {
         mention: "chat-input-mention_chat-input-mention__pDrCH",
@@ -326,7 +338,7 @@ const Elements = {
     class: "modal_modal__MS70U",
     confirm: {
       selector: `[class^="confirm-modal_confirm-modal"] button:nth-child(1)`,
-      class: "confirm-modal_confirm-modal__pxBa_",
+      class: "button_button__p28wJ",
     },
     container: {
       selector: `[class^="modal_modal-container"]`,
@@ -347,8 +359,11 @@ const Elements = {
         selector: `[class^="close-button"]`,
         classes: ["close-button_close-button__BKUKA", "close-button_sm__n0dZT"],
         image: {
-          selector: `[class=^"close-button"] img`,
-          attr: ["src", "https://cdn.fishtank.live/images/slices/close.png"],
+          attr: [
+            `src`,
+            // UPDATE TO GITHUB
+            `https://cdn.fishtank.live/images/slices/close.png`,
+          ],
         },
       },
     },
@@ -360,27 +375,6 @@ const Elements = {
     body: {
       selector: `[class^="modal_body"]`,
       class: [`modal_body__j3Bav`],
-    },
-    screws: {
-      selector: `[class^="screws_screws"]`,
-      class: `screws_screws__letgM`,
-      top: {
-        left: {
-          classes: [`screws_screw__t_1iY`, `screws_top-left__8K2_Q`],
-        },
-        right: {
-          selector: `[class*="screws_top-right"]`,
-          classes: [`screws_screw__t_1iY`, `screws_top-right__kdqNC`],
-        },
-      },
-      bottom: {
-        left: {
-          classes: [`screws_screw__t_1iY`, `screws_bottom-left__Kz1OJ`],
-        },
-        right: {
-          classes: [`screws_screw__t_1iY`, `screws_bottom-right__ebrGH`],
-        },
-      },
     },
     prompt: {
       selector: `[class*="maejok-modal_prompt"]`,
@@ -406,25 +400,21 @@ const Elements = {
       selector: `[class^="maejok-settings-opener"]`,
       class: [`maejok-settings-opener`],
       button: {
-        classes: [`icon-button_icon-button___ltd_`, `icon-button_md__NKfSk`],
-        square: { class: [`icon-button_text___4FTZ`] },
+        class: `chat-input_action__qw4PQ`,
         icon: { class: [`icon_icon__bDzMA`] },
-        image: {
-          attr: [
-            `src`,
-            `${REPO_RAW_ROOT}/public/images/console-button-square-purple.png`,
-          ],
-        },
       },
     },
     tabs: {
       bar: {
         selector: `[class^="maejok-settings_tab-bar"]`,
-        class: [`maejok-settings_tab-bar`],
+        class: [`maejok-settings_tab-bar`, `button-group_button-group__7lSi7`],
       },
       tab: {
         selector: `[class^="maejok-tab-button"]`,
         class: [`maejok-tab-button`],
+        active: {
+          class: `button-group_selected__rLKL4`
+        }
       },
       panel: {
         selector: `[class^="maejok-settings_tab-panel"]`,
@@ -434,16 +424,7 @@ const Elements = {
         selector: `[class^="maejok-settings_body"]`,
         classes: [
           `maejok-tab-button`,
-          `color-button_color-button__cW61T`,
-          `color-button_md__GaczN`,
         ],
-        image: {
-          attr: [`loading`, `lazy`, `decoding`, `async`, `data-nimg`, `1`],
-          src: `https://cdn.fishtank.live/images/slices/console-button-long-orange.png`,
-        },
-        text: {
-          class: ["color-button_text__3OQAq"],
-        },
       },
     },
     accordion: {
@@ -540,25 +521,27 @@ const Elements = {
         `maejok-input-button`,
         `color-button_color-button__cW61T`,
         `color-button_md__GaczN`,
+        `button_button__p28wJ`
       ],
       bind: {
-        class: "maejok-input-button-bind",
+        class: ["maejok-input-button-bind", "button_sm__O72y2", "button_button__p28wJ"],
         selector: `[class*="maejok-input-button-bind"]`,
       },
       img_colors: {
-        orange:
-          "https://cdn.fishtank.live/images/slices/console-button-long-orange.png",
-        green:
-          "https://cdn.fishtank.live/images/slices/console-button-long-green.png",
-        red: "https://cdn.fishtank.live/images/slices/console-button-long-red.png",
-        blue: "https://cdn.fishtank.live/images/slices/console-button-long-blue.png",
+        lightGreen:
+          "hsla(53, 88%, 78%, .1)",
+        red: "hsla(3, 100%, 73%, .1)",
+        darkGreen: "rgba(85, 213, 180, .1)",
       },
       wrapper: { class: [`maejok-input-button-wrapper`] },
       label: {
         class: [`color-button_text__3OQAq`],
         selector: `[class*="color-button_text__3OQAq"]`,
       },
-      save: { class: [`maejok-input-button-save`] },
+      save: { class: [`maejok-input-button-save`, `button_button__p28wJ`] },
+      standard: { 
+        classes: ["button_sm__O72y2", "button_button__p28wJ"] 
+      }
     },
     textbox: {
       class: "maejok-input-textbox",

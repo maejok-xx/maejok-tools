@@ -30,14 +30,9 @@ export const stop = () => {
     return;
   }
 
-  const chatCount = document.querySelector(
-    ELEMENTS.chat.header.recent.selector
-  );
-
-  chatCount?.remove();
+  restore();
 
   state.set("recentChatters", []);
-
   clearInterval(existingInterval);
   state.set("recentChattersInterval", null);
 };
@@ -125,7 +120,7 @@ function refresh() {
   }
 
   const numberString = String(users.length);
-  const zerosToAdd = 5 - numberString.length;
+  const zerosToAdd = 3 - numberString.length;
   const zeroPadding = "0".repeat(zerosToAdd);
 
   chatCount.innerText = zeroPadding + numberString;
@@ -136,24 +131,64 @@ function create() {
     return;
   }
 
+  const header = document.querySelector(
+    ELEMENTS.chat.header.selector
+  );
+
   const chatHeader = document.querySelector(
     ELEMENTS.chat.header.presence.selector
   );
-  const chatPresence = document.createElement("div");
-  chatPresence.classList.add(ELEMENTS.chat.header.presence.class);
-  chatPresence.classList.add(ELEMENTS.chat.header.recent.class);
+
+  const roomSelect = document.querySelector(
+    ELEMENTS.chat.header.roomSelect.selector
+  );
+
+  const chatPresenceContainer = document.createElement("div");
+  chatPresenceContainer.classList.add(ELEMENTS.chat.header.presence.wrapper.class);
+
+  const chattersOnline = document.createElement("div");
+  chattersOnline.innerHTML = chatHeader.innerHTML;
+  chattersOnline.classList.add(...[ELEMENTS.chat.header.presence.class, ELEMENTS.chat.header.presence.online.class]);
+
+  const chattersActive = document.createElement("div");
+  chattersActive.classList.add(ELEMENTS.chat.header.recent.class);
+  chattersActive.classList.add(ELEMENTS.chat.header.presence.class);
 
   const chattersText = document.createElement("div");
-  chattersText.innerText = `Chatting`;
+  chattersText.innerText = "Active";
 
   const chattersCount = document.createElement("div");
-  chattersCount.classList.add(ELEMENTS.chat.header.presence.count.class);
   chattersCount.classList.add(ELEMENTS.chat.header.recent.count.class);
-  chattersCount.innerHTML = `00000`;
+  chattersCount.innerHTML = "000";
+  chattersCount.style.marginRight = "5px";
 
-  chatHeader.insertAdjacentElement("afterend", chatPresence);
-  chatPresence.appendChild(chattersCount);
-  chatPresence.appendChild(chattersText);
+  chattersActive.appendChild(chattersCount);
+  chattersActive.appendChild(chattersText);
+  chatPresenceContainer.appendChild(chattersOnline);
+  chatPresenceContainer.appendChild(chattersActive);
+  header.insertBefore(chatPresenceContainer, roomSelect);
+  chatHeader.remove();
 
   update();
+}
+
+function restore() {
+  const onlineChatters = document.querySelector(
+    ELEMENTS.chat.header.presence.online.selector
+  );
+
+  const chatPresenceContainer = document.querySelector(
+    ELEMENTS.chat.header.presence.wrapper.selector
+  );
+
+  const chatHeader = document.querySelector(
+    ELEMENTS.chat.header.selector
+  );
+
+  const roomSelect = document.querySelector(
+    ELEMENTS.chat.header.roomSelect.selector
+  );
+  chatHeader.insertBefore(onlineChatters, roomSelect);
+
+  chatPresenceContainer.remove();
 }
