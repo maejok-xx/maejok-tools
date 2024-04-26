@@ -773,6 +773,7 @@ export const startMaejokTools = async () => {
 
   if (cfg.enableRecentChatters) {
     startRecentChatters();
+    observers.chatters.start();
   }
 
   disableSoundEffects(config.get("disableSoundEffects"));
@@ -814,6 +815,7 @@ export const stopMaejokTools = () => {
   toggleBigScreen(false);
 
   observers.chat.stop();
+  observers.chatters.stop();
   observers.body.stop();
   observers.modal.stop();
 

@@ -117,6 +117,7 @@ const Elements = {
       presence: {
         selector: `[class^="chat_presence__"]`,
         class: "chat_presence__90XuO",
+        id: "maejok-chatters_online-presence-id",
         online: {
           selector: `[class*="maejok-chatters_presence-online"]`,
           class: "maejok-chatters_presence-online",
@@ -539,8 +540,8 @@ const Elements = {
         selector: `[class*="color-button_text__3OQAq"]`,
       },
       save: { class: [`maejok-input-button-save`, `button_button__p28wJ`] },
-      standard: { 
-        classes: ["button_sm__O72y2", "button_button__p28wJ"] 
+      standard: {
+        classes: ["button_sm__O72y2", "button_button__p28wJ"]
       }
     },
     textbox: {

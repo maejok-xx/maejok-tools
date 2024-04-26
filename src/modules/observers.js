@@ -35,6 +35,35 @@ const observers = {
     },
   },
 
+  chatters: {
+    start: () => {
+      state.get("observers").chatters?.disconnect();
+
+      const chatters = document.querySelector(`#${ELEMENTS.chat.header.presence.id}`);
+
+      const chattersObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          const chattersOnlineNew = document.querySelector(
+            ELEMENTS.chat.header.presence.online.selector
+          );
+
+          const text = mutation.type === "childList" ? mutation.target.textContent : mutation.target.wholeText;
+
+          chattersOnlineNew.textContent = text;
+        });
+      });
+
+      chattersObserver.observe(chatters, { childList: true, characterData: true, subtree: true });
+
+      state.set("observers", { ...state.get("observers"), chatters: chattersObserver });
+    },
+
+    stop: () => {
+      const observers = state.get("observers");
+      observers.chatters?.disconnect();
+    },
+  },
+
   modal: {
     start: () => {
       state.get("observers").modal?.disconnect();
