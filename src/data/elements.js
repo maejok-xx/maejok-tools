@@ -57,6 +57,17 @@ const Elements = {
     logo: {
       selector: `[class^="top-bar_logo__"]`,
       class: "top-bar_logo__XL0_C",
+      img: {
+        selector: `[class^="top-bar_desktop__"]`,
+        class: "top-bar_desktop__pjX2g",
+      },
+      hoverImg: {
+        selector: ".maejok-logo_hover",
+        classes: ["maejok-logo_hover", "top-bar_desktop__pjX2g"],
+      },
+      hideImg: {
+        class: "maejok-logo_hide"
+      },
     },
     links: {
       selector: `[class^="top-bar-links"]`,
