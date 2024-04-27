@@ -88,7 +88,7 @@ export const rightClick = (event) => {
 };
 
 export const leftClick = (event) => {
-  const target = event.target.cloneNode(true);
+  const target = event.target;
 
   if (isMenuItem()) {
     return;
@@ -415,7 +415,7 @@ export const clickAccordionHeader = (accordion, panel, props) => {
 export const clickTabButton = (tab, element) => {
   const activeClass = ELEMENTS.settings.tabs.tab.active.class;
   const wrapper = element.parentElement;
-  
+
   for (const child of wrapper.children) {
     child.classList.remove(activeClass)
   }
