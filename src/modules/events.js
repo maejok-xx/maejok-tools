@@ -88,7 +88,7 @@ export const rightClick = (event) => {
 };
 
 export const leftClick = (event) => {
-  const target = event.target.cloneNode(true);
+  const target = event.target;
 
   if (isMenuItem()) {
     return;
@@ -96,22 +96,20 @@ export const leftClick = (event) => {
 
   menu.close();
 
-  checkForTarget();
-
-  const targets = {
-    [ELEMENTS.chat.message.sender.class]: "chatUsername",
-    [ELEMENTS.chat.message.avatar.class]: "chatAvatar",
-    [ELEMENTS.chat.header.recent.count.class]: "recentChatters",
-    [ELEMENTS.chat.header.recent.class]: "recentChatters",
-  };
-
-  const item = targets[target.className];
-  if (!item) {
-    return;
-  }
+  const item = checkClickedItem();
 
   switch (item) {
+    case "bigScreen":
+      const returnToBigScreen =
+        config.get("enableBigScreen") &&
+        config.get("bigScreenState") &&
+        state.get("bigScreenState");
+
+      setTimeout(() => toggleBigScreen(returnToBigScreen, true), 0);
+      break;
     case "chatAvatar":
+      target.className = ELEMENTS.chat.message.avatar.class;
+      break;
     case "chatUsername":
       if (!config.get("enableImprovedTagging")) {
         return;
@@ -127,7 +125,6 @@ export const leftClick = (event) => {
 
       mentionUser(user.displayName);
       break;
-
     case "recentChatters":
       const rect = event.target.getBoundingClientRect();
       const x = rect.left + rect.width / 2;
@@ -139,58 +136,30 @@ export const leftClick = (event) => {
       break;
   }
 
-  function checkSecondaryPanelTabClicked() {
-    const clicked = hasClass(
-      event.target.parentElement?.parentElement,
-      ELEMENTS.secondaryPanel.tab.class
-    );
+  function checkClickedItem() {
+    const targets = {
+      [ELEMENTS.chat.message.sender.class]: { target: target, item:  "chatUsername" },
+      [ELEMENTS.chat.message.avatar.class]: { target: target.parentElement, item: "chatAvatar" },
+      [ELEMENTS.chat.header.presence.wrapper.class]: { target: target.parentElement, item: "recentChatters" },
+      [ELEMENTS.chat.header.presence.class]: { target: target.parentElement, item: "recentChatters" },
+      [ELEMENTS.secondaryPanel.tab.class]: {target: target.parentElement?.parentElement, item: "bigScreen" },
 
-    if (clicked) {
-      const returnToBigScreen =
-        config.get("enableBigScreen") &&
-        config.get("bigScreenState") &&
-        state.get("bigScreenState");
+    };
 
-      setTimeout(() => toggleBigScreen(returnToBigScreen, true), 0);
-      return true;
+    let foundTarget;
+    for (const [targetClass, value] of Object.entries(targets)) {
+      let currentTarget = value.target
+
+      if (currentTarget.classList.contains(targetClass)) {
+        foundTarget = value.item;
+      }
     }
-    return false;
-  }
 
-  function checkAvatarClicked() {
-    const clicked = hasClass(
-      event.target.parentElement,
-      ELEMENTS.chat.message.avatar.class
-    );
-
-    if (clicked) {
-      target.className = ELEMENTS.chat.message.avatar.class;
-      return true;
-    }
-    return false;
-  }
-
-  function checkChattersClicked() {
-    const clicked = hasClass(target, [
-      ELEMENTS.chat.header.recent.class,
-      ELEMENTS.chat.header.recent.count.class,
-    ]);
-
-    if (clicked) {
-      target.className = ELEMENTS.chat.header.recent.class;
-      return true;
-    }
-    return false;
-  }
-
-  function checkForTarget() {
-    if (checkChattersClicked()) return;
-    if (checkAvatarClicked()) return;
-    if (checkSecondaryPanelTabClicked()) return;
+    return foundTarget;
   }
 
   function isMenuItem() {
-    return event.target.closest(ELEMENTS.menu.selector) !== null;
+    return target.closest(ELEMENTS.menu.selector) !== null;
   }
 };
 
@@ -415,7 +384,7 @@ export const clickAccordionHeader = (accordion, panel, props) => {
 export const clickTabButton = (tab, element) => {
   const activeClass = ELEMENTS.settings.tabs.tab.active.class;
   const wrapper = element.parentElement;
-  
+
   for (const child of wrapper.children) {
     child.classList.remove(activeClass)
   }
