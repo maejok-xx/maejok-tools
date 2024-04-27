@@ -544,8 +544,9 @@ export const playSound = (sound) => {
   const ext = SOUNDS.get(sound);
   if (ext) {
     audio.volume = 0.5;
-    audio.src = `https://www.fishtank.live/sounds/${sound}.${ext}`;
+    audio.src = `https://cdn.fishtank.live/sounds/${sound}.${ext}`;
     document.body.appendChild(audio);
+
     audio.onended = () => {
       audio.remove();
     };
