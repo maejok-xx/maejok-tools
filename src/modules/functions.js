@@ -7,6 +7,7 @@ import {
   SCREEN_TAKEOVERS_STYLES,
   BIG_SCREEN_STYLES,
   DEFAULT_KEYBINDS,
+  REPO_URL_ROOT,
 } from "./constants";
 import Message from "../classes/Message";
 import ELEMENTS from "../data/elements";
@@ -772,6 +773,8 @@ export const startMaejokTools = async () => {
   const cfg = config.get();
   const isPopoutChat = state.get("isPopoutChat");
 
+  toggleLogoHover(true);
+
   if (cfg.enableRecentChatters) {
     startRecentChatters();
     observers.chatters.start();
@@ -814,6 +817,7 @@ export const startMaejokTools = async () => {
 
 export const stopMaejokTools = () => {
   toggleBigScreen(false);
+  toggleLogoHover(false);
 
   observers.chat.stop();
   observers.chatters.stop();
@@ -992,5 +996,20 @@ function processMentions(message) {
       ...state.get("mentions"),
       { ...message, added: Date.now() },
     ]);
+  }
+}
+
+function toggleLogoHover(toggleState) {
+  const logoSelector = ELEMENTS.header.logo;
+  const logo = document.querySelector(logoSelector.img.selector);
+  logo.classList.toggle(logoSelector.hideImg.class, toggleState);
+
+  if (toggleState) {
+    const logoHover = document.createElement('img');
+    logoHover.src = `${REPO_URL_ROOT}/blob/06bddd3e353365fc62df0e1415b4cda3cbf07b14/public/images/logo-full-white-red-eyes.png?raw=true`;
+    logoHover.classList.add(...logoSelector.hoverImg.classes);
+    logo.insertAdjacentElement("afterend", logoHover);
+  } else {
+    document.querySelector(logoSelector.hoverImg.selector).remove();
   }
 }

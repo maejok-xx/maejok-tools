@@ -53,6 +53,25 @@
   font: inherit;
 }
 
+.maejok-logo_hide:hover {
+  opacity: 0 !important;
+}
+
+.maejok-logo_hover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity .5s;
+}
+.maejok-logo_hover:hover {
+  opacity: 1;
+}
+
+
 .button-link:focus,
 .button-link:hover,
 .button-link:active {
