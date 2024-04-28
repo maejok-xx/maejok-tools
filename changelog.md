@@ -1,5 +1,28 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.14.1_**
+
+_Release: 04-27-2024_
+
+### Notes
+
+- Huge thanks again to [f3rked](https://github.com/f3rked) for these fixes and additions!
+
+### Bug Fixes
+
+- Fix online chatters count [#54](https://github.com/maejok-xx/maejok-tools/pull/54)
+- Fix unecessary requests [#56](https://github.com/maejok-xx/maejok-tools/pull/56)
+
+### Features Added / Changed
+
+- Add glowing eye on logo hover [#55](https://github.com/maejok-xx/maejok-tools/pull/55/)
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.14.0_**
 
 _Release: 04-21-2024_

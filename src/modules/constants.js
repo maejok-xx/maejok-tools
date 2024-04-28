@@ -1,6 +1,7 @@
 export const VERSION = process.env.VERSION;
 
 export const REPO_RAW_ROOT = process.env.REPO.raw;
+export const REPO_URL_ROOT = process.env.REPO.url;
 export const PACKAGE_URL = `${REPO_RAW_ROOT}/package.json`;
 
 export const ONE_MINUTE = 60 * 1000;
@@ -198,7 +199,7 @@ export const BIG_SCREEN_STYLES = `
     unset: all;
     content: "❌";
   }
-  
+
   img {
     display: none;
   }

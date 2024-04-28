@@ -57,6 +57,17 @@ const Elements = {
     logo: {
       selector: `[class^="top-bar_logo__"]`,
       class: "top-bar_logo__XL0_C",
+      img: {
+        selector: `[class^="top-bar_desktop__"]`,
+        class: "top-bar_desktop__pjX2g",
+      },
+      hoverImg: {
+        selector: ".maejok-logo_hover",
+        classes: ["maejok-logo_hover", "top-bar_desktop__pjX2g"],
+      },
+      hideImg: {
+        class: "maejok-logo_hide"
+      },
     },
     links: {
       selector: `[class^="top-bar-links"]`,
@@ -117,6 +128,7 @@ const Elements = {
       presence: {
         selector: `[class^="chat_presence__"]`,
         class: "chat_presence__90XuO",
+        id: "maejok-chatters_online-presence-id",
         online: {
           selector: `[class*="maejok-chatters_presence-online"]`,
           class: "maejok-chatters_presence-online",
@@ -539,8 +551,8 @@ const Elements = {
         selector: `[class*="color-button_text__3OQAq"]`,
       },
       save: { class: [`maejok-input-button-save`, `button_button__p28wJ`] },
-      standard: { 
-        classes: ["button_sm__O72y2", "button_button__p28wJ"] 
+      standard: {
+        classes: ["button_sm__O72y2", "button_button__p28wJ"]
       }
     },
     textbox: {
