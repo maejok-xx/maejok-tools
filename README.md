@@ -1,6 +1,6 @@
 ## MAEJOK-TOOLS for Fishtank.live
 
-### Be sure to watch Fishtank Season Two LIVE and Fishtank Season One Episodes and Season Two clips, and get ready for Season 2.5 at https://www.fishtank.live/
+### Be sure to watch Fishtank Season One Episodes and Season Two clips, and get ready for Season 2.5 at https://www.fishtank.live/
 
 ---
 
