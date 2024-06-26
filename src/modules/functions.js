@@ -332,12 +332,16 @@ export const getSender = function (messageElement, messageType) {
 
 
 export const getUserData = async (userId) => {
-  const data = await fetchFromFishtank(
-    "get",
-    `https://www.fishtank.live/api/user/get?uid=${userId}`
-  );
+  try {
+    const data = await fetchFromFishtank(
+      "get",
+      `https://www.fishtank.live/api/user/get?uid=${userId}`
+    );
+  } catch (error) {
+    return false;
+  }
 
-  return data || false;
+  return data;
 };
 
 export const findUserByName = (displayName) => {
