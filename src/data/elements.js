@@ -93,18 +93,6 @@ const Elements = {
       class: "top-bar_clan-invite__Gv9N_",
     },
   },
-  stats: {
-    selector: `[class^="stats_value__"]`,
-    class: "stats_value__tX5K4",
-    day: {
-      selector1: `#__next > main > div.secondary-panel_secondary-panel__vUc65 > div.secondary-panel_stats-large__nd7E8 > div > div.stats_body__q3DS7 > div:nth-child(1) > div.stats_value__tX5K4`,
-      selector2: `#__next > main > div.stats_stats__SIg_t > div.stats_body__q3DS7 > div:nth-child(1) > div.stats_value__tX5K4`,
-      label: {
-        selector1: `#__next > main > div.stats_stats__SIg_t > div.stats_body__q3DS7 > div:nth-child(1) > div.stats_label___aXQq`,
-        selector2: `#__next > main > div.secondary-panel_secondary-panel__vUc65 > div.secondary-panel_stats-large__nd7E8 > div > div.stats_body__q3DS7 > div:nth-child(1) > div.stats_label___aXQq`,
-      },
-    },
-  },
   countdown: {
     selector: `[class^="countdown_countdown"]`,
     class: `countdown_countdown__eQUUu`,

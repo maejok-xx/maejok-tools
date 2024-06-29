@@ -59,13 +59,11 @@ import "./styles/styles.scss";
     } else {
       chat = document.querySelector(ELEMENTS.chat.list.selector);
 
-      // livestreams aren't currently on the site so skipping these checks for now
-      // livestreams = document.querySelector(ELEMENTS.livestreams.grid.selector);
+      livestreams = document.querySelector(ELEMENTS.livestreams.grid.selector);
       directorMode = document.querySelector(ELEMENTS.header.director.selector);
-      // isLoaded =
-      //   (directorMode !== null && chat !== null && livestreams !== null) ||
-      //   (directorMode === null && chat !== null);
-      isLoaded = chat !== null;
+      isLoaded =
+        (directorMode !== null && chat !== null && livestreams !== null) ||
+        (directorMode === null && chat !== null);
       isShowLive = directorMode !== null;
     }
 
