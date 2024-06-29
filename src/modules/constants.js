@@ -140,7 +140,8 @@ export const DARK_MODE_STYLES = `
 
 export const SCREEN_TAKEOVERS_STYLES = `
 .happening_happening__Ca2E7,
-.happening_backdrop__JCihz {
+.happening_backdrop__JCihz,
+.cyber-attack_cyber-attack__hKvrm {
   display: none !important;
 }
 `;
