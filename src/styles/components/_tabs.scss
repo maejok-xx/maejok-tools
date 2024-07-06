@@ -6,33 +6,37 @@
 
 .maejok-settings_tab-bar {
   display: flex;
+  gap: 8px;
   margin-top: $space-sm;
 
-  .maejok-settings_tab {
-    .maejok-tab-button {
-      flex: 1;
-      border: none;
-      cursor: pointer;
-      width: 100px;
-      text-transform: uppercase;
+  .maejok-tab-button {
+    display: flex;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: transparent !important;
+    border: 1px solid #505050;
 
-      button {
-        all: unset;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 8px;
-        gap: 8px;
-        cursor: pointer;
-        color: #fff;
-        background-color: rgba(43, 45, 46, .25);
-        flex-grow: 1;
-        border: 1px solid #505050;
-        border-left: 0;
-        border-radius: 0;
-        font-weight: 400;
-      }
+    button {
+      all: unset;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8px;
+      cursor: pointer;
+      color: #fff;
+      flex-grow: 1;
+      border-left: 0;
+      border-radius: 0;
+      font-weight: 400;
+    }
+
+    &:hover {
+      border: 1px solid #f8ec94;
+      color: #f8ec94;
     }
   }
 }
