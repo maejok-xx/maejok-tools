@@ -140,39 +140,35 @@ export const DARK_MODE_STYLES = `
 
 export const SCREEN_TAKEOVERS_STYLES = `
 .happening_happening__Ca2E7,
-.happening_backdrop__JCihz {
+.happening_backdrop__JCihz,
+.cyber-attack_cyber-attack__hKvrm {
   display: none !important;
 }
 `;
 
 export const BIG_SCREEN_STYLES = `
-.home_home__pUFCA {
-  grid-template-columns: 0px auto 0px 375px;
-  grid-template-rows: 75px auto 1fr 0px auto;
-  padding: 0px;
-  grid-gap: 0px;
-  gap: 0px;
+.home_home__pUFCA .home_center__6GW_l {
+  grid-column: 1/4;
+  grid-row: 1/6;
 }
 
 #main-panel {
   margin-right: 3px;
-  grid-row: 1/4;
 }
 
 .live-streams_live-streams__BYV96 {
   padding: 0 10px;
 }
 
-.stats_stats__SIg_t {
-  margin-bottom: 10px;
-}
-
 .top-bar_top-bar___Z0QX,
 .secondary-panel_secondary-panel__vUc65,
 .experience-bar_experience-bar__nVDge,
 .announcement_announcement__Sow3P,
+.home_left__UiQ0z,
+.home_center-bottom__zlpWm,
+.home_right__j_b3u,
 .tts-history_tts-history__8_9eB  {
-  display: none;
+  display: none !important;
 }
 
 .live-stream-fullscreen_live-stream-fullscreen__zpNvE {

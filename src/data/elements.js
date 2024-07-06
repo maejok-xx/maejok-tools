@@ -66,7 +66,7 @@ const Elements = {
         classes: ["maejok-logo_hover", "top-bar_desktop__pjX2g"],
       },
       hideImg: {
-        class: "maejok-logo_hide"
+        class: "maejok-logo_hide",
       },
     },
     links: {
@@ -91,18 +91,6 @@ const Elements = {
     clanInvite: {
       selector: `[class*="top-bar_clan-invite__"]`,
       class: "top-bar_clan-invite__Gv9N_",
-    },
-  },
-  stats: {
-    selector: `[class^="stats_value__"]`,
-    class: "stats_value__tX5K4",
-    day: {
-      selector1: `#__next > main > div.secondary-panel_secondary-panel__vUc65 > div.secondary-panel_stats-large__nd7E8 > div > div.stats_body__q3DS7 > div:nth-child(1) > div.stats_value__tX5K4`,
-      selector2: `#__next > main > div.stats_stats__SIg_t > div.stats_body__q3DS7 > div:nth-child(1) > div.stats_value__tX5K4`,
-      label: {
-        selector1: `#__next > main > div.stats_stats__SIg_t > div.stats_body__q3DS7 > div:nth-child(1) > div.stats_label___aXQq`,
-        selector2: `#__next > main > div.secondary-panel_secondary-panel__vUc65 > div.secondary-panel_stats-large__nd7E8 > div > div.stats_body__q3DS7 > div:nth-child(1) > div.stats_label___aXQq`,
-      },
     },
   },
   countdown: {
@@ -136,7 +124,7 @@ const Elements = {
         wrapper: {
           selector: `[class*="maejok-chatters_presence-container"]`,
           class: "maejok-chatters_presence-container",
-        }
+        },
       },
       recent: {
         selector: `[class*="maejok-chatters_presence"]`,
@@ -318,7 +306,7 @@ const Elements = {
         inputLength: {
           selector: `[class^="chat-input_length__"]`,
           class: "chat-input_length__c7xG6",
-        }
+        },
       },
       rich: {
         mention: "chat-input-mention_chat-input-mention__pDrCH",
@@ -419,14 +407,14 @@ const Elements = {
     tabs: {
       bar: {
         selector: `[class^="maejok-settings_tab-bar"]`,
-        class: [`maejok-settings_tab-bar`, `button-group_button-group__7lSi7`],
+        class: [`button-group_button-group__7lSi7`, `maejok-settings_tab-bar`],
       },
       tab: {
         selector: `[class^="maejok-tab-button"]`,
         class: [`maejok-tab-button`],
         active: {
-          class: `button-group_selected__rLKL4`
-        }
+          class: `button-group_selected__rLKL4`,
+        },
       },
       panel: {
         selector: `[class^="maejok-settings_tab-panel"]`,
@@ -434,9 +422,7 @@ const Elements = {
       },
       button: {
         selector: `[class^="maejok-settings_body"]`,
-        classes: [
-          `maejok-tab-button`,
-        ],
+        classes: [`maejok-tab-button`],
       },
     },
     accordion: {
@@ -533,15 +519,18 @@ const Elements = {
         `maejok-input-button`,
         `color-button_color-button__cW61T`,
         `color-button_md__GaczN`,
-        `button_button__p28wJ`
+        `button_button__p28wJ`,
       ],
       bind: {
-        class: ["maejok-input-button-bind", "button_sm__O72y2", "button_button__p28wJ"],
+        class: [
+          "maejok-input-button-bind",
+          "button_sm__O72y2",
+          "button_button__p28wJ",
+        ],
         selector: `[class*="maejok-input-button-bind"]`,
       },
       img_colors: {
-        lightGreen:
-          "hsla(53, 88%, 78%, .1)",
+        lightGreen: "hsla(53, 88%, 78%, .1)",
         red: "hsla(3, 100%, 73%, .1)",
         darkGreen: "rgba(85, 213, 180, .1)",
       },
@@ -552,8 +541,8 @@ const Elements = {
       },
       save: { class: [`maejok-input-button-save`, `button_button__p28wJ`] },
       standard: {
-        classes: ["button_sm__O72y2", "button_button__p28wJ"]
-      }
+        classes: ["button_sm__O72y2", "button_button__p28wJ"],
+      },
     },
     textbox: {
       class: "maejok-input-textbox",
