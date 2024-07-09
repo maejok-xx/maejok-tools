@@ -35,6 +35,7 @@ const Config = () => {
     hideSystem: false,
 
     enableImprovedTagging: true,
+    enableEmojis: false,
 
     enableDenseChat: false,
 
@@ -475,6 +476,18 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option will add <strong>Avatar-click Tagging</strong>, as well as improve the way mentions are added to the input box by adding spaces before and after the mention where needed.</p>`,
+              },
+            },
+            // enableEmojis
+            {
+              name: "enableEmojis",
+              label: "Enable emojis",
+              type: "toggle",
+              value: cfg.enableEmojis,
+              group: "chat-misc",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will replace some text emoticons with their closest emoji counterpart. e.g. :) -> 🙂</p>`,
               },
             },
             // normalizeEpicText
