@@ -2,6 +2,7 @@ import config from "../modules/config";
 import state from "../modules/state";
 import * as functions from "../modules/functions";
 import ELEMENTS from "../data/elements";
+import { Emojis, EmojiRegex } from "../data/emojis";
 
 export default class Message {
   constructor(node) {
@@ -300,5 +301,39 @@ export default class Message {
         this[prop] = null;
       }
     }
+  }
+
+  replaceEmojiText() {
+    const emojisDisabled = !config.get("enableEmojis");
+    if (emojisDisabled || !this.type === "message" || !this.body) {
+      return;
+    }
+
+    let { body, html } = this.body;
+    if (!body) {
+      return;
+    }
+
+    const matches = body.match(EmojiRegex);
+    if (!matches) {
+      return;
+    }
+
+    let updatedMessage = body;
+    matches.forEach((match) => {
+      updatedMessage = updatedMessage.replace(
+        new RegExp(match.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&"), "g"),
+        Emojis[match]
+      );
+    });
+
+    const messageNode = this.node.querySelector(
+      ELEMENTS.chat.message.body.text.selector
+    );
+    if (messageNode) {
+      messageNode.textContent = updatedMessage;
+    }
+
+    this.body = { updatedMessage, html };
   }
 }
