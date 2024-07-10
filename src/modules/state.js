@@ -23,6 +23,7 @@ const State = () => {
     updateShown: false,
     audioElement: false,
     pendingKeybind: null,
+    isShowLive: false,
   };
 
   const get = (key) => {

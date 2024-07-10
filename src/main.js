@@ -11,6 +11,7 @@ import {
   toggleScanLines,
   getReactProps,
   getUserData,
+  getShowLiveStatus,
 } from "./modules/functions";
 import { checkForUpdate } from "./modules/updater";
 import "./styles/styles.scss";
@@ -42,8 +43,9 @@ import "./styles/styles.scss";
     livestreams,
     directorMode,
     isShowLive = null;
-  let hasFetchedUserData = false;
-  let isPopoutChat = false;
+  let hasFetchedUserData,
+    hasFetchedShowLiveStatus,
+    isPopoutChat = false;
 
   if (config.get("hideGlobalMissions")) {
     observers.body.start();
@@ -64,7 +66,14 @@ import "./styles/styles.scss";
       isLoaded =
         (directorMode !== null && chat !== null && livestreams !== null) ||
         (directorMode === null && chat !== null);
-      isShowLive = directorMode !== null;
+
+      const liveStatusFetched =
+        state.get("isShowLive") || hasFetchedShowLiveStatus;
+      if (!liveStatusFetched) {
+        hasFetchedShowLiveStatus = true;
+        isShowLive = getShowLiveStatus();
+        state.set("isShowLive", isShowLive);
+      }
     }
 
     if (chat && !updateChecked) {
