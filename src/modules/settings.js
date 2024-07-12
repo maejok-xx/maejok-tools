@@ -134,6 +134,13 @@ export const applySettingsToChat = () => {
 
   state.set("contextUser", null);
 
+  const chatContainer = document.getElementById("chat-messages");
+  if (config.get("hideAvatars")) {
+    chatContainer.style.padding = "0px";
+  } else {
+    chatContainer.style.padding = "8px";
+  }
+
   toggleDenseChat();
 };
 
