@@ -5,7 +5,8 @@ import {
   SOUNDS,
   DARK_MODE_STYLES,
   SCREEN_TAKEOVERS_STYLES,
-  BIG_SCREEN_STYLES,
+  BIG_SCREEN_STYLES_ONLINE,
+  BIG_SCREEN_STYLES_OFFLINE,
   DEFAULT_KEYBINDS,
   REPO_URL_ROOT,
 } from "./constants";
@@ -152,6 +153,20 @@ export const toggleScanLines = (toggle) => {
   body.classList.toggle("maejok-hide-scan_lines", toggle);
 };
 
+export const getShowLiveStatus = () => {
+  const status = localStorage.getItem("live-streams-status");
+  let online = false;
+
+  if (status) {
+    const value = JSON.parse(status).value;
+    online = Object.values(value).some(function (s) {
+      return s === "online";
+    });
+  }
+
+  return online;
+};
+
 export const toggleBigScreen = (mode = null, muted = false) => {
   if (config.get("enableBigScreen")) {
     if (!muted) {
@@ -170,9 +185,13 @@ export const toggleBigScreen = (mode = null, muted = false) => {
 
   state.set("bigScreenState", mode);
 
+  const big_screen_styles = state.get("isShowLive")
+    ? BIG_SCREEN_STYLES_ONLINE
+    : BIG_SCREEN_STYLES_OFFLINE;
+
   if (mode) {
     const style = document.createElement("style");
-    style.textContent = BIG_SCREEN_STYLES;
+    style.textContent = big_screen_styles;
     style.setAttribute("id", "maejok-bigscreen");
     document.head.appendChild(style);
   } else {
