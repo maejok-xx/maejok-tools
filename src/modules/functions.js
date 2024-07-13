@@ -342,13 +342,13 @@ export const getSender = function (messageElement, messageType) {
     ? messageElement
     : messageElement.querySelector(sender.selector);
 
-  const senderText = messageType === "message"
-    ? senderElement.lastChild.textContent
-    : getElementText(senderElement);
+  const senderText =
+    messageType === "message"
+      ? senderElement.lastChild.textContent
+      : getElementText(senderElement);
 
   return senderText;
-}
-
+};
 
 export const getUserData = async (userId) => {
   try {
@@ -509,7 +509,7 @@ export const processChatMessage = (node, logMentions = true) => {
 
     message.normalizeEpic();
     message.normalizeGrand();
-
+    message.replaceEmojiText();
     message.fixDarkDisplayName();
 
     message.hideElements(hideTypes.element, hideTypes.hide);
@@ -1028,7 +1028,7 @@ function toggleLogoHover(toggleState) {
   logo.classList.toggle(logoSelector.hideImg.class, toggleState);
 
   if (toggleState) {
-    const logoHover = document.createElement('img');
+    const logoHover = document.createElement("img");
     logoHover.src = `${REPO_URL_ROOT}/blob/06bddd3e353365fc62df0e1415b4cda3cbf07b14/public/images/logo-full-white-red-eyes.png?raw=true`;
     logoHover.classList.add(...logoSelector.hoverImg.classes);
     logo.insertAdjacentElement("afterend", logoHover);
