@@ -167,6 +167,21 @@ export const getShowLiveStatus = () => {
   return online;
 };
 
+export const toggleControlOverlay = () => {
+  const videoControls = document.querySelector(
+    ELEMENTS.livestreams.controls.selector
+  );
+
+  const toggle = config.get("controlOverlayState");
+  config.set("controlOverlayState", !toggle);
+
+  if (toggle) {
+    videoControls.style.display = "none";
+  } else {
+    videoControls.style.display = "";
+  }
+};
+
 export const toggleBigScreen = (mode = null, muted = false) => {
   if (config.get("enableBigScreen")) {
     if (!muted) {
@@ -342,13 +357,13 @@ export const getSender = function (messageElement, messageType) {
     ? messageElement
     : messageElement.querySelector(sender.selector);
 
-  const senderText = messageType === "message"
-    ? senderElement.lastChild.textContent
-    : getElementText(senderElement);
+  const senderText =
+    messageType === "message"
+      ? senderElement.lastChild.textContent
+      : getElementText(senderElement);
 
   return senderText;
-}
-
+};
 
 export const getUserData = async (userId) => {
   try {
@@ -1028,7 +1043,7 @@ function toggleLogoHover(toggleState) {
   logo.classList.toggle(logoSelector.hideImg.class, toggleState);
 
   if (toggleState) {
-    const logoHover = document.createElement('img');
+    const logoHover = document.createElement("img");
     logoHover.src = `${REPO_URL_ROOT}/blob/06bddd3e353365fc62df0e1415b4cda3cbf07b14/public/images/logo-full-white-red-eyes.png?raw=true`;
     logoHover.classList.add(...logoSelector.hoverImg.classes);
     logo.insertAdjacentElement("afterend", logoHover);
