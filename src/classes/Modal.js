@@ -2,6 +2,7 @@ import state from "../modules/state";
 import * as events from "../modules/events";
 import * as functions from "../modules/functions";
 import ELEMENTS from "../data/elements";
+import { CLOSE_SVG } from "../modules/constants";
 
 export default class Modal {
   constructor(title, body) {
@@ -53,8 +54,9 @@ export default class Modal {
     closeButton.classList.add(...ELEMENTS.modal.close.button.classes);
     closeButton.addEventListener("click", () => events.clickCloseModal(this));
 
-    const closeButtonIcon = document.createElement("img");
-    closeButtonIcon.setAttribute(...ELEMENTS.modal.close.button.image.attr);
+    const closeButtonIcon = document.createElement("div");
+    closeButtonIcon.classList.add(ELEMENTS.modal.close.icon.class);
+    closeButtonIcon.innerHTML = CLOSE_SVG;
 
     this.body = document.createElement("div");
     this.body.classList.add(ELEMENTS.modal.body.class);
