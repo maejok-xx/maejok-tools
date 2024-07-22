@@ -11,6 +11,7 @@ const Config = () => {
     enableBigScreen: true,
     persistBigScreen: false,
     bigScreenState: false,
+    controlOverlayState: false,
     disableSoundEffects: false,
     hideGlobalMissions: false,
     hideScreenTakeovers: false,
