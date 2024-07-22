@@ -176,7 +176,7 @@ const Config = () => {
             // enableVideoControls
             {
               name: "enableControlOverlay",
-              label: "Enable Video Control Overlay",
+              label: "Enable Video Control Overlay Shortcut",
               type: "toggle",
               value: cfg.enableControlOverlay,
               group: "site-options",
