@@ -14,6 +14,7 @@ import {
   existsInUserList,
   modifyUserList,
   toggleBigScreen,
+  toggleControlOverlay,
   playSound,
   setChatInputValue,
   toggleItemInList,
@@ -138,17 +139,31 @@ export const leftClick = (event) => {
 
   function checkClickedItem() {
     const targets = {
-      [ELEMENTS.chat.message.sender.class]: { target: target, item:  "chatUsername" },
-      [ELEMENTS.chat.message.avatar.class]: { target: target.parentElement, item: "chatAvatar" },
-      [ELEMENTS.chat.header.presence.wrapper.class]: { target: target.parentElement, item: "recentChatters" },
-      [ELEMENTS.chat.header.presence.class]: { target: target.parentElement, item: "recentChatters" },
-      [ELEMENTS.secondaryPanel.tab.class]: {target: target.parentElement?.parentElement, item: "bigScreen" },
-
+      [ELEMENTS.chat.message.sender.class]: {
+        target: target,
+        item: "chatUsername",
+      },
+      [ELEMENTS.chat.message.avatar.class]: {
+        target: target.parentElement,
+        item: "chatAvatar",
+      },
+      [ELEMENTS.chat.header.presence.wrapper.class]: {
+        target: target.parentElement,
+        item: "recentChatters",
+      },
+      [ELEMENTS.chat.header.presence.class]: {
+        target: target.parentElement,
+        item: "recentChatters",
+      },
+      [ELEMENTS.secondaryPanel.tab.class]: {
+        target: target.parentElement?.parentElement,
+        item: "bigScreen",
+      },
     };
 
     let foundTarget;
     for (const [targetClass, value] of Object.entries(targets)) {
-      let currentTarget = value.target
+      let currentTarget = value.target;
 
       if (currentTarget.classList.contains(targetClass)) {
         foundTarget = value.item;
@@ -199,10 +214,13 @@ export const keyPress = (event) => {
     return;
   }
 
+  console.log(event.code);
+
   const keys = {
     backtick: "Backquote",
     space: "Space",
     escape: "Escape",
+    h: "KeyH",
   };
 
   if (
@@ -210,6 +228,11 @@ export const keyPress = (event) => {
     (event.ctrlKey && event.shiftKey && event.code === keys.space)
   ) {
     toggleBigScreen();
+    return;
+  }
+
+  if (event.ctrlKey && event.shiftKey && event.code === keys.h) {
+    toggleControlOverlay();
     return;
   }
 
@@ -386,7 +409,7 @@ export const clickTabButton = (tab, element) => {
   const wrapper = element.parentElement;
 
   for (const child of wrapper.children) {
-    child.classList.remove(activeClass)
+    child.classList.remove(activeClass);
   }
   element.classList.add(activeClass);
 
@@ -500,22 +523,19 @@ export const clickKeybindButton = (button, label, key) => {
   errorText.textContent = "Conflicts with an existing keybind!";
   errorText.style.display = "none";
 
-  const confirmBtn = settings.createButton(
-    "save",
-    function () {
-      playSound("shutter");
-      let bind = state.get("pendingKeybind");
-      if (bind) {
-        let val = {};
-        val[key] = bind;
-        config.set("binds", val);
-        settings.saveSettings();
-        button.textContent = keyEventToString(bind);
-      }
-      state.set("pendingKeybind", null);
-      prompt.destroy();
+  const confirmBtn = settings.createButton("save", function () {
+    playSound("shutter");
+    let bind = state.get("pendingKeybind");
+    if (bind) {
+      let val = {};
+      val[key] = bind;
+      config.set("binds", val);
+      settings.saveSettings();
+      button.textContent = keyEventToString(bind);
     }
-  );
+    state.set("pendingKeybind", null);
+    prompt.destroy();
+  });
 
   const body = document.createElement("div");
   body.classList.add(ELEMENTS.settings.config.help.class);
