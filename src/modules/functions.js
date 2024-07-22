@@ -168,6 +168,9 @@ export const getShowLiveStatus = () => {
 };
 
 export const toggleControlOverlay = () => {
+  if (!config.get("enableControlOverlay")) {
+    return;
+  }
   const videoControls = document.querySelector(
     ELEMENTS.livestreams.controls.selector
   );
