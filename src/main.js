@@ -49,6 +49,9 @@ import "./styles/styles.scss";
 
   if (config.get("hideGlobalMissions")) {
     observers.body.start();
+  }
+
+  if (config.get("hideGlobalMissions") || config.get("enableDragModal")) {
     observers.modal.start();
   }
 

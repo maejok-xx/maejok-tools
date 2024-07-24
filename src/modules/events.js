@@ -23,6 +23,50 @@ import {
 import * as settings from "./settings";
 import * as menu from "./menu";
 
+export const makeDraggable = () => {
+  let pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  const modal = document.querySelector(`[class^="modal_modal__MS70U"]`);
+  const header = modal.querySelector(`[class^="modal_header__O0ebJ"]`);
+  if (!header) {
+    return;
+  }
+
+  setTimeout(() => {
+    modal.style.top = `${modal.offsetTop}px`;
+    modal.style.left = `${modal.offsetLeft}px`;
+    modal.style.position = "absolute";
+    header.style.cursor = "move";
+
+    const dragMouseDown = (e) => {
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      document.onmousemove = elementDrag;
+    };
+
+    const elementDrag = (e) => {
+      e.preventDefault();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      modal.style.top = `${modal.offsetTop - pos2}px`;
+      modal.style.left = `${modal.offsetLeft - pos1}px`;
+    };
+
+    const closeDragElement = () => {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    };
+
+    header.onmousedown = dragMouseDown;
+  });
+};
+
 export const rightClick = (event) => {
   if (!config.get("enableChatMenu") && !config.get("enableEmotesMenu")) {
     return;
@@ -138,17 +182,31 @@ export const leftClick = (event) => {
 
   function checkClickedItem() {
     const targets = {
-      [ELEMENTS.chat.message.sender.class]: { target: target, item:  "chatUsername" },
-      [ELEMENTS.chat.message.avatar.class]: { target: target.parentElement, item: "chatAvatar" },
-      [ELEMENTS.chat.header.presence.wrapper.class]: { target: target.parentElement, item: "recentChatters" },
-      [ELEMENTS.chat.header.presence.class]: { target: target.parentElement, item: "recentChatters" },
-      [ELEMENTS.secondaryPanel.tab.class]: {target: target.parentElement?.parentElement, item: "bigScreen" },
-
+      [ELEMENTS.chat.message.sender.class]: {
+        target: target,
+        item: "chatUsername",
+      },
+      [ELEMENTS.chat.message.avatar.class]: {
+        target: target.parentElement,
+        item: "chatAvatar",
+      },
+      [ELEMENTS.chat.header.presence.wrapper.class]: {
+        target: target.parentElement,
+        item: "recentChatters",
+      },
+      [ELEMENTS.chat.header.presence.class]: {
+        target: target.parentElement,
+        item: "recentChatters",
+      },
+      [ELEMENTS.secondaryPanel.tab.class]: {
+        target: target.parentElement?.parentElement,
+        item: "bigScreen",
+      },
     };
 
     let foundTarget;
     for (const [targetClass, value] of Object.entries(targets)) {
-      let currentTarget = value.target
+      let currentTarget = value.target;
 
       if (currentTarget.classList.contains(targetClass)) {
         foundTarget = value.item;
@@ -386,7 +444,7 @@ export const clickTabButton = (tab, element) => {
   const wrapper = element.parentElement;
 
   for (const child of wrapper.children) {
-    child.classList.remove(activeClass)
+    child.classList.remove(activeClass);
   }
   element.classList.add(activeClass);
 
@@ -500,22 +558,19 @@ export const clickKeybindButton = (button, label, key) => {
   errorText.textContent = "Conflicts with an existing keybind!";
   errorText.style.display = "none";
 
-  const confirmBtn = settings.createButton(
-    "save",
-    function () {
-      playSound("shutter");
-      let bind = state.get("pendingKeybind");
-      if (bind) {
-        let val = {};
-        val[key] = bind;
-        config.set("binds", val);
-        settings.saveSettings();
-        button.textContent = keyEventToString(bind);
-      }
-      state.set("pendingKeybind", null);
-      prompt.destroy();
+  const confirmBtn = settings.createButton("save", function () {
+    playSound("shutter");
+    let bind = state.get("pendingKeybind");
+    if (bind) {
+      let val = {};
+      val[key] = bind;
+      config.set("binds", val);
+      settings.saveSettings();
+      button.textContent = keyEventToString(bind);
     }
-  );
+    state.set("pendingKeybind", null);
+    prompt.destroy();
+  });
 
   const body = document.createElement("div");
   body.classList.add(ELEMENTS.settings.config.help.class);

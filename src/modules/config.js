@@ -9,6 +9,7 @@ const Config = () => {
     enableDimMode: false,
 
     enableBigScreen: true,
+    enableDragModal: false,
     persistBigScreen: false,
     bigScreenState: false,
     disableSoundEffects: false,
@@ -178,6 +179,18 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option reduces the brightness of the site</p>`,
+              },
+            },
+            // enableDragModal
+            {
+              name: "enableDragModal",
+              label: "Enable Drag TTS Modal",
+              type: "toggle",
+              value: cfg.enableDragModal,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will enable dragging of TTS modal to desired location.</p>`,
               },
             },
             // enableEmotesMenu
