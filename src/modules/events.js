@@ -24,18 +24,17 @@ import {
 import * as settings from "./settings";
 import * as menu from "./menu";
 
-export const makeDraggable = () => {
-  let pos1 = 0,
-    pos2 = 0,
-    pos3 = 0,
-    pos4 = 0;
-  const modal = document.querySelector(`[class^="modal_modal__MS70U"]`);
-  const header = modal.querySelector(`[class^="modal_header__O0ebJ"]`);
-  if (!header) {
-    return;
-  }
-
+export const makeDraggable = (addedNode) => {
   setTimeout(() => {
+    let pos1 = 0,
+      pos2 = 0,
+      pos3 = 0,
+      pos4 = 0;
+    const modal = addedNode.querySelector(`[class^="modal_modal__MS70U"]`);
+    const header = modal.querySelector(`[class^="modal_header__O0ebJ"]`);
+    if (!header) {
+      return;
+    }
     modal.style.top = `${modal.offsetTop}px`;
     modal.style.left = `${modal.offsetLeft}px`;
     modal.style.position = "absolute";
@@ -65,7 +64,7 @@ export const makeDraggable = () => {
     };
 
     header.onmousedown = dragMouseDown;
-  });
+  }, 2);
 };
 
 export const rightClick = (event) => {

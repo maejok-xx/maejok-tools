@@ -109,8 +109,12 @@ const observers = {
               }
 
               const dragModalEnabled = config.get("enableDragModal");
-              if (dragModalEnabled && title?.includes("Send a TTS Message")) {
-                makeDraggable();
+              if (
+                dragModalEnabled &&
+                (title?.includes("Send a TTS Message") ||
+                  title?.includes("Play a Sound Effect"))
+              ) {
+                makeDraggable(addedNode);
               }
             }
           });
