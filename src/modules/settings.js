@@ -44,6 +44,7 @@ export const saveSettings = async () => {
   const prevUpdateCheckFrequency = config.get("updateCheckFrequency");
   const prevChattersEnabled = config.get("enableRecentChatters");
   const prevHideGlobalMissions = config.get("hideGlobalMissions");
+  const prevDragModal = config.get("enableDragModal");
 
   inputs.forEach((input) => {
     const key = input.id.replace("-hidden", "");
@@ -118,8 +119,11 @@ export const saveSettings = async () => {
   const hideGlobalMissionsJustEnabled =
     config.get("hideGlobalMissions") &&
     prevHideGlobalMissions !== config.get("hideGlobalMissions");
+  const dragModalJustEnabled =
+    config.get("enableDragModal") &&
+    prevDragModal !== config.get("enableDragModal");
 
-  if (hideGlobalMissionsJustEnabled) {
+  if (hideGlobalMissionsJustEnabled || dragModalJustEnabled) {
     observers.body.start();
     observers.modal.start();
   }
