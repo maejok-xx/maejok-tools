@@ -24,6 +24,50 @@ import {
 import * as settings from "./settings";
 import * as menu from "./menu";
 
+export const makeDraggable = () => {
+  let pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  const modal = document.querySelector(`[class^="modal_modal__MS70U"]`);
+  const header = modal.querySelector(`[class^="modal_header__O0ebJ"]`);
+  if (!header) {
+    return;
+  }
+
+  setTimeout(() => {
+    modal.style.top = `${modal.offsetTop}px`;
+    modal.style.left = `${modal.offsetLeft}px`;
+    modal.style.position = "absolute";
+    header.style.cursor = "move";
+
+    const dragMouseDown = (e) => {
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      document.onmousemove = elementDrag;
+    };
+
+    const elementDrag = (e) => {
+      e.preventDefault();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      modal.style.top = `${modal.offsetTop - pos2}px`;
+      modal.style.left = `${modal.offsetLeft - pos1}px`;
+    };
+
+    const closeDragElement = () => {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    };
+
+    header.onmousedown = dragMouseDown;
+  });
+};
+
 export const rightClick = (event) => {
   if (!config.get("enableChatMenu") && !config.get("enableEmotesMenu")) {
     return;
