@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         __PLUGINNAME__ for Fishtank.live
 // @description  __DESCRIPTION__
-// @author       maejok-xx
+// @author       f3rked
 // @version      __VERSION__
 // @license      GNU GPLv3
 // @homepageURL  __REPO__

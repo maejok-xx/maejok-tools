@@ -2,12 +2,12 @@
  * // ==UserScript==
  * // @name         MAEJ3RKED-TOOLS for Fishtank.live
  * // @description  Add-on Tools for Fishtank.live Season 2.5
- * // @author       maejok-xx
+ * // @author       f3rked
  * // @version      2.15.0
  * // @license      GNU GPLv3
  * // @homepageURL  https://github.com/f3rked/maej3rked-tools
  * // @namespace    https://greasyfork.org/en/scripts/465416-maejok-tools-for-fishtank-live
- * // @icon         https://raw.githubusercontent.com/maejok-xx/maejok-tools/master/public/images/icon.png
+ * // @icon         https://raw.githubusercontent.com/f3rked/maej3rked-tools/master/public/images/icon.png
  * // @updateURL    https://github.com/f3rked/maej3rked-tools/raw/master/dist/maej3rked-tools.user.js
  * // @supportURL   https://github.com/f3rked/maej3rked-tools/issues
  * // @match        https://www.fishtank.live/
