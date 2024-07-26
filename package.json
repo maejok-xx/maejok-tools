@@ -1,7 +1,7 @@
 {
-  "name": "maejok-tools",
-  "author": "maejok-xx",
-  "version": "2.14.2",
+  "name": "maej3rked-tools",
+  "author": "maejok-xx/f3rked",
+  "version": "2.14.3",
   "description": "Add-on Tools for Fishtank.live Season 2.5",
   "main": "main.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maejok-xx/maejok-tools.git"
+    "url": "git+https://github.com/f3rked/maej3rked-tools.git"
   },
   "keywords": [
     "Fishtank",
@@ -21,19 +21,19 @@
   ],
   "license": "GPL-3.0-or-later",
   "repo": {
-    "url": "https://github.com/maejok-xx/maejok-tools",
-    "raw": "https://raw.githubusercontent.com/maejok-xx/maejok-tools/master"
+    "url": "https://github.com/f3rked/maej3rked-tools",
+    "raw": "https://raw.githubusercontent.com/f3rked/maej3rked-tools/master"
   },
   "changelog": {
-    "url": "https://github.com/maejok-xx/maejok-tools/blob/master/changelog.md"
+    "url": "https://github.com/f3rked/maej3rked-tools/blob/master/changelog.md"
   },
   "update": {
-    "url": "https://github.com/maejok-xx/maejok-tools/raw/master/dist/maejok-tools.user.js"
+    "url": "https://github.com/f3rked/maej3rked-tools/raw/master/dist/maej3rked-tools.user.js"
   },
   "bugs": {
-    "url": "https://github.com/maejok-xx/maejok-tools/issues"
+    "url": "https://github.com/f3rked/maej3rked-tools/issues"
   },
-  "homepage": "https://github.com/maejok-xx/maejok-tools#readme",
+  "homepage": "https://github.com/f3rked/maej3rked-tools#readme",
   "greasyfork": "https://greasyfork.org/en/scripts/465416-maejok-tools-for-fishtank-live",
   "icon": "https://raw.githubusercontent.com/maejok-xx/maejok-tools/master/public/images/icon.png",
   "contributors": [
