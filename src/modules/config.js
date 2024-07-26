@@ -9,8 +9,11 @@ const Config = () => {
     enableDimMode: false,
 
     enableBigScreen: true,
+    enableDragModal: false,
     persistBigScreen: false,
     bigScreenState: false,
+    enableControlOverlay: false,
+    controlOverlayState: false,
     disableSoundEffects: false,
     hideGlobalMissions: false,
     hideScreenTakeovers: false,
@@ -168,6 +171,19 @@ const Config = () => {
                 text: `<p>Enabling this option will restore the last <strong>Big Screen Mode</strong> state upon refreshing the site.</p>`,
               },
             },
+            // enableVideoControls
+            {
+              name: "enableControlOverlay",
+              label: "Enable Video Control Overlay",
+              type: "toggle",
+              value: cfg.enableControlOverlay,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option creates a keyboard shortcut to toggle <strong>the video controls overlay</strong> which will show or hide the overlay.</p>
+                <p>Keyboard Shortcut: <strong>CTRL+SHIFT+H</strong></p>`,
+              },
+            },
             // enableDimMode
             {
               name: "enableDimMode",
@@ -178,6 +194,18 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option reduces the brightness of the site</p>`,
+              },
+            },
+            // enableDragModal
+            {
+              name: "enableDragModal",
+              label: "Enable Drag TTS Modal",
+              type: "toggle",
+              value: cfg.enableDragModal,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will enable dragging of TTS modal to desired location.</p>`,
               },
             },
             // enableEmotesMenu

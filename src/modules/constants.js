@@ -146,7 +146,7 @@ export const SCREEN_TAKEOVERS_STYLES = `
 }
 `;
 
-export const BIG_SCREEN_STYLES = `
+export const BIG_SCREEN_STYLES_ONLINE = `
 .home_home__pUFCA .home_center__6GW_l {
   grid-column: 1/4;
   grid-row: 1/6;
@@ -199,6 +199,24 @@ export const BIG_SCREEN_STYLES = `
   img {
     display: none;
   }
+}
+`;
+
+export const BIG_SCREEN_STYLES_OFFLINE = `
+.home_home__pUFCA .home_right__j_b3u {
+  grid-column: 1/4;
+  grid-row: 1/6;
+}
+
+.top-bar_top-bar___Z0QX,
+.secondary-panel_secondary-panel__vUc65,
+.experience-bar_experience-bar__nVDge,
+.announcement_announcement__Sow3P,
+.home_left__UiQ0z,
+.home_center-bottom__zlpWm,
+.home_center__6GW_l,
+.tts-history_tts-history__8_9eB  {
+  display: none !important;
 }
 `;
 
@@ -278,7 +296,7 @@ export const ROOMS = {
     name: "Master Bathroom",
     switchTo: () => {},
   },
-  "confessional": {
+  confessional: {
     id: "confessional",
     name: "Confessional",
     switchTo: () => {},
@@ -400,10 +418,12 @@ export const DEFAULT_KEYBINDS = {
     shiftKey: false,
     code: "F4",
   },
-  "confessional": {
+  confessional: {
     ctrlKey: false,
     altKey: false,
     shiftKey: false,
     code: "F6",
-  }
+  },
 };
+
+export const CLOSE_SVG = `<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"><path d="M5 3H3v18h18V3H5zm14 2v14H5V5h14zm-8 4H9V7H7v2h2v2h2v2H9v2H7v2h2v-2h2v-2h2v2h2v2h2v-2h-2v-2h-2v-2h2V9h2V7h-2v2h-2v2h-2V9z" fill="currentColor"></path></svg>`;

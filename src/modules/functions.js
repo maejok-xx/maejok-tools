@@ -5,7 +5,8 @@ import {
   SOUNDS,
   DARK_MODE_STYLES,
   SCREEN_TAKEOVERS_STYLES,
-  BIG_SCREEN_STYLES,
+  BIG_SCREEN_STYLES_ONLINE,
+  BIG_SCREEN_STYLES_OFFLINE,
   DEFAULT_KEYBINDS,
   REPO_URL_ROOT,
 } from "./constants";
@@ -152,6 +153,38 @@ export const toggleScanLines = (toggle) => {
   body.classList.toggle("maejok-hide-scan_lines", toggle);
 };
 
+export const getShowLiveStatus = () => {
+  const status = localStorage.getItem("live-streams-status");
+  let online = false;
+
+  if (status) {
+    const value = JSON.parse(status).value;
+    online = Object.values(value).some(function (s) {
+      return s === "online";
+    });
+  }
+
+  return online;
+};
+
+export const toggleControlOverlay = () => {
+  if (!config.get("enableControlOverlay")) {
+    return;
+  }
+  const videoControls = document.querySelector(
+    ELEMENTS.livestreams.controls.selector
+  );
+
+  const toggle = config.get("controlOverlayState");
+  config.set("controlOverlayState", !toggle);
+
+  if (toggle) {
+    videoControls.style.display = "none";
+  } else {
+    videoControls.style.display = "";
+  }
+};
+
 export const toggleBigScreen = (mode = null, muted = false) => {
   if (config.get("enableBigScreen")) {
     if (!muted) {
@@ -170,9 +203,13 @@ export const toggleBigScreen = (mode = null, muted = false) => {
 
   state.set("bigScreenState", mode);
 
+  const big_screen_styles = state.get("isShowLive")
+    ? BIG_SCREEN_STYLES_ONLINE
+    : BIG_SCREEN_STYLES_OFFLINE;
+
   if (mode) {
     const style = document.createElement("style");
-    style.textContent = BIG_SCREEN_STYLES;
+    style.textContent = big_screen_styles;
     style.setAttribute("id", "maejok-bigscreen");
     document.head.appendChild(style);
   } else {
@@ -323,13 +360,13 @@ export const getSender = function (messageElement, messageType) {
     ? messageElement
     : messageElement.querySelector(sender.selector);
 
-  const senderText = messageType === "message"
-    ? senderElement.lastChild.textContent
-    : getElementText(senderElement);
+  const senderText =
+    messageType === "message"
+      ? senderElement.lastChild.textContent
+      : getElementText(senderElement);
 
   return senderText;
-}
-
+};
 
 export const getUserData = async (userId) => {
   try {
@@ -1009,7 +1046,7 @@ function toggleLogoHover(toggleState) {
   logo.classList.toggle(logoSelector.hideImg.class, toggleState);
 
   if (toggleState) {
-    const logoHover = document.createElement('img');
+    const logoHover = document.createElement("img");
     logoHover.src = `${REPO_URL_ROOT}/blob/06bddd3e353365fc62df0e1415b4cda3cbf07b14/public/images/logo-full-white-red-eyes.png?raw=true`;
     logoHover.classList.add(...logoSelector.hoverImg.classes);
     logo.insertAdjacentElement("afterend", logoHover);
