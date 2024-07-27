@@ -1,5 +1,51 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.15.0_**
+
+_Release: 07-26-2024_
+
+### Notes
+
+- First fork release
+
+### Bug Fixes
+
+- Fix mentions log [#6](https://github.com/f3rked/maej3rked-tools/pull/6)
+- Fix modal close button [#5](https://github.com/f3rked/maej3rked-tools/pull/5)
+
+### Features Added / Changed
+
+- Add setting and shortcut to hide video control overlay(`CTRL+SHIFT+H`) [#5](https://github.com/f3rked/maej3rked-tools/pull/5)
+- Add setting to enable dragging TTS modal [#4](https://github.com/f3rked/maej3rked-tools/pull/4)
+
+### Removed
+
+- N/A
+
+---
+
+# **_v2.14.2_**
+
+_Release: 07-05-2024_
+
+### Notes
+
+- N/A
+
+### Bug Fixes
+
+- Fix issue with plugin load, fix bigscreen mode [#64](https://github.com/maejok-xx/maejok-tools/pull/64)
+
+### Features Added / Changed
+
+- Add popups to hide screen takeovers [#64](https://github.com/maejok-xx/maejok-tools/pull/64)
+
+### Removed
+
+- N/A
+
+---
+
 # **_v2.14.1_**
 
 _Release: 04-28-2024_
