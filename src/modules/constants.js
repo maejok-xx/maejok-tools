@@ -72,6 +72,8 @@ export const BAD_WORDS = [
   "hooker",
   "troon",
   "chink",
+  "negro",
+  "bimbo",
 ];
 
 export const DARK_MODE_STYLES = `
