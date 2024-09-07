@@ -54,6 +54,26 @@ export const SOUNDS = new Map([
   ["tick-short", "wav"],
 ]);
 
+export const BAD_WORDS = [
+  "nigger",
+  "nigga",
+  "kike",
+  "homo",
+  "tranny",
+  "fag",
+  "slut",
+  "whore",
+  "pedo",
+  "rapist",
+  "paki",
+  "pajeet",
+  "nazi",
+  "hitler",
+  "hooker",
+  "troon",
+  "chink",
+];
+
 export const DARK_MODE_STYLES = `
 .background_background__fNMDL {
   background: #1c1c1c;
