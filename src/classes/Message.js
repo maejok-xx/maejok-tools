@@ -10,7 +10,6 @@ export default class Message {
     this.sender = this.getSender();
     this.body = this.getBody();
     this.timestamp = this.getTimestamp();
-    this.mentions = this.getMentions();
     this.mentioned = this.isMentioned();
     this.html = this.getMessageHTML();
     this.fish = this.isFish();
@@ -110,21 +109,6 @@ export default class Message {
     return { body, html };
   }
 
-  getMentions() {
-    if (this.type !== "message") {
-      return;
-    }
-    const mentionElements = this.node.querySelectorAll(
-      ELEMENTS.chat.message.mention.selector
-    );
-
-    const mentions = Array.from(mentionElements).map((mention) =>
-      mention.innerText.replace("@", "")
-    );
-
-    return mentions;
-  }
-
   getTimestamp() {
     if (this.type !== "message") {
       return;
@@ -143,26 +127,9 @@ export default class Message {
       return;
     }
 
-    const hasMentions =
-      Array.isArray(this.mentions) && this.mentions.length > 0;
-
-    if (!hasMentions) {
-      return;
-    }
-
-    const user = state.get("user");
-
-    if (!user) {
-      return false;
-    }
-
-    const lowercaseMentions = this.mentions.map((mention) =>
-      mention.toLowerCase()
+    return [...this.node.classList].includes(
+      ELEMENTS.chat.message.mentioned.class
     );
-    const lowercaseDisplayName = user.displayName.toLowerCase();
-    const isMentioned = lowercaseMentions.includes(lowercaseDisplayName);
-
-    return isMentioned;
   }
 
   isFish() {
