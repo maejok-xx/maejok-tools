@@ -1,8 +1,13 @@
 import state from "./state";
 import config from "./config";
-import { processChatMessage, getElementText } from "./functions";
+import {
+  processChatMessage,
+  getElementText,
+  checkTTSFilteredWords,
+} from "./functions";
 import ELEMENTS from "../data/elements";
 import { makeDraggable } from "./events";
+import { BAD_WORDS } from "./constants";
 
 const observers = {
   chat: {
@@ -101,6 +106,8 @@ const observers = {
             }
 
             if (addedNode.id === "modal") {
+              checkTTSFilteredWords(addedNode);
+
               const title = getElementText(ELEMENTS.modal.title.text.selector);
 
               const hideMissionsEnabled = config.get("hideGlobalMissions");
