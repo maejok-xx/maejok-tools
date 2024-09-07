@@ -1,4 +1,5 @@
 import state from "./state";
+import { BAD_WORDS } from "./constants";
 import { pluginName } from "./functions";
 import { clickResetKeybindButton } from "./events";
 
@@ -10,6 +11,7 @@ const Config = () => {
 
     enableBigScreen: true,
     enableDragModal: false,
+    enableTTSFilterWarning: true,
     persistBigScreen: false,
     bigScreenState: false,
     enableControlOverlay: false,
@@ -206,6 +208,19 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option will enable dragging of TTS modal to desired location.</p>`,
+              },
+            },
+            // enableTTSFilterWarning
+            {
+              name: "enableTTSFilterWarning",
+              label: "Enable TTS Filter Warning",
+              type: "toggle",
+              value: cfg.enableTTSFilterWarning,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will display a warning if your TTS text includes words that will be filtered.</p>
+                <p><strong style="color:white;word-wrap:break-word">Current known filtered words: ${BAD_WORDS.toString()}</strong></p>`,
               },
             },
             // enableEmotesMenu
