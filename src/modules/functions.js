@@ -5,6 +5,7 @@ import {
   SOUNDS,
   DARK_MODE_STYLES,
   SCREEN_TAKEOVERS_STYLES,
+  BAD_WORDS,
   BIG_SCREEN_STYLES_ONLINE,
   BIG_SCREEN_STYLES_OFFLINE,
   DEFAULT_KEYBINDS,
@@ -342,13 +343,13 @@ export const getSender = function (messageElement, messageType) {
     ? messageElement
     : messageElement.querySelector(sender.selector);
 
-  const senderText = messageType === "message"
-    ? senderElement.lastChild.textContent
-    : getElementText(senderElement);
+  const senderText =
+    messageType === "message"
+      ? senderElement.lastChild.textContent
+      : getElementText(senderElement);
 
   return senderText;
-}
-
+};
 
 export const getUserData = async (userId) => {
   try {
@@ -690,6 +691,58 @@ export const muteUser = async (user) => {
   }, 10);
 };
 
+export const checkTTSFilteredWords = (addedNode) => {
+  if (!config.get("enableTTSFilterWarning")) {
+    return;
+  }
+  const maxAttempts = 5;
+  let retries = 0;
+
+  const checkInputBox = () => {
+    const inputBox = addedNode.querySelector("input");
+
+    if (inputBox) {
+      inputBox.addEventListener("input", function () {
+        const regex = new RegExp(BAD_WORDS.join("|"), "gi");
+        const filterMatches = this.value.match(regex);
+
+        if (filterMatches) {
+          const inputLabel = addedNode.querySelector(
+            ".input_input__Zwrui > span"
+          );
+          const warningContainer = inputLabel.querySelector(
+            ".maejok-tts-warning-text"
+          );
+
+          if (warningContainer) {
+            warningContainer.innerHTML = `Your TTS contains No No words! (${filterMatches.toString()})`;
+            return;
+          }
+
+          inputBox.classList.add("maejok-tts-input-warning-border");
+
+          inputLabel.insertAdjacentHTML(
+            "beforeend",
+            "<div class='maejok-tts-warning-text'>" +
+              `Your TTS contains No No words! (${filterMatches.toString()})` +
+              "</div>"
+          );
+        } else {
+          const input = addedNode.querySelector(".maejok-tts-warning-text");
+          input?.remove();
+          inputBox.classList.remove("maejok-tts-input-warning-border");
+        }
+      });
+    } else if (retries < maxAttempts) {
+      // Use requestAnimationFrame to retry on the next render cycle
+      retries++;
+      requestAnimationFrame(checkInputBox);
+    }
+  };
+
+  requestAnimationFrame(checkInputBox);
+};
+
 export const runUserAgreement = () => {
   const needsToAgree = config.get("agreementVersion") !== VERSION;
 
@@ -1028,7 +1081,7 @@ function toggleLogoHover(toggleState) {
   logo.classList.toggle(logoSelector.hideImg.class, toggleState);
 
   if (toggleState) {
-    const logoHover = document.createElement('img');
+    const logoHover = document.createElement("img");
     logoHover.src = `${REPO_URL_ROOT}/blob/06bddd3e353365fc62df0e1415b4cda3cbf07b14/public/images/logo-full-white-red-eyes.png?raw=true`;
     logoHover.classList.add(...logoSelector.hoverImg.classes);
     logo.insertAdjacentElement("afterend", logoHover);
