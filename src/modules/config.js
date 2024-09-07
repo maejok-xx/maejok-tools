@@ -11,6 +11,8 @@ const Config = () => {
     enableBigScreen: true,
     persistBigScreen: false,
     bigScreenState: false,
+    enableControlOverlay: false,
+    controlOverlayState: false,
     disableSoundEffects: false,
     hideGlobalMissions: false,
     hideScreenTakeovers: false,
@@ -166,6 +168,19 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option will restore the last <strong>Big Screen Mode</strong> state upon refreshing the site.</p>`,
+              },
+            },
+            // enableVideoControls
+            {
+              name: "enableControlOverlay",
+              label: "Enable Video Control Overlay Shortcut",
+              type: "toggle",
+              value: cfg.enableControlOverlay,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option creates a keyboard shortcut to toggle <strong>the video controls overlay</strong> which will show or hide the overlay.</p>
+                <p>Keyboard Shortcut: <strong>CTRL+SHIFT+H</strong></p>`,
               },
             },
             // enableDimMode
