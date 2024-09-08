@@ -1,5 +1,21 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.15.1_**
+
+_Release: 09-08-2024_
+
+### Notes
+
+- Merging feature from upstream PR
+
+### Bug Fixes
+
+- N/A
+
+### Features Added / Changed
+
+- Add TTS filter warning when entering text for TTS or SFX that will be censored [#9](https://github.com/f3rked/maej3rked-tools/pull/9)
+
 # **_v2.15.0_**
 
 _Release: 07-26-2024_
