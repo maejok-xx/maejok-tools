@@ -181,6 +181,49 @@ const fetchLiveStreamStatus = async () => {
   }
 };
 
+export const toggleTimestampOverlay = (toggle) => {
+  if (toggle) {
+    setInterval(displayCurrentTankTime, 5000);
+  } else {
+    clearInterval(displayCurrentTankTime);
+    const timestampContainer = document.querySelector(
+      ELEMENTS.livestreams.controls.timestamp.selector
+    );
+    timestampContainer.remove();
+  }
+};
+
+const displayCurrentTankTime = () => {
+  const overlay = document.querySelector(
+    ELEMENTS.livestreams.controls.volume.selector
+  );
+
+  if (!overlay) {
+    return;
+  }
+
+  const timestampElement = ELEMENTS.livestreams.controls.timestamp;
+  const timestampContainer = document.querySelector(timestampElement.selector);
+
+  let targetElement;
+  if (timestampContainer) {
+    targetElement = timestampContainer;
+  } else {
+    targetElement = document.createElement("div");
+    targetElement.classList.add(timestampElement.class);
+    overlay.insertAdjacentElement("afterend", targetElement);
+  }
+
+  const d = new Date();
+  const formattedDate = d.toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    dateStyle: "short",
+    timeStyle: "short",
+  });
+
+  targetElement.innerHTML = formattedDate;
+};
+
 export const toggleControlOverlay = () => {
   if (!config.get("enableControlOverlay")) {
     return;
@@ -839,6 +882,7 @@ export const startMaejokTools = async () => {
   applySettingsToChat();
   toggleScanLines();
   toggleScreenTakeovers(config.get("hideScreenTakeovers"));
+  toggleTimestampOverlay(config.get("enableTimestampOverlay"));
   observers.chat.start();
 
   if (config.get("hideGlobalMissions")) {
