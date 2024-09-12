@@ -74,7 +74,8 @@ import "./styles/styles.scss";
         state.get("isShowLive") || hasFetchedShowLiveStatus;
       if (!liveStatusFetched) {
         hasFetchedShowLiveStatus = true;
-        isShowLive = getShowLiveStatus();
+        isShowLive = await getShowLiveStatus();
+
         state.set("isShowLive", isShowLive);
       }
     }
