@@ -15,6 +15,7 @@ const Config = () => {
     persistBigScreen: false,
     bigScreenState: false,
     enableControlOverlay: false,
+    enableTimestampOverlay: false,
     controlOverlayState: false,
     disableSoundEffects: false,
     hideGlobalMissions: false,
@@ -185,6 +186,18 @@ const Config = () => {
                 label: "?",
                 text: `<p>Enabling this option creates a keyboard shortcut to toggle <strong>the video controls overlay</strong> which will show or hide the overlay.</p>
                 <p>Keyboard Shortcut: <strong>CTRL+SHIFT+H</strong></p>`,
+              },
+            },
+            // enableTimestampOverlay
+            {
+              name: "enableTimestampOverlay",
+              label: "Enable Tank Time Overlay ",
+              type: "toggle",
+              value: cfg.enableTimestampOverlay,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will display a timestamp of the current time in the tank alongside the player controls.</p>`,
               },
             },
             // enableDimMode
