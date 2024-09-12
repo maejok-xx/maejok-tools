@@ -23,6 +23,14 @@ const Elements = {
     controls: {
       selector: `[class^="livepeer-video-player_controls"]`,
       class: "livepeer-video-player_controls__y36El",
+      volume: {
+        selector: `[class^="livepeer-video-player_volume-controls"]`,
+        class: "livepeer-video-player_volume-controls__q9My4",
+      },
+      timestamp: {
+        selector: `.maejok-timestamp-container`,
+        class: "maejok-timestamp-container",
+      },
     },
   },
   secondaryPanel: {
