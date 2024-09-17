@@ -189,7 +189,9 @@ export const toggleTimestampOverlay = (toggle) => {
     const timestampContainer = document.querySelector(
       ELEMENTS.livestreams.controls.timestamp.selector
     );
-    timestampContainer.remove();
+    if (timestampContainer) {
+      timestampContainer.remove();
+    }
   }
 };
 
