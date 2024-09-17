@@ -4,12 +4,47 @@ import {
   processChatMessage,
   getElementText,
   checkTTSFilteredWords,
+  addDateForm,
 } from "./functions";
 import ELEMENTS from "../data/elements";
 import { makeDraggable } from "./events";
 import { BAD_WORDS } from "./constants";
 
 const observers = {
+  main: {
+    start: () => {
+      state.get("observers").main?.disconnect();
+
+      const main = document.querySelector("#main-panel");
+
+      const mainObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (
+            mutation.type !== "childList" ||
+            mutation.addedNodes.length === 0 ||
+            !mutation.addedNodes[0].className.includes("clips_clips__NXv0O")
+          ) {
+            return;
+          }
+
+          console.log(mutation);
+          addDateForm();
+          // mutation.addedNodes.forEach((addedNode) => {
+          //   processChatMessage(addedNode);
+          // });
+        });
+      });
+
+      mainObserver.observe(main, { childList: true });
+
+      state.set("observers", { ...state.get("observers"), main: mainObserver });
+    },
+
+    stop: () => {
+      const observers = state.get("observers");
+      observers.main?.disconnect();
+    },
+  },
   chat: {
     start: () => {
       state.get("observers").chat?.disconnect();

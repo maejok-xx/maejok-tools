@@ -93,6 +93,300 @@ export const modifyUserList = (list, user, toggle) => {
   return true;
 };
 
+export const addDateForm = () => {
+  requestAnimationFrame(() => {
+    const filters = document.querySelector(".clips_filters__iKW9I");
+    const form = document.createElement("form");
+    form.classList.add(...["clips_search___EXF7", "maejok-clip-date-search"]);
+    form.innerHTML = `
+      <label class="input_input__Zwrui input_full-width__CPmyK">
+          <span style="white-space:nowrap">Date (mm/dd/yy)</span>
+          <div><input id="maejok-date-search-input" type="text" minlength="2" maxlength="80" value="" name="date"></div>
+      </label>
+      <button id="maejok-date-search-submit" type="submit" class="icon-button_icon-button___ltd_ undefined">
+          <div><div class="icon_icon__bDzMA">
+              <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <path d="M6 2h8v2H6V2zM4 6V4h2v2H4zm0 8H2V6h2v8zm2 2H4v-2h2v2zm8 0v2H6v-2h8zm2-2h-2v2h2v2h2v2h2v2h2v-2h-2v-2h-2v-2h-2v-2zm0-8h2v8h-2V6zm0 0V4h-2v2h2z" fill="currentColor"></path>
+              </svg>
+          </div></div>
+      </button>`;
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const input = form.querySelector('input[name="date"]');
+      const inputValue = input ? input.value : "";
+      console.log("Form submitted with date:", inputValue);
+
+      changeClips(inputValue);
+      // Start checking pages for the specified date
+      //checkForDateOnPage(inputValue);
+    });
+
+    // Insert form into the DOM
+    filters.insertAdjacentElement("beforeend", form);
+  });
+};
+
+export const changeClips = (inputValue) => {
+  requestAnimationFrame(async () => {
+    const clipResults = await filterClips(inputValue);
+    const clipElements = document.querySelectorAll(".clip_clip__K81R7");
+    const pageSize = 49;
+    let index = 0;
+    console.log(clipResults);
+
+    clipResults.forEach((clip) => {
+      if (index >= 49) {
+        return;
+      }
+      const clipElement = clipElements[index];
+      const reactKey = Object.keys(clipElement).find((key) =>
+        key.startsWith("__reactFiber")
+      );
+      const internalInstance = clipElement[reactKey];
+
+      const clipProps = internalInstance.return.memoizedProps.clip;
+      clipProps.assetId = clip.assetId;
+      clipProps.createdAt = clip.createdAt;
+      clipProps.id = clip.id;
+      clipProps.name = clip.name;
+      clipProps.playbackId = clip.playbackId;
+      console.log(clipProps);
+
+      index++;
+    });
+  });
+};
+
+const filterClips = async (inputDate) => {
+  const response = await fetch(
+    "https://api.fishtank.live/v1/clips?sort=created_at&page=1&pageSize=1000",
+    { method: "GET" }
+  );
+  const data = await response.json();
+
+  const filteredClips = filterClipsByDate(data.clips, inputDate);
+  console.log(filteredClips);
+  return filteredClips;
+};
+
+// convert to eastern time
+// regex for user input
+const filterClipsByDate = (clips, inputDate) => {
+  const date = new Date(inputDate).toDateString();
+  return clips.filter((clip) => {
+    const clipDate = new Date(clip.createdAt).toDateString();
+    return date === clipDate;
+  });
+};
+
+// const filterClipsByDate = (clips, inputDate) => {
+//   console.log(clips);
+//   // Parse input date (mm/dd/yy) and create a Date object
+//   // const [month, day, year] = inputDate.split("/");
+//   // const startOfDay = new Date(`20${year}`, month - 1, day).setHours(0, 0, 0, 0); // Start of the day
+//   // const endOfDay = new Date(`20${year}`, month - 1, day).setHours(
+//   //   23,
+//   //   59,
+//   //   59,
+//   //   999
+//   // ); // End of the day
+
+//   // Filter the clips that were created within the input date's range
+//   const filteredClips = Array.from(clips).some((clip) => {
+//     clip.textContent.includes(inputDate);
+//   });
+//   console.log(filteredClips);
+
+//   return filteredClips;
+// };
+
+// export const addClipsClickHandler = () => {
+//   const buttons = document.querySelectorAll(
+//     "button.dropdown-button_dropdown-button-option__C_6uI"
+//   );
+
+//   const clipsButton = Array.from(buttons).find(
+//     (button) => button.textContent.trim() === "Clips"
+//   );
+
+//   if (clipsButton) {
+//     clipsButton.addEventListener("click", function () {
+//       console.log("Clips button clicked!");
+//       requestAnimationFrame(() => {
+//         const filters = document.querySelector(".clips_filters__iKW9I");
+//         const form = document.createElement("form");
+//         form.classList.add(
+//           ...["clips_search___EXF7", "maejok-clip-date-search"]
+//         );
+//         form.innerHTML = `
+//           <label class="input_input__Zwrui input_full-width__CPmyK">
+//               <span style="white-space:nowrap">Date (mm/dd/yy)</span>
+//               <div><input id="maejok-date-search-input" type="text" minlength="2" maxlength="80" value="" name="date"></div>
+//           </label>
+//           <button id="maejok-date-search-submit" type="submit" class="icon-button_icon-button___ltd_ undefined">
+//               <div><div class="icon_icon__bDzMA">
+//                   <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+//                       <path d="M6 2h8v2H6V2zM4 6V4h2v2H4zm0 8H2V6h2v8zm2 2H4v-2h2v2zm8 0v2H6v-2h8zm2-2h-2v2h2v2h2v2h2v2h2v-2h-2v-2h-2v-2h-2v-2zm0-8h2v8h-2V6zm0 0V4h-2v2h2z" fill="currentColor"></path>
+//                   </svg>
+//               </div></div>
+//           </button>`;
+
+//         // Attach the form submission handler
+
+//         if (form) {
+//           form.addEventListener("submit", function (event) {
+//             event.preventDefault(); // Prevents the form from submitting normally
+//             const input = form.querySelector('input[name="date"]');
+//             const inputValue = input ? input.value : "";
+//             console.log("Form submitted with date:", inputValue);
+
+//             const clipDates = document.querySelectorAll(".clip_date__nVXpl");
+
+//             //MAKE THIS BETTER WITH CLEANER RECURSION and separate function
+
+//             const nextPage = document.querySelector(
+//               ".pagination_page-change__1c4FC"
+//             );
+//             nextPage.addEventListener("click", function (event) {
+//               const clipDates = document.querySelectorAll(".clip_date__nVXpl");
+
+//               if (!filterClipsByDate(clipDates, inputValue)) {
+//                 nextPage.click();
+//                 console.log("click");
+//               }
+//               console.log(clipDates);
+//             });
+
+//             if (!filterClipsByDate(clipDates, inputValue)) {
+//               nextPage.click();
+//             }
+
+//             // const response = await fetch(
+//             //   "https://api.fishtank.live/v1/clips?sort=created_at&page=1&pageSize=1000",
+//             //   { method: "GET" }
+//             // );
+//             // const data = await response.json();
+//             // console.log(data.clips);
+
+//             // const filteredClips = filterClipsByDate(data.clips, inputValue);
+//             // console.log(filteredClips);
+//           });
+//         }
+
+//         // Insert form into the DOM
+//         filters.insertAdjacentElement("beforeend", form);
+
+//         const input = document.querySelector("#maejok-date-search-input");
+//         input.addEventListener("click", function (event) {
+//           const checkboxes = document.querySelector(".clips_buttons__0y7rH");
+//           const buttons = checkboxes.querySelectorAll("button");
+//           const newestButton = Array.from(buttons).find(
+//             (button) => button.textContent.trim() === "Newest"
+//           );
+//           newestButton.click();
+//         });
+//       });
+
+//       // Additional logic for the button click can be added here
+//     });
+//   }
+// };
+
+//USE OBSERVER
+// DISPLAY HIDDEN CLIPS LIST WHILE FINDING AND SHOW LOADING
+// Modify react props to update with different set of clips
+// const filterClipsByDate = (clips, inputDate) => {
+//   console.log(clips);
+//   const filteredClips = Array.from(clips).some((clip) => {
+//     return clip.textContent.includes(inputDate);
+//   });
+//   console.log(filteredClips);
+//   return filteredClips;
+// };
+
+// const checkForDateOnPage = (inputDate) => {
+//   const clipDates = document.querySelectorAll(".clip_date__nVXpl");
+
+//   if (!filterClipsByDate(clipDates, inputDate)) {
+//     //const nextPage = document.querySelector(".pagination_page-change__1c4FC");
+//     const nextPageSvg = document.querySelector(
+//       'path[d="M8 5v2h2V5H8zm4 4V7h-2v2h2zm2 2V9h-2v2h2zm0 2h2v-2h-2v2zm-2 2v-2h2v2h-2zm0 0h-2v2h2v-2zm-4 4v-2h2v2H8z"]'
+//     );
+//     const nextPage = nextPageSvg.parentElement.parentElement.parentElement;
+//     if (nextPage) {
+//       console.log("Clicking next page...");
+//       nextPage.click();
+//       // Delay and check again after page load (you may need to adjust timing)
+//       setTimeout(() => {
+//         checkForDateOnPage(inputDate);
+//       }, 200); // Adjust delay based on how long it takes for content to load
+//     } else {
+//       console.log("No more pages or next page button not found.");
+//     }
+//   } else {
+//     console.log("Date found on the current page.");
+//   }
+// };
+
+// export const addClipsClickHandler = () => {
+//   const buttons = document.querySelectorAll(
+//     "button.dropdown-button_dropdown-button-option__C_6uI"
+//   );
+
+//   const clipsButton = Array.from(buttons).find(
+//     (button) => button.textContent.trim() === "Clips"
+//   );
+
+//   if (clipsButton) {
+//     clipsButton.addEventListener("click", function () {
+//       console.log("Clips button clicked!");
+//       requestAnimationFrame(() => {
+//         const filters = document.querySelector(".clips_filters__iKW9I");
+//         const form = document.createElement("form");
+//         form.classList.add(
+//           ...["clips_search___EXF7", "maejok-clip-date-search"]
+//         );
+//         form.innerHTML = `
+//           <label class="input_input__Zwrui input_full-width__CPmyK">
+//               <span style="white-space:nowrap">Date (mm/dd/yy)</span>
+//               <div><input id="maejok-date-search-input" type="text" minlength="2" maxlength="80" value="" name="date"></div>
+//           </label>
+//           <button id="maejok-date-search-submit" type="submit" class="icon-button_icon-button___ltd_ undefined">
+//               <div><div class="icon_icon__bDzMA">
+//                   <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+//                       <path d="M6 2h8v2H6V2zM4 6V4h2v2H4zm0 8H2V6h2v8zm2 2H4v-2h2v2zm8 0v2H6v-2h8zm2-2h-2v2h2v2h2v2h2v2h2v-2h-2v-2h-2v-2h-2v-2zm0-8h2v8h-2V6zm0 0V4h-2v2h2z" fill="currentColor"></path>
+//                   </svg>
+//               </div></div>
+//           </button>`;
+
+//         form.addEventListener("submit", function (event) {
+//           event.preventDefault();
+//           const input = form.querySelector('input[name="date"]');
+//           const inputValue = input ? input.value : "";
+//           console.log("Form submitted with date:", inputValue);
+
+//           // Start checking pages for the specified date
+//           checkForDateOnPage(inputValue);
+//         });
+
+//         // Insert form into the DOM
+//         filters.insertAdjacentElement("beforeend", form);
+
+//         const input = document.querySelector("#maejok-date-search-input");
+//         input.addEventListener("click", function (event) {
+//           const checkboxes = document.querySelector(".clips_buttons__0y7rH");
+//           const buttons = checkboxes.querySelectorAll("button");
+//           const newestButton = Array.from(buttons).find(
+//             (button) => button.textContent.trim() === "Newest"
+//           );
+//           newestButton.click();
+//         });
+//       });
+//     });
+//   }
+// };
+
 export const toggleItemInList = (list, item) => {
   const items = config.get(list);
   const itemExists = items.includes(item);
@@ -892,7 +1186,9 @@ export const startMaejokTools = async () => {
   applySettingsToChat();
   toggleScanLines();
   toggleScreenTakeovers(config.get("hideScreenTakeovers"));
+
   observers.chat.start();
+  observers.main.start();
 
   if (config.get("hideGlobalMissions")) {
     observers.body.start();
@@ -928,6 +1224,7 @@ export const stopMaejokTools = () => {
   toggleLogoHover(false);
 
   observers.chat.stop();
+  observers.main.stop();
   observers.chatters.stop();
   observers.body.stop();
   observers.modal.stop();
