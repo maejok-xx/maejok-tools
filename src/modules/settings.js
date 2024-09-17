@@ -27,6 +27,7 @@ import {
   toggleScanLines,
   toggleScreenTakeovers,
   keyEventToString,
+  toggleTimestampOverlay,
 } from "./functions";
 import {
   start as startRecentChatters,
@@ -70,6 +71,7 @@ export const saveSettings = async () => {
   toggleScanLines();
   toggleDimMode(config.get("enableDimMode"));
   toggleScreenTakeovers(config.get("hideScreenTakeovers"));
+  toggleTimestampOverlay(config.get("enableTimestampOverlay"));
 
   if (!config.get("enableBigScreen")) {
     toggleBigScreen(false);
