@@ -38,6 +38,7 @@ const Config = () => {
     hideTTSMessages: false,
     hideSFXMessages: false,
     hideSystem: false,
+    hideFonts: false,
 
     enableImprovedTagging: true,
 
@@ -442,6 +443,19 @@ const Config = () => {
                 label: "?",
                 text: `<p>Enabling this option hides <strong>System Messages</strong>.</p>
                 <p>These are the green messages.  eg: "Joined Global".</p>`,
+              },
+            },
+            // hideFonts
+            {
+              name: "hideFonts",
+              label: "Hide Chat Fonts",
+              type: "toggle",
+              value: cfg.hideFonts,
+              group: "hiders",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option hides <strong>Special Chat Fonts</strong>.</p>
+                <p>These are the messages in non-standard font.</p>`,
               },
             },
 
