@@ -1,5 +1,21 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.16.0_**
+
+_Release: 10-06-2024_
+
+### Notes
+
+- Adding feature to remove special chat fonts
+
+### Bug Fixes
+
+- N/A
+
+### Features Added / Changed
+
+- Added setting to standardize chat fonts [#10](https://github.com/f3rked/maej3rked-tools/pull/10)
+
 # **_v2.15.1_**
 
 _Release: 09-08-2024_
