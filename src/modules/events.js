@@ -257,8 +257,6 @@ export const keyPress = (event) => {
     return;
   }
 
-  console.log(event.code);
-
   const keys = {
     backtick: "Backquote",
     space: "Space",
