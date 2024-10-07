@@ -529,6 +529,8 @@ export const processChatMessage = (node, logMentions = true) => {
     message.normalizeEpic();
     message.normalizeGrand();
 
+    message.normalizeFonts(cfg.hideFonts);
+
     message.fixDarkDisplayName();
 
     message.hideElements(hideTypes.element, hideTypes.hide);

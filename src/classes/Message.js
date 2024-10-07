@@ -173,6 +173,16 @@ export default class Message {
     element.classList.toggle(normalize.class, shouldNormalize);
   }
 
+  normalizeFonts(hideFonts) {
+    const { selector, normalize } = ELEMENTS.chat.message.body.text;
+
+    const element = this.node.querySelector(selector);
+    console.log(element);
+    if (element) {
+      element.classList.toggle(normalize.class, hideFonts);
+    }
+  }
+
   normalizeGrand() {
     if (!this.isGrand()) {
       return;

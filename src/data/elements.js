@@ -221,6 +221,9 @@ const Elements = {
         text: {
           selector: `[class^="chat-message-default_message"]`,
           class: `chat-message-default_message__milmT`,
+          normalize: {
+            class: `maejok-hide-fonts`,
+          },
         },
       },
       timestamp: {
