@@ -154,18 +154,32 @@ export const toggleScanLines = (toggle) => {
   body.classList.toggle("maejok-hide-scan_lines", toggle);
 };
 
-export const getShowLiveStatus = () => {
-  const status = localStorage.getItem("live-streams-status");
+export const getShowLiveStatus = async () => {
+  const livestreams = await fetchLiveStreamStatus();
   let online = false;
 
-  if (status) {
-    const value = JSON.parse(status).value;
-    online = Object.values(value).some(function (s) {
+  if (livestreams) {
+    online = Object.values(livestreams.status).some(function (s) {
       return s === "online";
     });
   }
 
   return online;
+};
+
+const fetchLiveStreamStatus = async () => {
+  const options = {
+    method: "GET",
+  };
+  try {
+    const data = await fetch(
+      `https://api.fishtank.live/v1/live-streams/status`,
+      options
+    );
+    return await data?.json();
+  } catch (error) {
+    return false;
+  }
 };
 
 export const toggleControlOverlay = () => {
