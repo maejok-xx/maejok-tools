@@ -211,6 +211,9 @@ const Elements = {
         selector: `[class^="chat-message-default_endorsement__"]`,
         class: `chat-message-default_endorsement__n_LUu`,
       },
+      grayName: {
+        selector: `.chat-message-default_free___3d5O`,
+      },
       sender: {
         selector: `[class^="chat-message-default_user"]`,
         class: `chat-message-default_user__uVNvH`,

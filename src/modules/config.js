@@ -39,6 +39,7 @@ const Config = () => {
     hideSFXMessages: false,
     hideSystem: false,
     hideFonts: false,
+    hideGrayNames: false,
 
     enableImprovedTagging: true,
 
@@ -67,16 +68,6 @@ const Config = () => {
 
     friends: [],
     watching: [],
-    // friendsColor: {
-    //   background: "rgba(0, 149, 255, 0.1)",
-    //   outline: "rgba(0, 149, 255, 0.25)",
-    //   font: "rgb(255,255,255)",
-    // },
-    // watchingColor: {
-    //   background: "rgba(0, 255, 4, 0.1)",
-    //   outline: "rgba(0, 255, 4, 0.25)",
-    //   font: "rgb(255,255,255)",
-    // },
   };
 
   const pluginObj = {
@@ -456,6 +447,18 @@ const Config = () => {
                 label: "?",
                 text: `<p>Enabling this option hides <strong>Special Chat Fonts</strong>.</p>
                 <p>These are the messages in non-standard font.</p>`,
+              },
+            },
+            // hideGrayNames
+            {
+              name: "hideGrayNames",
+              label: "Hide Gray Names",
+              type: "toggle",
+              value: cfg.hideGrayNames,
+              group: "hiders",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option hides chat messages from <strong>Gray Names (free users)</strong>.</p>`,
               },
             },
 

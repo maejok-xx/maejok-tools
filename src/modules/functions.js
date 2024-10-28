@@ -529,6 +529,10 @@ export const processChatMessage = (node, logMentions = true) => {
         element: "endorsement",
         hide: cfg.enablePlugin ? cfg.hideEndorsements : false,
       },
+      hideGrayNames: {
+        element: "grayName",
+        hide: cfg.enablePlugin ? cfg.hideGrayNames : false,
+      },
     };
 
     const hideTypes = Object.entries(messageHideMap).reduce(
