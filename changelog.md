@@ -1,5 +1,21 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.17.0_**
+
+_Release: 10-28-2024_
+
+### Notes
+
+- N/A
+
+### Bug Fixes
+
+- Fix bigscreen [#13](https://github.com/f3rked/maej3rked-tools/pull/13)
+
+### Features Added / Changed
+
+- Add setting to hide gray name chat messages [#13](https://github.com/f3rked/maej3rked-tools/pull/13)
+
 # **_v2.16.0_**
 
 _Release: 10-06-2024_
