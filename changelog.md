@@ -1,5 +1,21 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.17.2_**
+
+_Release: 10-28-2024_
+
+### Notes
+
+- Sorry for the update spam
+
+### Bug Fixes
+
+- Fix issue with recent chatters capping at 999 and throwing errors
+
+### Features Added / Changed
+
+- N/A
+
 # **_v2.17.1_**
 
 _Release: 10-28-2024_

@@ -120,8 +120,12 @@ function refresh() {
   }
 
   const numberString = String(users.length);
-  const zerosToAdd = 3 - numberString.length;
-  const zeroPadding = "0".repeat(zerosToAdd);
+  let zeroPadding = "";
+
+  if (numberString.length < 3) {
+    const zerosToAdd = 3 - numberString.length;
+    zeroPadding = "0".repeat(zerosToAdd);
+  }
 
   chatCount.innerText = zeroPadding + numberString;
 }
@@ -131,9 +135,7 @@ function create() {
     return;
   }
 
-  const header = document.querySelector(
-    ELEMENTS.chat.header.selector
-  );
+  const header = document.querySelector(ELEMENTS.chat.header.selector);
 
   const chattersOnlineOriginal = document.querySelector(
     ELEMENTS.chat.header.presence.selector
@@ -144,11 +146,18 @@ function create() {
   );
 
   const chatPresenceContainer = document.createElement("div");
-  chatPresenceContainer.classList.add(ELEMENTS.chat.header.presence.wrapper.class);
+  chatPresenceContainer.classList.add(
+    ELEMENTS.chat.header.presence.wrapper.class
+  );
 
   const chattersOnline = document.createElement("div");
   chattersOnline.innerHTML = chattersOnlineOriginal.innerHTML;
-  chattersOnline.classList.add(...[ELEMENTS.chat.header.presence.class, ELEMENTS.chat.header.presence.online.class]);
+  chattersOnline.classList.add(
+    ...[
+      ELEMENTS.chat.header.presence.class,
+      ELEMENTS.chat.header.presence.online.class,
+    ]
+  );
 
   const chattersActive = document.createElement("div");
   chattersActive.classList.add(ELEMENTS.chat.header.recent.class);
@@ -167,7 +176,7 @@ function create() {
   chatPresenceContainer.appendChild(chattersOnline);
   chatPresenceContainer.appendChild(chattersActive);
   header.insertBefore(chatPresenceContainer, roomSelect);
-  chattersOnlineOriginal.id =  ELEMENTS.chat.header.presence.id;
+  chattersOnlineOriginal.id = ELEMENTS.chat.header.presence.id;
 
   update();
 }
