@@ -1,5 +1,21 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.17.1_**
+
+_Release: 10-28-2024_
+
+### Notes
+
+- Oopsie
+
+### Bug Fixes
+
+- Fix hide gray names feature only hiding message text but not avatar + name
+
+### Features Added / Changed
+
+- N/A
+
 # **_v2.17.0_**
 
 _Release: 10-28-2024_

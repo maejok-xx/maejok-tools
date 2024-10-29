@@ -235,6 +235,8 @@ export default class Message {
           if (item) item.classList.toggle("maejok-hide", hide[index]);
           if (level)
             level.classList.toggle("maejok-hide_avatar-fix", hide[index]);
+        } else if (element === "grayName") {
+          this.node.classList.toggle("maejok-hide", hide[index]);
         } else {
           item.classList.toggle("maejok-hide", hide[index]);
         }
