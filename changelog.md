@@ -1,5 +1,22 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.18.0_**
+
+_Release: 10-31-2024_
+
+### Notes
+
+- N/A
+
+### Bug Fixes
+
+- N/A
+
+### Features Added / Changed
+
+- Update video control overlay shortcut to also hide quality option
+- Add option to display timestamp in the video player top bar - mostly useful for clippers and bigscreen users
+
 # **_v2.17.2_**
 
 _Release: 10-28-2024_
