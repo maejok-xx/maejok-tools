@@ -189,14 +189,19 @@ export const toggleControlOverlay = () => {
   const videoControls = document.querySelector(
     ELEMENTS.livestreams.controls.selector
   );
+  const qualityControl = document.querySelector(
+    ELEMENTS.livestreams.quality.selector
+  );
 
   const toggle = config.get("controlOverlayState");
   config.set("controlOverlayState", !toggle);
 
   if (toggle) {
     videoControls.style.display = "none";
+    qualityControl.style.display = "none";
   } else {
     videoControls.style.display = "";
+    qualityControl.style.display = "";
   }
 };
 

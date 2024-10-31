@@ -24,6 +24,10 @@ const Elements = {
       selector: `[class^="livepeer-video-player_controls"]`,
       class: "livepeer-video-player_controls__y36El",
     },
+    quality: {
+      selector: `[class^="livepeer-video-player_quality"]`,
+      class: "livepeer-video-player_quality__1WPkz",
+    },
   },
   secondaryPanel: {
     tab: {
