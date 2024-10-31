@@ -205,6 +205,75 @@ export const toggleControlOverlay = () => {
   }
 };
 
+export const toggleTimestampOverlay = (toggle) => {
+  if (toggle) {
+    setInterval(displayCurrentTankTime, 30000);
+  } else {
+    clearInterval(displayCurrentTankTime);
+    const timestampContainer = document.querySelector(
+      ELEMENTS.livestreams.timestamp.selector
+    );
+    timestampContainer?.remove();
+  }
+};
+
+const displayCurrentTankTime = () => {
+  const playerHeaderTarget = document.querySelector(
+    ".live-stream-player_right__YlQQh"
+  );
+
+  if (!playerHeaderTarget) {
+    return;
+  }
+
+  const timestampElement = ELEMENTS.livestreams.timestamp;
+  const timestampContainer = document.querySelector(timestampElement.selector);
+  const targetTimeElement = document.querySelector(".maejok-timestamp-time");
+
+  let targetElement;
+  let timestampDate;
+  let timestampTime;
+  if (timestampContainer) {
+    targetElement = timestampContainer;
+    timestampDate = timestampContainer.querySelector(
+      timestampElement.day.selector
+    );
+    timestampTime = timestampContainer.querySelector(
+      timestampElement.time.selector
+    );
+  } else {
+    targetElement = document.createElement("div");
+    targetElement.classList.add(timestampElement.class);
+    timestampDate = document.createElement("div");
+    timestampDate.classList.add(timestampElement.day.class);
+    timestampTime = document.createElement("div");
+    timestampTime.classList.add(timestampElement.time.class);
+    targetElement.appendChild(timestampDate);
+    targetElement.appendChild(timestampTime);
+    playerHeaderTarget.insertAdjacentElement("beforebegin", targetElement);
+  }
+
+  const d = new Date();
+  const showStartDate = new Date("2024-10-27");
+  const showDay = Math.floor((d - showStartDate) / 86400000);
+  const formattedTime = d.toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
+
+  let dayString = "";
+  if (showDay < 10) {
+    dayString = `0${showDay}`;
+  } else {
+    dayString = showDay.toString();
+  }
+
+  timestampDate.innerHTML = `Day ${dayString}`;
+  timestampTime.innerHTML = formattedTime;
+};
+
 export const toggleBigScreen = (mode = null, muted = false) => {
   if (config.get("enableBigScreen")) {
     if (!muted) {
@@ -902,6 +971,7 @@ export const startMaejokTools = async () => {
   disableSoundEffects(config.get("disableSoundEffects"));
   applySettingsToChat();
   toggleScanLines();
+  toggleTimestampOverlay(config.get("enableTimestampOverlay"));
   toggleScreenTakeovers(config.get("hideScreenTakeovers"));
   observers.chat.start();
 

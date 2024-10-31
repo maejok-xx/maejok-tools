@@ -26,6 +26,7 @@ import {
   disableSoundEffects,
   toggleScanLines,
   toggleScreenTakeovers,
+  toggleTimestampOverlay,
   keyEventToString,
 } from "./functions";
 import {
@@ -69,6 +70,7 @@ export const saveSettings = async () => {
   applySettingsToChat();
   toggleScanLines();
   toggleDimMode(config.get("enableDimMode"));
+  toggleTimestampOverlay(config.get("enableTimestampOverlay"));
   toggleScreenTakeovers(config.get("hideScreenTakeovers"));
 
   if (!config.get("enableBigScreen")) {

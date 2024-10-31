@@ -12,6 +12,10 @@ const Elements = {
   home: {
     selector: `[class^="home_home"]`,
     class: "home_home__pUFCA",
+    date: {
+      selector: `[class^="status-bar_date"]`,
+      class: "status-bar_date__mqIyI",
+    },
   },
   livestreams: {
     selector: `[class*="live-streams_live-streams__"]`,
@@ -27,6 +31,18 @@ const Elements = {
     quality: {
       selector: `[class^="livepeer-video-player_quality"]`,
       class: "livepeer-video-player_quality__1WPkz",
+    },
+    timestamp: {
+      selector: `.maejok-timestamp-container`,
+      class: "maejok-timestamp-container",
+      day: {
+        selector: `.maejok-timestamp-day`,
+        class: "maejok-timestamp-day",
+      },
+      time: {
+        selector: `.maejok-timestamp-time`,
+        class: "maejok-timestamp-time",
+      },
     },
   },
   secondaryPanel: {

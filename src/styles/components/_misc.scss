@@ -47,6 +47,47 @@
   }
 }
 
+.maejok-timestamp-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  margin-left: auto;
+}
+
+.maejok-timestamp-day {
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #28d97f;
+  text-shadow: 2px 2px 0 rgba(27, 154, 89, .25);
+  letter-spacing: -1.5px;
+}
+
+.maejok-timestamp-time {
+  letter-spacing: -2px;
+  font-size: 14px;
+  white-space: nowrap;
+  color: white;
+}
+
+.maejok-timestamp-time::before {
+  color: #f8ec94;
+  content: "[";
+  text-shadow: 1px 1px 0 #000;
+  margin-right: 4px;
+}
+
+.maejok-timestamp-time::after {
+  color: #f8ec94;
+  content: "]";
+  text-shadow: 1px 1px 0 #000;
+  margin-left: 4px;
+}
+
 .maejok-chatters_presence-container {
   text-align: center;
   cursor: pointer;
