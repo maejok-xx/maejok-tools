@@ -51,7 +51,11 @@ import "./styles/styles.scss";
     observers.body.start();
   }
 
-  if (config.get("hideGlobalMissions") || config.get("enableDragModal")) {
+  if (
+    config.get("hideGlobalMissions") ||
+    config.get("enableDragModal") ||
+    config.get("enableTTSFilterWarning")
+  ) {
     observers.modal.start();
   }
 
