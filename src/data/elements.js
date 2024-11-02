@@ -28,6 +28,10 @@ const Elements = {
       selector: `[class*="live-streams_live-streams-grid__"]`,
       class: "live-streams_live-streams-grid__Tp4ah",
     },
+    player: {
+      selector: `[class^="live-stream-player_live-stream-player__4CHjG"]`,
+      class: "live-stream-player_live-stream-player__4CHjG",
+    },
     selected: {
       selector: `[class^="live-streams_selected-live-stream"]`,
       class: `live-streams_selected-live-stream__bFOAj`,
@@ -51,6 +55,10 @@ const Elements = {
         selector: `.maejok-timestamp-time`,
         class: "maejok-timestamp-time",
       },
+    },
+    overlay: {
+      selector: `.maejok-user-overlay`,
+      class: "maejok-user-overlay",
     },
   },
   secondaryPanel: {

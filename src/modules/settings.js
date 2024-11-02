@@ -27,6 +27,7 @@ import {
   toggleScanLines,
   toggleScreenTakeovers,
   toggleTimestampOverlay,
+  toggleUserOverlay,
   keyEventToString,
 } from "./functions";
 import {
@@ -72,6 +73,7 @@ export const saveSettings = async () => {
   toggleScanLines();
   toggleDimMode(config.get("enableDimMode"));
   toggleTimestampOverlay(config.get("enableTimestampOverlay"));
+  toggleUserOverlay(config.get("enableUserOverlay"));
   toggleScreenTakeovers(config.get("hideScreenTakeovers"));
 
   if (!config.get("enableBigScreen")) {

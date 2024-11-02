@@ -267,6 +267,43 @@ export const displayCurrentTankTime = () => {
   timestampTime.innerHTML = formattedTime;
 };
 
+export const toggleUserOverlay = (toggle) => {
+  if (toggle) {
+    const { userOverlayHTML } = state.get("user");
+    if (!userOverlayHTML) {
+      const displayNameElement = document.querySelector(
+        ELEMENTS.header.user.name.selector
+      );
+
+      setUserData(displayNameElement);
+    }
+
+    displayUserNameOverlay();
+  } else {
+    const userOverlay = document.querySelector(
+      ELEMENTS.livestreams.overlay.selector
+    );
+
+    userOverlay?.remove();
+  }
+};
+
+export const displayUserNameOverlay = () => {
+  const playerHeaderTarget = document.querySelector(
+    ".live-stream-player_right__YlQQh"
+  );
+
+  if (!playerHeaderTarget) {
+    return;
+  }
+
+  const { userOverlayHTML } = state.get("user");
+  const userOverlayContainer = document.createElement("div");
+  userOverlayContainer.classList.add(ELEMENTS.livestreams.overlay.class);
+  userOverlayContainer.innerHTML = userOverlayHTML;
+  playerHeaderTarget.insertAdjacentElement("beforebegin", userOverlayContainer);
+};
+
 export const toggleBigScreen = (mode = null, muted = false) => {
   if (config.get("enableBigScreen")) {
     if (!muted) {
@@ -450,17 +487,34 @@ export const getSender = function (messageElement, messageType) {
   return senderText;
 };
 
-export const getUserData = async (userId) => {
-  try {
-    const data = await fetchFromFishtank(
-      "get",
-      `https://www.fishtank.live/api/user/get?uid=${userId}`
-    );
-  } catch (error) {
-    return false;
+export const setUserData = (userNameElement) => {
+  const name = userNameElement.textContent;
+
+  let clanName, clanStyle;
+  let clanHTML = "";
+
+  const clanElement = document.querySelector(
+    `.${ELEMENTS.header.user.clan.class} > button`
+  );
+
+  if (clanElement) {
+    clanName = clanElement.textContent;
+    clanStyle = clanElement.getAttribute("style");
+    clanHTML = `<div class="maejok-user-overlay-clan" style="${clanStyle}">${clanName}</div>`;
   }
 
-  return data;
+  const userOverlayHTML =
+    clanHTML + `<div class="maejok-user-overlay-username">${name}</div>`;
+  console.log(userOverlayHTML);
+
+  return {
+    profile: {
+      displayName: name,
+      clan: clanName,
+      clanStyle: clanStyle,
+      userOverlayHTML: userOverlayHTML,
+    },
+  };
 };
 
 export const findUserByName = (displayName) => {
@@ -965,6 +1019,7 @@ export const startMaejokTools = async () => {
   applySettingsToChat();
   toggleScanLines();
   toggleTimestampOverlay(config.get("enableTimestampOverlay"));
+  toggleUserOverlay(config.get("enableUserOverlay"));
   toggleScreenTakeovers(config.get("hideScreenTakeovers"));
   observers.chat.start();
   observers.home.start();

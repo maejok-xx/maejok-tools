@@ -10,7 +10,7 @@ import {
   runUserAgreement,
   toggleScanLines,
   getReactProps,
-  getUserData,
+  setUserData,
   getShowLiveStatus,
 } from "./modules/functions";
 import { checkForUpdate } from "./modules/updater";
@@ -43,8 +43,7 @@ import "./styles/styles.scss";
     livestreams,
     directorMode,
     isShowLive = null;
-  let hasFetchedUserData,
-    hasFetchedShowLiveStatus,
+  let hasFetchedShowLiveStatus,
     isPopoutChat = false;
 
   if (config.get("hideGlobalMissions")) {
@@ -106,13 +105,12 @@ import "./styles/styles.scss";
       return;
     }
 
-    const userFetched = state.get("user") || hasFetchedUserData;
+    const userFetched = state.get("user")?.displayName;
     if (!userFetched && !isPopoutChat) {
-      hasFetchedUserData = true;
       let userProfile;
 
       try {
-        userProfile = await getUserData(userId);
+        userProfile = setUserData(displayNameElement);
       } catch (error) {
         clearInterval(loadingInterval);
         return;

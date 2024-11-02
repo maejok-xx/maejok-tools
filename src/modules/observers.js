@@ -5,6 +5,7 @@ import {
   getElementText,
   checkTTSFilteredWords,
   displayCurrentTankTime,
+  displayUserNameOverlay,
 } from "./functions";
 import ELEMENTS from "../data/elements";
 import { makeDraggable } from "./events";
@@ -155,8 +156,8 @@ const observers = {
           if (
             mutation.type !== "childList" ||
             mutation.addedNodes.length === 0 ||
-            !mutation.addedNodes[0].className?.includes(
-              ELEMENTS.livestreams.class
+            !mutation.addedNodes[0].classList?.contains(
+              ELEMENTS.livestreams.player.class
             )
           ) {
             return;
@@ -174,42 +175,16 @@ const observers = {
               ELEMENTS.livestreams.selected.selector
             );
 
-            if (config.get("enableTimestampOverlay")) {
-              if (liveStreamPanel) {
-                displayCurrentTankTime();
-              }
+            if (!liveStreamPanel) {
+              return;
             }
+
+            if (config.get("enableTimestampOverlay")) {
+              displayCurrentTankTime();
+            }
+
             if (config.get("enableUserOverlay")) {
-              const userDisplay = document.querySelector(
-                ".top-bar-user_name__4xWuY"
-              );
-
-              if (userDisplay && liveStreamPanel) {
-                const playerHeaderTarget = document.querySelector(
-                  ".live-stream-player_right__YlQQh"
-                );
-
-                if (!playerHeaderTarget) {
-                  return;
-                }
-
-                const userOverlay = document.createElement("div");
-                userOverlay.classList.add("maejok-user-overlay");
-                const userClan = document.createElement("div");
-                userClan.classList.add("maejok-user-overlay-clan");
-                userClan.style =
-                  "background-color: rgb(255, 0, 0); color: white;";
-                userClan.textContent = "CRACK";
-                const userName = document.createElement("div");
-                userName.classList.add("maejok-user-overlay-username");
-                userName.textContent = "f3rk";
-                userOverlay.appendChild(userClan);
-                userOverlay.appendChild(userName);
-                playerHeaderTarget.insertAdjacentElement(
-                  "beforebegin",
-                  userOverlay
-                );
-              }
+              displayUserNameOverlay();
             }
           });
         });
