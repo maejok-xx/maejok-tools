@@ -17,6 +17,10 @@ const Elements = {
       class: "status-bar_date__mqIyI",
     },
   },
+  globalMissions: {
+    selector: `[class^="global-mission-modal_backdrop"]`,
+    class: "global-mission-modal_backdrop__oVezg",
+  },
   livestreams: {
     selector: `[class*="live-streams_live-streams__"]`,
     class: "live-streams_live-streams__BYV96",

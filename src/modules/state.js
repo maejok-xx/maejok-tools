@@ -16,6 +16,7 @@ const State = () => {
     prevMousePos: { x: 0, y: 0 },
     contextUser: null,
     recentChattersInterval: null,
+    timestampInterval: null,
     updateCheckInterval: null,
     daysLeftInterval: null,
     running: false,

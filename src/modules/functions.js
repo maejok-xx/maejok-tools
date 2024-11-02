@@ -206,18 +206,20 @@ export const toggleControlOverlay = () => {
 };
 
 export const toggleTimestampOverlay = (toggle) => {
+  clearInterval(state.get("timestampInterval"));
+  const timestampContainer = document.querySelector(
+    ELEMENTS.livestreams.timestamp.selector
+  );
+  timestampContainer?.remove();
+
   if (toggle) {
-    setInterval(displayCurrentTankTime, 30000);
-  } else {
-    clearInterval(displayCurrentTankTime);
-    const timestampContainer = document.querySelector(
-      ELEMENTS.livestreams.timestamp.selector
-    );
-    timestampContainer?.remove();
+    displayCurrentTankTime();
+    const timestampInterval = setInterval(displayCurrentTankTime, 30000);
+    state.set("timestampInterval", timestampInterval);
   }
 };
 
-const displayCurrentTankTime = () => {
+export const displayCurrentTankTime = () => {
   const playerHeaderTarget = document.querySelector(
     ".live-stream-player_right__YlQQh"
   );
@@ -228,7 +230,6 @@ const displayCurrentTankTime = () => {
 
   const timestampElement = ELEMENTS.livestreams.timestamp;
   const timestampContainer = document.querySelector(timestampElement.selector);
-  const targetTimeElement = document.querySelector(".maejok-timestamp-time");
 
   let targetElement;
   let timestampDate;
@@ -254,8 +255,7 @@ const displayCurrentTankTime = () => {
   }
 
   const d = new Date();
-  const showStartDate = new Date("2024-10-27");
-  const showDay = Math.floor((d - showStartDate) / 86400000);
+  const showDay = document.querySelector(".status-bar_day__V8Zac")?.textContent;
   const formattedTime = d.toLocaleString("en-US", {
     timeZone: "America/New_York",
     hour: "numeric",
@@ -263,14 +263,7 @@ const displayCurrentTankTime = () => {
     hour12: true,
   });
 
-  let dayString = "";
-  if (showDay < 10) {
-    dayString = `0${showDay}`;
-  } else {
-    dayString = showDay.toString();
-  }
-
-  timestampDate.innerHTML = `Day ${dayString}`;
+  timestampDate.innerHTML = showDay;
   timestampTime.innerHTML = formattedTime;
 };
 
@@ -974,7 +967,7 @@ export const startMaejokTools = async () => {
   toggleTimestampOverlay(config.get("enableTimestampOverlay"));
   toggleScreenTakeovers(config.get("hideScreenTakeovers"));
   observers.chat.start();
-
+  observers.home.start();
   if (config.get("hideGlobalMissions")) {
     observers.body.start();
     observers.modal.start();
@@ -1019,8 +1012,10 @@ export const stopMaejokTools = () => {
   toggleScanLines(false);
 
   clearInterval(state.get("updateCheckInterval"));
+  clearInterval(state.get("timestampInterval"));
   clearInterval(state.get("daysLeftInterval"));
   state.set("updateCheckInterval", null);
+  state.set("timestampInterval", null);
   state.set("daysLeftInterval", null);
 
   const chat = document.querySelector(ELEMENTS.chat.list.selector);

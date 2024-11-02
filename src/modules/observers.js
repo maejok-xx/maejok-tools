@@ -4,10 +4,10 @@ import {
   processChatMessage,
   getElementText,
   checkTTSFilteredWords,
+  displayCurrentTankTime,
 } from "./functions";
 import ELEMENTS from "../data/elements";
 import { makeDraggable } from "./events";
-import { BAD_WORDS } from "./constants";
 
 const observers = {
   chat: {
@@ -139,6 +139,66 @@ const observers = {
     stop: () => {
       const observers = state.get("observers");
       observers.modal?.disconnect();
+    },
+  },
+  home: {
+    start: () => {
+      state.get("observers").home?.disconnect();
+
+      // const mainPanel = document.querySelector(
+      //   ".live-streams_live-streams__BYV96"
+      // );
+      const mainPanel = document.getElementById("main-panel");
+
+      const mainPanelObserver = new MutationObserver(async (mutations) => {
+        mutations.forEach((mutation) => {
+          if (
+            mutation.type !== "childList" ||
+            mutation.addedNodes.length === 0
+          ) {
+            return;
+          }
+
+          if (
+            !mutation.addedNodes[0].className.includes(
+              "live-stream-player_live-stream-player__4CHjG"
+            ) ||
+            !config.get("enableTimestampOverlay")
+          ) {
+            return;
+          }
+
+          mutation.addedNodes.forEach((addedNode) => {
+            const liveStreamPanel = document.querySelector(
+              ".live-streams_selected-live-stream__bFOAj"
+            );
+            if (liveStreamPanel) {
+              const playerHeaderTarget = liveStreamPanel.querySelector(
+                ".live-stream-player_right__YlQQh"
+              );
+
+              displayCurrentTankTime();
+            } else {
+              return;
+            }
+          });
+        });
+      });
+
+      mainPanelObserver.observe(mainPanel, {
+        childList: true,
+        subtree: true,
+      });
+
+      state.set("observers", {
+        ...state.get("observers"),
+        home: mainPanelObserver,
+      });
+    },
+
+    stop: () => {
+      const observers = state.get("observers");
+      observers.home?.disconnect();
     },
   },
 
