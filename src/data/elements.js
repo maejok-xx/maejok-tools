@@ -28,6 +28,10 @@ const Elements = {
       selector: `[class*="live-streams_live-streams-grid__"]`,
       class: "live-streams_live-streams-grid__Tp4ah",
     },
+    selected: {
+      selector: `[class^="live-streams_selected-live-stream"]`,
+      class: `live-streams_selected-live-stream__bFOAj`,
+    },
     controls: {
       selector: `[class^="livepeer-video-player_controls"]`,
       class: "livepeer-video-player_controls__y36El",

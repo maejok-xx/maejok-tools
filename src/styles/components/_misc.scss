@@ -47,6 +47,46 @@
   }
 }
 
+.maejok-user-overlay {
+  margin-right: auto;
+  display: flex;
+  background-color: rgba(0, 0, 0, .5);
+  font-size: 12px;
+  padding: 4px;
+  align-items: center;
+  line-height:10px;
+}
+
+.maejok-user-overlay-clan {
+  all: unset;
+  background-color: unset;
+  border-top-left-radius: unset;
+  border-top-right-radius: unset;
+  border-bottom-right-radius: unset;
+  border-bottom-left-radius: unset;
+  font-weight: unset;
+  font-size: unset;
+  color: unset;
+  cursor: unset;
+  margin-right: unset;
+  padding-top: unset;
+  padding-right: unset;
+  padding-bottom: unset;
+  padding-left: unset;
+  cursor: pointer;
+  padding: 2px;
+  margin-right: 4px;
+  border-radius: 2px;
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.maejok-user-overlay-username {
+  font-weight: 800;
+  color: #28d97f;
+  font-size: 11px;
+}
+
 .maejok-timestamp-container {
   display: flex;
   flex-direction: column;
@@ -54,13 +94,18 @@
   justify-content: center;
   text-align: center;
   padding: 4px;
-  height: 100%;
   background-color: rgba(0, 0, 0, .5);
-  margin-left: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #00FF00; /* Adjust color as needed */
+  text-align: center;
+  white-space: nowrap;
 }
 
 .maejok-timestamp-day {
   font-weight: 500;
+  font-size: 13px;
   text-transform: uppercase;
   color: #28d97f;
   text-shadow: 2px 2px 0 rgba(27, 154, 89, .25);
@@ -69,7 +114,7 @@
 
 .maejok-timestamp-time {
   letter-spacing: -2px;
-  font-size: 14px;
+  font-size: 12px;
   white-space: nowrap;
   color: white;
 }
