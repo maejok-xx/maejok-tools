@@ -46,6 +46,7 @@ export const saveSettings = async () => {
   const prevChattersEnabled = config.get("enableRecentChatters");
   const prevHideGlobalMissions = config.get("hideGlobalMissions");
   const prevDragModal = config.get("enableDragModal");
+  const prevTTSFilter = config.get("enableTTSFilterWarning");
 
   inputs.forEach((input) => {
     const key = input.id.replace("-hidden", "");
@@ -124,8 +125,15 @@ export const saveSettings = async () => {
   const dragModalJustEnabled =
     config.get("enableDragModal") &&
     prevDragModal !== config.get("enableDragModal");
+  const ttsFilterJustEnabled =
+    config.get("enableTTSFilterWarning") &&
+    prevTTSFilter !== config.get("enableTTSFilterWarning");
 
-  if (hideGlobalMissionsJustEnabled || dragModalJustEnabled) {
+  if (
+    hideGlobalMissionsJustEnabled ||
+    dragModalJustEnabled ||
+    ttsFilterJustEnabled
+  ) {
     observers.body.start();
     observers.modal.start();
   }
