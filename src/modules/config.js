@@ -16,6 +16,7 @@ const Config = () => {
     bigScreenState: false,
     enableControlOverlay: false,
     enableTimestampOverlay: false,
+    enableUserOverlay: false,
     controlOverlayState: false,
     disableSoundEffects: false,
     hideGlobalMissions: false,
@@ -189,7 +190,20 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option will display a timestamp of the current time in the tank at the top of the video player.</p>
-                <p><i><strong>Note that it may take 30 seconds to show up because the function is on an interval and I'm lazy.</strong></i></p>`,
+                <p><i><strong>Note there may be a delay before it shows up because the function is on an interval and I'm lazy.</strong></i></p>`,
+              },
+            },
+            // enableUserOverlay
+            {
+              name: "enableUserOverlay",
+              label: "Enable User Name Overlay ",
+              type: "toggle",
+              value: cfg.enableUserOverlay,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p><strong>Enabling this option will display your username at at the top of the video player.</strong></p>
+                <p><i>This is intended to help out clippers if they want to embed credit easily.</i></p>`,
               },
             },
             // enableDimMode

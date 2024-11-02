@@ -154,32 +154,62 @@ const observers = {
         mutations.forEach((mutation) => {
           if (
             mutation.type !== "childList" ||
-            mutation.addedNodes.length === 0
+            mutation.addedNodes.length === 0 ||
+            !mutation.addedNodes[0].className?.includes(
+              ELEMENTS.livestreams.class
+            )
           ) {
             return;
           }
 
           if (
-            !mutation.addedNodes[0].className.includes(
-              "live-stream-player_live-stream-player__4CHjG"
-            ) ||
-            !config.get("enableTimestampOverlay")
+            !config.get("enableTimestampOverlay") &&
+            !config.get("enableUserOverlay")
           ) {
             return;
           }
 
           mutation.addedNodes.forEach((addedNode) => {
             const liveStreamPanel = document.querySelector(
-              ".live-streams_selected-live-stream__bFOAj"
+              ELEMENTS.livestreams.selected.selector
             );
-            if (liveStreamPanel) {
-              const playerHeaderTarget = liveStreamPanel.querySelector(
-                ".live-stream-player_right__YlQQh"
+
+            if (config.get("enableTimestampOverlay")) {
+              if (liveStreamPanel) {
+                displayCurrentTankTime();
+              }
+            }
+            if (config.get("enableUserOverlay")) {
+              const userDisplay = document.querySelector(
+                ".top-bar-user_name__4xWuY"
               );
 
-              displayCurrentTankTime();
-            } else {
-              return;
+              if (userDisplay && liveStreamPanel) {
+                const playerHeaderTarget = document.querySelector(
+                  ".live-stream-player_right__YlQQh"
+                );
+
+                if (!playerHeaderTarget) {
+                  return;
+                }
+
+                const userOverlay = document.createElement("div");
+                userOverlay.classList.add("maejok-user-overlay");
+                const userClan = document.createElement("div");
+                userClan.classList.add("maejok-user-overlay-clan");
+                userClan.style =
+                  "background-color: rgb(255, 0, 0); color: white;";
+                userClan.textContent = "CRACK";
+                const userName = document.createElement("div");
+                userName.classList.add("maejok-user-overlay-username");
+                userName.textContent = "f3rk";
+                userOverlay.appendChild(userClan);
+                userOverlay.appendChild(userName);
+                playerHeaderTarget.insertAdjacentElement(
+                  "beforebegin",
+                  userOverlay
+                );
+              }
             }
           });
         });
