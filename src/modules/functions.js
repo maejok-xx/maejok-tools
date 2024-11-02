@@ -268,7 +268,15 @@ export const displayCurrentTankTime = () => {
 };
 
 export const toggleUserOverlay = (toggle) => {
+  const userOverlay = document.querySelector(
+    ELEMENTS.livestreams.overlay.selector
+  );
+
   if (toggle) {
+    if (userOverlay) {
+      return;
+    }
+
     const { userOverlayHTML } = state.get("user");
     if (!userOverlayHTML) {
       const displayNameElement = document.querySelector(
@@ -280,10 +288,6 @@ export const toggleUserOverlay = (toggle) => {
 
     displayUserNameOverlay();
   } else {
-    const userOverlay = document.querySelector(
-      ELEMENTS.livestreams.overlay.selector
-    );
-
     userOverlay?.remove();
   }
 };
@@ -346,6 +350,22 @@ export const toggleDimMode = (toggle) => {
   } else {
     const styles = document.getElementById("maejok-darkmode");
     styles?.remove();
+  }
+};
+
+export const toggleNavigationOverlay = (toggle) => {
+  const zoneOverlay = document.querySelector(
+    ".clickable-zones_clickable-zones__OgYjT"
+  );
+
+  if (!zoneOverlay) {
+    return;
+  }
+
+  if (toggle) {
+    zoneOverlay.style.display = "none";
+  } else {
+    zoneOverlay.style.display = "";
   }
 };
 

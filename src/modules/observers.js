@@ -6,6 +6,7 @@ import {
   checkTTSFilteredWords,
   displayCurrentTankTime,
   displayUserNameOverlay,
+  toggleNavigationOverlay,
 } from "./functions";
 import ELEMENTS from "../data/elements";
 import { makeDraggable } from "./events";
@@ -185,6 +186,10 @@ const observers = {
 
             if (config.get("enableUserOverlay")) {
               displayUserNameOverlay();
+            }
+
+            if (config.get("hideNavigationOverlay")) {
+              toggleNavigationOverlay(true);
             }
           });
         });

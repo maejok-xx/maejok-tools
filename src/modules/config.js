@@ -21,6 +21,7 @@ const Config = () => {
     disableSoundEffects: false,
     hideGlobalMissions: false,
     hideScreenTakeovers: false,
+    hideNavigationOverlay: false,
 
     enableUpdateChecks: true,
     updateCheckFrequency: 10,
@@ -189,8 +190,7 @@ const Config = () => {
               group: "site-options",
               help: {
                 label: "?",
-                text: `<p>Enabling this option will display a timestamp of the current time in the tank at the top of the video player.</p>
-                <p><i><strong>Note there may be a delay before it shows up because the function is on an interval and I'm lazy.</strong></i></p>`,
+                text: `<p>Enabling this option will display a timestamp of the current time in the tank at the top of the video player.</p>`,
               },
             },
             // enableUserOverlay
@@ -316,6 +316,18 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option hide the <strong>Scan Line Effect</strong> seen across the site.</p>`,
+              },
+            },
+            // hideNavigationOverlay
+            {
+              name: "hideNavigationOverlay",
+              label: "Hide Stream Navigation Overlay",
+              type: "toggle",
+              value: cfg.hideNavigationOverlay,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option hide the <strong>Stream Navigation Overlay</strong> that displays semi-transparent polygons over the livestream on hover.</p>`,
               },
             },
           ],
