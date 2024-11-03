@@ -190,15 +190,21 @@ export const toggleControlOverlay = (force) => {
     ELEMENTS.livestreams.quality.selector
   );
 
+  if (!config.get("enableControlOverlay")) {
+    videoControls?.classList.remove("maejok-hide");
+    qualityControl?.classList.remove("maejok-hide");
+    return;
+  }
+
+  let disabled;
   if (force !== undefined) {
+    disabled = !force;
     state.set("controlOverlayDisabled", force);
   }
 
   if (!videoControls || !qualityControl) {
     return;
   }
-
-  let disabled = !force;
 
   if (force === undefined) {
     disabled = state.get("controlOverlayDisabled");
@@ -534,7 +540,6 @@ export const setUserData = (userNameElement) => {
 
   const userOverlayHTML =
     clanHTML + `<div class="maejok-user-overlay-username">${name}</div>`;
-  console.log(userOverlayHTML);
 
   return {
     profile: {
