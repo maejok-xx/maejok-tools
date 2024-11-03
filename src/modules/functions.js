@@ -182,10 +182,7 @@ const fetchLiveStreamStatus = async () => {
   }
 };
 
-export const toggleControlOverlay = () => {
-  if (!config.get("enableControlOverlay")) {
-    return;
-  }
+export const toggleControlOverlay = (force) => {
   const videoControls = document.querySelector(
     ELEMENTS.livestreams.controls.selector
   );
@@ -193,15 +190,27 @@ export const toggleControlOverlay = () => {
     ELEMENTS.livestreams.quality.selector
   );
 
-  const toggle = config.get("controlOverlayState");
-  config.set("controlOverlayState", !toggle);
+  if (force !== undefined) {
+    state.set("controlOverlayDisabled", force);
+  }
 
-  if (toggle) {
-    videoControls.style.display = "none";
-    qualityControl.style.display = "none";
+  if (!videoControls || !qualityControl) {
+    return;
+  }
+
+  let disabled = !force;
+
+  if (force === undefined) {
+    disabled = state.get("controlOverlayDisabled");
+    state.set("controlOverlayDisabled", !disabled);
+  }
+
+  if (disabled) {
+    videoControls.classList.remove("maejok-hide");
+    qualityControl.classList.remove("maejok-hide");
   } else {
-    videoControls.style.display = "";
-    qualityControl.style.display = "";
+    videoControls.classList.add("maejok-hide");
+    qualityControl.classList.add("maejok-hide");
   }
 };
 

@@ -7,6 +7,7 @@ import {
   displayCurrentTankTime,
   displayUserNameOverlay,
   toggleNavigationOverlay,
+  toggleControlOverlay,
 } from "./functions";
 import ELEMENTS from "../data/elements";
 import { makeDraggable } from "./events";
@@ -156,40 +157,63 @@ const observers = {
         mutations.forEach((mutation) => {
           if (
             mutation.type !== "childList" ||
-            mutation.addedNodes.length === 0 ||
-            !mutation.addedNodes[0].classList?.contains(
-              ELEMENTS.livestreams.player.class
-            )
+            mutation.addedNodes.length === 0
           ) {
             return;
           }
 
+          const livestreamAdded = mutation.addedNodes[0].classList?.contains(
+            ELEMENTS.livestreams.player.class
+          );
+
+          const playerControlsAdded =
+            mutation.addedNodes[0].classList?.contains(
+              "livepeer-video-player_controls__y36El"
+            );
+
+          if (!livestreamAdded && !playerControlsAdded) {
+            return;
+          }
+
+          const controlOverlayEnabled = config.get("enableControlOverlay");
+          const timestampOverlayEnabled = config.get("enableTimestampOverlay");
+          const userOverlayEnabled = config.get("enableUserOverlay");
+
           if (
-            !config.get("enableTimestampOverlay") &&
-            !config.get("enableUserOverlay")
+            !controlOverlayEnabled &&
+            !timestampOverlayEnabled &&
+            !userOverlayEnabled
           ) {
             return;
           }
 
           mutation.addedNodes.forEach((addedNode) => {
-            const liveStreamPanel = document.querySelector(
-              ELEMENTS.livestreams.selected.selector
-            );
+            if (livestreamAdded) {
+              const liveStreamPanel = document.querySelector(
+                ELEMENTS.livestreams.selected.selector
+              );
 
-            if (!liveStreamPanel) {
-              return;
+              if (!liveStreamPanel) {
+                return;
+              }
+
+              if (config.get("enableTimestampOverlay")) {
+                displayCurrentTankTime();
+              }
+
+              if (config.get("enableUserOverlay")) {
+                displayUserNameOverlay();
+              }
+
+              if (config.get("hideNavigationOverlay")) {
+                toggleNavigationOverlay(true);
+              }
             }
 
-            if (config.get("enableTimestampOverlay")) {
-              displayCurrentTankTime();
-            }
-
-            if (config.get("enableUserOverlay")) {
-              displayUserNameOverlay();
-            }
-
-            if (config.get("hideNavigationOverlay")) {
-              toggleNavigationOverlay(true);
+            if (playerControlsAdded) {
+              if (config.get("enableControlOverlay")) {
+                toggleControlOverlay(state.get("controlOverlayDisabled"));
+              }
             }
           });
         });

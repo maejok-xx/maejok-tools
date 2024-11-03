@@ -30,6 +30,7 @@ import {
   toggleNavigationOverlay,
   toggleUserOverlay,
   keyEventToString,
+  toggleControlOverlay,
 } from "./functions";
 import {
   start as startRecentChatters,
@@ -49,6 +50,7 @@ export const saveSettings = async () => {
   const prevHideGlobalMissions = config.get("hideGlobalMissions");
   const prevDragModal = config.get("enableDragModal");
   const prevTTSFilter = config.get("enableTTSFilterWarning");
+  const prevControlOverlay = config.get("enableControlOverlay");
 
   inputs.forEach((input) => {
     const key = input.id.replace("-hidden", "");
@@ -132,6 +134,8 @@ export const saveSettings = async () => {
   const ttsFilterJustEnabled =
     config.get("enableTTSFilterWarning") &&
     prevTTSFilter !== config.get("enableTTSFilterWarning");
+  const controlOverlayJustChanged =
+    prevControlOverlay !== config.get("enableControlOverlay");
 
   if (
     hideGlobalMissionsJustEnabled ||
@@ -140,6 +144,10 @@ export const saveSettings = async () => {
   ) {
     observers.body.start();
     observers.modal.start();
+  }
+
+  if (controlOverlayJustChanged) {
+    toggleControlOverlay(config.get("enableControlOverlay"));
   }
 
   scrollToBottom();

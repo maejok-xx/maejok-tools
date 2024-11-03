@@ -17,7 +17,7 @@ const Config = () => {
     enableControlOverlay: false,
     enableTimestampOverlay: false,
     enableUserOverlay: false,
-    controlOverlayState: false,
+    controlOverlayDisabled: false,
     disableSoundEffects: false,
     hideGlobalMissions: false,
     hideScreenTakeovers: false,
@@ -178,6 +178,7 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option creates a keyboard shortcut to toggle <strong>the video controls overlay</strong> which will show or hide the overlay.</p>
+                <p><strong><i>It will hide the controls when enabled, but you can show them again by using the shortcut.  You may have to click on the window to regain focus for the shortcut to work.</i></strong></p>
                 <p>Keyboard Shortcut: <strong>CTRL+SHIFT+H</strong></p>`,
               },
             },

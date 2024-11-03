@@ -94,7 +94,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 4px;
+  padding: 2px;
   background-color: rgba(0, 0, 0, .5);
   position: absolute;
   left: 50%;
@@ -102,6 +102,7 @@
   color: #00FF00; /* Adjust color as needed */
   text-align: center;
   white-space: nowrap;
+  line-height: 12px;
 }
 
 .maejok-timestamp-day {
