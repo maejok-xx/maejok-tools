@@ -1,5 +1,30 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.19.0_**
+
+_Release: 11-02-2024_
+
+### Notes
+
+- N/A
+
+### Bug Fixes
+
+- Fix TTS filter warning only working when drag tts modal was also enabled [#18](https://github.com/f3rked/maej3rked-tools/pull/18)
+- Fix timestamp overlay issues [#19](https://github.com/f3rked/maej3rked-tools/pull/19)
+  - header resizing
+  - day being incorrect
+  - display delay/disappearing when switching cams
+  - position changing based on cam title length
+- Fix hide video control overlay shortcut setting [#21](https://github.com/f3rked/maej3rked-tools/pull/21)
+  - think this fixes issue where you'd sometimes have to use the shortcut multiple times for it to hide
+  - issue with controls reappearing on camera change
+  - hides/shows controls by default when setting enabled/disabled
+
+### Features Added / Changed
+
+- Add setting to hide semi-transparent cam navigation polygons [#20](https://github.com/f3rked/maej3rked-tools/pull/20)
+
 # **_v2.18.0_**
 
 _Release: 10-31-2024_
