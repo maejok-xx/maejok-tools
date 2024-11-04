@@ -495,6 +495,21 @@ const Elements = {
         },
       },
     },
+    events: {
+      class: "maejok-settings_events-list",
+      item: {
+        class: "maejok-settings_events-list-item",
+        remove: {
+          class: "maejok-settings_events-list-item-remove",
+        },
+      },
+      timestamp: {
+        class: "maejok-event-timestamp",
+      },
+      toastFix: {
+        class: "maejok-event-toast-fix",
+      },
+    },
     config: {
       wrapper: { class: "maejok-settings-config-wrapper" },
       group: { class: "maejok-settings-config-input-group" },
@@ -615,6 +630,17 @@ const Elements = {
     happening: {
       selector: `[class^="happening_happening__"]`,
       class: "happening_happening__Ca2E7",
+    },
+  },
+  toast: {
+    class: "toast_toast__zhSlo",
+    message: {
+      selector: `[class^="toast_message__"]`,
+      class: "toast_message__l35K3",
+    },
+    success: {
+      selector: `[class^="toast_success__"]`,
+      class: `toast_success__DNYPY`,
     },
   },
 };

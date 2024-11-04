@@ -6,6 +6,7 @@ const State = () => {
     modals: [],
     user: null,
     bigScreenState: false,
+    events: [],
     controlOverlayDisabled: false,
     mentions: [],
     recentChatters: [],

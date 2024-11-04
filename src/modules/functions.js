@@ -936,6 +936,50 @@ export const checkTTSFilteredWords = (addedNode) => {
   requestAnimationFrame(checkInputBox);
 };
 
+export const createEventLogEntry = (toast) => {
+  const toastExclusionPattern = /(level|item|mission)/;
+
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = toast.outerHTML;
+
+  const body = wrapper.querySelector(ELEMENTS.toast.message.selector);
+  // Way to distinguish other types of system messages
+  const containsHeader = body.querySelector("h3");
+  if (containsHeader) {
+    return;
+  }
+  const toastText = getElementText(toast);
+  if (toastExclusionPattern.test(toastText?.toLowerCase())) {
+    return;
+  }
+
+  const timestamp = document.createElement("div");
+  timestamp.classList.add(ELEMENTS.settings.events.timestamp.class);
+
+  const d = new Date();
+  const formattedTime = d.toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    year: "2-digit",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
+  timestamp.textContent = formattedTime;
+
+  const message = wrapper.querySelector(".toast_toast__zhSlo");
+  message.classList.add(ELEMENTS.settings.events.toastFix.class);
+
+  body.parentNode.style.width = "100%";
+  body.append(timestamp);
+
+  state.set("events", [
+    ...state.get("events"),
+    { html: wrapper.outerHTML, added: Date.now() },
+  ]);
+};
+
 export const runUserAgreement = () => {
   const previousAgreement = config.get("agreementVersion");
   const needsToAgree =

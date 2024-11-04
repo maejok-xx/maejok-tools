@@ -1,0 +1,37 @@
+.maejok-settings_mentions-list,
+.maejok-settings_events-list {
+  display: flex;
+  flex-flow: column;
+  background-color: rgba($color-black, 0.65);
+  padding: $space-sm;
+  max-height: 380px;
+  max-width: 656px;
+  overflow-y: scroll;
+  margin: 0 (-$space-md) (-$space-sm) (-$space-md);
+  font-family: Work Sans, sans-serif;
+  user-select: text;
+  text-transform: none;
+
+  .chat-message-default_mentioned__EDIeq {
+    background-color: unset !important;
+  }
+}
+
+.maejok-event-timestamp {
+  margin-left: auto;
+  margin-top: 4px;
+  margin-right: -10px;
+  margin-bottom: -10px;
+  font-weight: 100;
+  color: gray;
+  font-family: JetBrains Mono, monospace !important;
+  font-size: 14px;
+}
+
+.maejok-event-toast-fix {
+  position: relative !important;
+}
+
+.maejok-toast-body-full-width {
+  
+}

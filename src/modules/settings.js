@@ -71,6 +71,10 @@ export const saveSettings = async () => {
     state.set("mentions", []);
   }
 
+  if (!config.get("enableEventsLog")) {
+    state.set("events", []);
+  }
+
   disableSoundEffects(config.get("disableSoundEffects"));
   applySettingsToChat();
   toggleScanLines();
@@ -285,6 +289,7 @@ export const createSettingsModal = () => {
       else if (["hidden"].includes(cfg.type)) createHiddenInput(cfg, panel);
       else if (["mentions-log"].includes(cfg.type))
         createMentionsLog(cfg, panel);
+      else if (["events-log"].includes(cfg.type)) createEventsLog(cfg, panel);
       else if (["color-picker"].includes(cfg.type))
         createHighlightsPanel(cfg, panel);
     });
@@ -634,6 +639,33 @@ function createMentionsLog(list, panel) {
     wrapper.style.textAlign = "center";
   }
 
+  accordion.appendChild(wrapper);
+}
+
+function createEventsLog(list, panel) {
+  // refactor this to make resusable createLog for mentions and events
+  const reverse = config.get("reverseEventsLog");
+  const props = ELEMENTS.settings;
+
+  const log = reverse
+    ? list.value.sort((a, b) => b.added - a.added)
+    : list.value.sort((a, b) => a.added - b.added);
+  const accordion = panel.querySelector(`[data-group-content="${list.group}"]`);
+  const wrapper = document.createElement("div");
+  accordion ? accordion.appendChild(wrapper) : panel.appendChild(wrapper);
+  if (log.length > 0) {
+    wrapper.classList.add(props.events.class);
+    log.forEach((event) => {
+      const message = document.createElement("div");
+      message.classList.add(props.events.item.class);
+      message.innerHTML = event.html;
+      wrapper.appendChild(message);
+    });
+  } else {
+    wrapper.innerHTML = "No events yet...";
+    wrapper.style.color = "gray";
+    wrapper.style.textAlign = "center";
+  }
   accordion.appendChild(wrapper);
 }
 
