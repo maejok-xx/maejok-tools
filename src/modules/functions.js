@@ -937,14 +937,17 @@ export const checkTTSFilteredWords = (addedNode) => {
 };
 
 export const runUserAgreement = () => {
-  const needsToAgree = config.get("agreementVersion") !== VERSION;
+  const previousAgreement = config.get("agreementVersion");
+  const needsToAgree =
+    !previousAgreement ||
+    Array.from(previousAgreement)[0] != Array.from(VERSION)[0];
 
   if (!needsToAgree) {
     return true;
   }
 
   const message =
-    '\nMAEJOK-TOOLS AGREEMENT:\n\nBy using MAEJOK-TOOLS you understand that this plugin is NOT endorsed nor promoted by Fishtank.live or its creators, may cause issues with the Fishtank.live webiste and alters the intended user experience for Fishtank.live; therefore, any bugs or issues created by use of this plugin does not the concern of Fishtank.live or its creators.\n\nIf you have any issues with the Fishtank.live website while using this plugin, you agree to FULLY disable this plugin from within your userscript plugin manager before making any bug reports to Fishtank.live staff.\n\nAny questions or bug reports in regards to MAEJOK-TOOLS are to be directed at @maejok only.\n\nIf you understand and agree, type "I agree" below to continue.';
+    '\nMAEJ3RKED-TOOLS AGREEMENT:\n\nBy using MAEJ3RKED-TOOLS you understand that this plugin is NOT endorsed nor promoted by Fishtank.live or its creators, may cause issues with the Fishtank.live webiste and alters the intended user experience for Fishtank.live; therefore, any bugs or issues created by use of this plugin is not the concern of Fishtank.live or its creators.\n\nIf you have any issues with the Fishtank.live website while using this plugin, you agree to FULLY disable this plugin from within your userscript plugin manager before making any bug reports to Fishtank.live staff.\n\nAny questions or bug reports in regards to MAEJ3RKED-TOOLS are to be directed at @f3rk only.\n\nIf you understand and agree, type "I agree" below to continue.';
 
   const agreement = prompt(message);
 
@@ -961,7 +964,7 @@ export const runUserAgreement = () => {
     return false;
   } else {
     const refuseMessage =
-      "You did not accept the MAEJOK-TOOLS usage agreement\nMAEJOK-TOOLS will not be started.\nDisable or remove MAEJOK-TOOLS from your userscript plugin (GreaseMonkey, Tampermonkey, etc) to disable this alert.";
+      "You did not accept the MAEJ3RKED-TOOLS usage agreement\nMAEJ3RKED-TOOLS will not be started.\nDisable or remove MAEJ3RKED-TOOLS from your userscript plugin (GreaseMonkey, Tampermonkey, etc) to disable this alert.";
 
     alert(refuseMessage);
 
