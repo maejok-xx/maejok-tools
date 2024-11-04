@@ -392,6 +392,17 @@ function createAboutPanel(panel) {
 
   const authorLinks = [
     {
+      label: "@f3rk",
+      onClick: () => mentionUser("f3rk"),
+    },
+    {
+      label: "github.com/f3rked",
+      onClick: () => window.open("https://github.com/f3rked", "_blank"),
+    },
+  ];
+
+  const originalAuthorLinks = [
+    {
       label: "@maejok",
       onClick: () => mentionUser("maejok"),
     },
@@ -426,7 +437,7 @@ function createAboutPanel(panel) {
 
   const authorLabel = document.createElement("span");
   authorLabel.classList.add("maejok-settings-about-author_label");
-  authorLabel.innerHTML = `<strong>Author</strong>: `;
+  authorLabel.innerHTML = `<strong>Fork author</strong>: `;
   author.appendChild(authorLabel);
 
   authorLinks.forEach((link, index) => {
@@ -441,6 +452,31 @@ function createAboutPanel(panel) {
 
     if (index !== authorLinks.length - 1) {
       author.appendChild(document.createTextNode(" / "));
+    }
+  });
+
+  const originalAuthor = document.createElement("div");
+  originalAuthor.classList.add("maejok-settings-about-author");
+  originalAuthor.style.marginTop = "10px";
+  wrapper.appendChild(originalAuthor);
+
+  const originalAuthorLabel = document.createElement("span");
+  originalAuthorLabel.classList.add("maejok-settings-about-author_label");
+  originalAuthorLabel.innerHTML = `<strong>Original author</strong>: `;
+  originalAuthor.appendChild(originalAuthorLabel);
+
+  originalAuthorLinks.forEach((link, index) => {
+    const originalAuthorLink = document.createElement("button");
+    originalAuthorLink.classList.add(
+      "maejok-settings-about-author_link",
+      "button-link"
+    );
+    originalAuthorLink.textContent = link.label;
+    originalAuthorLink.onclick = link.onClick;
+    originalAuthor.appendChild(originalAuthorLink);
+
+    if (index !== originalAuthorLinks.length - 1) {
+      originalAuthor.appendChild(document.createTextNode(" / "));
     }
   });
 
@@ -469,7 +505,7 @@ function createAboutPanel(panel) {
 
   const message = document.createElement("div");
   message.classList.add("maejok-settings-about-message");
-  message.innerHTML = `<p>This plugin is not created, promoted, nor endorsed by the creators of Fishtank Live.</p><p>If you have issues while using the plugin, disable it FULLY from your Userscript Extension (Tampermonkey, GreaseMonkey, etc) and try again before making any bug reports.  If you find that the issue goes away when the plugin is disabled, please make a bug report using <a href="https://github.com/maejok-xx/maejok-tools/issues" target="_blank">GitHub Issues</a> and I'll work on getting it fixed as soon as possible!</p><p>You can show your appreciation by tipping me tokens or by <a href="https://ko-fi.com/maejok" target="_blank">donating on Ko-fi</a>!</p><p><strong>I LOVE YOU!</strong><br/>-maejok</p>`;
+  message.innerHTML = `<p><strong>This is a fork of the original maejok-tools plugin.  I had been maintaining that after Season 2, but with maejok in the big leagues now - o7 - he no longer has time to review PRs.  To continue getting updates out, I've made this fork.</strong></p><p>This plugin is not created, promoted, nor endorsed by the creators of Fishtank Live.</p><p>If you have issues while using the plugin, disable it FULLY from your Userscript Extension (Tampermonkey, GreaseMonkey, etc) and try again before making any bug reports.  If you find that the issue goes away when the plugin is disabled, please make a bug report using <a href="https://github.com/f3rked/maej3rked-tools/issues" target="_blank">GitHub Issues</a> and I'll work on getting it fixed as soon as possible!</p><p>You can show your appreciation to maejok by <a href="https://ko-fi.com/maejok" target="_blank">donating on Ko-fi</a>.</p><p><strong>I LOVE YOU!</strong><br/>-maejok/f3rk</p>`;
   wrapper.appendChild(message);
 
   accordion.appendChild(wrapper);

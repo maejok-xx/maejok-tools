@@ -3,8 +3,7 @@
   text-transform: none;
   color: $color-white;
   padding-bottom: 10px;
-  font-family: Work Sans, sans-serif;
-  text-align: center;
+  font-family: JetBrains Mono, monospace;
   overflow-y: auto;
 
   .maejok-settings-about-title {
@@ -30,9 +29,10 @@
   }
 
   .maejok-settings-about-message {
-    max-width: 500px;
+    max-width: 700px;
     font-weight: 400;
-    margin: 20px auto;
+    font-size: 14px;
+    margin-top: 20px;
     line-height: normal;
 
     a {
