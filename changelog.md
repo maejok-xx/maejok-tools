@@ -1,5 +1,23 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.20.0_**
+
+_Release: 11-04-2024_
+
+### Notes
+
+- N/A
+
+### Bug Fixes
+
+- N/A
+
+### Features Added / Changed
+
+- Add admin system event log (toast messages from production) [#22](https://github.com/f3rked/maej3rked-tools/pull/22)
+- Update about
+- Update how often agreement is required - now only required for major versions when previous agreement is in cache
+
 # **_v2.19.0_**
 
 _Release: 11-02-2024_
