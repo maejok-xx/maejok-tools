@@ -50,6 +50,10 @@ export const saveSettings = async () => {
   inputs.forEach((input) => {
     const key = input.id.replace("-hidden", "");
     if (input.type === "checkbox") {
+      if (input.id === "enableTTSFilterWarning" && input.checked) {
+        return createTTSFilterAcknowledgmentModal();
+      }
+
       config.set(key, input.checked ? true : false);
     } else {
       if (key === "updateCheckFrequency") {
@@ -131,6 +135,39 @@ export const saveSettings = async () => {
   }
 
   scrollToBottom();
+};
+
+const createTTSFilterAcknowledgmentModal = () => {
+  const settingsModalButton = document.querySelector(
+    ELEMENTS.modal.close.button.selector
+  );
+  settingsModalButton.click();
+  const data = {
+    title: "TTS Filter Warning Acknowledgement",
+    message: `Confirm to acknowledge that this feature relies on a hardcoded list
+      that may not accurately reflect what is and isn't filtered on the site.`,
+    confirm: () => acknowledgeModal(true),
+    close: () => acknowledgeModal(false),
+  };
+
+  const customConfirmEvent = new CustomEvent("modalopenconfirm", {
+    detail: {
+      data: JSON.stringify(data),
+      onConfirm: data.confirm,
+      onClose: data.close,
+    },
+  });
+
+  document.dispatchEvent(customConfirmEvent);
+};
+
+const acknowledgeModal = (agreement) => {
+  if (agreement) {
+    config.set("enableTTSFilterWarning", true);
+  } else {
+    config.set("enableTTSFilterWarning", false);
+  }
+  config.save();
 };
 
 export const applySettingsToChat = () => {
