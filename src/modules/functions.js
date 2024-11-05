@@ -5,7 +5,9 @@ import {
   SOUNDS,
   DARK_MODE_STYLES,
   SCREEN_TAKEOVERS_STYLES,
-  BIG_SCREEN_STYLES,
+  BAD_WORDS,
+  BIG_SCREEN_STYLES_ONLINE,
+  BIG_SCREEN_STYLES_OFFLINE,
   DEFAULT_KEYBINDS,
   REPO_URL_ROOT,
 } from "./constants";
@@ -172,7 +174,7 @@ export const toggleBigScreen = (mode = null, muted = false) => {
 
   if (mode) {
     const style = document.createElement("style");
-    style.textContent = BIG_SCREEN_STYLES;
+    style.textContent = big_screen_styles;
     style.setAttribute("id", "maejok-bigscreen");
     document.head.appendChild(style);
   } else {
@@ -235,33 +237,33 @@ export const getMessageType = (element) => {
     [
       "message",
       hasClass(element, classes.message) ||
-        closestWithClass(element, classes.message),
+      closestWithClass(element, classes.message),
     ],
     [
       "emote",
       hasClass(element, classes.emote) ||
-        closestWithClass(element, classes.emote),
+      closestWithClass(element, classes.emote),
     ],
     [
       "roll",
       element.textContent.includes("rolls a 20-sided dice") &&
-        (hasClass(element, classes.emote) ||
-          closestWithClass(element, classes.emote)),
+      (hasClass(element, classes.emote) ||
+        closestWithClass(element, classes.emote)),
     ],
     [
       "clan",
       hasClass(element, classes.clan) ||
-        closestWithClass(element, classes.clan),
+      closestWithClass(element, classes.clan),
     ],
     [
       "system",
       hasClass(element, classes.system) ||
-        closestWithClass(element, classes.system),
+      closestWithClass(element, classes.system),
     ],
     [
       "consumable",
       hasClass(element, classes.consumable) ||
-        closestWithClass(element, classes.consumable),
+      closestWithClass(element, classes.consumable),
     ],
     [
       "tts",
@@ -323,13 +325,13 @@ export const getSender = function (messageElement, messageType) {
     ? messageElement
     : messageElement.querySelector(sender.selector);
 
-  const senderText = messageType === "message"
-    ? senderElement.lastChild.textContent
-    : getElementText(senderElement);
+  const senderText =
+    messageType === "message"
+      ? senderElement.lastChild.textContent
+      : getElementText(senderElement);
 
   return senderText;
-}
-
+};
 
 export const getUserData = async (userId) => {
   try {
@@ -490,7 +492,6 @@ export const processChatMessage = (node, logMentions = true) => {
 
     message.normalizeEpic();
     message.normalizeGrand();
-
     message.fixDarkDisplayName();
 
     message.hideElements(hideTypes.element, hideTypes.hide);
@@ -1009,7 +1010,7 @@ function toggleLogoHover(toggleState) {
   logo.classList.toggle(logoSelector.hideImg.class, toggleState);
 
   if (toggleState) {
-    const logoHover = document.createElement('img');
+    const logoHover = document.createElement("img");
     logoHover.src = `${REPO_URL_ROOT}/blob/06bddd3e353365fc62df0e1415b4cda3cbf07b14/public/images/logo-full-white-red-eyes.png?raw=true`;
     logoHover.classList.add(...logoSelector.hoverImg.classes);
     logo.insertAdjacentElement("afterend", logoHover);

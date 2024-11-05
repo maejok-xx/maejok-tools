@@ -13,4 +13,5 @@
 // @match        https://www.fishtank.live/clips
 // @match        https://www.fishtank.live/clip/*
 // @run-at       document-idle
+// @grant        GM_openInTab
 // ==/UserScript==

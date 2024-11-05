@@ -16,6 +16,24 @@ import { checkForUpdate } from "./modules/updater";
 import "./styles/styles.scss";
 
 (async function () {
+  if (localStorage.getItem('maej3rked-installed') !== null) {
+    alert('You are now using maej3rked-tools.  Please uninstall maejok-tools from your userscript extension (Tampermonkey, GreaseMonkey, etc), as it is no longer needed.');
+    return;
+  } else {
+    const depreciationNotice = () => {
+      const depreciationPrompt = prompt('MAEJOK-TOOLS DEPRECIATION NOTICE!!\n\nPLEASE READ THIS CAREFULLY!!\n\nThis update does not contain any new features or bug fixes.  I (maejok) have discontinued updates for this plugin. The new maintainer of this plugin is "f3rked".  He will take over maintenance and updates. \n\nThe new source can be found here: https://github.com/f3rked/maej3rked-tools \n\n I trust f3rked with this project and I\m happy to see it making progress without  me, but I will not be able to provide support for it.  If you have any issues with the plugin, please report them to f3rked.\n\nIf you wish to continue using and receiving updates for this plugin, you can install f3rked\'s fork of maejok-tools, now called "maej3rked-tools".  Just type "f3rked" below to get started with f3rked\'s plugin, or go to https://greasyfork.org/en/scripts/501824-maej3rked-tools-for-fishtank-live\n\nThanks for your support!\n\n-maejok');
+
+      if (depreciationPrompt.toLowerCase() === "f3rked") {
+        GM_openInTab('https://greasyfork.org/en/scripts/501824-maej3rked-tools-for-fishtank-live', { active: true });
+        return;
+      }
+
+      depreciationNotice();
+    };
+
+    depreciationNotice();
+  }
+
   config.load();
 
   const userAgreementAccepted = runUserAgreement();
@@ -130,6 +148,7 @@ import "./styles/styles.scss";
         console.warn(`${config.plugin("name")} disabled in settings panel`);
         return;
       }
+
 
       startMaejokTools();
     }
