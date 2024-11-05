@@ -27,6 +27,7 @@ import {
   toggleScanLines,
   toggleScreenTakeovers,
   keyEventToString,
+  toggleTimestampOverlay,
 } from "./functions";
 import {
   start as startRecentChatters,
@@ -44,10 +45,15 @@ export const saveSettings = async () => {
   const prevUpdateCheckFrequency = config.get("updateCheckFrequency");
   const prevChattersEnabled = config.get("enableRecentChatters");
   const prevHideGlobalMissions = config.get("hideGlobalMissions");
+  const prevDragModal = config.get("enableDragModal");
 
   inputs.forEach((input) => {
     const key = input.id.replace("-hidden", "");
     if (input.type === "checkbox") {
+      if (input.id === "enableTTSFilterWarning" && input.checked) {
+        return createTTSFilterAcknowledgmentModal();
+      }
+
       config.set(key, input.checked ? true : false);
     } else {
       if (key === "updateCheckFrequency") {
@@ -69,6 +75,7 @@ export const saveSettings = async () => {
   toggleScanLines();
   toggleDimMode(config.get("enableDimMode"));
   toggleScreenTakeovers(config.get("hideScreenTakeovers"));
+  toggleTimestampOverlay(config.get("enableTimestampOverlay"));
 
   if (!config.get("enableBigScreen")) {
     toggleBigScreen(false);
@@ -118,13 +125,49 @@ export const saveSettings = async () => {
   const hideGlobalMissionsJustEnabled =
     config.get("hideGlobalMissions") &&
     prevHideGlobalMissions !== config.get("hideGlobalMissions");
+  const dragModalJustEnabled =
+    config.get("enableDragModal") &&
+    prevDragModal !== config.get("enableDragModal");
 
-  if (hideGlobalMissionsJustEnabled) {
+  if (hideGlobalMissionsJustEnabled || dragModalJustEnabled) {
     observers.body.start();
     observers.modal.start();
   }
 
   scrollToBottom();
+};
+
+const createTTSFilterAcknowledgmentModal = () => {
+  const settingsModalButton = document.querySelector(
+    ELEMENTS.modal.close.button.selector
+  );
+  settingsModalButton.click();
+  const data = {
+    title: "TTS Filter Warning Acknowledgement",
+    message: `Confirm to acknowledge that this feature relies on a hardcoded list
+      that may not accurately reflect what is and isn't filtered on the site.`,
+    confirm: () => acknowledgeModal(true),
+    close: () => acknowledgeModal(false),
+  };
+
+  const customConfirmEvent = new CustomEvent("modalopenconfirm", {
+    detail: {
+      data: JSON.stringify(data),
+      onConfirm: data.confirm,
+      onClose: data.close,
+    },
+  });
+
+  document.dispatchEvent(customConfirmEvent);
+};
+
+const acknowledgeModal = (agreement) => {
+  if (agreement) {
+    config.set("enableTTSFilterWarning", true);
+  } else {
+    config.set("enableTTSFilterWarning", false);
+  }
+  config.save();
 };
 
 export const applySettingsToChat = () => {
@@ -133,6 +176,13 @@ export const applySettingsToChat = () => {
   nodes.forEach((node) => processChatMessage(node, false));
 
   state.set("contextUser", null);
+
+  const chatContainer = document.getElementById("chat-messages");
+  if (config.get("hideAvatars")) {
+    chatContainer.style.padding = "0px";
+  } else {
+    chatContainer.style.padding = "8px";
+  }
 
   toggleDenseChat();
 };

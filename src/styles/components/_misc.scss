@@ -11,6 +11,14 @@
   gap: 2px !important;
 }
 
+.maejok-tts-warning-text {
+  color: red;
+}
+
+.maejok-tts-input-warning-border {
+  border-color: red !important;
+}
+
 .maejok-dim-mode {
   position: fixed;
   top: 0;
@@ -32,6 +40,17 @@
     color: #ffcf00 !important;
     font-weight: 400 !important;
   }
+}
+
+.maejok-timestamp-container {
+  font-size: 12px;
+  padding-right: 8px;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75);
+  white-space: nowrap;
+  position: relative;
+  top: -7px;
+  letter-spacing: -1px;
+  opacity: 0.8;
 }
 
 .maejok-chatters_presence-container {

@@ -1,6 +1,13 @@
 import state from "./state";
-import { processChatMessage, getElementText } from "./functions";
+import config from "./config";
+import {
+  processChatMessage,
+  getElementText,
+  checkTTSFilteredWords,
+} from "./functions";
 import ELEMENTS from "../data/elements";
+import { makeDraggable } from "./events";
+import { BAD_WORDS } from "./constants";
 
 const observers = {
   chat: {
@@ -39,7 +46,9 @@ const observers = {
     start: () => {
       state.get("observers").chatters?.disconnect();
 
-      const chatters = document.querySelector(`#${ELEMENTS.chat.header.presence.id}`);
+      const chatters = document.querySelector(
+        `#${ELEMENTS.chat.header.presence.id}`
+      );
 
       const chattersObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
@@ -47,15 +56,25 @@ const observers = {
             ELEMENTS.chat.header.presence.online.selector
           );
 
-          const text = mutation.type === "childList" ? mutation.target.textContent : mutation.target.wholeText;
+          const text =
+            mutation.type === "childList"
+              ? mutation.target.textContent
+              : mutation.target.wholeText;
 
           chattersOnlineNew.textContent = text;
         });
       });
 
-      chattersObserver.observe(chatters, { childList: true, characterData: true, subtree: true });
+      chattersObserver.observe(chatters, {
+        childList: true,
+        characterData: true,
+        subtree: true,
+      });
 
-      state.set("observers", { ...state.get("observers"), chatters: chattersObserver });
+      state.set("observers", {
+        ...state.get("observers"),
+        chatters: chattersObserver,
+      });
     },
 
     stop: () => {
@@ -87,9 +106,22 @@ const observers = {
             }
 
             if (addedNode.id === "modal") {
+              checkTTSFilteredWords(addedNode);
+
               const title = getElementText(ELEMENTS.modal.title.text.selector);
-              if (title && title.includes("Global Mission")) {
+
+              const hideMissionsEnabled = config.get("hideGlobalMissions");
+              if (hideMissionsEnabled && title?.includes("Global Mission")) {
                 addedNode.setAttribute("style", "display: none !important");
+              }
+
+              const dragModalEnabled = config.get("enableDragModal");
+              if (
+                dragModalEnabled &&
+                (title?.includes("Send a TTS Message") ||
+                  title?.includes("Play a Sound Effect"))
+              ) {
+                makeDraggable(addedNode);
               }
             }
           });

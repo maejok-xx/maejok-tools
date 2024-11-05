@@ -1,4 +1,5 @@
 import state from "./state";
+import { BAD_WORDS } from "./constants";
 import { pluginName } from "./functions";
 import { clickResetKeybindButton } from "./events";
 
@@ -9,8 +10,13 @@ const Config = () => {
     enableDimMode: false,
 
     enableBigScreen: true,
+    enableDragModal: false,
+    enableTTSFilterWarning: false,
     persistBigScreen: false,
     bigScreenState: false,
+    enableControlOverlay: false,
+    enableTimestampOverlay: false,
+    controlOverlayState: false,
     disableSoundEffects: false,
     hideGlobalMissions: false,
     hideScreenTakeovers: false,
@@ -35,6 +41,7 @@ const Config = () => {
     hideSystem: false,
 
     enableImprovedTagging: true,
+    enableEmojis: false,
 
     enableDenseChat: false,
 
@@ -168,6 +175,31 @@ const Config = () => {
                 text: `<p>Enabling this option will restore the last <strong>Big Screen Mode</strong> state upon refreshing the site.</p>`,
               },
             },
+            // enableVideoControls
+            {
+              name: "enableControlOverlay",
+              label: "Enable Video Control Overlay Shortcut",
+              type: "toggle",
+              value: cfg.enableControlOverlay,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option creates a keyboard shortcut to toggle <strong>the video controls overlay</strong> which will show or hide the overlay.</p>
+                <p>Keyboard Shortcut: <strong>CTRL+SHIFT+H</strong></p>`,
+              },
+            },
+            // enableTimestampOverlay
+            {
+              name: "enableTimestampOverlay",
+              label: "Enable Tank Time Overlay ",
+              type: "toggle",
+              value: cfg.enableTimestampOverlay,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will display a timestamp of the current time in the tank alongside the player controls.</p>`,
+              },
+            },
             // enableDimMode
             {
               name: "enableDimMode",
@@ -178,6 +210,32 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option reduces the brightness of the site</p>`,
+              },
+            },
+            // enableDragModal
+            {
+              name: "enableDragModal",
+              label: "Enable Drag TTS Modal",
+              type: "toggle",
+              value: cfg.enableDragModal,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will enable dragging of TTS modal to desired location.</p>`,
+              },
+            },
+            // enableTTSFilterWarning
+            {
+              name: "enableTTSFilterWarning",
+              label: "Enable TTS Filter Warning",
+              type: "toggle",
+              value: cfg.enableTTSFilterWarning,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will display a warning if your TTS text includes words that will be filtered.
+                <strong><i>This list is dynamic and subject to change on the backend.  It is not exposed on the site, so this list may not catch everything or may otherwise be incorrect.</strong></i></p>
+                <p><strong style="color:white;word-wrap:break-word">Current known filtered words: ${BAD_WORDS.toString()}</strong></p>`,
               },
             },
             // enableEmotesMenu
@@ -475,6 +533,18 @@ const Config = () => {
               help: {
                 label: "?",
                 text: `<p>Enabling this option will add <strong>Avatar-click Tagging</strong>, as well as improve the way mentions are added to the input box by adding spaces before and after the mention where needed.</p>`,
+              },
+            },
+            // enableEmojis
+            {
+              name: "enableEmojis",
+              label: "Enable emojis",
+              type: "toggle",
+              value: cfg.enableEmojis,
+              group: "chat-misc",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will replace some text emoticons with their closest emoji counterpart. e.g. :) -> 🙂</p>`,
               },
             },
             // normalizeEpicText

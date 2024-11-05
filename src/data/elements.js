@@ -20,6 +20,18 @@ const Elements = {
       selector: `[class*="live-streams_live-streams-grid__"]`,
       class: "live-streams_live-streams-grid__Tp4ah",
     },
+    controls: {
+      selector: `[class^="livepeer-video-player_controls"]`,
+      class: "livepeer-video-player_controls__y36El",
+      volume: {
+        selector: `[class^="livepeer-video-player_volume-controls"]`,
+        class: "livepeer-video-player_volume-controls__q9My4",
+      },
+      timestamp: {
+        selector: `.maejok-timestamp-container`,
+        class: "maejok-timestamp-container",
+      },
+    },
   },
   secondaryPanel: {
     tab: {
@@ -358,13 +370,10 @@ const Elements = {
       button: {
         selector: `[class^="close-button"]`,
         classes: ["close-button_close-button__BKUKA", "close-button_sm__n0dZT"],
-        image: {
-          attr: [
-            `src`,
-            // UPDATE TO GITHUB
-            `https://cdn.fishtank.live/images/slices/close.png`,
-          ],
-        },
+      },
+      icon: {
+        selector: `[class^="icon_icon]`,
+        class: "icon_icon__bDzMA",
       },
     },
     title: {
