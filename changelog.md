@@ -1,5 +1,21 @@
 # MAEJOK-TOOLS CHANGE LOG
 
+# **_v2.21.0_**
+
+_Release: 11-04-2024_
+
+### Notes
+
+- N/A
+
+### Bug Fixes
+
+- Fix event log css
+
+### Features Added / Changed
+
+- Add setting to hide non admin toast message (gifted season passes, level up, item consumed, etc)
+
 # **_v2.20.0_**
 
 _Release: 11-04-2024_

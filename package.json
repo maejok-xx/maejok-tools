@@ -1,7 +1,7 @@
 {
   "name": "maej3rked-tools",
   "author": "maejok-xx/f3rked",
-  "version": "2.20.0",
+  "version": "2.21.0",
   "description": "Add-on Tools for Fishtank.live Season 3",
   "main": "main.js",
   "scripts": {
