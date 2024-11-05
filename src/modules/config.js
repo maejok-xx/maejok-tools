@@ -38,6 +38,7 @@ const Config = () => {
     hideEmotes: false,
     hideDiceRolling: false,
     hideClanMessages: false,
+    hideToastMessages: false,
     hideTTSMessages: false,
     hideSFXMessages: false,
     hideSystem: false,
@@ -330,7 +331,20 @@ const Config = () => {
               group: "site-options",
               help: {
                 label: "?",
-                text: `<p>Enabling this option hide the <strong>Stream Navigation Overlay</strong> that displays semi-transparent polygons over the livestream on hover.</p>`,
+                text: `<p>Enabling this option will hide the <strong>Stream Navigation Overlay</strong> that displays semi-transparent polygons over the livestream on hover.</p>`,
+              },
+            },
+            // hideToastMessages
+            {
+              name: "hideToastMessages",
+              label: "Hide Non Admin Toast Messages",
+              type: "toggle",
+              value: cfg.hideToastMessages,
+              group: "site-options",
+              help: {
+                label: "?",
+                text: `<p>Enabling this option will hide the <strong>Toast Messages</strong> that pop up for these like level up, gifted season pass, consumed item, etc.</p>
+                <p>This will not hide the admin messages that come from production.`,
               },
             },
           ],

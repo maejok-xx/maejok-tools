@@ -936,6 +936,15 @@ export const checkTTSFilteredWords = (addedNode) => {
   requestAnimationFrame(checkInputBox);
 };
 
+export const hideToastMessage = (toast) => {
+  //const body = toast.querySelector(ELEMENTS.toast.message.selector);
+  // Way to distinguish other types of system messages
+  const containsHeader = toast.querySelector("h3");
+  if (containsHeader) {
+    toast.classList.add("maejok-hide");
+  }
+};
+
 export const createEventLogEntry = (toast) => {
   const toastExclusionPattern = /(level|item|mission)/;
 
@@ -969,6 +978,7 @@ export const createEventLogEntry = (toast) => {
   timestamp.textContent = formattedTime;
 
   const message = wrapper.querySelector(".toast_toast__zhSlo");
+  message.style = "";
   message.classList.add(ELEMENTS.settings.events.toastFix.class);
 
   body.parentNode.style.width = "100%";

@@ -9,6 +9,7 @@ import {
   toggleNavigationOverlay,
   toggleControlOverlay,
   createEventLogEntry,
+  hideToastMessage,
 } from "./functions";
 import ELEMENTS from "../data/elements";
 import { makeDraggable } from "./events";
@@ -134,6 +135,13 @@ const observers = {
               addedNode.className.includes("toast")
             ) {
               createEventLogEntry(addedNode);
+            }
+
+            if (
+              config.get("hideToastMessages") &&
+              addedNode.className.includes("toast")
+            ) {
+              hideToastMessage(addedNode);
             }
           });
         });
