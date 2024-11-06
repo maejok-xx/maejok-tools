@@ -596,17 +596,20 @@ export const areObjectsEqual = (obj1, obj2) => {
 };
 
 export const disableSoundEffects = (disable) => {
-  const audioElement = state.get("audioElement");
+  const originalPlay = state.get("audioElement");
 
-  if (audioElement === false) {
+  if (originalPlay === false) {
     state.set("audioElement", HTMLAudioElement.prototype.play);
     disableSoundEffects(!!disable);
     return;
   }
 
   HTMLAudioElement.prototype.play = function () {
-    this.muted = !!disable;
-    return audioElement.apply(this, arguments);
+    if (disable && this.src.startsWith("https://cdn.fishtank.live/sounds/")) {
+      console.log(`Blocked sound from: ${this.src}`);
+      return Promise.resolve(); // Return a resolved promise to mimic the play method
+    }
+    return originalPlay.apply(this, arguments);
   };
 };
 
