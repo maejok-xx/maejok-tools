@@ -1,5 +1,3 @@
-# MAEJOK-TOOLS for Fishtank.live
-
 ## DEPRECIATED!
 
 #### This plugin is now maintained by f3rked: https://github.com/f3rked/maej3rked-tools
@@ -7,6 +5,10 @@
 Get the userscript here: https://greasyfork.org/en/scripts/501824-maej3rked-tools-for-fishtank-live
 
 ---
+
+
+# MAEJOK-TOOLS for Fishtank.live
+
 
 Be sure to watch Season 3 LIVE now, and past seasons episodes, at https://www.fishtank.live/
 
