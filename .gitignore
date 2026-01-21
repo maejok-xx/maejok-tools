@@ -4,3 +4,13 @@ pnpm-lock.yaml
 maejok-tools.code-workspace
 dist/maejok-tools.dev.user.js
 dist/maejok-tools.preview.user.js
+src/styles/styles.css
+src/styles/styles.css.map
+src/styles/variables/breakpoints.css
+src/styles/variables/breakpoints.css.map
+src/styles/variables/colors.css
+src/styles/variables/colors.css.map
+src/styles/variables/mixins.css
+src/styles/variables/mixins.css.map
+src/styles/variables/spacing.css
+src/styles/variables/spacing.css.map
